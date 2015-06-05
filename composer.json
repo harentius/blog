@@ -21,7 +21,8 @@
         "stof/doctrine-extensions-bundle": "~1.1",
         "sonata-project/admin-bundle": "~2.3",
         "fxp/composer-asset-plugin": "1.0",
-        "bower-asset/bootstrap": "~3.3"
+        "bower-asset/bootstrap": "~3.3",
+        "knplabs/knp-paginator-bundle": "2.4.*@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
