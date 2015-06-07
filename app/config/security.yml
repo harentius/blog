@@ -9,7 +9,7 @@ security:
         admin_users:
             entity:
                 class: AppBundle\Entity\AdminUser
-                property: username
+                property: name
 
     firewalls:
         dev:

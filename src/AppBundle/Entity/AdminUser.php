@@ -22,7 +22,7 @@ class AdminUser implements UserInterface
      * @SymfonyConstraints\Length(max=50)
      * @SymfonyConstraints\Type("string")
      */
-    private $username;
+    private $name;
 
     /**
      * @var string
@@ -61,18 +61,18 @@ class AdminUser implements UserInterface
     /**
      * @return string
      */
-    public function getUsername()
+    public function getName()
     {
-        return $this->username;
+        return $this->name;
     }
 
     /**
      * @param string $value
      * @return $this
      */
-    public function setUsername($value)
+    public function setName($value)
     {
-        $this->username = $value;
+        $this->name = $value;
 
         return $this;
     }
@@ -83,17 +83,6 @@ class AdminUser implements UserInterface
     public function getPassword()
     {
         return $this->password;
-    }
-
-    /**
-     * @param string $value
-     * @return $this
-     */
-    public function setPassword($value)
-    {
-        $this->password = $value;
-
-        return $this;
     }
 
     /**
@@ -130,6 +119,7 @@ class AdminUser implements UserInterface
     public function setPlainPassword($value)
     {
         $this->plainPassword = $value;
+        $this->password = hash('sha512', $value . $this->salt);
 
         return $this;
     }
