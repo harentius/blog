@@ -7,11 +7,27 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class BlogController extends Controller
 {
+
     /**
      * @Route("/app/example", name="homepage")
      */
     public function indexAction()
     {
         return $this->render('default/index.html.twig');
+    }
+
+    public function categoryAction()
+    {
+
+    }
+
+    public function tagAction()
+    {
+
+    }
+
+    public function sidebarAction()
+    {
+
     }
 }
