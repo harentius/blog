@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use AppBundle\Entity\Base\IdentifiableEntityTrait;
+use AppBundle\Entity\Base\SeoContentTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Tree\Traits\NestedSetEntity;
@@ -17,6 +18,7 @@ class Category
 {
     use IdentifiableEntityTrait;
     use NestedSetEntity;
+    use SeoContentTrait;
 
     /**
      * @var string
