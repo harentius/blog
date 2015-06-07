@@ -1,0 +1,16 @@
+#!/bin/sh
+
+echo "Dropping database"
+app/console doctrine:database:drop --force --quiet "$@"
+
+echo "Creating database"
+app/console doctrine:database:create "$@"
+
+echo "Updating database schema"
+app/console doctrine:schema:update --force "$@"
+
+echo "Populating database"
+app/console blog:database:populate
+
+echo "Loading fixtures"
+app/console doctrine:fixtures:load --append --no-interaction "$@"
