@@ -18,7 +18,13 @@
         "sensio/distribution-bundle": "~3.0,>=3.0.12",
         "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
         "incenteev/composer-parameter-handler": "~2.0",
-        "stof/doctrine-extensions-bundle": "1.1.0"
+        "stof/doctrine-extensions-bundle": "~1.1",
+        "sonata-project/admin-bundle": "~2.3",
+        "fxp/composer-asset-plugin": "1.0",
+        "bower-asset/bootstrap": "~3.3",
+        "knplabs/knp-paginator-bundle": "2.4.*@dev",
+        "hautelook/alice-bundle": "~0.2",
+        "knplabs/knp-menu-bundle": "~2.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
@@ -58,6 +64,10 @@
         },
         "branch-alias": {
             "dev-master": "2.7-dev"
+        },
+        "asset-installer-paths": {
+          "npm-asset-library": "web/assets/vendor",
+          "bower-asset-library": "web/assets/vendor"
         }
     }
 }

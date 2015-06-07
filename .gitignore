@@ -8,5 +8,12 @@
 /app/phpunit.xml
 /build/
 /vendor/
-/bin/
-/composer.phar
+
+/bin/doctrine
+/bin/doctrine.php
+/bin/security-checker
+
+/web/bundles/*
+/web/css/*
+/web/js/*
+/web/assets/*

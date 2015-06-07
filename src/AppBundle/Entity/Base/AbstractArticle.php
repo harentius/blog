@@ -14,6 +14,7 @@ abstract class AbstractArticle
 {
     use IdentifiableEntityTrait;
     use TimestampableEntityTrait;
+    use SeoContentTrait;
 
     /**
      * @var string
@@ -28,21 +29,21 @@ abstract class AbstractArticle
     /**
      * @var string
      *
-     * @ORM\Column(type="text")
-     * @SymfonyConstraints\Type(type="string")
-     * @SymfonyConstraints\NotBlank()
-     */
-    protected $text;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(type="string", length=1000)
      * @Gedmo\Slug(fields={"title"}, unique=true)
      * @SymfonyConstraints\Type(type="string")
      * @SymfonyConstraints\Length(max=1000)
      */
     protected $slug;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="text")
+     * @SymfonyConstraints\Type(type="string")
+     * @SymfonyConstraints\NotBlank()
+     */
+    protected $text;
 
     /**
      * @var Category
@@ -76,33 +77,6 @@ abstract class AbstractArticle
     protected $author;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @SymfonyConstraints\Type(type="string")
-     * @SymfonyConstraints\Length(max=255)
-     */
-    protected $metaTitle;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @SymfonyConstraints\Type(type="string")
-     * @SymfonyConstraints\Length(max=255)
-     */
-    protected $metaDescription;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @SymfonyConstraints\Type(type="string")
-     * @SymfonyConstraints\Length(max=255)
-     */
-    protected $metaKeywords;
-
-    /**
      * @var int
      *
      * @ORM\Column(type="integer")
@@ -124,6 +98,7 @@ abstract class AbstractArticle
      */
     public function __construct()
     {
+        $this->isPublished = false;
         $this->tags = new ArrayCollection();
         $this->viewsCount = 0;
     }
@@ -243,63 +218,6 @@ abstract class AbstractArticle
     }
 
     /**
-     * @return string
-     */
-    public function getMetaTitle()
-    {
-        return $this->metaTitle;
-    }
-
-    /**
-     * @param string $value
-     * @return $this
-     */
-    public function setMetaTitle($value)
-    {
-        $this->metaTitle = $value;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMetaDescription()
-    {
-        return $this->metaDescription;
-    }
-
-    /**
-     * @param string $value
-     * @return $this
-     */
-    public function setMetaDescription($value)
-    {
-        $this->metaDescription = $value;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getMetaKeywords()
-    {
-        return $this->metaKeywords;
-    }
-
-    /**
-     * @param string $value
-     * @return $this
-     */
-    public function setMetaKeywords($value)
-    {
-        $this->metaKeywords = $value;
-
-        return $this;
-    }
-
-    /**
      * @return int
      */
     public function getViewsCount()
@@ -321,7 +239,7 @@ abstract class AbstractArticle
     /**
      * @return boolean
      */
-    public function isIsPublished()
+    public function getIsPublished()
     {
         return $this->isPublished;
     }
