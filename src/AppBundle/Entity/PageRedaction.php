@@ -2,7 +2,6 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Entity\Base\Article;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -14,30 +13,30 @@ use Doctrine\ORM\Mapping as ORM;
  *      1 = "AppBundle\Entity\PageRedaction",
  * })
  */
-class ArticleRedaction extends Article
+class PageRedaction extends Page
 {
     /**
-     * @var Article
+     * @var Page
      *
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Article")
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Page")
      */
-    private $article;
+    private $page;
 
     /**
-     * @return Article
+     * @return Page
      */
-    public function getArticle()
+    public function getPage()
     {
-        return $this->article;
+        return $this->page;
     }
 
     /**
-     * @param Article $value
+     * @param Page $value
      * @return $this
      */
-    public function setArticle($value)
+    public function setPage($value)
     {
-        $this->article = $value;
+        $this->page = $value;
 
         return $this;
     }

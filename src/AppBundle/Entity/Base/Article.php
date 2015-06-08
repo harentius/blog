@@ -10,7 +10,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as SymfonyConstraints;
 use Doctrine\ORM\Mapping as ORM;
 
-abstract class AbstractArticle
+abstract class Article
 {
     use IdentifiableEntityTrait;
     use TimestampableEntityTrait;
