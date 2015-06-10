@@ -8,7 +8,7 @@ security:
     providers:
         admin_users:
             entity:
-                class: AppBundle\Entity\AdminUser
+                class: Harentius\BlogBundle\Entity\AdminUser
                 property: name
 
     firewalls:

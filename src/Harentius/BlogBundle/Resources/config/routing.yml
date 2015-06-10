@@ -1,0 +1,3 @@
+blog_index:
+    path:     /
+    defaults: { _controller: HarentiusBlogBundle:Blog:index }
