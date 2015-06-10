@@ -15,30 +15,18 @@ class BlogController extends Controller
         return $this->render('HarentiusBlogBundle:Blog:index.html.twig');
     }
 
-    public function categoryAction()
+    public function categoryAction($category)
     {
 
     }
 
-    public function tagAction()
+    public function tagAction($category)
     {
 
     }
 
-    /**
-     * @return Response
-     */
-    public function sidebarAction()
+    public function showAction()
     {
-        $categories = $this->getDoctrine()->getRepository('HarentiusBlogBundle:Category');
 
-        return $this->render('HarentiusBlogBundle:Blog:sidebar.html.twig', [
-            'categories' => $categories->childrenHierarchy(null, false, [
-                    'decorate' => true,
-                    'representationField' => 'slug',
-                    'html' => true,
-                ]
-            ),
-        ]);
     }
 }

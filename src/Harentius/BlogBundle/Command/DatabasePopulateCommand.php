@@ -28,7 +28,7 @@ class DatabasePopulateCommand extends ContainerAwareCommand
         $adminUser = new AdminUser();
         $adminUser
             ->setName('admin')
-            ->setPlainPassword('change_it')
+            ->setPlainPassword('admin')
         ;
 
         $em->persist($adminUser);
