@@ -15,16 +15,6 @@ class BlogController extends Controller
         return $this->render('HarentiusBlogBundle:Blog:index.html.twig');
     }
 
-    public function categoryAction($category)
-    {
-
-    }
-
-    public function tagAction($category)
-    {
-
-    }
-
     public function showAction()
     {
 
