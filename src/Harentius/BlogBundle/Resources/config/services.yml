@@ -1,0 +1,14 @@
+services:
+    harentius_blog.sidebar.cache:
+        class: Doctrine\Common\Cache\ApcCache
+        calls:
+            - [ setNamespace, [ harentius_blog_sidebar ] ]
+
+    harentius_blog.twig.blog_extension:
+        class: Harentius\BlogBundle\Twig\BlogExtension
+        arguments:
+            - @fragment.handler
+            - @harentius_blog.sidebar.cache
+            - %sidebar_cache_filefime%
+        tags:
+            - { name: twig.extension }
