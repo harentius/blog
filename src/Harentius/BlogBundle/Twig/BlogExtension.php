@@ -2,7 +2,7 @@
 
 namespace Harentius\BlogBundle\Twig;
 
-use Doctrine\Common\Cache\ApcCache;
+use Doctrine\Common\Cache\Cache;
 use Symfony\Bridge\Twig\Extension\HttpKernelExtension;
 use Symfony\Component\HttpKernel\Controller\ControllerReference;
 use Symfony\Component\HttpKernel\Fragment\FragmentHandler;
@@ -10,7 +10,7 @@ use Symfony\Component\HttpKernel\Fragment\FragmentHandler;
 class BlogExtension extends HttpKernelExtension
 {
     /**
-     * @var ApcCache
+     * @var Cache
      */
     private $apcCache;
 
@@ -21,10 +21,10 @@ class BlogExtension extends HttpKernelExtension
 
     /**
      * @param FragmentHandler $handler A FragmentHandler instance
-     * @param ApcCache $apcCache
+     * @param Cache $apcCache
      * @param int $sidebarCacheLifeTime
      */
-    public function __construct(FragmentHandler $handler, ApcCache $apcCache, $sidebarCacheLifeTime)
+    public function __construct(FragmentHandler $handler, Cache $apcCache, $sidebarCacheLifeTime)
     {
         parent::__construct($handler);
         $this->apcCache = $apcCache;
