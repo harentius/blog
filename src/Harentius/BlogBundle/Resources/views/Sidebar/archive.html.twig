@@ -1,0 +1,14 @@
+<ul>
+{% for year, monthes in archivesList %}
+    <li>
+        {{ year }}
+        <ul>
+    {% for month in monthes %}
+            <li>
+                {{ month|localizeddate('none', 'none', 'ru', null, "LLLL") }}
+            </li>
+    {% endfor %}
+        </ul>
+    </li>
+{% endfor %}
+</ul>

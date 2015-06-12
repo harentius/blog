@@ -30,4 +30,14 @@ class SidebarController extends Controller
             ),
         ]);
     }
+
+    /**
+     * @return Response
+     */
+    public function archiveAction()
+    {
+        return $this->render('HarentiusBlogBundle:Sidebar:archive.html.twig', [
+            'archivesList' => $this->get('harentius_blog.sidebar.archive')->getList(),
+        ]);
+    }
 }

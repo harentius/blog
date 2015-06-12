@@ -17,3 +17,8 @@ services:
             - %sidebar_cache_filefime%
         tags:
             - { name: twig.extension }
+
+    harentius_blog.sidebar.archive:
+        class: Harentius\BlogBundle\Sidebar\Archive
+        arguments:
+            - @doctrine.orm.entity_manager
