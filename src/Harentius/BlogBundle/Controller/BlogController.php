@@ -16,13 +16,17 @@ class BlogController extends Controller
     }
 
     /**
-     * @param $filtrationType
-     * @param $criteria
+     * @param string $filtrationType
+     * @param string $criteria
      * @return Response
      */
     public function listAction($filtrationType, $criteria)
     {
-        return $this->render('HarentiusBlogBundle:Blog:list.html.twig');
+        $articles = [];
+
+        return $this->render('HarentiusBlogBundle:Blog:list.html.twig', [
+            'articles' => $articles,
+        ]);
     }
 
     public function showAction()

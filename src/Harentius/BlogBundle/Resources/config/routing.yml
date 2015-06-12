@@ -2,10 +2,8 @@ blog_index:
     path:     /
     defaults: { _controller: HarentiusBlogBundle:Blog:index }
 
-blog_category:
-    path:     category/{category}
-    defaults: { _controller: HarentiusBlogBundle:Blog:category }
-
-blog_tag:
-    path:     tag/{category}
-    defaults: { _controller: HarentiusBlogBundle:Blog:tag }
+blog_list:
+    path:     /{filtrationType}/{criteria}
+    defaults: { _controller: HarentiusBlogBundle:Blog:list }
+    requirements:
+        filtrationType: category|archive|tag
