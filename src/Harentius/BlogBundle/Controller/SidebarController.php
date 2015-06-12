@@ -20,7 +20,8 @@ class SidebarController extends Controller
                     'representationField' => 'slug',
                     'html' => true,
                     'nodeDecorator' => function($node) {
-                        return sprintf('<a href="%s">%s</a>',
+                        // Silent missing IDE warning
+                        return sprintf('<a href=' . '"%s">%s</a>',
                             $this->generateUrl('blog_category', ['category' => $node['slug']]),
                             $node['name']
                         );
