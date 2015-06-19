@@ -1,0 +1,8 @@
+{% for tag in tags %}
+    <a class="tag"
+       href="{{ path('blog_list', {'filtrationType': 'tag', 'criteria': tag.slug}) }}"
+       style="font-size: {{ tag.percentage }}%"
+    >
+        {{ tag.name }}
+    </a>
+{% endfor %}

@@ -36,3 +36,4 @@ services:
         class: Harentius\BlogBundle\Sidebar\Tags
         arguments:
             - %sidebar_tags_limit%
+            - %sidebar_tag_sizes%

@@ -18,5 +18,8 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
 
-    # 0 - unlimited cache
+    # ~ - no cache, 0 - unlimited cache
     sidebar_cache_filefime: 0
+    sidebar_tags_limit: 10
+    # Percent tags size, unlimited variants number (valid values: [50, 100], [25, 50, 75, 100], etc)
+    sidebar_tag_sizes: [50, 75, 100]

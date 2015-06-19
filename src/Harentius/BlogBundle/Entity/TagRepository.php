@@ -9,11 +9,11 @@ class TagRepository extends EntityRepository
 {
     /**
      * @param $limit
-     * @return mixed
+     * @return array
      */
     public function findMostPopularLimited($limit)
     {
-        $tags = $this->createQueryBuilder('t')
+        return $this->createQueryBuilder('t')
             ->select('t.name, t.slug, COUNT(a) as weight')
             ->join('t.articles', 'a')
             ->orderBy('weight', 'DESC')
@@ -23,13 +23,5 @@ class TagRepository extends EntityRepository
             ->setHydrationMode(Query::HYDRATE_ARRAY)
             ->execute()
         ;
-
-        $result = [];
-
-        foreach ($tags as $tag) {
-            $result[] = $tag;
-        }
-
-        return $result;
     }
 }
