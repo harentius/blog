@@ -2,10 +2,15 @@ blog_index:
     path:     /
     defaults: { _controller: HarentiusBlogBundle:Blog:index }
 
-blog_category:
-    path:     category/{category}
-    defaults: { _controller: HarentiusBlogBundle:Blog:category }
+blog_archive:
+    path:     /{year}/{month}
+    defaults: { _controller: HarentiusBlogBundle:Blog:archive, month: null }
+    requirements:
+        year: \d+
+        month: \d+
 
-blog_tag:
-    path:     tag/{category}
-    defaults: { _controller: HarentiusBlogBundle:Blog:tag }
+blog_list:
+    path:     /{filtrationType}/{criteria}
+    defaults: { _controller: HarentiusBlogBundle:Blog:list }
+    requirements:
+        filtrationType: category|tag

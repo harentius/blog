@@ -2,14 +2,15 @@
 
 namespace Harentius\BlogBundle\Twig;
 
-use Doctrine\Common\Cache\ApcCache;
+use Doctrine\Common\Cache\Cache;
 use Symfony\Bridge\Twig\Extension\HttpKernelExtension;
+use Symfony\Component\HttpKernel\Controller\ControllerReference;
 use Symfony\Component\HttpKernel\Fragment\FragmentHandler;
 
 class BlogExtension extends HttpKernelExtension
 {
     /**
-     * @var ApcCache
+     * @var Cache
      */
     private $apcCache;
 
@@ -20,10 +21,10 @@ class BlogExtension extends HttpKernelExtension
 
     /**
      * @param FragmentHandler $handler A FragmentHandler instance
-     * @param ApcCache $apcCache
+     * @param Cache $apcCache
      * @param int $sidebarCacheLifeTime
      */
-    public function __construct(FragmentHandler $handler, ApcCache $apcCache, $sidebarCacheLifeTime)
+    public function __construct(FragmentHandler $handler, Cache $apcCache, $sidebarCacheLifeTime)
     {
         parent::__construct($handler);
         $this->apcCache = $apcCache;
@@ -41,17 +42,19 @@ class BlogExtension extends HttpKernelExtension
     }
 
     /**
-     * @param $uri
+     * @param $controllerReference
      * @param array $options
      * @return string
      */
-    public function renderCached($uri, $options = [])
+    public function renderCached(ControllerReference $controllerReference, $options = [])
     {
-        if (!$this->apcCache->contains($uri)) {
-            $this->apcCache->save($uri, $this->renderFragment($uri, $options));
+        $key = $controllerReference->controller;
+
+        if (!$this->apcCache->contains($key)) {
+            $this->apcCache->save($key, $this->renderFragment($controllerReference, $options));
         }
 
-        return $this->apcCache->fetch($uri);
+        return $this->apcCache->fetch($key);
     }
 
     /**

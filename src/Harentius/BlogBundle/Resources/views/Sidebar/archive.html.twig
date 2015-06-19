@@ -1,0 +1,16 @@
+<ul>
+{% for year, months in archivesList %}
+    <li>
+        <a href="{{ path('blog_archive', {'year': year}) }}">{{ year }}</a>
+        <ul>
+    {% for month in months %}
+            <li>
+                <a href="{{ path('blog_archive', {'year': year, 'month': month|localizeddate('none', 'none', 'ru', null, "LL") }) }}">
+                    {{ month|localizeddate('none', 'none', 'ru', null, "LLLL") }}
+                </a>
+            </li>
+    {% endfor %}
+        </ul>
+    </li>
+{% endfor %}
+</ul>

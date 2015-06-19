@@ -10,27 +10,47 @@ class SidebarController extends Controller
     /**
      * @return Response
      */
-    public function indexAction()
+    public function categoriesAction()
     {
         $categories = $this->getDoctrine()->getRepository('HarentiusBlogBundle:Category');
 
-        return $this->render('HarentiusBlogBundle:Sidebar:index.html.twig', [
+        return $this->render('HarentiusBlogBundle:Sidebar:categories.html.twig', [
             'categories' => $categories->childrenHierarchy(null, false, [
                     'decorate' => true,
                     'representationField' => 'slug',
                     'html' => true,
-                    'rootOpen' => '<ul>',
-                    'rootClose' => '</ul>',
-                    'childOpen' => '<li>',
-                    'childClose' => '</li>',
                     'nodeDecorator' => function($node) {
-                        return sprintf('<a href="%s">%s</a>',
-                            $this->generateUrl('blog_category', ['category' => $node['slug']]),
+                        // Silent missing IDE warning
+                        return sprintf('<a href=' . '"%s">%s</a>',
+                            $this->generateUrl('blog_list', [
+                                'filtrationType' => 'category',
+                                'criteria' => $node['slug']
+                            ]),
                             $node['name']
                         );
                     }
                 ]
             ),
+        ]);
+    }
+
+    /**
+     * @return Response
+     */
+    public function archiveAction()
+    {
+        return $this->render('HarentiusBlogBundle:Sidebar:archive.html.twig', [
+            'archivesList' => $this->get('harentius_blog.sidebar.archive')->getList(),
+        ]);
+    }
+
+    /**
+     * @return Response
+     */
+    public function tagsAction()
+    {
+        return $this->render('HarentiusBlogBundle:Sidebar:tags.html.twig', [
+            'tags' => $this->get('harentius_blog.sidebar.tags')->getList(),
         ]);
     }
 }

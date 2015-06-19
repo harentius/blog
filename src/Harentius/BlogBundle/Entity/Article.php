@@ -3,6 +3,7 @@
 namespace Harentius\BlogBundle\Entity;
 
 use Harentius\BlogBundle\Entity\Base\Article as BaseArticle;
+use Symfony\Component\Validator\Constraints as SymfonyConstraints;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -16,5 +17,30 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Article extends BaseArticle
 {
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(type="datetime")
+     * @SymfonyConstraints\DateTime
+     */
+    private $publishedAt;
 
+    /**
+     * @return \DateTime
+     */
+    public function getPublishedAt()
+    {
+        return $this->publishedAt;
+    }
+
+    /**
+     * @param \DateTime $value
+     * @return $this
+     */
+    public function setPublishedAt($value)
+    {
+        $this->publishedAt = $value;
+
+        return $this;
+    }
 }

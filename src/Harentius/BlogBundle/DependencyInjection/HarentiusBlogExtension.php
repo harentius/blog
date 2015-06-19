@@ -15,10 +15,17 @@ class HarentiusBlogExtension extends Extension
     public function load(array $configs, ContainerBuilder $container)
     {
         $configuration = new Configuration();
-        $config = $this->processConfiguration($configuration, $configs);
+        $this->processConfiguration($configuration, $configs);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
+        $twigExtensionDefinition = $container->getDefinition('harentius_blog.twig.blog_extension');
+        $cacheService = ($container->getParameterBag()->get('sidebar_cache_filefime') === null)
+            ? 'harentius_blog.array_cache'
+            : 'harentius_blog.sidebar.cache'
+        ;
+
+        $twigExtensionDefinition->replaceArgument(1, $container->getDefinition($cacheService));
     }
 }

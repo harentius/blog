@@ -15,12 +15,29 @@ class BlogController extends Controller
         return $this->render('HarentiusBlogBundle:Blog:index.html.twig');
     }
 
-    public function categoryAction($category)
+    /**
+     * @param string $filtrationType
+     * @param string $criteria
+     * @return Response
+     */
+    public function listAction($filtrationType, $criteria)
     {
+        $articlesRepository = $this->getDoctrine()->getRepository('HarentiusBlogBundle:Article');
 
+        switch ($filtrationType) {
+            case 'category':
+                $articles = $articlesRepository->findOneBy(['category']);
+            default:
+                $articles = [];
+                break;
+        }
+
+        return $this->render('HarentiusBlogBundle:Blog:list.html.twig', [
+            'articles' => $articles,
+        ]);
     }
 
-    public function tagAction($category)
+    public function archiveAction($year, $month = null)
     {
 
     }
