@@ -62,7 +62,7 @@ Harentius\BlogBundle\Entity\Article:
         title: Title <current()>
         slug: title-<current()>
         category: @category_2
-        tags: [@tag_1, @tag_3]
+        tags: [@tag_1, @tag_4]
         author: <getAdminUser()>
         isPublished: true
         metaTitle: Meta title for 'Title <current()>' articte

@@ -22,11 +22,24 @@ class BlogController extends Controller
      */
     public function listAction($filtrationType, $criteria)
     {
-        $articles = [];
+        $articlesRepository = $this->getDoctrine()->getRepository('HarentiusBlogBundle:Article');
+
+        switch ($filtrationType) {
+            case 'category':
+                $articles = $articlesRepository->findOneBy(['category']);
+            default:
+                $articles = [];
+                break;
+        }
 
         return $this->render('HarentiusBlogBundle:Blog:list.html.twig', [
             'articles' => $articles,
         ]);
+    }
+
+    public function archiveAction($year, $month = null)
+    {
+
     }
 
     public function showAction()
