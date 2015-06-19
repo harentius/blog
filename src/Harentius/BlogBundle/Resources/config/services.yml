@@ -4,6 +4,9 @@ services:
         tags:
             - { name: twig.extension }
 
+    harentius_blog.array_cache:
+        class: Doctrine\Common\Cache\ArrayCache
+
     harentius_blog.sidebar.cache:
         class: Doctrine\Common\Cache\ApcCache
         calls:
@@ -13,7 +16,7 @@ services:
         class: Harentius\BlogBundle\Twig\BlogExtension
         arguments:
             - @fragment.handler
-            - @harentius_blog.sidebar.cache
+            - ~
             - %sidebar_cache_filefime%
         tags:
             - { name: twig.extension }
