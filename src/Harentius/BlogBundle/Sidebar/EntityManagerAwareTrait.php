@@ -14,7 +14,7 @@ trait EntityManagerAwareTrait
     /**
      * @param EntityManagerInterface $em
      */
-    public function __construct(EntityManagerInterface $em)
+    public function setEntityManager(EntityManagerInterface $em)
     {
         $this->em = $em;
     }

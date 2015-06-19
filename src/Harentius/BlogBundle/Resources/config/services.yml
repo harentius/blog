@@ -23,5 +23,5 @@ services:
 
     harentius_blog.sidebar.archive:
         class: Harentius\BlogBundle\Sidebar\Archive
-        arguments:
-            - @doctrine.orm.entity_manager
+        calls:
+            - [setEntityManager, [@doctrine.orm.entity_manager] ]
