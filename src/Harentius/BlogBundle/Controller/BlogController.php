@@ -26,12 +26,23 @@ class BlogController extends Controller
     {
         $articlesRepository = $this->getDoctrine()->getRepository('HarentiusBlogBundle:Article');
 
+        $breadcrumbs = $this->get('white_october_breadcrumbs');
+        $breadcrumbs->addItem('Blog', $this->generateUrl('blog_homepage'));
+
         switch ($filtrationType) {
             case 'category':
-                $articles = $articlesRepository->findOneByCategorySlug($criteria);
+                $category = $this->getDoctrine()->getRepository('HarentiusBlogBundle:Category')
+                    ->findOneBy(['slug' => $criteria])
+                ;
+                $breadcrumbs->addItem($category->getName());
+                $articles = $articlesRepository->findBy(['category' => $category]);
                 break;
             case 'tag':
-                $articles = $articlesRepository->findByTagSlug($criteria);
+                $tag = $this->getDoctrine()->getRepository('HarentiusBlogBundle:Tag')
+                    ->findOneBy(['slug' => $criteria])
+                ;
+                $breadcrumbs->addItem($tag->getName());
+                $articles = $articlesRepository->findByTag($tag);
                 break;
             default:
                 $articles = [];
@@ -55,6 +66,16 @@ class BlogController extends Controller
      */
     public function showAction(Article $article)
     {
+        $category = $article->getCategory();
+
+        $breadcrumbs = $this->get('white_october_breadcrumbs');
+        $breadcrumbs->addItem('Blog', $this->generateUrl('blog_homepage'));
+        $breadcrumbs->addItem($category->getName(), $this->generateUrl('blog_list', [
+            'filtrationType' => 'category',
+            'criteria' => $category->getSlug(),
+        ]));
+        $breadcrumbs->addItem($article->getTitle());
+
         return $this->render('HarentiusBlogBundle:Blog:show.html.twig', [
             'article' => $article
         ]);

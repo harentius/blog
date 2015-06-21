@@ -1,4 +1,4 @@
-blog_index:
+blog_homepage:
     path:     /
     defaults: { _controller: HarentiusBlogBundle:Blog:index }
 
