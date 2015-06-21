@@ -2,8 +2,10 @@
 
 namespace Harentius\BlogBundle\Controller;
 
+use Harentius\BlogBundle\Entity\Article;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class BlogController extends Controller
 {
@@ -26,7 +28,11 @@ class BlogController extends Controller
 
         switch ($filtrationType) {
             case 'category':
-                $articles = $articlesRepository->findOneBy(['category']);
+                $articles = $articlesRepository->findOneByCategorySlug($criteria);
+                break;
+            case 'tag':
+                $articles = $articlesRepository->findByTagSlug($criteria);
+                break;
             default:
                 $articles = [];
                 break;
@@ -42,8 +48,15 @@ class BlogController extends Controller
 
     }
 
-    public function showAction()
+    /**
+     * @param Article $article
+     * @ParamConverter("article", options={"mapping": {"slug": "slug"}})
+     * @return Response
+     */
+    public function showAction(Article $article)
     {
-
+        return $this->render('HarentiusBlogBundle:Blog:show.html.twig', [
+            'article' => $article
+        ]);
     }
 }
