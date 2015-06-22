@@ -10,7 +10,7 @@ class CategoryRepository extends NestedTreeRepository
     {
         $q = $this->createQueryBuilder('c')
             ->select('c.slug, c.name, c.level, COUNT(a) AS articles_number')
-            ->leftJoin('c.articles', 'a')
+            ->innerJoin('c.articles', 'a')
             ->groupBy('a.category')
             ->getQuery()
         ;
