@@ -26,10 +26,9 @@ services:
         calls:
             - [setEntityManager, [@doctrine.orm.entity_manager] ]
 
-    harentius_blog.sidebar.archive:
+    harentius_blog.sidebar.categories:
         parent: harentius_blog.sidebar.block
-        class: Harentius\BlogBundle\Sidebar\Archive
-
+        class: Harentius\BlogBundle\Sidebar\Categories
 
     harentius_blog.sidebar.tags:
         parent: harentius_blog.sidebar.block
@@ -37,3 +36,7 @@ services:
         arguments:
             - %sidebar_tags_limit%
             - %sidebar_tag_sizes%
+
+    harentius_blog.sidebar.archive:
+        parent: harentius_blog.sidebar.block
+        class: Harentius\BlogBundle\Sidebar\Archive

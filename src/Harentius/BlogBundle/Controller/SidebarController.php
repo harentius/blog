@@ -12,25 +12,23 @@ class SidebarController extends Controller
      */
     public function categoriesAction()
     {
-        $categories = $this->getDoctrine()->getRepository('HarentiusBlogBundle:Category');
-
         return $this->render('HarentiusBlogBundle:Sidebar:categories.html.twig', [
-            'categories' => $categories->childrenHierarchy(null, false, [
-                    'decorate' => true,
-                    'representationField' => 'slug',
-                    'html' => true,
-                    'nodeDecorator' => function($node) {
-                        // Silent missing IDE warning
-                        return sprintf('<a href=' . '"%s">%s</a>',
-                            $this->generateUrl('blog_list', [
-                                'filtrationType' => 'category',
-                                'criteria' => $node['slug']
-                            ]),
-                            $node['name']
-                        );
-                    }
-                ]
-            ),
+            'categories' => $this->get('harentius_blog.sidebar.categories')->getList([
+                'decorate' => true,
+                'representationField' => 'slug',
+                'html' => true,
+                'nodeDecorator' => function($node) {
+                    // Silent missing IDE warning
+                    return sprintf('<a href=' . '"%s">%s</a> (%d)',
+                        $this->generateUrl('blog_list', [
+                            'filtrationType' => 'category',
+                            'criteria' => $node['slug']
+                        ]),
+                        $node['name'],
+                        $node['articles_number']
+                    );
+                }
+            ]),
         ]);
     }
 
