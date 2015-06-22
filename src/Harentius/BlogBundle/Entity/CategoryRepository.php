@@ -8,13 +8,13 @@ class CategoryRepository extends NestedTreeRepository
 {
     public function notEmptyChildrenHierarchy(array $options = [])
     {
-        $query = $this->createQueryBuilder('c')
+        $q = $this->createQueryBuilder('c')
             ->select('c.slug, c.name, c.level, COUNT(a) AS articles_number')
             ->leftJoin('c.articles', 'a')
-            ->groupBy('c.slug')
+            ->groupBy('a.category')
             ->getQuery()
         ;
 
-        return $this->buildTree($query->getArrayResult(), $options);
+        return $this->buildTree($q->getArrayResult(), $options);
     }
 }
