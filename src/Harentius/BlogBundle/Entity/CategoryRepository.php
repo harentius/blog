@@ -6,6 +6,10 @@ use Gedmo\Tree\Entity\Repository\NestedTreeRepository;
 
 class CategoryRepository extends NestedTreeRepository
 {
+    /**
+     * @param array $options
+     * @return mixed
+     */
     public function notEmptyChildrenHierarchy(array $options = [])
     {
         $q = $this->createQueryBuilder('c')
