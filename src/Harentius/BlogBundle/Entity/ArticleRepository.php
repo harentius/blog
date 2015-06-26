@@ -15,7 +15,6 @@ class ArticleRepository extends EntityRepository
         $qb = $this->createQueryBuilder('a');
 
         return $qb
-            ->join('a.category', 'ca')
             ->where('a.category IN
                 (SELECT c FROM HarentiusBlogBundle:Category c
                  WHERE c.left >= :left AND c.right <= :right AND c.root = :root)'
