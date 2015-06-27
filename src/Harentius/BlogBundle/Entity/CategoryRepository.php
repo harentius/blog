@@ -12,7 +12,7 @@ class CategoryRepository extends NestedTreeRepository
      */
     public function notEmptyChildrenHierarchy(array $options = [])
     {
-        $q = $this->createQueryBuilder('c')
+        $qb = $this->createQueryBuilder('c')
             ->select('c.slug, c.name, c.level')
             ->addSelect('COUNT(a) AS articles_number')
                 ->from('HarentiusBlogBundle:Article', 'a')
@@ -24,6 +24,6 @@ class CategoryRepository extends NestedTreeRepository
             ->getQuery()
         ;
 
-        return $this->buildTree($q->getArrayResult(), $options);
+        return $this->buildTree($qb->getArrayResult(), $options);
     }
 }
