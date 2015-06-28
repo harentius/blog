@@ -1,10 +1,10 @@
 <?php
 
-namespace AppBundle;
+namespace Harentius\FolkprogBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class AppBundle extends Bundle
+class HarentiusFolkprogBundle extends Bundle
 {
     /**
      * {@inheritDoc}

@@ -21,7 +21,7 @@ class AppKernel extends Kernel
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new WhiteOctober\BreadcrumbsBundle\WhiteOctoberBreadcrumbsBundle(),
             new Harentius\BlogBundle\HarentiusBlogBundle(),
-            new AppBundle\AppBundle(),
+            new Harentius\FolkprogBundle\HarentiusFolkprogBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
