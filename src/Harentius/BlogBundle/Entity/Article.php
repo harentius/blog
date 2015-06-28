@@ -2,44 +2,109 @@
 
 namespace Harentius\BlogBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Harentius\BlogBundle\Entity\Base\Article as BaseArticle;
 use Symfony\Component\Validator\Constraints as SymfonyConstraints;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Harentius\BlogBundle\Entity\ArticleRepository")
- * @ORM\InheritanceType("SINGLE_TABLE")
- * @ORM\DiscriminatorColumn(name="type", type="integer")
- * @ORM\DiscriminatorMap({
- *      0 = "Harentius\BlogBundle\Entity\Article",
- *      1 = "Harentius\BlogBundle\Entity\Page",
- * })
  */
 class Article extends BaseArticle
 {
     /**
-     * @var \DateTime
+     * @var Category
      *
-     * @ORM\Column(type="datetime")
-     * @SymfonyConstraints\DateTime
+     * @ORM\ManyToOne(
+     *      targetEntity="Harentius\BlogBundle\Entity\Category",
+     *      inversedBy="articles"
+     * )
+     * @SymfonyConstraints\NotNull()
      */
-    private $publishedAt;
+    private $category;
 
     /**
-     * @return \DateTime
+     * @var Tag[]
+     *
+     * @ORM\ManyToMany(
+     *      targetEntity="Harentius\BlogBundle\Entity\Tag",
+     *      inversedBy="articles"
+     * )
      */
-    public function getPublishedAt()
+    private $tags;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     * @SymfonyConstraints\Type(type="integer")
+     * @SymfonyConstraints\Range(min=0)
+     * @SymfonyConstraints\NotNull()
+     */
+    private $viewsCount;
+
+    /**
+     *
+     */
+    public function __construct()
     {
-        return $this->publishedAt;
+        $this->tags = new ArrayCollection();
+        $this->viewsCount = 0;
     }
 
     /**
-     * @param \DateTime $value
+     * @return Category
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param Category $value
      * @return $this
      */
-    public function setPublishedAt($value)
+    public function setCategory($value)
     {
-        $this->publishedAt = $value;
+        $this->category = $value;
+
+        return $this;
+    }
+
+    /**
+     * @return Tag[]|ArrayCollection
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    /**
+     * @param Tag[] $value
+     * @return $this
+     */
+    public function setTags($value)
+    {
+        $this->tags = $value;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getViewsCount()
+    {
+        return $this->viewsCount;
+    }
+
+    /**
+     * @param int $value
+     * @return $this
+     */
+    public function setViewsCount($value)
+    {
+        $this->viewsCount = $value;
 
         return $this;
     }
