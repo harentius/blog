@@ -23,7 +23,7 @@ class Page extends BaseArticle
     /**
      * @var integer
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true, name="_order")
      * @SymfonyConstraints\Type(type="integer")
      */
     private $order;

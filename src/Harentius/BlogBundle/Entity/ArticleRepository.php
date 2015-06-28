@@ -10,7 +10,7 @@ class ArticleRepository extends EntityRepository
      * @param Category $category
      * @return mixed
      */
-    public function findByCategory(Category $category)
+    public function findPublishedByCategory(Category $category)
     {
         $qb = $this->createQueryBuilder('a');
 
@@ -19,10 +19,12 @@ class ArticleRepository extends EntityRepository
                 (SELECT c FROM HarentiusBlogBundle:Category c
                  WHERE c.left >= :left AND c.right <= :right AND c.root = :root)'
             )
+            ->andWhere('a.isPublished = :isPublished')
             ->setParameters([
                 ':left' => $category->getLeft(),
                 ':right' => $category->getRight(),
                 ':root' => $category->getRoot(),
+                ':isPublished' => true,
             ])
             ->getQuery()
             ->execute()

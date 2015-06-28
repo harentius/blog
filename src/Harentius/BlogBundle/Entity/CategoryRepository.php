@@ -20,6 +20,8 @@ class CategoryRepository extends NestedTreeRepository
                     (SELECT cc FROM HarentiusBlogBundle:Category cc
                      WHERE cc.left >= c.left AND cc.right <= c.right AND cc.root = c.root)'
                 )
+                ->andWhere('a.isPublished = :isPublished')
+            ->setParameter('isPublished', true)
             ->groupBy('c')
             ->getQuery()
         ;

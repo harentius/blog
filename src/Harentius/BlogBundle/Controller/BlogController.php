@@ -5,7 +5,6 @@ namespace Harentius\BlogBundle\Controller;
 use Harentius\BlogBundle\Entity\Article;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class BlogController extends Controller
 {
@@ -35,7 +34,7 @@ class BlogController extends Controller
                     ->findOneBy(['slug' => $criteria])
                 ;
                 $breadcrumbs->addItem($category->getName());
-                $articles = $articlesRepository->findBy(['category' => $category]);
+                $articles = $articlesRepository->findPublishedByCategory($category);
                 break;
             case 'tag':
                 $tag = $this->getDoctrine()->getRepository('HarentiusBlogBundle:Tag')
@@ -61,7 +60,6 @@ class BlogController extends Controller
 
     /**
      * @param Article $article
-     * @ParamConverter("article", options={"mapping": {"slug": "slug"}})
      * @return Response
      */
     public function showAction(Article $article)
@@ -79,5 +77,10 @@ class BlogController extends Controller
         return $this->render('HarentiusBlogBundle:Blog:show.html.twig', [
             'article' => $article
         ]);
+    }
+
+    public function menuAction()
+    {
+
     }
 }
