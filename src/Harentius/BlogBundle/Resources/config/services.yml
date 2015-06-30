@@ -9,6 +9,7 @@ services:
         arguments:
             - @knp_menu.factory
             - @doctrine.orm.entity_manager
+            - %harentius_blog.homepage.page_slug%
 
     harentius_blog.menu.main:
         class: Knp\Menu\MenuItem

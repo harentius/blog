@@ -21,3 +21,4 @@ parameters:
     sidebar_cache_filefime: 0
     sidebar_tags_limit: 10
     sidebar_tag_sizes: [50, 75, 100]
+    homepage_page_slug: index

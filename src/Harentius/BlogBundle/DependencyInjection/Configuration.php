@@ -25,6 +25,11 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
             ->end()
+            ->arrayNode('homepage')
+                ->children()
+                    ->scalarNode('page_slug')->defaultValue(null)->end()
+                ->end()
+            ->end()
         ;
 
         return $treeBuilder;

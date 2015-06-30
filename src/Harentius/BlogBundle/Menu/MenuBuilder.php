@@ -20,13 +20,23 @@ class MenuBuilder
     private $em;
 
     /**
+     * @var string
+     */
+    private $homepageSlug;
+
+    /**
      * @param FactoryInterface $factory
      * @param EntityManagerInterface $em
+     * @param $homepageSlug
      */
-    public function __construct(FactoryInterface $factory, EntityManagerInterface $em)
-    {
+    public function __construct(
+        FactoryInterface $factory,
+        EntityManagerInterface $em,
+        $homepageSlug
+    ) {
         $this->factory = $factory;
         $this->em = $em;
+        $this->homepageSlug = $homepageSlug;
     }
 
     /**
@@ -35,11 +45,11 @@ class MenuBuilder
     public function createMainMenu()
     {
         /** @var Page[] $pages */
-        $pages = $this->em->getRepository('HarentiusBlogBundle:Page')->findPublishedOrdered();
+        $pages = $this->em->getRepository('HarentiusBlogBundle:Page')->findPublishedNotIndexOrdered($this->homepageSlug);
         $menu = $this->factory->createItem('root');
 
         foreach ($pages as $page) {
-            $menu->addChild(sprintf('menu.main.%s', $page->getSlug()), [
+            $menu->addChild($page->getTitle(), [
                 'route' => 'blog_show',
                 'routeParameters' => ['slug' => $page->getSlug()],
             ]);
