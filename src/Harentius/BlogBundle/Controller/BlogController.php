@@ -3,6 +3,7 @@
 namespace Harentius\BlogBundle\Controller;
 
 use Harentius\BlogBundle\Entity\Article;
+use Harentius\BlogBundle\Entity\Page;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -59,23 +60,39 @@ class BlogController extends Controller
     }
 
     /**
-     * @param Article $article
+     * @param string $slug
      * @return Response
      */
-    public function showAction(Article $article)
+    public function showAction($slug)
     {
-        $category = $article->getCategory();
+        $entity = $this->getDoctrine()->getRepository('HarentiusBlogBundle:Article')
+            ->findOneBy(['slug' => $slug])
+        ;
 
         $breadcrumbs = $this->get('white_october_breadcrumbs');
         $breadcrumbs->addItem('Blog', $this->generateUrl('blog_homepage'));
-        $breadcrumbs->addItem($category->getName(), $this->generateUrl('blog_list', [
-            'filtrationType' => 'category',
-            'criteria' => $category->getSlug(),
-        ]));
-        $breadcrumbs->addItem($article->getTitle());
+
+        if ($entity) {
+            $category = $entity->getCategory();
+
+            $breadcrumbs->addItem($category->getName(), $this->generateUrl('blog_list', [
+                'filtrationType' => 'category',
+                'criteria' => $category->getSlug(),
+            ]));
+        } else {
+            $entity = $this->getDoctrine()->getRepository('HarentiusBlogBundle:Page')
+                ->findOneBy(['slug' => $slug])
+            ;
+
+            if (!$entity) {
+                throw $this->createNotFoundException(sprintf("Page '%s' not found", $slug));
+            }
+        }
+
+        $breadcrumbs->addItem($entity->getTitle());
 
         return $this->render('HarentiusBlogBundle:Blog:show.html.twig', [
-            'article' => $article
+            'entity' => $entity
         ]);
     }
 

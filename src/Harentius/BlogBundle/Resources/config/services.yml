@@ -4,6 +4,19 @@ services:
         tags:
             - { name: twig.extension }
 
+    harentius_blog.menu.menu_builder:
+        class:  Harentius\BlogBundle\Menu\MenuBuilder
+        arguments:
+            - @knp_menu.factory
+            - @doctrine.orm.entity_manager
+
+    harentius_blog.menu.main:
+        class: Knp\Menu\MenuItem
+        factory_service: harentius_blog.menu.menu_builder
+        factory_method: createMainMenu
+        tags:
+            - { name: knp_menu.menu, alias: main }
+
     harentius_blog.array_cache:
         class: Doctrine\Common\Cache\ArrayCache
 
