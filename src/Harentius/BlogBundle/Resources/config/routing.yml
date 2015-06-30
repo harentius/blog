@@ -1,4 +1,4 @@
-blog_index:
+blog_homepage:
     path:     /
     defaults: { _controller: HarentiusBlogBundle:Blog:index }
 
@@ -14,3 +14,7 @@ blog_list:
     defaults: { _controller: HarentiusBlogBundle:Blog:list }
     requirements:
         filtrationType: category|tag
+
+blog_show:
+    path:     /{slug}
+    defaults: { _controller: HarentiusBlogBundle:Blog:show }

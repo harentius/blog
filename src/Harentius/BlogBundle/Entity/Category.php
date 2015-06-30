@@ -178,4 +178,61 @@ class Category
 
         return $this;
     }
+
+    /**
+     * @return int
+     */
+    public function getLeft()
+    {
+        return $this->left;
+    }
+
+    /**
+     * @param int $value
+     * @return $this
+     */
+    public function setLeft($value)
+    {
+        $this->left = $value;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRight()
+    {
+        return $this->right;
+    }
+
+    /**
+     * @param int $value
+     * @return $this
+     */
+    public function setRight($value)
+    {
+        $this->right = $value;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRoot()
+    {
+        return $this->root;
+    }
+
+    /**
+     * @param int $value
+     * @return $this
+     */
+    public function setRoot($value)
+    {
+        $this->root = $value;
+
+        return $this;
+    }
 }

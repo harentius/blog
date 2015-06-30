@@ -19,8 +19,9 @@ class AppKernel extends Kernel
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            new WhiteOctober\BreadcrumbsBundle\WhiteOctoberBreadcrumbsBundle(),
             new Harentius\BlogBundle\HarentiusBlogBundle(),
-            new AppBundle\AppBundle(),
+            new Harentius\FolkprogBundle\HarentiusFolkprogBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

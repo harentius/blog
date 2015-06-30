@@ -26,6 +26,11 @@
     <body>
         <div class="container">
             <div class="col-lg-9">
+                {{ knp_menu_render('main') }}
+            </div>
+
+            <div class="col-lg-9">
+                {{ wo_render_breadcrumbs() }}
                 {% block content %}{% endblock %}
             </div>
 
@@ -36,13 +41,13 @@
             </div>
         </div>
 
-    {% block common_javascripts %}
+{#    {% block common_javascripts %}
         {% javascripts
         'assets/vendor/bootstrap/dist/js/bootstrap.min.js'
         %}
         <script src="{{ asset_url }}"></script>
         {% endjavascripts %}
-    {% endblock %}
+    {% endblock %}#}
 
     {% block javascripts %}{% endblock %}
     </body>

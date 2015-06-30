@@ -3,13 +3,19 @@
 namespace Harentius\BlogBundle\Entity\Base;
 
 use Harentius\BlogBundle\Entity\AdminUser;
-use Harentius\BlogBundle\Entity\Category;
-use Harentius\BlogBundle\Entity\Tag;
-use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as SymfonyConstraints;
 use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @ORM\Entity
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="type", type="integer")
+ * @ORM\DiscriminatorMap({
+ *      0 = "Harentius\BlogBundle\Entity\Article",
+ *      1 = "Harentius\BlogBundle\Entity\Page",
+ * })
+ */
 abstract class Article
 {
     use IdentifiableEntityTrait;
@@ -46,27 +52,6 @@ abstract class Article
     protected $text;
 
     /**
-     * @var Category
-     *
-     * @ORM\ManyToOne(
-     *      targetEntity="Harentius\BlogBundle\Entity\Category",
-     *      inversedBy="articles"
-     * )
-     * @SymfonyConstraints\NotNull()
-     */
-    protected $category;
-
-    /**
-     * @var Tag[]
-     *
-     * @ORM\ManyToMany(
-     *      targetEntity="Harentius\BlogBundle\Entity\Tag",
-     *      inversedBy="articles"
-     * )
-     */
-    protected $tags;
-
-    /**
      * @var AdminUser
      *
      * @ORM\ManyToOne(
@@ -77,16 +62,6 @@ abstract class Article
     protected $author;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(type="integer")
-     * @SymfonyConstraints\Type(type="integer")
-     * @SymfonyConstraints\Range(min=0)
-     * @SymfonyConstraints\NotNull()
-     */
-    protected $viewsCount;
-
-    /**
      * @var bool
      *
      * @ORM\Column(type="boolean"))
@@ -94,12 +69,19 @@ abstract class Article
     protected $isPublished;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(type="datetime")
+     * @SymfonyConstraints\DateTime
+     */
+    protected $publishedAt;
+
+    /**
      *
      */
     public function __construct()
     {
         $this->isPublished = false;
-        $this->tags = new ArrayCollection();
         $this->viewsCount = 0;
     }
 
@@ -161,44 +143,6 @@ abstract class Article
     }
 
     /**
-     * @return Category
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
-
-    /**
-     * @param Category $value
-     * @return $this
-     */
-    public function setCategory($value)
-    {
-        $this->category = $value;
-
-        return $this;
-    }
-
-    /**
-     * @return Tag[]|ArrayCollection
-     */
-    public function getTags()
-    {
-        return $this->tags;
-    }
-
-    /**
-     * @param Tag[] $value
-     * @return $this
-     */
-    public function setTags($value)
-    {
-        $this->tags = $value;
-
-        return $this;
-    }
-
-    /**
      * @return AdminUser
      */
     public function getAuthor()
@@ -218,25 +162,6 @@ abstract class Article
     }
 
     /**
-     * @return int
-     */
-    public function getViewsCount()
-    {
-        return $this->viewsCount;
-    }
-
-    /**
-     * @param int $value
-     * @return $this
-     */
-    public function setViewsCount($value)
-    {
-        $this->viewsCount = $value;
-
-        return $this;
-    }
-
-    /**
      * @return boolean
      */
     public function getIsPublished()
@@ -251,6 +176,25 @@ abstract class Article
     public function setIsPublished($value)
     {
         $this->isPublished = $value;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getPublishedAt()
+    {
+        return $this->publishedAt;
+    }
+
+    /**
+     * @param \DateTime $value
+     * @return $this
+     */
+    public function setPublishedAt($value)
+    {
+        $this->publishedAt = $value;
 
         return $this;
     }

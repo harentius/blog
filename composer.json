@@ -24,7 +24,8 @@
         "bower-asset/bootstrap": "~3.3",
         "knplabs/knp-paginator-bundle": "2.4.*@dev",
         "hautelook/alice-bundle": "~0.2",
-        "knplabs/knp-menu-bundle": "~2.0"
+        "knplabs/knp-menu-bundle": "~2.0",
+        "whiteoctober/breadcrumbs-bundle": "~1.1.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

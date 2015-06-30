@@ -2,7 +2,6 @@
 
 namespace Harentius\BlogBundle\Entity;
 
-use Harentius\BlogBundle\Entity\Base\Article;
 use Doctrine\ORM\Mapping as ORM;
 
 /**

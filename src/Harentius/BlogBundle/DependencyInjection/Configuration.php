@@ -15,6 +15,23 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('harentius_blog');
 
+        $rootNode->children()
+            ->arrayNode('sidebar')
+                ->children()
+                    ->scalarNode('cache_filefime')->defaultValue(0)->end()
+                    ->integerNode('tags_limit')->defaultValue(10)->end()
+                    ->arrayNode('tag_sizes')
+                        ->prototype('integer')->end()
+                    ->end()
+                ->end()
+            ->end()
+            ->arrayNode('homepage')
+                ->children()
+                    ->scalarNode('page_slug')->defaultValue(null)->end()
+                ->end()
+            ->end()
+        ;
+
         return $treeBuilder;
     }
 }
