@@ -88,3 +88,11 @@ swiftmailer:
 
 white_october_breadcrumbs:
     separator: ~
+
+harentius_blog:
+    sidebar:
+        # ~ - no cache, 0 - unlimited cache
+        cache_filefime: %sidebar_cache_filefime%
+        tags_limit: %sidebar_tags_limit%
+        # Percent tags size, unlimited variants number (valid values: [50, 100], [25, 50, 75, 100], etc)
+        tag_sizes: %sidebar_tag_sizes%

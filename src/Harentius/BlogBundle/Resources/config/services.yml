@@ -34,8 +34,8 @@ services:
         parent: harentius_blog.sidebar.block
         class: Harentius\BlogBundle\Sidebar\Tags
         arguments:
-            - %sidebar_tags_limit%
-            - %sidebar_tag_sizes%
+            - %harentius_blog.sidebar.tags_limit%
+            - %harentius_blog.sidebar.tag_sizes%
 
     harentius_blog.sidebar.archive:
         parent: harentius_blog.sidebar.block
