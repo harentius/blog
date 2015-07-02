@@ -45,7 +45,7 @@ class MenuBuilder
     public function createMainMenu()
     {
         /** @var Page[] $pages */
-        $pages = $this->em->getRepository('HarentiusBlogBundle:Page')->findPublishedNotIndexOrdered($this->homepageSlug);
+        $pages = $this->em->getRepository('HarentiusBlogBundle:Page')->findPublishedNotSlugOrdered($this->homepageSlug);
         $menu = $this->factory->createItem('root');
 
         foreach ($pages as $page) {

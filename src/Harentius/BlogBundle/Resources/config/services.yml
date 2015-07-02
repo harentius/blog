@@ -13,8 +13,7 @@ services:
 
     harentius_blog.menu.main:
         class: Knp\Menu\MenuItem
-        factory_service: harentius_blog.menu.menu_builder
-        factory_method: createMainMenu
+        factory: [@harentius_blog.menu.menu_builder, createMainMenu]
         tags:
             - { name: knp_menu.menu, alias: main }
 

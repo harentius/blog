@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a2c208c338ad70413926338f41c976db",
+    "hash": "cba364ec4a2781ca3bb1e5e72a72de04",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1558,7 +1558,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/800eb12f225573869b6f04d77a6e329a6da9110f",
+                "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/84accca9c921dcbdc9c4be3ba0366a25f8d779b3",
                 "reference": "800eb12f225573869b6f04d77a6e329a6da9110f",
                 "shasum": ""
             },
