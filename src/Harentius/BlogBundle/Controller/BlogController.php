@@ -14,7 +14,16 @@ class BlogController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('HarentiusBlogBundle:Blog:index.html.twig');
+        $indexPageContent = $this->getDoctrine()->getRepository('HarentiusBlogBundle:Page')
+            ->findOneBy([
+                'slug' => $this->getParameter('harentius_blog.homepage.page_slug'),
+                'isPublished' => true
+            ])
+        ;
+
+        return $this->render('HarentiusBlogBundle:Blog:index.html.twig', [
+            'page' => $indexPageContent,
+        ]);
     }
 
     /**

@@ -7,9 +7,10 @@ use Doctrine\ORM\EntityRepository;
 class PageRepository extends EntityRepository
 {
     /**
+     * @param $slug
      * @return mixed
      */
-    public function findPublishedNotIndexOrdered($slug)
+    public function findPublishedNotSlugOrdered($slug)
     {
         return $this->createQueryBuilder('p')
             ->where('p.isPublished = :isPublished')
