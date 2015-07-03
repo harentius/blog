@@ -99,3 +99,9 @@ harentius_blog:
     homepage:
         # ~ - no page, feed only or page slug
         page_slug: %homepage_page_slug%
+
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts:   [admin]
