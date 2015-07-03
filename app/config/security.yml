@@ -9,7 +9,7 @@ security:
         admin_users:
             entity:
                 class: Harentius\BlogBundle\Entity\AdminUser
-                property: name
+                property: username
 
     firewalls:
         dev:

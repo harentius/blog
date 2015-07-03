@@ -22,7 +22,7 @@ class AdminUser implements UserInterface
      * @SymfonyConstraints\Length(max=50)
      * @SymfonyConstraints\Type("string")
      */
-    private $name;
+    private $username;
 
     /**
      * @var string
@@ -61,18 +61,18 @@ class AdminUser implements UserInterface
     /**
      * @return string
      */
-    public function getName()
+    public function getUsername()
     {
-        return $this->name;
+        return $this->username;
     }
 
     /**
      * @param string $value
      * @return $this
      */
-    public function setName($value)
+    public function setUsername($value)
     {
-        $this->name = $value;
+        $this->username = $value;
 
         return $this;
     }
