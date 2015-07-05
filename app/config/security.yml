@@ -20,8 +20,8 @@ security:
             pattern: ^/admin(.*)
             form_login:
                 provider: admin_users
-                login_path: viosk_frontend_admin_login
-                check_path: viosk_frontend_admin_login_check
+                login_path: login
+                check_path: login_check
                 default_target_path: sonata_admin_dashboard
             logout:
                 path:   viosk_frontend_admin_logout
