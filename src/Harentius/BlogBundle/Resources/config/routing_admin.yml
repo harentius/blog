@@ -1,0 +1,7 @@
+login:
+    path: login
+    defaults: { _controller: HarentiusBlogBundle:Security:login }
+
+login_check:
+    path: login-check
+    defaults: { _controller: HarentiusBlogBundle:Security:loginCheck }

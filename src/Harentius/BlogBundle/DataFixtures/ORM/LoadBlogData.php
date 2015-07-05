@@ -21,7 +21,7 @@ class LoadBlogData extends DataFixtureLoader
     {
         return $this->container->get('doctrine.orm.entity_manager')
             ->getRepository('HarentiusBlogBundle:AdminUser')
-            ->findOneBy(['name' => 'admin'])
+            ->findOneBy(['username' => 'admin'])
         ;
     }
 }

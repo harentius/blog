@@ -63,9 +63,18 @@ class BlogController extends Controller
         ]);
     }
 
+    /**
+     * @param string $year
+     * @param string $month
+     * @return Response
+     */
     public function archiveAction($year, $month = null)
     {
+        $articles = [];
 
+        return $this->render('HarentiusBlogBundle:Blog:list.html.twig', [
+            'articles' => $articles,
+        ]);
     }
 
     /**
