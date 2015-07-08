@@ -1,4 +1,5 @@
 security:
+
     encoders:
         Harentius\BlogBundle\Entity\AdminUser: sha512
 
