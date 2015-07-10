@@ -3,14 +3,5 @@ blog:
     prefix:   /
 
 admin:
-    resource: "@HarentiusBlogBundle/Resources/config/routing_admin.yml"
+    resource: "@HarentiusBlogBundle/Resources/config/routing-admin.yml"
     prefix:   /admin
-
-sonata_admin:
-    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
-    prefix: /admin
-
-_sonata_admin:
-    resource: .
-    type: sonata_admin
-    prefix: /admin

@@ -1,5 +1,8 @@
+# app/config/config.yml
+
 sonata_block:
-    default_contexts: [cms]
+    default_contexts: [sonata_page_bundle]
     blocks:
+        sonata.block.service.menu:
         sonata.admin.block.admin_list:
-            contexts:   [admin]
+            contexts: [admin]

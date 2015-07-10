@@ -1,0 +1,11 @@
+services:
+    harentius_blog.article:
+        class: Harentius\BlogBundle\Admin\ArticleAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: content, label: Content, show_in_dashboard: true }
+        arguments:
+            - null
+            - Harentius\BlogBundle\Entity\Article
+            - null
+        calls:
+            - [ setTranslationDomain, [harentius_blog]]

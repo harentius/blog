@@ -19,6 +19,7 @@ class HarentiusBlogExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+        $loader->load('services-admin.yml');
 
         $twigExtensionDefinition = $container->getDefinition('harentius_blog.twig.blog_extension');
         $cacheService = ($config['sidebar']['cache_filefime'] === null)

@@ -56,6 +56,14 @@ class AdminUser implements UserInterface, \Serializable
     /**
      * @return string
      */
+    public function __toString()
+    {
+        return $this->username;
+    }
+
+    /**
+     * @return string
+     */
     public function getUsername()
     {
         return $this->username;
@@ -115,7 +123,7 @@ class AdminUser implements UserInterface, \Serializable
      */
     public function getRoles()
     {
-        return ['ROLE_ADMIN'];
+        return ['ROLE_ADMIN', 'ROLE_SONATA_ADMIN'];
     }
 
     /**
