@@ -48,6 +48,7 @@ class Article extends BaseArticle
      */
     public function __construct()
     {
+        parent::__construct();
         $this->tags = new ArrayCollection();
         $this->viewsCount = 0;
     }
