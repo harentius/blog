@@ -24,11 +24,12 @@ class DatabasePopulateCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $em = $this->getContainer()->get('doctrine.orm.entity_manager');
+        $encoder = $this->getContainer()->get('security.password_encoder');
 
         $adminUser = new AdminUser();
         $adminUser
-            ->setName('admin')
-            ->setPlainPassword('admin')
+            ->setUsername('admin')
+            ->setPassword($encoder->encodePassword($adminUser, 'admin'))
         ;
 
         $em->persist($adminUser);

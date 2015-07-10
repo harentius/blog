@@ -4,7 +4,7 @@ blog_homepage:
 
 blog_archive:
     path:     /{year}/{month}
-    defaults: { _controller: HarentiusBlogBundle:Blog:archive, month: null }
+    defaults: { _controller: HarentiusBlogBundle:Blog:archive, month: '' }
     requirements:
         year: \d+
         month: \d+

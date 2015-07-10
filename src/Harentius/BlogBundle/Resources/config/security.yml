@@ -1,15 +1,12 @@
 security:
     encoders:
-        AppBundle\Entity\AdminUser: sha512
-
-    role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
+        Harentius\BlogBundle\Entity\AdminUser: sha512
 
     providers:
         admin_users:
             entity:
                 class: Harentius\BlogBundle\Entity\AdminUser
-                property: name
+                property: username
 
     firewalls:
         dev:
@@ -20,8 +17,8 @@ security:
             pattern: ^/admin(.*)
             form_login:
                 provider: admin_users
-                login_path: viosk_frontend_admin_login
-                check_path: viosk_frontend_admin_login_check
+                login_path: login
+                check_path: login_check
                 default_target_path: sonata_admin_dashboard
             logout:
                 path:   viosk_frontend_admin_logout
@@ -33,3 +30,6 @@ security:
          - { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
          - { path: ^/admin(/|$), role: ROLE_ADMIN }
          - { role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER

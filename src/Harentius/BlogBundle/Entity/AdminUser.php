@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="Harentius\BlogBundle\Entity\AdminUserRepository")
  */
-class AdminUser implements UserInterface
+class AdminUser implements UserInterface, \Serializable
 {
     use IdentifiableEntityTrait;
 
@@ -22,7 +22,7 @@ class AdminUser implements UserInterface
      * @SymfonyConstraints\Length(max=50)
      * @SymfonyConstraints\Type("string")
      */
-    private $name;
+    private $username;
 
     /**
      * @var string
@@ -46,11 +46,6 @@ class AdminUser implements UserInterface
     private $salt;
 
     /**
-     * @var string
-     */
-    private $plainPassword;
-
-    /**
      *
      */
     public function __construct()
@@ -61,18 +56,26 @@ class AdminUser implements UserInterface
     /**
      * @return string
      */
-    public function getName()
+    public function __toString()
     {
-        return $this->name;
+        return $this->username;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUsername()
+    {
+        return $this->username;
     }
 
     /**
      * @param string $value
      * @return $this
      */
-    public function setName($value)
+    public function setUsername($value)
     {
-        $this->name = $value;
+        $this->username = $value;
 
         return $this;
     }
@@ -97,6 +100,17 @@ class AdminUser implements UserInterface
      * @param string $value
      * @return $this
      */
+    public function setPassword($value)
+    {
+        $this->password = $value;
+
+        return $this;
+    }
+
+    /**
+     * @param string $value
+     * @return $this
+     */
     public function setSalt($value)
     {
         $this->salt = $value;
@@ -104,32 +118,12 @@ class AdminUser implements UserInterface
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getPlainPassword()
-    {
-        return $this->plainPassword;
-    }
-
-    /**
-     * @param string $value
-     * @return $this
-     */
-    public function setPlainPassword($value)
-    {
-        $this->plainPassword = $value;
-        $this->password = hash('sha512', $value . $this->salt);
-
-        return $this;
-    }
-
-    /**
+      /**
      * @return array
      */
     public function getRoles()
     {
-        return ['ROLE_ADMIN'];
+        return ['ROLE_ADMIN', 'ROLE_SONATA_ADMIN'];
     }
 
     /**
@@ -137,6 +131,31 @@ class AdminUser implements UserInterface
      */
     public function eraseCredentials()
     {
-        $this->plainPassword = null;
+
+    }
+
+// TODO: implement
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
+
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+            // $this->salt
+            ) = unserialize($serialized);
     }
 }
