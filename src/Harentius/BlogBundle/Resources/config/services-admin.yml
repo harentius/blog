@@ -1,11 +1,22 @@
 services:
-    harentius_blog.article:
+    harentius_blog.admin.article:
         class: Harentius\BlogBundle\Admin\ArticleAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: content, label: Content, show_in_dashboard: true }
+            - { name: sonata.admin, manager_type: orm, group: Content, label: Articles, show_in_dashboard: true }
         arguments:
             - null
             - Harentius\BlogBundle\Entity\Article
             - null
         calls:
-            - [ setTranslationDomain, [harentius_blog]]
+            - [ setTranslationDomain, [HarentiusBlogBundle]]
+
+    harentius_blog.admin.category:
+        class: Harentius\BlogBundle\Admin\CategoryAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Content, label: Categories, show_in_dashboard: true }
+        arguments:
+            - null
+            - Harentius\BlogBundle\Entity\Category
+            - null
+        calls:
+            - [ setTranslationDomain, [HarentiusBlogBundle]]

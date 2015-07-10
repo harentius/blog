@@ -5,7 +5,6 @@ namespace Harentius\BlogBundle\Admin;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
 
 class ArticleAdmin extends Admin
 {
@@ -42,9 +41,10 @@ class ArticleAdmin extends Admin
             ->add('title')
             ->add('slug')
             ->add('category')
-            ->add('tags', null, [
-                'attr' => ['class' => 'tags-list'],
-            ])
+//            ->add('tags', 'sonata_type_model_autocomplete', array(
+//                'property' => 'name',
+//                'multiple' => 'true',
+//            ))
             ->add('text', 'textarea', [
                 'attr' => ['rows' => 12, 'class' => 'blog-post-text'],
             ])

@@ -14,15 +14,6 @@ trait SeoContentTrait
      * @SymfonyConstraints\Type(type="string")
      * @SymfonyConstraints\Length(max=255)
      */
-    protected $metaTitle;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @SymfonyConstraints\Type(type="string")
-     * @SymfonyConstraints\Length(max=255)
-     */
     protected $metaDescription;
 
     /**
@@ -33,25 +24,6 @@ trait SeoContentTrait
      * @SymfonyConstraints\Length(max=1000)
      */
     protected $metaKeywords;
-
-    /**
-     * @return string
-     */
-    public function getMetaTitle()
-    {
-        return $this->metaTitle;
-    }
-
-    /**
-     * @param string $value
-     * @return $this
-     */
-    public function setMetaTitle($value)
-    {
-        $this->metaTitle = $value;
-
-        return $this;
-    }
 
     /**
      * @return string
