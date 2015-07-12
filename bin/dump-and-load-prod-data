@@ -1,4 +1,4 @@
 #!/bin/sh
 
 echo "Dumping old base"
-app/console blog:database:dump --db-name=folkprog --db-user=root --db-password=1111 --dir="var/dump" --dump-file=dump.yml "$@"
+app/console folkprog:database:dump --db-name=folkprog --db-user=root --db-password=1111 --dir="var/dump" --dump-file=dump.yml "$@"

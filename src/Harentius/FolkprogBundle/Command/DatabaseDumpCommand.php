@@ -35,7 +35,7 @@ class DatabaseDumpCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('blog:database:dump')
+            ->setName('folkprog:database:dump')
             ->addOption('db-name', null, InputOption::VALUE_REQUIRED)
             ->addOption('db-host', null, InputOption::VALUE_OPTIONAL, '', 'localhost')
             ->addOption('db-user', null, InputOption::VALUE_REQUIRED)
