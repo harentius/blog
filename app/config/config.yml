@@ -100,3 +100,5 @@ harentius_blog:
     homepage:
         # ~ - no page, feed only or page slug
         page_slug: %homepage_page_slug%
+    list:
+        posts_per_page: %list_posts_per_page%

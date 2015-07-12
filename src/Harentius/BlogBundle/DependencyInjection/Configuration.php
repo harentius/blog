@@ -30,6 +30,11 @@ class Configuration implements ConfigurationInterface
                     ->scalarNode('page_slug')->defaultValue(null)->end()
                 ->end()
             ->end()
+            ->arrayNode('list')
+                ->children()
+                    ->integerNode('posts_per_page')->defaultValue(10)->end()
+                ->end()
+            ->end()
         ;
 
         return $treeBuilder;
