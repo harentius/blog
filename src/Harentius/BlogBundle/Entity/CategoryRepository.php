@@ -13,7 +13,7 @@ class CategoryRepository extends NestedTreeRepository
     public function notEmptyChildrenHierarchy(array $options = [])
     {
         $qb = $this->createQueryBuilder('c')
-            ->select('c.slug, c.name, c.level, c.root, c.left, c.right')
+            ->select('c.slug, c.name, c.level')
             ->addSelect('COUNT(a) AS articles_number')
                 ->from('HarentiusBlogBundle:Article', 'a')
                 ->where('a.category IN
