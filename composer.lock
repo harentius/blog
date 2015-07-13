@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "698a09cab2a8734fe6ddc01af157dae4",
+    "hash": "0faebb5fb8e7c382885a9db240e1797b",
     "packages": [
         {
             "name": "beberlei/DoctrineExtensions",
@@ -155,6 +155,36 @@
                 "mobile-first",
                 "responsive",
                 "web"
+            ]
+        },
+        {
+            "name": "bower-asset/ckeditor",
+            "version": "4.4.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ckeditor/ckeditor-releases.git",
+                "reference": "a68e8c32012f2955b76e0d2e84f1b14a90c8c959"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ckeditor/ckeditor-releases/zipball/a68e8c32012f2955b76e0d2e84f1b14a90c8c959",
+                "reference": "a68e8c32012f2955b76e0d2e84f1b14a90c8c959",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "license": [
+                "For licensing, see LICENSE.md or http://ckeditor.com/license."
+            ],
+            "description": "JavaScript WYSIWYG web text editor.",
+            "keywords": [
+                "ckeditor",
+                "editor",
+                "fckeditor",
+                "html",
+                "javascript",
+                "richtext",
+                "text",
+                "wysiwyg"
             ]
         },
         {
