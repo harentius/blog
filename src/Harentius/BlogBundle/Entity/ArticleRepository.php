@@ -8,7 +8,7 @@ class ArticleRepository extends EntityRepository
 {
     /**
      * @param Category $category
-     * @return mixed
+     * @return Article[]
      */
     public function findPublishedByCategory(Category $category)
     {
@@ -33,7 +33,7 @@ class ArticleRepository extends EntityRepository
 
     /**
      * @param Tag $tag
-     * @return mixed
+     * @return Article[]
      */
     public function findByTag(Tag $tag)
     {
@@ -44,5 +44,33 @@ class ArticleRepository extends EntityRepository
             ->getQuery()
             ->execute()
         ;
+    }
+
+    /**
+     * @param string $year
+     * @param string $month
+     * @return Article[]
+     */
+    public function findPublishedByYearMonth($year, $month = null)
+    {
+        $qb = $this->createQueryBuilder('a');
+
+        $qb
+            ->where('YEAR(a.publishedAt) = :year')
+            ->andWhere('a.isPublished = :isPublished')
+            ->setParameters([
+                ':year' => $year,
+                ':isPublished' => true,
+            ])
+        ;
+
+        if ($month) {
+            $qb
+                ->andWhere('MONTH(a.publishedAt) = :month')
+                ->setParameter(':month', $month)
+            ;
+        }
+
+        return $qb->getQuery()->execute();
     }
 }

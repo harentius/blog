@@ -70,10 +70,10 @@ class BlogController extends Controller
      */
     public function archiveAction($year, $month = null)
     {
-        $articles = [];
+        $articlesRepository = $this->getDoctrine()->getRepository('HarentiusBlogBundle:Article');
 
         return $this->render('HarentiusBlogBundle:Blog:list.html.twig', [
-            'articles' => $articles,
+            'articles' => $articlesRepository->findPublishedByYearMonth($year, $month),
         ]);
     }
 
