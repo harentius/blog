@@ -71,7 +71,7 @@ abstract class Article
     /**
      * @var \DateTime
      *
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      * @SymfonyConstraints\DateTime
      */
     protected $publishedAt;
@@ -82,7 +82,6 @@ abstract class Article
     public function __construct()
     {
         $this->isPublished = false;
-        $this->viewsCount = 0;
     }
 
     /**
