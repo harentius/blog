@@ -22,3 +22,4 @@ parameters:
     sidebar_tags_limit: 10
     sidebar_tag_sizes: [50, 75, 100]
     homepage_page_slug: index
+    list_posts_per_page: 40

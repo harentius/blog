@@ -12,5 +12,5 @@ app/console doctrine:schema:update --force "$@"
 echo "Populating database"
 app/console blog:database:populate
 
-echo "Loading fixtures"
-app/console doctrine:fixtures:load --append --no-interaction "$@"
+echo "Loading Data"
+bin/dump-and-load-prod-data "$@"

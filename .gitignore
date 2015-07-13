@@ -17,3 +17,6 @@
 /web/css/*
 /web/js/*
 /web/assets/*
+
+/var/dump/*
+!/var/dump/.gitkeep

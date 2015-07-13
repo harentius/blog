@@ -2,7 +2,6 @@ Harentius\BlogBundle\Entity\Category:
     category_{1..3}:
         name: Category <current()>
         slug: category-<current()>
-        metaTitle: Meta title for 'Title <current()>' category
         metaDescription: Meta description for 'Title <current()>' category
         metaKeywords: Meta keywords for 'Title <current()>' category
     category_with_children_1:
@@ -30,7 +29,6 @@ Harentius\BlogBundle\Entity\Article:
         tags: [@tag_1, @tag_2]
         author: <getAdminUser()>
         isPublished: true
-        metaTitle: Meta title for 'Title 1' articte
         metaDescription: Meta description for 'Title 1' articte
         metaKeywords: Meta keywords for 'Title 1' articte
         publishedAt: <dateTimeBetween('-30 days', 'now')>
@@ -47,7 +45,6 @@ Harentius\BlogBundle\Entity\Article:
         tags: [@tag_1, @tag_3]
         author: <getAdminUser()>
         isPublished: false
-        metaTitle: Meta title for 'Title 2' articte
         metaDescription: Meta description for 'Title 2' articte
         metaKeywords: Meta keywords for 'Title 2' articte
         publishedAt: <dateTimeBetween('-60 days', 'now')>
@@ -65,7 +62,6 @@ Harentius\BlogBundle\Entity\Article:
         tags: [@tag_1, @tag_4]
         author: <getAdminUser()>
         isPublished: true
-        metaTitle: Meta title for 'Title <current()>' articte
         metaDescription: Meta description for 'Title <current()>' articte
         metaKeywords: Meta keywords for 'Title <current()>' articte
         publishedAt: <dateTimeBetween('-90 days', 'now')>
@@ -83,7 +79,6 @@ Harentius\BlogBundle\Entity\Article:
         tags: [@tag_1, @tag_3]
         author: <getAdminUser()>
         isPublished: true
-        metaTitle: Meta title for 'Title 6' articte
         metaDescription: Meta description for 'Title 6' articte
         metaKeywords: Meta keywords for 'Title 6' articte
         publishedAt: <dateTimeBetween('-120 days', 'now')>
@@ -101,7 +96,6 @@ Harentius\BlogBundle\Entity\Article:
         tags: [@tag_2, @tag_5]
         author: <getAdminUser()>
         isPublished: true
-        metaTitle: Meta title for 'Title 7' articte
         metaDescription: Meta description for 'Title 7' articte
         metaKeywords: Meta keywords for 'Title 7' articte
         publishedAt: <dateTimeBetween('-120 days', 'now')>

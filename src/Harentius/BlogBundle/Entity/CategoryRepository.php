@@ -22,6 +22,7 @@ class CategoryRepository extends NestedTreeRepository
                 )
                 ->andWhere('a.isPublished = :isPublished')
             ->setParameter('isPublished', true)
+            ->orderBy('c.root, c.left', 'ASC')
             ->groupBy('c')
             ->getQuery()
         ;

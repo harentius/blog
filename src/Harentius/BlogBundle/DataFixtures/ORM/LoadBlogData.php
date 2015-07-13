@@ -11,10 +11,9 @@ class LoadBlogData extends DataFixtureLoader
      */
     protected function getFixtures()
     {
-        return  array(
+        return [
             __DIR__ . '/blog_data.yml',
-
-        );
+        ];
     }
 
     public function getAdminUser()
