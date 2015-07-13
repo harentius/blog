@@ -6,6 +6,7 @@ use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
 use Harentius\BlogBundle\Entity\Article;
 use Harentius\BlogBundle\Entity\Category;
+use Harentius\BlogBundle\Entity\Page;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -70,12 +71,14 @@ class DatabaseDumpCommand extends Command
 
         $dumps = [
             'Categories' => 'dumpCategories',
-            'Posts' => 'dumpPosts',
+            'Articles' => 'dumpArticles',
+            'Pages' => 'dumpPages',
         ];
 
         foreach ($dumps as $name => $method) {
-            $output->writeln(sprintf('<info>Dumping %s</info>', $name));
+            $output->write(sprintf('<info>Dumping %s...</info>', $name));
             $this->{$method}();
+            $output->writeln(sprintf('<info> done</info>', $name));
         }
 
         file_put_contents($dumpFile, Yaml::dump($this->data, 100));
@@ -105,7 +108,8 @@ class DatabaseDumpCommand extends Command
             SELECT * FROM p2a44_terms
             INNER JOIN p2a44_term_taxonomy
             ON p2a44_terms.term_id = p2a44_term_taxonomy.term_id
-            AND p2a44_term_taxonomy.taxonomy = 'category'"
+            AND p2a44_term_taxonomy.taxonomy = 'category'
+            ORDER BY parent ASC"
         );
         $this->data[Category::class] = $this->processData($categories, [
             'name' => 'name',
@@ -137,7 +141,42 @@ class DatabaseDumpCommand extends Command
     /**
      *
      */
-    protected function dumpPosts()
+    protected function dumpArticles()
+    {
+        $this->dumpAbstractPostData('post', Article::class, [
+            'category' => function ($v) {
+                $result = $this->connection->fetchAssoc("
+                    SELECT p2a44_terms.term_id
+                    FROM p2a44_term_relationships
+                    INNER JOIN p2a44_term_taxonomy ON p2a44_term_relationships.term_taxonomy_id = p2a44_term_taxonomy.term_taxonomy_id
+                    INNER JOIN p2a44_terms ON p2a44_term_taxonomy.term_id = p2a44_terms.term_id
+                    WHERE object_id = :object_id
+                    AND p2a44_term_taxonomy.taxonomy = 'category'", [':object_id' => $v['ID']]
+                );
+
+                return sprintf('@category-%s', $result['term_id']);
+            },
+        ]);
+    }
+
+    /**
+     *
+     */
+    protected function dumpPages()
+    {
+        $this->dumpAbstractPostData('page', Page::class, [
+            'isPublished' => function () {
+                return true;
+            },
+        ]);
+    }
+
+    /**
+     * @param string $type
+     * @param string $entityClass
+     * @param array $additionalData
+     */
+    private function dumpAbstractPostData($type, $entityClass, array $additionalData = [])
     {
         $getMeta = function ($v, $key) {
             $result = $this->connection->fetchAssoc("
@@ -149,23 +188,28 @@ class DatabaseDumpCommand extends Command
             return $result['meta_value'];
         };
 
-        $posts = $this->connection->fetchAll("SELECT * FROM p2a44_posts WHERE post_status IN ('publish', 'draft')");
-        $this->data[Article::class] = $this->processData($posts, [
+        $posts = $this->connection->fetchAll("
+            SELECT * FROM p2a44_posts
+            WHERE post_status IN ('publish', 'draft')
+            AND post_type = :type", [':type' => $type]
+        );
+        $this->data[$entityClass] = $this->processData($posts, array_merge([
             'title' => 'post_title',
             'slug' => 'post_name',
-            'text' => 'post_content',
+            'text' => function($v) {
+                return stripcslashes($v['post_content']);
+            },
             'isPublished' => function ($v) {
                 return $v['post_status'] === 'publish';
             },
-            'publishedAt' => 'post_date_gmt',
-            'category' => function ($v) {
-                $result = $this->connection->fetchAssoc("
-                    SELECT term_taxonomy_id
-                    FROM p2a44_term_relationships
-                    WHERE object_id = :object_id", [':object_id' => $v['ID']]
-                );
-
-                return sprintf('@category-%s', $result['term_taxonomy_id']);
+            'publishedAt' => function ($v) {
+                if ($v['post_date_gmt'] !== '0000-00-00 00:00:00') {
+                    return $v['post_date_gmt'];
+                } elseif ($v['post_date'] !== '0000-00-00 00:00:00') {
+                    return $v['post_date'];
+                } else {
+                    return null;
+                }
             },
             'metaDescription' => function ($v) use ($getMeta) {
                 return $getMeta($v, '_yoast_wpseo_metadesc');
@@ -173,7 +217,7 @@ class DatabaseDumpCommand extends Command
             'metaKeywords' => function ($v) use ($getMeta) {
                 return $getMeta($v, '_yoast_wpseo_metakeywords');
             },
-        ], function ($v) {
+        ], $additionalData), function ($v) {
             return sprintf('post-%s', $v['ID']);
         }, function ($v) {
             return (bool) $v['post_title'] && $v['post_content'];
