@@ -18,6 +18,10 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
 
+    nodejs.path: /usr/bin/node
+    nodejs.modules_path: /usr/lib/node_modules
+    bin_coffee: /usr/bin/coffee
+
     sidebar_cache_filefime: 0
     sidebar_tags_limit: 10
     sidebar_tag_sizes: [50, 75, 100]
