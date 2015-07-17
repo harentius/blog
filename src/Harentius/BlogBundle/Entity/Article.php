@@ -92,6 +92,17 @@ class Article extends BaseArticle
     }
 
     /**
+     * @param Tag $value
+     * @return $this
+     */
+    public function addTag($value)
+    {
+        $this->tags[] = $value;
+
+        return $this;
+    }
+
+    /**
      * @return int
      */
     public function getViewsCount()

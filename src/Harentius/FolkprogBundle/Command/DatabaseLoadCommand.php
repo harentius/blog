@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Harentius\BlogBundle\Entity\Article;
 use Harentius\BlogBundle\Entity\Category;
 use Harentius\BlogBundle\Entity\Page;
+use Harentius\BlogBundle\Entity\Tag;
 use Harentius\FolkprogBundle\Utils\FieldsCopier;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -28,11 +29,6 @@ class DatabaseLoadCommand extends ContainerAwareCommand
     private $fs;
 
     /**
-     * @var array
-     */
-    private $limits;
-
-    /**
      * @var EntityManagerInterface
      */
     private $em;
@@ -52,7 +48,6 @@ class DatabaseLoadCommand extends ContainerAwareCommand
             ->addOption('dir', null, InputOption::VALUE_REQUIRED)
             ->addOption('dump-file', 'f', InputOption::VALUE_REQUIRED, '', 'dump.yml')
             ->addOption('no-sql-logger', null, InputOption::VALUE_NONE)
-            ->addOption('limits', 'l', InputOption::VALUE_IS_ARRAY|InputOption::VALUE_REQUIRED)
         ;
     }
 
@@ -64,7 +59,6 @@ class DatabaseLoadCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->limits = $this->parseLimits($input->getOption('limits'));
         $directory = $input->getOption('dir');
         $dumpFile = sprintf('%s/%s', $directory, $input->getOption('dump-file'));
 
@@ -95,6 +89,7 @@ class DatabaseLoadCommand extends ContainerAwareCommand
 
         $processors = [
             'Categories' => 'loadCategories',
+            'Tags' => 'loadTags',
             'Articles' => 'loadArticles',
             'Pages' => 'loadPages',
         ];
@@ -125,7 +120,8 @@ class DatabaseLoadCommand extends ContainerAwareCommand
 
             $this->fieldsCopier->copy(
                 ['name', 'slug', 'metaDescription', 'metaKeywords'],
-                $categoryData, $category
+                $categoryData,
+                $category
             );
 
             if ($categoryData['parent']) {
@@ -134,6 +130,34 @@ class DatabaseLoadCommand extends ContainerAwareCommand
 
             $this->em->persist($category);
             $this->setReference($id, $category);
+            $count++;
+        }
+
+        $this->em->flush();
+
+        return $count;
+    }
+
+
+    /**
+     * @param array $rawData
+     * @return int
+     */
+    protected function loadTags($rawData)
+    {
+        $count = 0;
+
+        foreach ($rawData[Tag::class] as $id => $tagData) {
+            $tag = new Tag();
+
+            $this->fieldsCopier->copy(
+                ['name', 'slug'],
+                $tagData,
+                $tag
+            );
+
+            $this->em->persist($tag);
+            $this->setReference($id, $tag);
             $count++;
         }
 
@@ -176,7 +200,8 @@ class DatabaseLoadCommand extends ContainerAwareCommand
 
             $this->fieldsCopier->copy(
                 ['title', 'slug', 'text', 'isPublished', 'metaDescription', 'metaKeywords'],
-                $articleData, $article
+                $articleData,
+                $article
             );
 
             if ($articleData['publishedAt']) {
@@ -185,6 +210,12 @@ class DatabaseLoadCommand extends ContainerAwareCommand
 
             if ($categoryRequired) {
                 $article->setCategory($this->getReference($articleData['category']));
+            }
+
+            if (isset($articleData['tags'])) {
+                foreach ($articleData['tags'] as $tag) {
+                    $article->addTag($this->getReference($tag));
+                }
             }
 
             $this->em->persist($article);
@@ -239,25 +270,5 @@ class DatabaseLoadCommand extends ContainerAwareCommand
         }
 
         return $this->references[$reference];
-    }
-
-    /**
-     * @param array $limits
-     * @return array
-     */
-    private function parseLimits(array $limits)
-    {
-        $result = [];
-
-        foreach ($limits as $item) {
-            @list($class, $limit) = explode(':', $item, 2);
-            $limit = (int) $limit;
-
-            if ($limit > 0) {
-                $result[$class] = $limit;
-            }
-        }
-
-        return $result;
     }
 }

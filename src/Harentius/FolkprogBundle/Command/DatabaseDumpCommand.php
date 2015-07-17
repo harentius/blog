@@ -7,6 +7,7 @@ use Doctrine\DBAL\DriverManager;
 use Harentius\BlogBundle\Entity\Article;
 use Harentius\BlogBundle\Entity\Category;
 use Harentius\BlogBundle\Entity\Page;
+use Harentius\BlogBundle\Entity\Tag;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -71,6 +72,7 @@ class DatabaseDumpCommand extends Command
 
         $dumps = [
             'Categories' => 'dumpCategories',
+            'Tags' => 'dumpTags',
             'Articles' => 'dumpArticles',
             'Pages' => 'dumpPages',
         ];
@@ -101,19 +103,10 @@ class DatabaseDumpCommand extends Command
             return $optionValue && isset($optionValue['category'][$v['term_id']][$key])
                 ? $optionValue['category'][$v['term_id']][$key]
                 : null
-            ;
+                ;
         };
 
-        $categories = $this->connection->fetchAll("
-            SELECT * FROM p2a44_terms
-            INNER JOIN p2a44_term_taxonomy
-            ON p2a44_terms.term_id = p2a44_term_taxonomy.term_id
-            AND p2a44_term_taxonomy.taxonomy = 'category'
-            ORDER BY parent ASC"
-        );
-        $this->data[Category::class] = $this->processData($categories, [
-            'name' => 'name',
-            'slug' => 'slug',
+        $this->dumpAbstractTaxonomyData('category', Category::class, [
             'parent' => function ($v) {
                 $result = $this->connection->fetchAssoc("
                     SELECT parent FROM p2a44_terms
@@ -125,7 +118,7 @@ class DatabaseDumpCommand extends Command
                 return $result && $result['parent']
                     ? sprintf('@category-%s', $result['parent'])
                     : null
-                ;
+                    ;
             },
             'metaDescription' => function ($v) use ($getMeta) {
                 return $getMeta($v, 'wpseo_desc');
@@ -133,9 +126,15 @@ class DatabaseDumpCommand extends Command
             'metaKeywords' => function ($v) use ($getMeta) {
                 return $getMeta($v, 'wpseo_metakey');
             },
-        ], function ($v) {
-            return sprintf('category-%s', $v['term_id']);
-        });
+        ]);
+    }
+
+    /**
+     *
+     */
+    protected function dumpTags()
+    {
+        $this->dumpAbstractTaxonomyData('post_tag', Tag::class);
     }
 
     /**
@@ -143,18 +142,39 @@ class DatabaseDumpCommand extends Command
      */
     protected function dumpArticles()
     {
-        $this->dumpAbstractPostData('post', Article::class, [
-            'category' => function ($v) {
-                $result = $this->connection->fetchAssoc("
-                    SELECT p2a44_terms.term_id
-                    FROM p2a44_term_relationships
-                    INNER JOIN p2a44_term_taxonomy ON p2a44_term_relationships.term_taxonomy_id = p2a44_term_taxonomy.term_taxonomy_id
-                    INNER JOIN p2a44_terms ON p2a44_term_taxonomy.term_id = p2a44_terms.term_id
-                    WHERE object_id = :object_id
-                    AND p2a44_term_taxonomy.taxonomy = 'category'", [':object_id' => $v['ID']]
-                );
+        $getTaxonomy = function ($v, $type) {
+            $result = $this->connection->fetchAll("
+                SELECT p2a44_terms.term_id
+                FROM p2a44_term_relationships
+                INNER JOIN p2a44_term_taxonomy ON p2a44_term_relationships.term_taxonomy_id = p2a44_term_taxonomy.term_taxonomy_id
+                INNER JOIN p2a44_terms ON p2a44_term_taxonomy.term_id = p2a44_terms.term_id
+                WHERE object_id = :object_id
+                AND p2a44_term_taxonomy.taxonomy = :type", [':object_id' => $v['ID'], ':type' => $type]
+            );
 
-                return sprintf('@category-%s', $result['term_id']);
+            switch ($type) {
+                case 'category':
+                    return sprintf('@category-%s', $result[0]['term_id']);
+                case 'post_tag':
+                    $tags = [];
+
+                    foreach ($result as $tag) {
+                        $tags[] = sprintf('@post_tag-%s', $tag['term_id']);
+                    }
+
+                    return $tags;
+                default:
+                    return null;
+            }
+
+        };
+
+        $this->dumpAbstractPostData('post', Article::class, [
+            'category' => function ($v) use ($getTaxonomy) {
+                return $getTaxonomy($v, 'category');
+            },
+            'tags' => function ($v) use ($getTaxonomy) {
+                return $getTaxonomy($v, 'post_tag');
             },
         ]);
     }
@@ -169,6 +189,28 @@ class DatabaseDumpCommand extends Command
                 return true;
             },
         ]);
+    }
+
+    /**
+     * @param $type
+     * @param $entityClass
+     * @param array $additionalData
+     */
+    private function dumpAbstractTaxonomyData($type, $entityClass, array $additionalData = [])
+    {
+        $taxonomy = $this->connection->fetchAll("
+            SELECT * FROM p2a44_terms
+            INNER JOIN p2a44_term_taxonomy
+            ON p2a44_terms.term_id = p2a44_term_taxonomy.term_id
+            AND p2a44_term_taxonomy.taxonomy = :type
+            ORDER BY parent ASC", [':type' => $type]
+        );
+        $this->data[$entityClass] = $this->processData($taxonomy, array_merge([
+            'name' => 'name',
+            'slug' => 'slug',
+        ], $additionalData), function ($v) use ($type) {
+            return sprintf('%s-%s', $type, $v['term_id']);
+        });
     }
 
     /**
