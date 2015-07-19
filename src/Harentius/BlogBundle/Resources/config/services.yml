@@ -34,22 +34,20 @@ services:
         tags:
             - { name: twig.extension }
 
-    harentius_blog.sidebar.block:
-        abstract: true
-        calls:
-            - [setEntityManager, [@doctrine.orm.entity_manager] ]
-
     harentius_blog.sidebar.categories:
-        parent: harentius_blog.sidebar.block
         class: Harentius\BlogBundle\Sidebar\Categories
+        arguments:
+            - @harentius_blog.entity.category_repository
 
     harentius_blog.sidebar.tags:
-        parent: harentius_blog.sidebar.block
         class: Harentius\BlogBundle\Sidebar\Tags
         arguments:
+            - @harentius_blog.entity.tag_repository
             - %harentius_blog.sidebar.tags_limit%
             - %harentius_blog.sidebar.tag_sizes%
 
     harentius_blog.sidebar.archive:
-        parent: harentius_blog.sidebar.block
         class: Harentius\BlogBundle\Sidebar\Archive
+        arguments:
+            - @harentius_blog.entity.article_repository
+

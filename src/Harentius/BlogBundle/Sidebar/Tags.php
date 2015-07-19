@@ -2,9 +2,14 @@
 
 namespace Harentius\BlogBundle\Sidebar;
 
+use Harentius\BlogBundle\Entity\TagRepository;
+
 class Tags
 {
-    use EntityManagerAwareTrait;
+    /**
+     * @var TagRepository
+     */
+    private $tagRepository;
 
     /**
      * @var int
@@ -17,11 +22,13 @@ class Tags
     private $sidebarTagSizes;
 
     /**
+     * @param TagRepository $tagRepository
      * @param int $sidebarTagsLimit
      * @param array $sidebarTagsSize
      */
-    public function __construct($sidebarTagsLimit, $sidebarTagsSize)
+    public function __construct(TagRepository $tagRepository, $sidebarTagsLimit, $sidebarTagsSize)
     {
+        $this->tagRepository = $tagRepository;
         $this->sidebarTagsLimit = $sidebarTagsLimit;
         $this->sidebarTagSizes = $sidebarTagsSize;
     }
@@ -31,9 +38,7 @@ class Tags
      */
     public function getList()
     {
-        $tags = $this->em->getRepository('HarentiusBlogBundle:Tag')
-            ->findMostPopularLimited($this->sidebarTagsLimit)
-        ;
+        $tags = $this->tagRepository->findMostPopularLimited($this->sidebarTagsLimit);
 
         if (!$tags) {
             return $tags;
