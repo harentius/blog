@@ -96,8 +96,8 @@ class DatabaseLoadCommand extends ContainerAwareCommand
 
         foreach ($processors as $name => $method) {
             $output->write(sprintf('<info>Importing %s data...</info>', $name));
-            $this->{$method}($rawData);
-            $output->writeln(sprintf('<info> done (loaded %s items)</info>', $name));
+            $count = $this->{$method}($rawData);
+            $output->writeln(sprintf('<info> done (loaded %s items)</info>', $count));
         }
 
         $output->writeln("<info>Loaded data from '$dumpFile'</info>");
