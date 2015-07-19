@@ -42,6 +42,16 @@ class BlogExtension extends HttpKernelExtension
     }
 
     /**
+     * {@inheritDoc}
+     */
+    public function getFilters()
+    {
+        return [
+            new \Twig_SimpleFilter('read_more', [$this, 'readMore'], ['is_safe' => ['html']]),
+        ];
+    }
+
+    /**
      * @param $controllerReference
      * @param array $options
      * @return string
@@ -55,6 +65,24 @@ class BlogExtension extends HttpKernelExtension
         }
 
         return $this->apcCache->fetch($key);
+    }
+
+    /**
+     * @param $content
+     * @param null $url
+     * @return string
+     */
+    public function readMore($content, $url = null)
+    {
+        if (($length = strpos($content, '<!--more-->')) !== false) {
+            $content = substr($content, 0, $length);
+        }
+
+        if ($url !== null) {
+            $content .= '<a href="' . $url . '">[..]</a>';
+        }
+
+        return $content;
     }
 
     /**
