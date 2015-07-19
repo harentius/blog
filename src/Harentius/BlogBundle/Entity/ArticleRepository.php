@@ -26,6 +26,7 @@ class ArticleRepository extends EntityRepository
                 ':root' => $category->getRoot(),
                 ':isPublished' => true,
             ])
+            ->orderBy('a.publishedAt', 'DESC')
             ->getQuery()
             ->execute()
         ;
@@ -41,6 +42,7 @@ class ArticleRepository extends EntityRepository
             ->join('a.tags', 't')
             ->where('t = :tag')
             ->setParameter(':tag', $tag)
+            ->orderBy('a.publishedAt', 'DESC')
             ->getQuery()
             ->execute()
         ;
@@ -62,6 +64,7 @@ class ArticleRepository extends EntityRepository
                 ':year' => $year,
                 ':isPublished' => true,
             ])
+            ->orderBy('a.publishedAt', 'DESC')
         ;
 
         if ($month) {
