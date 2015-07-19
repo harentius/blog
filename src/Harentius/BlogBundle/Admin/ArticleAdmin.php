@@ -46,7 +46,7 @@ class ArticleAdmin extends Admin
 //                'multiple' => 'true',
 //            ))
             ->add('text', 'textarea', [
-                'attr' => ['rows' => 12, 'class' => 'blog-post-text'],
+                'attr' => ['class' => 'blog-page-edit'],
             ])
             ->add('isPublished')
             ->add('publishedAt', 'datetime')

@@ -28,7 +28,9 @@
         "whiteoctober/breadcrumbs-bundle": "~1.1.0",
         "sonata-project/doctrine-orm-admin-bundle": "~2.3",
         "beberlei/DoctrineExtensions": "~1.0.1",
-        "bower-asset/ckeditor": "~4.4.7"
+        "bower-asset/ckeditor": "~4.4.7",
+        "bower-asset/ckeditor-youtube-plugin": "~2.0",
+        "bower-asset/ckeditor-readmore-plugin": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
@@ -72,6 +74,13 @@
         "asset-installer-paths": {
           "npm-asset-library": "web/assets/vendor",
           "bower-asset-library": "web/assets/vendor"
-        }
+        },
+        "asset-repositories": [
+            {
+                "type": "bower-vcs",
+                "url": "https://github.com/zionsg/CKEditor-More-plugin.git",
+                "name": "bower-asset/ckeditor-readmore-plugin"
+            }
+        ]
     }
 }

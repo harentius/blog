@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2a7cc8350095ba959a748c44e8449ec4",
+    "hash": "c6bc939e19b0a57ea5d1d67ce288b80f",
     "packages": [
         {
             "name": "beberlei/DoctrineExtensions",
@@ -185,6 +185,54 @@
                 "richtext",
                 "text",
                 "wysiwyg"
+            ]
+        },
+        {
+            "name": "bower-asset/ckeditor-readmore-plugin",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zionsg/CKEditor-More-plugin.git",
+                "reference": "bfaca49c84b482132384405178e90003d209ada5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zionsg/CKEditor-More-plugin/zipball/bfaca49c84b482132384405178e90003d209ada5",
+                "reference": "bfaca49c84b482132384405178e90003d209ada5",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "time": "2013-06-01 14:41:25"
+        },
+        {
+            "name": "bower-asset/ckeditor-youtube-plugin",
+            "version": "v2.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fonini/ckeditor-youtube-plugin.git",
+                "reference": "f6a31c550a402b0438707443dd0c88d262bdf555"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fonini/ckeditor-youtube-plugin/zipball/f6a31c550a402b0438707443dd0c88d262bdf555",
+                "reference": "f6a31c550a402b0438707443dd0c88d262bdf555",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/ckeditor": ">=4.0.0"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "node_modules",
+                    "bower_components",
+                    "test",
+                    "tests"
+                ]
+            },
+            "license": [
+                "MIT"
             ]
         },
         {
@@ -3134,7 +3182,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "knplabs/knp-paginator-bundle": 20
+        "knplabs/knp-paginator-bundle": 20,
+        "bower-asset/ckeditor-readmore-plugin": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
