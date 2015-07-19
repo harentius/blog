@@ -23,6 +23,7 @@ class BlogController extends Controller
 
         return $this->render('HarentiusBlogBundle:Blog:index.html.twig', [
             'page' => $indexPageContent,
+            'articles' => $this->get('harentius_blog.feed')->fetch(),
         ]);
     }
 

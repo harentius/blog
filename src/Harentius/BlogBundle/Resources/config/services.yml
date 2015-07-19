@@ -51,3 +51,9 @@ services:
         arguments:
             - @harentius_blog.entity.article_repository
 
+    harentius_blog.feed:
+        class: Harentius\BlogBundle\Feed
+        arguments:
+            - @harentius_blog.entity.article_repository
+            - %harentius_blog.homepage.feed.category%
+            - %harentius_blog.homepage.feed.number%

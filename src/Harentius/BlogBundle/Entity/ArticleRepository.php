@@ -76,4 +76,29 @@ class ArticleRepository extends EntityRepository
 
         return $qb->getQuery()->execute();
     }
+
+    /**
+     * @param $limit
+     * @param null $categorySlug
+     * @return mixed
+     */
+    public function findByCategorySlugLimited($limit, $categorySlug = null)
+    {
+        $qb = $this->createQueryBuilder('a');
+
+        $qb
+            ->orderBy('a.publishedAt', 'DESC')
+            ->setMaxResults($limit)
+        ;
+
+        if ($categorySlug !== null) {
+            $qb
+                ->join('a.category', 'c')
+                ->where('c.slug = :slug')
+                ->setParameter(':slug', $categorySlug)
+            ;
+        }
+
+        return $qb->getQuery()->execute();
+    }
 }
