@@ -33,6 +33,7 @@ class Page extends BaseArticle
      */
     public function __construct()
     {
+        parent::__construct();
         $this->showInMainMenu = false;
     }
 

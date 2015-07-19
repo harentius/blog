@@ -84,6 +84,11 @@ abstract class Article
         $this->isPublished = false;
     }
 
+    public function __toString()
+    {
+        return $this->title;
+    }
+
     /**
      * @return string
      */

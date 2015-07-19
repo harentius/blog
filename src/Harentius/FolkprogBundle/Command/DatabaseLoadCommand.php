@@ -193,6 +193,14 @@ class DatabaseLoadCommand extends ContainerAwareCommand
     private function loadAbstractPostData($rawData, $entityClass, $categoryRequired = true)
     {
         $count = 0;
+        $adminUser = $this->getContainer()->get('doctrine.orm.entity_manager')
+            ->getRepository('HarentiusBlogBundle:AdminUser')
+            ->findOneBy(['username' => 'admin'])
+        ;
+
+        if (!$adminUser) {
+            throw new \LogicException('Admin user now found');
+        }
 
         foreach ($rawData[$entityClass] as $id => $articleData) {
             /** @var Article|Page $article */
@@ -218,6 +226,7 @@ class DatabaseLoadCommand extends ContainerAwareCommand
                 }
             }
 
+            $article->setAuthor($adminUser);
             $this->em->persist($article);
             $this->setReference($id, $article);
             $count++;

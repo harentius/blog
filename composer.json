@@ -69,7 +69,8 @@
             "file": "app/config/parameters.yml"
         },
         "branch-alias": {
-            "dev-master": "2.7-dev"
+            "dev-master": "2.7-dev",
+            "dev-ckeditor-4": "ckeditor-4"
         },
         "asset-installer-paths": {
           "npm-asset-library": "web/assets/vendor",
