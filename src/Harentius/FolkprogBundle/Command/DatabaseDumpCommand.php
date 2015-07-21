@@ -239,7 +239,21 @@ class DatabaseDumpCommand extends Command
             'title' => 'post_title',
             'slug' => 'post_name',
             'text' => function($v) {
+                $regExp =
+                    '/
+                        <pre\s*class="brush:\s*(?<language>[a-zA-Z]*).*?>
+                            (?<content>.*?)
+                        <\/pre>
+                    /xs'
+                ;
                 $result = sprintf('<p>%s</p>', str_replace(["\r\n\r\n", "\n\n"], '</p><p>', stripcslashes($v['post_content'])));
+                $result = preg_replace_callback($regExp, function($matches) {
+                    return sprintf(
+                        '<pre><code class="%s">%s</code></pre>',
+                        $matches['language'],
+                        $matches['content']
+                    );
+                }, $result);
 
                 return $result;
             },
