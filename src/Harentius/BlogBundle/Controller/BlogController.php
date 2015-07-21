@@ -73,6 +73,14 @@ class BlogController extends Controller
     {
         $articlesRepository = $this->getDoctrine()->getRepository('HarentiusBlogBundle:Article');
 
+        $breadcrumbs = $this->get('white_october_breadcrumbs');
+        $breadcrumbs->addItem('Blog', $this->generateUrl('blog_homepage'));
+        $breadcrumbs->addItem($year, $this->generateUrl('blog_archive', ['year' => $year]));
+
+        if ($month !== null) {
+            $breadcrumbs->addItem($month);
+        }
+
         return $this->render('HarentiusBlogBundle:Blog:list.html.twig', [
             'articles' => $articlesRepository->findPublishedByYearMonth($year, $month),
         ]);
