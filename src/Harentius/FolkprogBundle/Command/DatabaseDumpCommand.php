@@ -239,7 +239,9 @@ class DatabaseDumpCommand extends Command
             'title' => 'post_title',
             'slug' => 'post_name',
             'text' => function($v) {
-                return sprintf('<p>%s</p>', str_replace(["\r\n\r\n", "\n\n"], '</p><p>', stripcslashes($v['post_content'])));
+                $result = sprintf('<p>%s</p>', str_replace(["\r\n\r\n", "\n\n"], '</p><p>', stripcslashes($v['post_content'])));
+
+                return $result;
             },
             'isPublished' => function ($v) {
                 return $v['post_status'] === 'publish';
