@@ -2,6 +2,7 @@
 
 namespace Harentius\BlogBundle\Admin;
 
+use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -57,5 +58,21 @@ class ArticleAdmin extends Admin
                 'required' => false,
             ])
         ;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function createQuery($context = 'list')
+    {
+        /** @var QueryBuilder $query */
+        $query = parent::createQuery($context);
+        $alias = $query->getRootAliases()[0];
+        $query
+            ->orderBy($alias . '.isPublished', 'ASC')
+            ->addOrderBy($alias . '.publishedAt', 'DESC')
+        ;
+
+        return $query;
     }
 }
