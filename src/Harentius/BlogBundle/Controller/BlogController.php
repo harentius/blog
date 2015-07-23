@@ -5,6 +5,7 @@ namespace Harentius\BlogBundle\Controller;
 use Harentius\BlogBundle\Entity\Article;
 use Harentius\BlogBundle\Entity\Page;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class BlogController extends Controller
@@ -69,7 +70,7 @@ class BlogController extends Controller
      * @param string $month
      * @return Response
      */
-    public function archiveAction($year, $month = null)
+    public function archiveAction(Request $request, $year, $month = null)
     {
         $articlesRepository = $this->getDoctrine()->getRepository('HarentiusBlogBundle:Article');
 
@@ -78,7 +79,7 @@ class BlogController extends Controller
         $breadcrumbs->addItem($year, $this->generateUrl('blog_archive', ['year' => $year]));
 
         if ($month !== null) {
-            $breadcrumbs->addItem($month);
+            $breadcrumbs->addItem($this->numberToMonth($month, $request->getLocale()));
         }
 
         return $this->render('HarentiusBlogBundle:Blog:list.html.twig', [
@@ -123,8 +124,23 @@ class BlogController extends Controller
         ]);
     }
 
-    public function menuAction()
+    /**
+     * @param string $number
+     * @param string $locale
+     * @return string
+     */
+    private function numberToMonth($number, $locale)
     {
+        $dateTime = \DateTime::createFromFormat('!m', $number);
+        $formatter = \IntlDateFormatter::create(
+            $locale,
+            \IntlDateFormatter::NONE,
+            \IntlDateFormatter::NONE,
+            $dateTime->getTimezone()->getName(),
+            null,
+            'LLLL'
+        );
 
+        return mb_convert_case($formatter->format($dateTime), MB_CASE_TITLE, "UTF-8");
     }
 }

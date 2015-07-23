@@ -6,7 +6,7 @@
     {% for month in months %}
             <li>
                 <a href="{{ path('blog_archive', {'year': year, 'month': month|localizeddate('none', 'none', 'ru', null, "LL") }) }}">
-                    {{ month|localizeddate('none', 'none', 'ru', null, "LLLL") }}
+                    {{ month|localizeddate('none', 'none', app.request.locale, null, 'LLLL')|capitalize }}
                 </a>
             </li>
     {% endfor %}

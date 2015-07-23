@@ -26,19 +26,23 @@
 
     <body>
         <div class="container">
-            <div class="col-lg-9">
-                {{ knp_menu_render('main') }}
+            <div class="row">
+                <div class="col-lg-12">
+                    {{ knp_menu_render('main') }}
+                </div>
             </div>
 
-            <div class="col-lg-9">
-                {{ wo_render_breadcrumbs() }}
-                {% block content %}{% endblock %}
-            </div>
+            <div class="row">
+                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                    {{ wo_render_breadcrumbs() }}
+                    {% block content %}{% endblock %}
+                </div>
 
-            <div class="col-lg-3">
-                {% block sidebar %}
-                    {{ include('HarentiusBlogBundle:Sidebar:index.html.twig') }}
-                {% endblock %}
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                    {% block sidebar %}
+                        {{ include('HarentiusBlogBundle:Sidebar:index.html.twig') }}
+                    {% endblock %}
+                </div>
             </div>
         </div>
 
