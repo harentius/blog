@@ -17,6 +17,7 @@
 /web/css/*
 /web/js/*
 /web/assets/*
-!/web/assets/articles/.gitkeep
+!/web/assets/images/.gitignore
+!/web/assets/audios/.gitignore
 /var/dump/*
 !/var/dump/.gitkeep

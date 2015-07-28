@@ -42,7 +42,7 @@ class Resolver
      */
     public function assetUri($type)
     {
-        return "/{$this->assetsDir}/$type";
+        return "/{$this->assetsDir}/{$type}s";
     }
 
     /**

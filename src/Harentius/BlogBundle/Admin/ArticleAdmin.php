@@ -83,5 +83,6 @@ class ArticleAdmin extends Admin
     protected function configureRoutes(RouteCollection $collection)
     {
         $collection->add('upload', 'upload');
+        $collection->add('browse', 'browse/{type}');
     }
 }

@@ -34,7 +34,8 @@
                     { name: "others" }
                 ],
                 filebrowserUploadUrl: "{{ admin.generateUrl('upload') }}",
-                filebrowserBrowseUrl: "/"
+                filebrowserBrowseUrl: "{{ admin.generateUrl('browse', {'type': 'image'}) }}",
+                filebrowserAudioBrowseUrl: "{{ admin.generateUrl('browse', {'type': 'audio'}) }}"
             });
         })
     </script>
