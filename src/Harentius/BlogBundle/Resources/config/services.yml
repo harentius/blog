@@ -57,3 +57,13 @@ services:
             - @harentius_blog.entity.article_repository
             - %harentius_blog.homepage.feed.category%
             - %harentius_blog.homepage.feed.number%
+
+    harentius_blog.assets.resolver:
+        class: Harentius\BlogBundle\Assets\Resolver
+        arguments:
+             - "%kernel.root_dir%/../web"
+
+    harentius_blog.assets.manager:
+        class: Harentius\BlogBundle\Assets\Manager
+        arguments:
+            - @harentius_blog.assets.resolver

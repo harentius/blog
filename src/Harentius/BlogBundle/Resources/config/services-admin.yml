@@ -6,9 +6,10 @@ services:
         arguments:
             - null
             - Harentius\BlogBundle\Entity\Article
-            - null
+            - HarentiusBlogBundle:CRUD
         calls:
             - [ setTranslationDomain, [HarentiusBlogBundle]]
+            - [ setTemplate, [edit, HarentiusBlogBundle:Admin:edit.html.twig]]
 
     harentius_blog.admin.category:
         class: Harentius\BlogBundle\Admin\CategoryAdmin

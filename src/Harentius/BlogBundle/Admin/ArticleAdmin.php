@@ -6,6 +6,7 @@ use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Route\RouteCollection;
 
 class ArticleAdmin extends Admin
 {
@@ -74,5 +75,13 @@ class ArticleAdmin extends Admin
         ;
 
         return $query;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function configureRoutes(RouteCollection $collection)
+    {
+        $collection->add('upload', 'upload');
     }
 }

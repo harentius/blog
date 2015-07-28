@@ -30,7 +30,8 @@
         "beberlei/DoctrineExtensions": "~1.0.1",
         "bower-asset/ckeditor": "~4.4.7",
         "bower-asset/ckeditor-youtube-plugin": "~2.0",
-        "bower-asset/ckeditor-readmore-plugin": "dev-master"
+        "bower-asset/ckeditor-readmore-plugin": "dev-master",
+        "bower-asset/ckeditor-audio-plugin": "~1.0.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
