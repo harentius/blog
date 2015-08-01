@@ -4,17 +4,21 @@ namespace Harentius\FolkprogBundle\Command;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
+use Harentius\BlogBundle\Assets\AssetFile;
 use Harentius\BlogBundle\Entity\Article;
 use Harentius\BlogBundle\Entity\Category;
 use Harentius\BlogBundle\Entity\Page;
 use Harentius\BlogBundle\Entity\Tag;
-use Symfony\Component\Console\Command\Command;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Yaml\Yaml;
 
-class DatabaseDumpCommand extends Command
+class DatabaseDumpCommand extends ContainerAwareCommand
 {
     /**
      * @var Connection
@@ -27,6 +31,7 @@ class DatabaseDumpCommand extends Command
     private $directory;
 
     /**
+     * @var array
      * @var array
      */
     private $data = [];
@@ -220,6 +225,8 @@ class DatabaseDumpCommand extends Command
      */
     private function dumpAbstractPostData($type, $entityClass, array $additionalData = [])
     {
+        $fs = new Filesystem();
+        $assetsResolver = $this->getContainer()->get('harentius_blog.assets.resolver');
         $getMeta = function ($v, $key) {
             $result = $this->connection->fetchAssoc("
                 SELECT meta_value FROM p2a44_postmeta
@@ -238,7 +245,8 @@ class DatabaseDumpCommand extends Command
         $this->data[$entityClass] = $this->processData($posts, array_merge([
             'title' => 'post_title',
             'slug' => 'post_name',
-            'text' => function($v) {
+            'text' => function($v) use ($fs, $assetsResolver) {
+                // Migrates from syntaxhighlighter.js to highlight.js
                 $regExp =
                     '/
                         <pre\s*class="brush:\s*(?<language>[a-zA-Z]*).*?>
@@ -252,6 +260,37 @@ class DatabaseDumpCommand extends Command
                         '<pre><code class="%s">%s</code></pre>',
                         $matches['language'],
                         $matches['content']
+                    );
+                }, $result);
+
+                // Dumping photos
+                $crawler = new Crawler();
+                $crawler->addHtmlContent($result, 'UTF-8');
+                $crawler->filter('img')->each(function ($node) use ($fs, $assetsResolver) {
+                    /** @var Crawler $node */
+                    $imageNode = $node->getNode(0);
+                    $oldSrc = $imageNode->getAttribute('src');
+                    $path = $this->loadFile($oldSrc, $this->directory . '/assets/');
+                    $newSrc = $assetsResolver->pathToUri(realpath($path));
+                    $imageNode->setAttribute('src', $newSrc);
+                    $parentNode = $imageNode->parentNode;
+
+                    if ($parentNode->tagName === 'a' && $parentNode->getAttribute('href') === $oldSrc) {
+                        $parentNode->setAttribute('href', $newSrc);
+                    }
+                });
+
+                $result = $crawler->html();
+
+                //Dumping mp3s
+                $regExp = '/\[ca_audio\s*url=\"(?<url>.*?)\".*\]/';
+                $result = preg_replace_callback($regExp, function($matches) use ($assetsResolver) {
+                    $path = $this->loadFile($matches['url'], $this->directory . '/assets/');
+
+                    return sprintf(
+                        // Silent missing IDE warning
+                        '<audio src=' . '"%s" controls="controls"></audio>',
+                        $assetsResolver->pathToUri(realpath($path))
                     );
                 }, $result);
 
@@ -307,5 +346,57 @@ class DatabaseDumpCommand extends Command
         }
 
         return $output;
+    }
+
+    /**
+     * @param string $uri
+     * @param string $targetDir
+     * @return string
+     * @throws \Exception
+     */
+    private function loadFile($uri, $targetDir)
+    {
+        static $fs = null;
+
+        if ($fs === null) {
+            $fs = new Filesystem();
+        }
+
+        $filename = pathinfo($uri, PATHINFO_BASENAME);
+        $targetFile = $targetDir . $filename;
+
+        if (!$fs->exists($targetFile)) {
+            $targetDirectory = dirname($targetFile);
+
+            if (!$fs->exists($targetDirectory)) {
+                $fs->mkdir($targetDirectory, 0777);
+            }
+
+            $url =  ltrim($uri, '/');
+
+            if (strpos($uri, 'http://') === false) {
+                $url = 'http://folkprog.net/' . $url;
+            }
+
+            $fileData = @file_get_contents($url);
+
+            if (!$fileData) {
+                throw new \RuntimeException(sprintf("Unable to download file '%s'", $url));
+            }
+
+            if (!@file_put_contents($targetFile, $fileData)) {
+                throw new \RuntimeException(sprintf("Unable to save file '%s' under '%s'", $url, $targetFile));
+            }
+        }
+
+        $file = new AssetFile(new File($targetFile));
+        $finalPath = sprintf('%s/../web/assets/%ss/%s',
+            $this->getContainer()->getParameter('kernel.root_dir'),
+            $file->getType(),
+            pathinfo($targetFile, PATHINFO_BASENAME)
+        );
+        $fs->copy($targetFile, $finalPath);
+
+        return $finalPath;
     }
 }
