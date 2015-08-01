@@ -49,7 +49,7 @@ class CRUDController extends BaseCRUDController
 
         /** @var SplFileInfo $file */
         foreach ($finder as $file) {
-            $uri = $resolver->getUriForFilePath($file->getPathname());
+            $uri = $resolver->pathToUri($file->getPathname());
 
             if ($uri) {
                 $files[$uri] = pathinfo($uri, PATHINFO_BASENAME);

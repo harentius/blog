@@ -58,7 +58,7 @@ class Resolver
      * @param string $path
      * @return string|null
      */
-    public function getUriForFilePath($path)
+    public function pathToUri($path)
     {
         $prefix = "{$this->webDir}/{$this->assetsDir}/";
 

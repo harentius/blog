@@ -76,7 +76,7 @@ class Manager
             $this->getTargetFileName($uploadedFile->getClientOriginalName(), $uploadsDir)
         );
         $assetFile->setFile($tempFile);
-        $uri = $this->assetsResolver->getUriForFilePath($assetFile->getFile()->getPathname());
+        $uri = $this->assetsResolver->pathToUri($assetFile->getFile()->getPathname());
 
         if ($uri === null) {
             throw new \RuntimeException('Unable to retrieve uploaded file uri');
