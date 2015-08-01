@@ -4,6 +4,8 @@ namespace Harentius\BlogBundle\Controller;
 
 use Harentius\BlogBundle\Entity\Article;
 use Harentius\BlogBundle\Entity\Page;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,11 +31,12 @@ class BlogController extends Controller
     }
 
     /**
+     * @param Request $request
      * @param string $filtrationType
      * @param string $criteria
      * @return Response
      */
-    public function listAction($filtrationType, $criteria)
+    public function listAction(Request $request, $filtrationType, $criteria)
     {
         $articlesRepository = $this->getDoctrine()->getRepository('HarentiusBlogBundle:Article');
 
@@ -46,26 +49,26 @@ class BlogController extends Controller
                     ->findOneBy(['slug' => $criteria])
                 ;
                 $breadcrumbs->addItem($category->getName());
-                $articles = $articlesRepository->findPublishedByCategory($category);
+                $articlesQuery = $articlesRepository->findPublishedByCategoryQuery($category);
                 break;
             case 'tag':
                 $tag = $this->getDoctrine()->getRepository('HarentiusBlogBundle:Tag')
                     ->findOneBy(['slug' => $criteria])
                 ;
                 $breadcrumbs->addItem($tag->getName());
-                $articles = $articlesRepository->findByTag($tag);
+                $articlesQuery = $articlesRepository->findByTagQuery($tag);
                 break;
             default:
-                $articles = [];
-                break;
+                throw $this->createNotFoundException('Unknown filtration type');
         }
 
         return $this->render('HarentiusBlogBundle:Blog:list.html.twig', [
-            'articles' => $articles,
+            'articles' => $this->knpPaginate($request, $articlesQuery),
         ]);
     }
 
     /**
+     * @param Request $request
      * @param string $year
      * @param string $month
      * @return Response
@@ -78,12 +81,14 @@ class BlogController extends Controller
         $breadcrumbs->addItem('Blog', $this->generateUrl('blog_homepage'));
         $breadcrumbs->addItem($year, $this->generateUrl('blog_archive', ['year' => $year]));
 
-        if ($month !== null) {
+        if ($month) {
             $breadcrumbs->addItem($this->numberToMonth($month, $request->getLocale()));
         }
 
+        $articlesQuery = $articlesRepository->findPublishedByYearMonthQuery($year, $month);
+
         return $this->render('HarentiusBlogBundle:Blog:list.html.twig', [
-            'articles' => $articlesRepository->findPublishedByYearMonth($year, $month),
+            'articles' => $this->knpPaginate($request, $articlesQuery),
         ]);
     }
 
@@ -122,6 +127,28 @@ class BlogController extends Controller
         return $this->render('HarentiusBlogBundle:Blog:show.html.twig', [
             'entity' => $entity
         ]);
+    }
+
+    /**
+     * @param Request $request
+     * @param mixed $target
+     * @param array $options
+     * @return PaginationInterface
+     */
+    private function knpPaginate(Request $request, $target, array $options = [])
+    {
+        /** @var Controller $this */
+
+        if (!isset($options['pageParameterName'])) {
+            $options['pageParameterName'] = 'page';
+        }
+
+        /** @var PaginatorInterface $paginator */
+        $paginator = $this->get('knp_paginator');
+        $page = max(1, (int) $request->query->get($options['pageParameterName'], 1));
+        $maxResults = $this->getParameter('harentius_blog.list.posts_per_page');
+
+        return $paginator->paginate($target, $page, $maxResults, $options);
     }
 
     /**

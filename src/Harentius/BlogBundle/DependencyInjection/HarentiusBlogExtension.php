@@ -35,5 +35,6 @@ class HarentiusBlogExtension extends Extension
         $container->setParameter('harentius_blog.homepage.page_slug', $config['homepage']['page_slug']);
         $container->setParameter('harentius_blog.homepage.feed.category', $config['homepage']['feed']['category']);
         $container->setParameter('harentius_blog.homepage.feed.number', $config['homepage']['feed']['number']);
+        $container->setParameter('harentius_blog.list.posts_per_page', $config['list']['posts_per_page']);
     }
 }
