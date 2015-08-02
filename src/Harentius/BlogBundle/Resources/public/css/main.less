@@ -1,4 +1,15 @@
-// Last selector - for correct preview inside Ckeditor
+h2 {
+  font-size: 25px;
+}
+
+h3 {
+  font-size: 21px;
+}
+
+body {
+  background: url('../img/images_frontend.png') repeat;
+}
+
 figure, img {
   &[style*="float:right"] {
     margin: 15px 0 15px 15px;
@@ -11,4 +22,41 @@ figure, img {
 
 figcaption {
   text-align: center;
+}
+
+.container {
+  border: 1px solid #eeeeee;
+  background-color: #ffffff;
+  box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.25);
+}
+
+.main-menu-wrapper {
+  margin: 15px 0;
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      float: left;
+
+      &:not(:first-child) {
+        margin-left: 20px;
+      }
+    }
+  }
+}
+
+.sidebar-block {
+  h3 {
+    margin: 0;
+  }
+
+  &.tags {
+    font-size: 18px;
+
+    a {
+      margin-right: 10px;
+    }
+  }
 }

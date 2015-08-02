@@ -273,6 +273,14 @@ class DatabaseDumpCommand extends ContainerAwareCommand
                     $path = $this->loadFile($oldSrc, $this->directory . '/assets/');
                     $newSrc = $assetsResolver->pathToUri(realpath($path));
                     $imageNode->setAttribute('src', $newSrc);
+                    $imageNode->setAttribute(
+                        'class',
+                        str_replace(
+                            ['alignleft', 'alignright'],
+                            ['pull-left', 'pull-right'],
+                            $imageNode->getAttribute('class')
+                        )
+                    );
                     $parentNode = $imageNode->parentNode;
 
                     if ($parentNode->tagName === 'a' && $parentNode->getAttribute('href') === $oldSrc) {
@@ -317,7 +325,7 @@ class DatabaseDumpCommand extends ContainerAwareCommand
         ], $additionalData), function ($v) {
             return sprintf('post-%s', $v['ID']);
         }, function ($v) {
-            return (bool) $v['post_title'] && $v['post_content'];
+            return (bool) $v['post_title'] && $v['post_content'] && $v['post_name'] !== 'sitemap';
         });
     }
 

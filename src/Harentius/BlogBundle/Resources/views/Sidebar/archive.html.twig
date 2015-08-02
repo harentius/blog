@@ -1,16 +1,19 @@
-<ul>
-{% for year, months in archivesList %}
-    <li>
-        <a href="{{ path('blog_archive', {'year': year}) }}">{{ year }}</a>
-        <ul>
-    {% for month in months %}
-            <li>
-                <a href="{{ path('blog_archive', {'year': year, 'month': month|localizeddate('none', 'none', 'ru', null, "LL") }) }}">
-                    {{ month|localizeddate('none', 'none', app.request.locale, null, 'LLLL')|capitalize }}
-                </a>
-            </li>
+<div class="sidebar-block archive">
+    <h3>{{ 'Archive'|trans }}</h3>
+    <ul>
+    {% for year, months in archivesList %}
+        <li>
+            <a href="{{ path('blog_archive', {'year': year}) }}">{{ year }}</a>
+            <ul>
+        {% for month in months %}
+                <li>
+                    <a href="{{ path('blog_archive', {'year': year, 'month': month|localizeddate('none', 'none', 'ru', null, "LL") }) }}">
+                        {{ month|localizeddate('none', 'none', app.request.locale, null, 'LLLL')|capitalize }}
+                    </a>
+                </li>
+        {% endfor %}
+            </ul>
+        </li>
     {% endfor %}
-        </ul>
-    </li>
-{% endfor %}
-</ul>
+    </ul>
+</div>
