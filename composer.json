@@ -20,7 +20,7 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "stof/doctrine-extensions-bundle": "~1.1",
         "sonata-project/admin-bundle": "~2.3",
-        "fxp/composer-asset-plugin": "1.0",
+        "fxp/composer-asset-plugin": "~1.0.3",
         "bower-asset/bootstrap": "~3.3",
         "knplabs/knp-paginator-bundle": "2.4.*@dev",
         "hautelook/alice-bundle": "~0.2",
@@ -31,7 +31,8 @@
         "bower-asset/ckeditor": "~4.4.7",
         "bower-asset/ckeditor-youtube-plugin": "~2.0",
         "bower-asset/ckeditor-readmore-plugin": "dev-master",
-        "bower-asset/ckeditor-audio-plugin": "~1.0.0"
+        "bower-asset/ckeditor-audio-plugin": "~1.0.0",
+        "bower-asset/jquery": "~2.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

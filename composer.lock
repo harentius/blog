@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6c37b17514c8433c5c21b938222b3255",
+    "hash": "dd6d57a6d01e8d72458f71bbc66ab6ee",
     "packages": [
         {
             "name": "beberlei/DoctrineExtensions",
@@ -1179,20 +1179,20 @@
         },
         {
             "name": "fxp/composer-asset-plugin",
-            "version": "v1.0.0",
+            "version": "v1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/francoispluchino/composer-asset-plugin.git",
-                "reference": "dbc856439a09f07987de673aa8a264c1b88b0c6b"
+                "reference": "c2b0406ac19e9ea2d9556987e827d4e7f6924fde"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/francoispluchino/composer-asset-plugin/zipball/dbc856439a09f07987de673aa8a264c1b88b0c6b",
-                "reference": "dbc856439a09f07987de673aa8a264c1b88b0c6b",
+                "url": "https://api.github.com/repos/francoispluchino/composer-asset-plugin/zipball/c2b0406ac19e9ea2d9556987e827d4e7f6924fde",
+                "reference": "c2b0406ac19e9ea2d9556987e827d4e7f6924fde",
                 "shasum": ""
             },
             "require": {
-                "composer-plugin-api": "1.0.0",
+                "composer-plugin-api": "^1.0",
                 "php": ">=5.3.3"
             },
             "require-dev": {
@@ -1231,7 +1231,7 @@
                 "npm",
                 "package"
             ],
-            "time": "2015-01-25 13:24:06"
+            "time": "2015-07-29 12:23:21"
         },
         {
             "name": "fzaninotto/faker",
