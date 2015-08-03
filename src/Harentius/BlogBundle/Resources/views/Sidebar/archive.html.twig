@@ -2,9 +2,10 @@
     <h3>{{ 'Archive'|trans }}</h3>
     <ul>
     {% for year, months in archivesList %}
-        <li>
+        <li class="year-content-wrapper">
+            <i class="glyphicon glyphicon-menu-down months-expander"></i>
             <a href="{{ path('blog_archive', {'year': year}) }}">{{ year }}</a>
-            <ul>
+            <ul class="months-list display-none">
         {% for month in months %}
                 <li>
                     <a href="{{ path('blog_archive', {'year': year, 'month': month|localizeddate('none', 'none', 'ru', null, "LL") }) }}">

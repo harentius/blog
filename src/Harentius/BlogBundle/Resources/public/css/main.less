@@ -24,6 +24,10 @@ figcaption {
   text-align: center;
 }
 
+.display-none {
+  display: none;
+}
+
 .container {
   border: 1px solid #eeeeee;
   background-color: #ffffff;
@@ -48,8 +52,18 @@ figcaption {
 }
 
 .sidebar-block {
+  ul {
+    padding-left: 15px;
+  }
+
   h3 {
     margin: 0;
+  }
+
+  &.categories {
+    li:before {
+      margin-right: 5px;
+    }
   }
 
   &.tags {
@@ -57,6 +71,41 @@ figcaption {
 
     a {
       margin-right: 10px;
+    }
+  }
+
+  &.archive {
+    > ul {
+      list-style: none;
+
+      ul {
+        padding-left: 35px;
+      }
+    }
+  }
+}
+
+.months-expander {
+  cursor: pointer;
+
+  &:hover {
+    color: #6ca4ab;
+  }
+}
+
+.post-stats {
+  i {
+    &:before {
+      margin-right: 2px;
+    }
+  }
+
+  span {
+    margin-right: 2px;
+
+    &:not(:last-child):after {
+      content: '|';
+      margin-left: 4px;
     }
   }
 }
