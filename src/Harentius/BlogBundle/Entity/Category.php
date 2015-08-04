@@ -3,7 +3,7 @@
 namespace Harentius\BlogBundle\Entity;
 
 use Harentius\BlogBundle\Entity\Base\IdentifiableEntityTrait;
-use Harentius\BlogBundle\Entity\Base\SeoContentTrait;
+use Harentius\BlogBundle\Entity\Base\SeoContentEntityTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Gedmo\Tree\Traits\NestedSetEntity;
@@ -18,7 +18,7 @@ class Category
 {
     use IdentifiableEntityTrait;
     use NestedSetEntity;
-    use SeoContentTrait;
+    use SeoContentEntityTrait;
 
     /**
      * @var string

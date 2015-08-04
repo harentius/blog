@@ -20,7 +20,7 @@ abstract class Article
 {
     use IdentifiableEntityTrait;
     use TimestampableEntityTrait;
-    use SeoContentTrait;
+    use SeoContentEntityTrait;
 
     /**
      * @var string
