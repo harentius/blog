@@ -1,0 +1,4 @@
+{% extends 'HarentiusBlogBundle:Blog:show_page.html.twig' %}
+{% block after_post_content%}
+    {% include 'HarentiusBlogBundle:Blog:_post_info.html.twig' with {'article': entity} %}
+{% endblock %}

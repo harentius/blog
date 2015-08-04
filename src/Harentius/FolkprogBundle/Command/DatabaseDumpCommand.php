@@ -181,6 +181,9 @@ class DatabaseDumpCommand extends ContainerAwareCommand
             'tags' => function ($v) use ($getTaxonomy) {
                 return $getTaxonomy($v, 'post_tag');
             },
+            'viewsCount' => function ($v) {
+                return $this->getPostMeta($v, 'views');
+            }
         ]);
     }
 
@@ -218,6 +221,17 @@ class DatabaseDumpCommand extends ContainerAwareCommand
         });
     }
 
+    private function getPostMeta($v, $key)
+    {
+        $result = $this->connection->fetchAssoc("
+                SELECT meta_value FROM p2a44_postmeta
+                WHERE meta_key = :key
+                AND post_id = :post_id", [':key' => $key, ':post_id' => $v['ID']]
+        );
+
+        return $result['meta_value'];
+    }
+
     /**
      * @param string $type
      * @param string $entityClass
@@ -227,16 +241,6 @@ class DatabaseDumpCommand extends ContainerAwareCommand
     {
         $fs = new Filesystem();
         $assetsResolver = $this->getContainer()->get('harentius_blog.assets.resolver');
-        $getMeta = function ($v, $key) {
-            $result = $this->connection->fetchAssoc("
-                SELECT meta_value FROM p2a44_postmeta
-                WHERE meta_key = :key
-                AND post_id = :post_id", [':key' => $key, ':post_id' => $v['ID']]
-            );
-
-            return $result['meta_value'];
-        };
-
         $posts = $this->connection->fetchAll("
             SELECT * FROM p2a44_posts
             WHERE post_status IN ('publish', 'draft')
@@ -316,11 +320,11 @@ class DatabaseDumpCommand extends ContainerAwareCommand
                     return null;
                 }
             },
-            'metaDescription' => function ($v) use ($getMeta) {
-                return $getMeta($v, '_yoast_wpseo_metadesc');
+            'metaDescription' => function ($v) {
+                return $this->getPostMeta($v, '_yoast_wpseo_metadesc');
             },
-            'metaKeywords' => function ($v) use ($getMeta) {
-                return $getMeta($v, '_yoast_wpseo_metakeywords');
+            'metaKeywords' => function ($v) {
+                return $this->getPostMeta($v, '_yoast_wpseo_metakeywords');
             },
         ], $additionalData), function ($v) {
             return sprintf('post-%s', $v['ID']);

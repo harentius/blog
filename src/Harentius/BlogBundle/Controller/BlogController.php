@@ -79,7 +79,7 @@ class BlogController extends Controller
 
         $breadcrumbs = $this->get('white_october_breadcrumbs');
         $breadcrumbs->addItem('Blog', $this->generateUrl('blog_homepage'));
-        $breadcrumbs->addItem($year, $this->generateUrl('blog_archive', ['year' => $year]));
+        $breadcrumbs->addItem($year, $this->generateUrl('blog_archive_year', ['year' => $year]));
 
         if ($month) {
             $breadcrumbs->addItem($this->numberToMonth($month, $request->getLocale()));
@@ -112,6 +112,10 @@ class BlogController extends Controller
                 'filtrationType' => 'category',
                 'criteria' => $category->getSlug(),
             ]));
+
+            $entity->increaseViewsCount();
+            $em = $this->get('doctrine.orm.entity_manager');
+            $em->flush($entity);
         } else {
             $entity = $this->getDoctrine()->getRepository('HarentiusBlogBundle:Page')
                 ->findOneBy(['slug' => $slug])
@@ -123,9 +127,11 @@ class BlogController extends Controller
         }
 
         $breadcrumbs->addItem($entity->getTitle());
+        $class = get_class($entity);
+        $type = strtolower(substr($class, strrpos($class, '\\') + 1));
 
-        return $this->render('HarentiusBlogBundle:Blog:show.html.twig', [
-            'entity' => $entity
+        return $this->render(sprintf('HarentiusBlogBundle:Blog:show_%s.html.twig', $type), [
+            'entity' => $entity,
         ]);
     }
 

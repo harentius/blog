@@ -120,4 +120,12 @@ class Article extends BaseArticle
 
         return $this;
     }
+
+    /**
+     *
+     */
+    public function increaseViewsCount()
+    {
+        $this->viewsCount = $this->getViewsCount() + 1;
+    }
 }

@@ -1,21 +1,9 @@
 {% for article in articles %}
-<div class="post-preview-wrapper">
+<div class="padded-content post-preview-wrapper">
     <article>
         <h2><a href="{{ path('blog_show', {'slug': article.slug}) }}">{{ article.title }}</a></h2>
         <div>{{ article.text|read_more }}</div>
     </article>
-    <div>
-        <div class="post-stats pull-left">
-            <i class="glyphicon glyphicon-calendar"></i><span class="date">{{ article.publishedAt|date('d/m/Y') }}</span>
-            <i class="glyphicon glyphicon-user"></i><span class="author">{{ article.author.username }}</span>
-            <i class="glyphicon glyphicon-folder-close"></i><span class="category">{{ article.category.name }}</span>
-            <i class="glyphicon glyphicon-stats"></i><span class="views">{{ article.viewsCount }}</span>
-        </div>
-        <div class="post-tags pull-right">
-        {% for tag in article.tags %}
-            {{ tag.name }},
-        {% endfor %}
-        </div>
-    </div>
+    {% include 'HarentiusBlogBundle:Blog:_post_info.html.twig' %}
 </div>
 {% endfor %}

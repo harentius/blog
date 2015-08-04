@@ -187,10 +187,10 @@ class DatabaseLoadCommand extends ContainerAwareCommand
     /**
      * @param $rawData
      * @param $entityClass
-     * @param bool|true $categoryRequired
+     * @param bool|true $isArticle
      * @return int
      */
-    private function loadAbstractPostData($rawData, $entityClass, $categoryRequired = true)
+    private function loadAbstractPostData($rawData, $entityClass, $isArticle = true)
     {
         $count = 0;
         $adminUser = $this->getContainer()->get('doctrine.orm.entity_manager')
@@ -207,7 +207,10 @@ class DatabaseLoadCommand extends ContainerAwareCommand
             $article = new $entityClass();
 
             $this->fieldsCopier->copy(
-                ['title', 'slug', 'text', 'isPublished', 'metaDescription', 'metaKeywords'],
+                array_merge(
+                    ['title', 'slug', 'text', 'isPublished', 'metaDescription', 'metaKeywords'],
+                    $isArticle ? ['viewsCount'] : []
+                ),
                 $articleData,
                 $article
             );
@@ -216,7 +219,7 @@ class DatabaseLoadCommand extends ContainerAwareCommand
                 $article->setpublishedAt(new \DateTime($articleData['publishedAt']));
             }
 
-            if ($categoryRequired) {
+            if ($isArticle) {
                 $article->setCategory($this->getReference($articleData['category']));
             }
 

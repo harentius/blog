@@ -1,0 +1,26 @@
+<div class="post-info row">
+    <div class="post-stats pull-left col-lg-6 col-md-6 col-xs-12">
+        <i class="glyphicon glyphicon-calendar"></i>
+        <span>{{ article.publishedAt|date('d/m/Y') }}</span>
+
+        <i class="glyphicon glyphicon-user"></i>
+        <span>{{ article.author.username }}</span>
+
+        <i class="glyphicon glyphicon-folder-close"></i>
+        <a href="{{ path('blog_list', { 'filtrationType': 'category', 'criteria': article.category.slug }) }}">
+            {{ article.category.name }}
+        </a>
+
+        <i class="glyphicon glyphicon-stats"></i>
+        <span>{{ article.viewsCount }}</span>
+    </div>
+    <div class="post-tags pull-right col-lg-6 col-md-6 col-xs-12 text-right">
+        {% for tag in article.tags %}
+            <i class="glyphicon glyphicon-tag"></i>
+            <a href="{{ path('blog_list', { 'filtrationType': 'tag', 'criteria': tag.slug }) }}">
+                {{ tag.name }}
+            </a>
+            {% if not loop.last %}, {% endif %}
+        {% endfor %}
+    </div>
+</div>

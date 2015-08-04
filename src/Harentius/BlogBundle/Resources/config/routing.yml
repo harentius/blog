@@ -2,19 +2,27 @@ blog_homepage:
     path:     /
     defaults: { _controller: HarentiusBlogBundle:Blog:index }
 
-blog_archive:
-    path:     /{year}/{month}
-    defaults: { _controller: HarentiusBlogBundle:Blog:archive, month: '' }
+# So terrible way for compability with my old wp site ...(
+# (need closing slashes, but symfony router doesn't pass optional parameters with closing slash)
+blog_archive_year:
+    path:     /{year}/
+    defaults: { _controller: HarentiusBlogBundle:Blog:archive }
+    requirements:
+        year: \d+
+
+blog_archive_month:
+    path:     /{year}/{month}/
+    defaults: { _controller: HarentiusBlogBundle:Blog:archive }
     requirements:
         year: \d+
         month: \d+
 
 blog_list:
-    path:     /{filtrationType}/{criteria}
+    path:     /{filtrationType}/{criteria}/
     defaults: { _controller: HarentiusBlogBundle:Blog:list }
     requirements:
         filtrationType: category|tag
 
 blog_show:
-    path:     /{slug}
+    path:     /{slug}/
     defaults: { _controller: HarentiusBlogBundle:Blog:show }
