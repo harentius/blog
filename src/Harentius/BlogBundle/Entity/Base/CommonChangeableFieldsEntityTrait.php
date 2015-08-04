@@ -3,22 +3,9 @@
 namespace Harentius\BlogBundle\Entity\Base;
 
 use Harentius\BlogBundle\Entity\AdminUser;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Validator\Constraints as SymfonyConstraints;
-use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity
- * @ORM\InheritanceType("SINGLE_TABLE")
- * @ORM\DiscriminatorColumn(name="type", type="integer")
- * @ORM\DiscriminatorMap({
- *      0 = "Harentius\BlogBundle\Entity\Article",
- *      1 = "Harentius\BlogBundle\Entity\Page",
- * })
- */
-abstract class Article
+trait CommonChangeableFieldsEntityTrait
 {
-    use IdentifiableEntityTrait;
     use TimestampableEntityTrait;
     use SeoContentEntityTrait;
 
@@ -75,14 +62,6 @@ abstract class Article
      * @SymfonyConstraints\DateTime
      */
     protected $publishedAt;
-
-    /**
-     *
-     */
-    public function __construct()
-    {
-        $this->isPublished = false;
-    }
 
     /**
      * @return string

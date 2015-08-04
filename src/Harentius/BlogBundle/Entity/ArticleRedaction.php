@@ -3,6 +3,10 @@
 namespace Harentius\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Harentius\BlogBundle\Entity\Base\AbstractPostRedaction;
+use Harentius\BlogBundle\Entity\Base\ArticleChangeableFieldsEntityTrait;
+use Symfony\Component\Validator\Constraints as SymfonyConstraints;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="Harentius\BlogBundle\Entity\ArticleRedactionRepository")
@@ -13,8 +17,10 @@ use Doctrine\ORM\Mapping as ORM;
  *      1 = "Harentius\BlogBundle\Entity\PageRedaction",
  * })
  */
-class ArticleRedaction extends Article
+class ArticleRedaction extends AbstractPostRedaction
 {
+    use ArticleChangeableFieldsEntityTrait;
+
     /**
      * @var Article
      *

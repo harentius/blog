@@ -3,35 +3,18 @@
 namespace Harentius\BlogBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Harentius\BlogBundle\Entity\Base\Article as BaseArticle;
+use Harentius\BlogBundle\Entity\Base\AbstractPost;
+use Harentius\BlogBundle\Entity\Base\ArticleChangeableFieldsEntityTrait;
 use Symfony\Component\Validator\Constraints as SymfonyConstraints;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Harentius\BlogBundle\Entity\ArticleRepository")
  */
-class Article extends BaseArticle
+class Article extends AbstractPost
 {
-    /**
-     * @var Category
-     *
-     * @ORM\ManyToOne(
-     *      targetEntity="Harentius\BlogBundle\Entity\Category",
-     *      inversedBy="articles"
-     * )
-     * @SymfonyConstraints\NotNull()
-     */
-    private $category;
-
-    /**
-     * @var Tag[]
-     *
-     * @ORM\ManyToMany(
-     *      targetEntity="Harentius\BlogBundle\Entity\Tag",
-     *      inversedBy="articles"
-     * )
-     */
-    private $tags;
+    use ArticleChangeableFieldsEntityTrait;
 
     /**
      * @var int
@@ -43,63 +26,18 @@ class Article extends BaseArticle
      */
     private $viewsCount;
 
+    private $likesCount;
+
+    private $disLikesCount;
+
     /**
      *
      */
     public function __construct()
     {
-        parent::__construct();
-        $this->tags = new ArrayCollection();
+        $this->isPublished = false;
         $this->viewsCount = 0;
-    }
-
-    /**
-     * @return Category
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
-
-    /**
-     * @param Category $value
-     * @return $this
-     */
-    public function setCategory($value)
-    {
-        $this->category = $value;
-
-        return $this;
-    }
-
-    /**
-     * @return Tag[]|ArrayCollection
-     */
-    public function getTags()
-    {
-        return $this->tags;
-    }
-
-    /**
-     * @param Tag[] $value
-     * @return $this
-     */
-    public function setTags($value)
-    {
-        $this->tags = $value;
-
-        return $this;
-    }
-
-    /**
-     * @param Tag $value
-     * @return $this
-     */
-    public function addTag($value)
-    {
-        $this->tags[] = $value;
-
-        return $this;
+        $this->tags = new ArrayCollection();
     }
 
     /**
