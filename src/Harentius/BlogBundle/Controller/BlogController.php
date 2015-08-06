@@ -2,6 +2,7 @@
 
 namespace Harentius\BlogBundle\Controller;
 
+use Doctrine\ORM\EntityManager;
 use Harentius\BlogBundle\Entity\Article;
 use Harentius\BlogBundle\Entity\Page;
 use Knp\Component\Pager\Pagination\PaginationInterface;
@@ -41,7 +42,7 @@ class BlogController extends Controller
         $articlesRepository = $this->getDoctrine()->getRepository('HarentiusBlogBundle:Article');
 
         $breadcrumbs = $this->get('white_october_breadcrumbs');
-        $breadcrumbs->addItem('Blog', $this->generateUrl('blog_homepage'));
+        $breadcrumbs->addItem('Blog', $this->generateUrl('harentius_blog_homepage'));
 
         switch ($filtrationType) {
             case 'category':
@@ -78,8 +79,8 @@ class BlogController extends Controller
         $articlesRepository = $this->getDoctrine()->getRepository('HarentiusBlogBundle:Article');
 
         $breadcrumbs = $this->get('white_october_breadcrumbs');
-        $breadcrumbs->addItem('Blog', $this->generateUrl('blog_homepage'));
-        $breadcrumbs->addItem($year, $this->generateUrl('blog_archive_year', ['year' => $year]));
+        $breadcrumbs->addItem('Blog', $this->generateUrl('harentius_blog_homepage'));
+        $breadcrumbs->addItem($year, $this->generateUrl('harentius_blog_archive_year', ['year' => $year]));
 
         if ($month) {
             $breadcrumbs->addItem($this->numberToMonth($month, $request->getLocale()));
@@ -103,18 +104,19 @@ class BlogController extends Controller
         ;
 
         $breadcrumbs = $this->get('white_october_breadcrumbs');
-        $breadcrumbs->addItem('Blog', $this->generateUrl('blog_homepage'));
+        $breadcrumbs->addItem('Blog', $this->generateUrl('harentius_blog_homepage'));
 
         if ($entity) {
             $category = $entity->getCategory();
 
-            $breadcrumbs->addItem($category->getName(), $this->generateUrl('blog_list', [
+            $breadcrumbs->addItem($category->getName(), $this->generateUrl('harentius_blog_list', [
                 'filtrationType' => 'category',
                 'criteria' => $category->getSlug(),
             ]));
 
             $entity->increaseViewsCount();
-            $em = $this->get('doctrine.orm.entity_manager');
+            /** @var EntityManager $em */
+            $em = $this->getDoctrine()->getManager();
             $em->flush($entity);
         } else {
             $entity = $this->getDoctrine()->getRepository('HarentiusBlogBundle:Page')
@@ -133,6 +135,16 @@ class BlogController extends Controller
         return $this->render(sprintf('HarentiusBlogBundle:Blog:show_%s.html.twig', $type), [
             'entity' => $entity,
         ]);
+    }
+
+    /**
+     * @param Article $article
+     * @param string $type
+     * @return Response
+     */
+    public function rateAction(Article $article, $type = 'like')
+    {
+        return $this->get('harentius_blog.rating')->rate(new Response(), $article, $type);
     }
 
     /**

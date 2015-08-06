@@ -171,7 +171,17 @@ class DatabaseDumpCommand extends ContainerAwareCommand
                 default:
                     return null;
             }
+        };
 
+        $aggregateRating = function ($v, $rating) {
+            $result = $this->connection->fetchAssoc("
+                SELECT COUNT(rating_id) as result
+                FROM p2a44_ratings
+                WHERE rating_postid = :post_id
+                AND rating_rating = :rating", [':post_id' => $v['ID'], ':rating' => $rating]
+            );
+
+            return (int) $result['result'];
         };
 
         $this->dumpAbstractPostData('post', Article::class, [
@@ -182,7 +192,13 @@ class DatabaseDumpCommand extends ContainerAwareCommand
                 return $getTaxonomy($v, 'post_tag');
             },
             'viewsCount' => function ($v) {
-                return $this->getPostMeta($v, 'views');
+                return (int) $this->getPostMeta($v, 'views');
+            },
+            'likesCount' => function ($v) use ($aggregateRating) {
+                return $aggregateRating($v, 1);
+            },
+            'disLikesCount' => function ($v) use ($aggregateRating) {
+                return $aggregateRating($v, -1);
             }
         ]);
     }

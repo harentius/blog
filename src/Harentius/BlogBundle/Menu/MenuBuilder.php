@@ -52,7 +52,7 @@ class MenuBuilder
 
         foreach ($pages as $page) {
             $menu->addChild($page->getTitle(), [
-                'route' => 'blog_show',
+                'route' => 'harentius_blog_show',
                 'routeParameters' => ['slug' => $page->getSlug()],
             ]);
         }

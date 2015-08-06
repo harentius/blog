@@ -30,6 +30,7 @@ services:
         arguments:
             - @fragment.handler
             - ~
+            - @harentius_blog.rating
             - %sidebar_cache_filefime%
         tags:
             - { name: twig.extension }
@@ -57,6 +58,12 @@ services:
             - @harentius_blog.entity.article_repository
             - %harentius_blog.homepage.feed.category%
             - %harentius_blog.homepage.feed.number%
+
+    harentius_blog.rating:
+        class: Harentius\BlogBundle\Rating
+        arguments:
+            - @request_stack
+            - @doctrine.orm.entity_manager
 
     harentius_blog.assets.resolver:
         class: Harentius\BlogBundle\Assets\Resolver

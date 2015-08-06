@@ -2,7 +2,7 @@
     <h3>{{ 'Tags Cloud'|trans }}</h3>
 {% for tag in tags %}
     <a class="tag"
-       href="{{ path('blog_list', {'filtrationType': 'tag', 'criteria': tag.slug}) }}"
+       href="{{ path('harentius_blog_list', {'filtrationType': 'tag', 'criteria': tag.slug}) }}"
        style="font-size: {{ tag.percentage }}%"
     >
         {{ tag.name }}

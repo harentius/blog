@@ -26,8 +26,24 @@ class Article extends AbstractPost
      */
     private $viewsCount;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     * @SymfonyConstraints\Type(type="integer")
+     * @SymfonyConstraints\Range(min=0)
+     * @SymfonyConstraints\NotNull()
+     */
     private $likesCount;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     * @SymfonyConstraints\Type(type="integer")
+     * @SymfonyConstraints\Range(min=0)
+     * @SymfonyConstraints\NotNull()
+     */
     private $disLikesCount;
 
     /**
@@ -37,6 +53,8 @@ class Article extends AbstractPost
     {
         $this->isPublished = false;
         $this->viewsCount = 0;
+        $this->likesCount = 0;
+        $this->disLikesCount = 0;
         $this->tags = new ArrayCollection();
     }
 
@@ -65,5 +83,59 @@ class Article extends AbstractPost
     public function increaseViewsCount()
     {
         $this->viewsCount = $this->getViewsCount() + 1;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLikesCount()
+    {
+        return $this->likesCount;
+    }
+
+    /**
+     * @param int $value
+     * @return $this
+     */
+    public function setLikesCount($value)
+    {
+        $this->likesCount = $value;
+
+        return $this;
+    }
+
+    /**
+     *
+     */
+    public function increaseLikesCount()
+    {
+        $this->likesCount = $this->getLikesCount() + 1;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDisLikesCount()
+    {
+        return $this->disLikesCount;
+    }
+
+    /**
+     * @param int $value
+     * @return $this
+     */
+    public function setDisLikesCount($value)
+    {
+        $this->disLikesCount = $value;
+
+        return $this;
+    }
+
+    /**
+     *
+     */
+    public function increaseDisLikesCount()
+    {
+        $this->disLikesCount = $this->getDisLikesCount() + 1;
     }
 }

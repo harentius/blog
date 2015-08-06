@@ -22,3 +22,14 @@ services:
             - null
         calls:
             - [ setTranslationDomain, [ HarentiusBlogBundle ] ]
+
+    harentius_blog.admin.tag:
+        class: Harentius\BlogBundle\Admin\TagAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Content, label: Tags, show_in_dashboard: true }
+        arguments:
+            - null
+            - Harentius\BlogBundle\Entity\Tag
+            - null
+        calls:
+            - [ setTranslationDomain, [ HarentiusBlogBundle ] ]

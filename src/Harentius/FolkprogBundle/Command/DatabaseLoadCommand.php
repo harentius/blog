@@ -209,7 +209,7 @@ class DatabaseLoadCommand extends ContainerAwareCommand
             $this->fieldsCopier->copy(
                 array_merge(
                     ['title', 'slug', 'text', 'isPublished', 'metaDescription', 'metaKeywords'],
-                    $isArticle ? ['viewsCount'] : []
+                    $isArticle ? ['viewsCount', 'likesCount', 'dislikesCount'] : []
                 ),
                 $articleData,
                 $article

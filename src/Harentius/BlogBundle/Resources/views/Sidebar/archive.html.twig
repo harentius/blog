@@ -4,11 +4,11 @@
     {% for year, months in archivesList %}
         <li class="year-content-wrapper">
             <i class="glyphicon glyphicon-menu-down months-expander"></i>
-            <a href="{{ path('blog_archive_year', {'year': year}) }}">{{ year }}</a>
+            <a href="{{ path('harentius_blog_archive_year', {'year': year}) }}">{{ year }}</a>
             <ul class="months-list display-none">
         {% for month in months %}
                 <li>
-                    <a href="{{ path('blog_archive_month', {'year': year, 'month': month|localizeddate('none', 'none', 'ru', null, "LL") }) }}">
+                    <a href="{{ path('harentius_blog_archive_month', {'year': year, 'month': month|localizeddate('none', 'none', 'ru', null, "LL") }) }}">
                         {{ month|localizeddate('none', 'none', app.request.locale, null, 'LLLL')|capitalize }}
                     </a>
                 </li>
