@@ -17,20 +17,13 @@ class Feed
     private $category;
 
     /**
-     * @var int
-     */
-    private $number;
-
-    /**
      * @param ArticleRepository $articleRepository
      * @param $category
-     * @param $number
      */
-    public function __construct(ArticleRepository $articleRepository, $category, $number)
+    public function __construct(ArticleRepository $articleRepository, $category)
     {
         $this->articleRepository = $articleRepository;
         $this->category = $category;
-        $this->number = $number;
     }
 
     /**
@@ -38,10 +31,6 @@ class Feed
      */
     public function fetch()
     {
-        if (!$this->category && !$this->number) {
-            return [];
-        }
-
-        return $this->articleRepository->findByCategorySlugLimited($this->number, $this->category);
+        return $this->articleRepository->findByCategorySlugLimitedQuery($this->category);
     }
 }

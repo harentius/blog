@@ -14,9 +14,10 @@ use Symfony\Component\HttpFoundation\Response;
 class BlogController extends Controller
 {
     /**
+     * @param Request $request
      * @return Response
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $indexPageContent = $this->getDoctrine()->getRepository('HarentiusBlogBundle:Page')
             ->findOneBy([
@@ -27,7 +28,11 @@ class BlogController extends Controller
 
         return $this->render('HarentiusBlogBundle:Blog:index.html.twig', [
             'page' => $indexPageContent,
-            'articles' => $this->get('harentius_blog.feed')->fetch(),
+            'articles' => $this->knpPaginateCustomPerPage(
+                $request,
+                $this->get('harentius_blog.feed')->fetch(),
+                $this->getParameter('harentius_blog.homepage.feed.number')
+            ),
         ]);
     }
 
@@ -155,6 +160,20 @@ class BlogController extends Controller
      */
     private function knpPaginate(Request $request, $target, array $options = [])
     {
+        $maxResults = $this->getParameter('harentius_blog.list.posts_per_page');
+
+        return $this->knpPaginateCustomPerPage($request, $target, $maxResults, $options);
+    }
+
+    /**
+     * @param Request $request
+     * @param mixed $target
+     * @param $maxResults
+     * @param array $options
+     * @return PaginationInterface
+     */
+    private function knpPaginateCustomPerPage(Request $request, $target, $maxResults, array $options = [])
+    {
         /** @var Controller $this */
 
         if (!isset($options['pageParameterName'])) {
@@ -164,7 +183,6 @@ class BlogController extends Controller
         /** @var PaginatorInterface $paginator */
         $paginator = $this->get('knp_paginator');
         $page = max(1, (int) $request->query->get($options['pageParameterName'], 1));
-        $maxResults = $this->getParameter('harentius_blog.list.posts_per_page');
 
         return $paginator->paginate($target, $page, $maxResults, $options);
     }

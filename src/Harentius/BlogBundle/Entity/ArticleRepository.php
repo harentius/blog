@@ -77,17 +77,15 @@ class ArticleRepository extends EntityRepository
     }
 
     /**
-     * @param $limit
      * @param null $categorySlug
      * @return mixed
      */
-    public function findByCategorySlugLimited($limit, $categorySlug = null)
+    public function findByCategorySlugLimitedQuery($categorySlug = null)
     {
         $qb = $this->createQueryBuilder('a');
 
         $qb
             ->orderBy('a.publishedAt', 'DESC')
-            ->setMaxResults($limit)
         ;
 
         if ($categorySlug !== null) {
@@ -98,6 +96,6 @@ class ArticleRepository extends EntityRepository
             ;
         }
 
-        return $qb->getQuery()->execute();
+        return $qb->getQuery();
     }
 }

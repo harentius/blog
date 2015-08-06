@@ -6,4 +6,7 @@
     <div>{{ page.text|raw }}</div>
 </div>
 {% include('HarentiusBlogBundle:Blog:_articles.html.twig') %}
+<div class="paginator">
+    {{ knp_pagination_render(articles) }}
+</div>
 {% endblock %}

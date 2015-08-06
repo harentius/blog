@@ -57,7 +57,6 @@ services:
         arguments:
             - @harentius_blog.entity.article_repository
             - %harentius_blog.homepage.feed.category%
-            - %harentius_blog.homepage.feed.number%
 
     harentius_blog.rating:
         class: Harentius\BlogBundle\Rating
