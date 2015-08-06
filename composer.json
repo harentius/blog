@@ -32,7 +32,9 @@
         "bower-asset/ckeditor-youtube-plugin": "~2.0",
         "bower-asset/ckeditor-readmore-plugin": "dev-master",
         "bower-asset/ckeditor-audio-plugin": "~1.0.0",
-        "bower-asset/jquery": "~2.1"
+        "bower-asset/jquery": "~2.1",
+        "friendsofsymfony/jsrouting-bundle": "~1.5.4",
+        "bower-asset/components-font-awesome": "^4.4"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
