@@ -308,7 +308,7 @@ class DatabaseDumpCommand extends ContainerAwareCommand
                     }
                 });
 
-                $result = $crawler->html();
+                $result = $crawler->filter('body')->html();
 
                 //Dumping mp3s
                 $regExp = '/\[ca_audio\s*url=\"(?<url>.*?)\".*\]/';
