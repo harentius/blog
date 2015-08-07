@@ -19,6 +19,7 @@ class HarentiusBlogExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+        $loader->load('services-repositories.yml');
         $loader->load('services-admin.yml');
 
         $twigExtensionDefinition = $container->getDefinition('harentius_blog.twig.blog_extension');
@@ -32,5 +33,8 @@ class HarentiusBlogExtension extends Extension
         $container->setParameter('harentius_blog.sidebar.tags_limit', $config['sidebar']['tags_limit']);
         $container->setParameter('harentius_blog.sidebar.tag_sizes', $config['sidebar']['tag_sizes']);
         $container->setParameter('harentius_blog.homepage.page_slug', $config['homepage']['page_slug']);
+        $container->setParameter('harentius_blog.homepage.feed.category', $config['homepage']['feed']['category']);
+        $container->setParameter('harentius_blog.homepage.feed.number', $config['homepage']['feed']['number']);
+        $container->setParameter('harentius_blog.list.posts_per_page', $config['list']['posts_per_page']);
     }
 }

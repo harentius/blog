@@ -1,0 +1,35 @@
+<div class="post-info row">
+    <div class="pull-left col-lg-7 col-md-7 col-sm-12 col-xs-12 post-stats">
+        <span>
+            <i class="glyphicon glyphicon-calendar"></i>
+            {{ article.publishedAt|date('d/m/Y') }}
+        </span>
+
+        <span>
+            <i class="glyphicon glyphicon-user"></i>
+            {{ article.author.username }}
+        </span>
+
+        <span>
+            <i class="glyphicon glyphicon-folder-close"></i>
+            <a href="{{ path('harentius_blog_list', { 'filtrationType': 'category', 'criteria': article.category.slug }) }}">
+                {{ article.category.name }}
+            </a>
+        </span>
+
+        <span>
+            <i class="glyphicon glyphicon-stats"></i>
+            {{ article.viewsCount }}
+        </span>
+    </div>
+    <div class="text-right post-tags col-lg-5 col-md-5 col-sm-12 col-xs-12">
+        {% for tag in article.tags %}
+            {% spaceless %}
+        <span>
+            <i class="glyphicon glyphicon-tag"></i>
+            <a href="{{ path('harentius_blog_list', { 'filtrationType': 'tag', 'criteria': tag.slug }) }}">{{ tag.name }}</a>
+        </span>
+            {% endspaceless %}
+        {% endfor %}
+    </div>
+</div>

@@ -2,9 +2,22 @@
 
 namespace Harentius\BlogBundle\Sidebar;
 
-class Categories 
+use Harentius\BlogBundle\Entity\CategoryRepository;
+
+class Categories
 {
-    use EntityManagerAwareTrait;
+    /**
+     * @var CategoryRepository
+     */
+    private $categoryRepository;
+
+    /**
+     * @param CategoryRepository $categoryRepository
+     */
+    public function __construct(CategoryRepository $categoryRepository)
+    {
+        $this->categoryRepository = $categoryRepository;
+    }
 
     /**
      * @param array $options
@@ -12,8 +25,6 @@ class Categories
      */
     public function getList(array $options = [])
     {
-        $categories = $this->em->getRepository('HarentiusBlogBundle:Category');
-
-        return $categories->notEmptyChildrenHierarchy($options);
+        return $this->categoryRepository->notEmptyChildrenHierarchy($options);
     }
 }

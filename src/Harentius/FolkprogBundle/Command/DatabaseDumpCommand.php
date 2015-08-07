@@ -4,16 +4,21 @@ namespace Harentius\FolkprogBundle\Command;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\DriverManager;
+use Harentius\BlogBundle\Assets\AssetFile;
 use Harentius\BlogBundle\Entity\Article;
 use Harentius\BlogBundle\Entity\Category;
 use Harentius\BlogBundle\Entity\Page;
-use Symfony\Component\Console\Command\Command;
+use Harentius\BlogBundle\Entity\Tag;
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Yaml\Yaml;
 
-class DatabaseDumpCommand extends Command
+class DatabaseDumpCommand extends ContainerAwareCommand
 {
     /**
      * @var Connection
@@ -26,6 +31,7 @@ class DatabaseDumpCommand extends Command
     private $directory;
 
     /**
+     * @var array
      * @var array
      */
     private $data = [];
@@ -71,6 +77,7 @@ class DatabaseDumpCommand extends Command
 
         $dumps = [
             'Categories' => 'dumpCategories',
+            'Tags' => 'dumpTags',
             'Articles' => 'dumpArticles',
             'Pages' => 'dumpPages',
         ];
@@ -101,19 +108,10 @@ class DatabaseDumpCommand extends Command
             return $optionValue && isset($optionValue['category'][$v['term_id']][$key])
                 ? $optionValue['category'][$v['term_id']][$key]
                 : null
-            ;
+                ;
         };
 
-        $categories = $this->connection->fetchAll("
-            SELECT * FROM p2a44_terms
-            INNER JOIN p2a44_term_taxonomy
-            ON p2a44_terms.term_id = p2a44_term_taxonomy.term_id
-            AND p2a44_term_taxonomy.taxonomy = 'category'
-            ORDER BY parent ASC"
-        );
-        $this->data[Category::class] = $this->processData($categories, [
-            'name' => 'name',
-            'slug' => 'slug',
+        $this->dumpAbstractTaxonomyData('category', Category::class, [
             'parent' => function ($v) {
                 $result = $this->connection->fetchAssoc("
                     SELECT parent FROM p2a44_terms
@@ -125,7 +123,7 @@ class DatabaseDumpCommand extends Command
                 return $result && $result['parent']
                     ? sprintf('@category-%s', $result['parent'])
                     : null
-                ;
+                    ;
             },
             'metaDescription' => function ($v) use ($getMeta) {
                 return $getMeta($v, 'wpseo_desc');
@@ -133,9 +131,15 @@ class DatabaseDumpCommand extends Command
             'metaKeywords' => function ($v) use ($getMeta) {
                 return $getMeta($v, 'wpseo_metakey');
             },
-        ], function ($v) {
-            return sprintf('category-%s', $v['term_id']);
-        });
+        ]);
+    }
+
+    /**
+     *
+     */
+    protected function dumpTags()
+    {
+        $this->dumpAbstractTaxonomyData('post_tag', Tag::class);
     }
 
     /**
@@ -143,19 +147,59 @@ class DatabaseDumpCommand extends Command
      */
     protected function dumpArticles()
     {
-        $this->dumpAbstractPostData('post', Article::class, [
-            'category' => function ($v) {
-                $result = $this->connection->fetchAssoc("
-                    SELECT p2a44_terms.term_id
-                    FROM p2a44_term_relationships
-                    INNER JOIN p2a44_term_taxonomy ON p2a44_term_relationships.term_taxonomy_id = p2a44_term_taxonomy.term_taxonomy_id
-                    INNER JOIN p2a44_terms ON p2a44_term_taxonomy.term_id = p2a44_terms.term_id
-                    WHERE object_id = :object_id
-                    AND p2a44_term_taxonomy.taxonomy = 'category'", [':object_id' => $v['ID']]
-                );
+        $getTaxonomy = function ($v, $type) {
+            $result = $this->connection->fetchAll("
+                SELECT p2a44_terms.term_id
+                FROM p2a44_term_relationships
+                INNER JOIN p2a44_term_taxonomy ON p2a44_term_relationships.term_taxonomy_id = p2a44_term_taxonomy.term_taxonomy_id
+                INNER JOIN p2a44_terms ON p2a44_term_taxonomy.term_id = p2a44_terms.term_id
+                WHERE object_id = :object_id
+                AND p2a44_term_taxonomy.taxonomy = :type", [':object_id' => $v['ID'], ':type' => $type]
+            );
 
-                return sprintf('@category-%s', $result['term_id']);
+            switch ($type) {
+                case 'category':
+                    return sprintf('@category-%s', $result[0]['term_id']);
+                case 'post_tag':
+                    $tags = [];
+
+                    foreach ($result as $tag) {
+                        $tags[] = sprintf('@post_tag-%s', $tag['term_id']);
+                    }
+
+                    return $tags;
+                default:
+                    return null;
+            }
+        };
+
+        $aggregateRating = function ($v, $rating) {
+            $result = $this->connection->fetchAssoc("
+                SELECT COUNT(rating_id) as result
+                FROM p2a44_ratings
+                WHERE rating_postid = :post_id
+                AND rating_rating = :rating", [':post_id' => $v['ID'], ':rating' => $rating]
+            );
+
+            return (int) $result['result'];
+        };
+
+        $this->dumpAbstractPostData('post', Article::class, [
+            'category' => function ($v) use ($getTaxonomy) {
+                return $getTaxonomy($v, 'category');
             },
+            'tags' => function ($v) use ($getTaxonomy) {
+                return $getTaxonomy($v, 'post_tag');
+            },
+            'viewsCount' => function ($v) {
+                return (int) $this->getPostMeta($v, 'views');
+            },
+            'likesCount' => function ($v) use ($aggregateRating) {
+                return $aggregateRating($v, 1);
+            },
+            'disLikesCount' => function ($v) use ($aggregateRating) {
+                return $aggregateRating($v, -1);
+            }
         ]);
     }
 
@@ -172,22 +216,47 @@ class DatabaseDumpCommand extends Command
     }
 
     /**
+     * @param $type
+     * @param $entityClass
+     * @param array $additionalData
+     */
+    private function dumpAbstractTaxonomyData($type, $entityClass, array $additionalData = [])
+    {
+        $taxonomy = $this->connection->fetchAll("
+            SELECT * FROM p2a44_terms
+            INNER JOIN p2a44_term_taxonomy
+            ON p2a44_terms.term_id = p2a44_term_taxonomy.term_id
+            AND p2a44_term_taxonomy.taxonomy = :type
+            ORDER BY parent ASC", [':type' => $type]
+        );
+        $this->data[$entityClass] = $this->processData($taxonomy, array_merge([
+            'name' => 'name',
+            'slug' => 'slug',
+        ], $additionalData), function ($v) use ($type) {
+            return sprintf('%s-%s', $type, $v['term_id']);
+        });
+    }
+
+    private function getPostMeta($v, $key)
+    {
+        $result = $this->connection->fetchAssoc("
+                SELECT meta_value FROM p2a44_postmeta
+                WHERE meta_key = :key
+                AND post_id = :post_id", [':key' => $key, ':post_id' => $v['ID']]
+        );
+
+        return $result['meta_value'];
+    }
+
+    /**
      * @param string $type
      * @param string $entityClass
      * @param array $additionalData
      */
     private function dumpAbstractPostData($type, $entityClass, array $additionalData = [])
     {
-        $getMeta = function ($v, $key) {
-            $result = $this->connection->fetchAssoc("
-                SELECT meta_value FROM p2a44_postmeta
-                WHERE meta_key = :key
-                AND post_id = :post_id", [':key' => $key, ':post_id' => $v['ID']]
-            );
-
-            return $result['meta_value'];
-        };
-
+        $fs = new Filesystem();
+        $assetsResolver = $this->getContainer()->get('harentius_blog.assets.resolver');
         $posts = $this->connection->fetchAll("
             SELECT * FROM p2a44_posts
             WHERE post_status IN ('publish', 'draft')
@@ -196,8 +265,64 @@ class DatabaseDumpCommand extends Command
         $this->data[$entityClass] = $this->processData($posts, array_merge([
             'title' => 'post_title',
             'slug' => 'post_name',
-            'text' => function($v) {
-                return stripcslashes($v['post_content']);
+            'text' => function($v) use ($fs, $assetsResolver) {
+                // Migrates from syntaxhighlighter.js to highlight.js
+                $regExp =
+                    '/
+                        <pre\s*class="brush:\s*(?<language>[a-zA-Z]*).*?>
+                            (?<content>.*?)
+                        <\/pre>
+                    /xs'
+                ;
+                $result = sprintf('<p>%s</p>', str_replace(["\r\n\r\n", "\n\n"], '</p><p>', stripcslashes($v['post_content'])));
+                $result = preg_replace_callback($regExp, function($matches) {
+                    return sprintf(
+                        '<pre><code class="%s">%s</code></pre>',
+                        $matches['language'],
+                        $matches['content']
+                    );
+                }, $result);
+
+                // Dumping photos
+                $crawler = new Crawler();
+                $crawler->addHtmlContent($result, 'UTF-8');
+                $crawler->filter('img')->each(function ($node) use ($fs, $assetsResolver) {
+                    /** @var Crawler $node */
+                    $imageNode = $node->getNode(0);
+                    $oldSrc = $imageNode->getAttribute('src');
+                    $path = $this->loadFile($oldSrc, $this->directory . '/assets/');
+                    $newSrc = $assetsResolver->pathToUri(realpath($path));
+                    $imageNode->setAttribute('src', $newSrc);
+                    $imageNode->setAttribute(
+                        'class',
+                        str_replace(
+                            ['alignleft', 'alignright'],
+                            ['pull-left', 'pull-right'],
+                            $imageNode->getAttribute('class')
+                        )
+                    );
+                    $parentNode = $imageNode->parentNode;
+
+                    if ($parentNode->tagName === 'a' && $parentNode->getAttribute('href') === $oldSrc) {
+                        $parentNode->setAttribute('href', $newSrc);
+                    }
+                });
+
+                $result = $crawler->filter('body')->html();
+
+                //Dumping mp3s
+                $regExp = '/\[ca_audio\s*url=\"(?<url>.*?)\".*\]/';
+                $result = preg_replace_callback($regExp, function($matches) use ($assetsResolver) {
+                    $path = $this->loadFile($matches['url'], $this->directory . '/assets/');
+
+                    return sprintf(
+                        // Silent missing IDE warning
+                        '<audio src=' . '"%s" controls="controls"></audio>',
+                        $assetsResolver->pathToUri(realpath($path))
+                    );
+                }, $result);
+
+                return $result;
             },
             'isPublished' => function ($v) {
                 return $v['post_status'] === 'publish';
@@ -211,16 +336,16 @@ class DatabaseDumpCommand extends Command
                     return null;
                 }
             },
-            'metaDescription' => function ($v) use ($getMeta) {
-                return $getMeta($v, '_yoast_wpseo_metadesc');
+            'metaDescription' => function ($v) {
+                return $this->getPostMeta($v, '_yoast_wpseo_metadesc');
             },
-            'metaKeywords' => function ($v) use ($getMeta) {
-                return $getMeta($v, '_yoast_wpseo_metakeywords');
+            'metaKeywords' => function ($v) {
+                return $this->getPostMeta($v, '_yoast_wpseo_metakeywords');
             },
         ], $additionalData), function ($v) {
             return sprintf('post-%s', $v['ID']);
         }, function ($v) {
-            return (bool) $v['post_title'] && $v['post_content'];
+            return (bool) $v['post_title'] && $v['post_content'] && $v['post_name'] !== 'sitemap';
         });
     }
 
@@ -249,5 +374,57 @@ class DatabaseDumpCommand extends Command
         }
 
         return $output;
+    }
+
+    /**
+     * @param string $uri
+     * @param string $targetDir
+     * @return string
+     * @throws \Exception
+     */
+    private function loadFile($uri, $targetDir)
+    {
+        static $fs = null;
+
+        if ($fs === null) {
+            $fs = new Filesystem();
+        }
+
+        $filename = pathinfo($uri, PATHINFO_BASENAME);
+        $targetFile = $targetDir . $filename;
+
+        if (!$fs->exists($targetFile)) {
+            $targetDirectory = dirname($targetFile);
+
+            if (!$fs->exists($targetDirectory)) {
+                $fs->mkdir($targetDirectory, 0777);
+            }
+
+            $url =  ltrim($uri, '/');
+
+            if (strpos($uri, 'http://') === false) {
+                $url = 'http://folkprog.net/' . $url;
+            }
+
+            $fileData = @file_get_contents($url);
+
+            if (!$fileData) {
+                throw new \RuntimeException(sprintf("Unable to download file '%s'", $url));
+            }
+
+            if (!@file_put_contents($targetFile, $fileData)) {
+                throw new \RuntimeException(sprintf("Unable to save file '%s' under '%s'", $url, $targetFile));
+            }
+        }
+
+        $file = new AssetFile(new File($targetFile));
+        $finalPath = sprintf('%s/../web/assets/%ss/%s',
+            $this->getContainer()->getParameter('kernel.root_dir'),
+            $file->getType(),
+            pathinfo($targetFile, PATHINFO_BASENAME)
+        );
+        $fs->copy($targetFile, $finalPath);
+
+        return $finalPath;
     }
 }

@@ -20,7 +20,7 @@ class SidebarController extends Controller
                 'nodeDecorator' => function($node) {
                     // Silent missing IDE warning
                     return sprintf('<a href=' . '"%s">%s</a> (%d)',
-                        $this->generateUrl('blog_list', [
+                        $this->generateUrl('harentius_blog_list', [
                             'filtrationType' => 'category',
                             'criteria' => $node['slug']
                         ]),

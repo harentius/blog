@@ -6,9 +6,11 @@ services:
         arguments:
             - null
             - Harentius\BlogBundle\Entity\Article
-            - null
+            - HarentiusBlogBundle:CRUD
         calls:
-            - [ setTranslationDomain, [HarentiusBlogBundle]]
+            - [ setTranslationDomain, [ HarentiusBlogBundle ] ]
+            - [ setTemplate, [ edit, HarentiusBlogBundle:Admin:edit.html.twig ] ]
+            - [ setEntityManager, [ @doctrine.orm.entity_manager ] ]
 
     harentius_blog.admin.category:
         class: Harentius\BlogBundle\Admin\CategoryAdmin
@@ -19,4 +21,15 @@ services:
             - Harentius\BlogBundle\Entity\Category
             - null
         calls:
-            - [ setTranslationDomain, [HarentiusBlogBundle]]
+            - [ setTranslationDomain, [ HarentiusBlogBundle ] ]
+
+    harentius_blog.admin.tag:
+        class: Harentius\BlogBundle\Admin\TagAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Content, label: Tags, show_in_dashboard: true }
+        arguments:
+            - null
+            - Harentius\BlogBundle\Entity\Tag
+            - null
+        calls:
+            - [ setTranslationDomain, [ HarentiusBlogBundle ] ]

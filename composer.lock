@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "698a09cab2a8734fe6ddc01af157dae4",
+    "hash": "ecafea48d50363e4f34883d9a99179cc",
     "packages": [
         {
             "name": "beberlei/DoctrineExtensions",
@@ -156,6 +156,143 @@
                 "responsive",
                 "web"
             ]
+        },
+        {
+            "name": "bower-asset/ckeditor",
+            "version": "4.4.8",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ckeditor/ckeditor-releases.git",
+                "reference": "a68e8c32012f2955b76e0d2e84f1b14a90c8c959"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ckeditor/ckeditor-releases/zipball/a68e8c32012f2955b76e0d2e84f1b14a90c8c959",
+                "reference": "a68e8c32012f2955b76e0d2e84f1b14a90c8c959",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "license": [
+                "For licensing, see LICENSE.md or http://ckeditor.com/license."
+            ],
+            "description": "JavaScript WYSIWYG web text editor.",
+            "keywords": [
+                "ckeditor",
+                "editor",
+                "fckeditor",
+                "html",
+                "javascript",
+                "richtext",
+                "text",
+                "wysiwyg"
+            ]
+        },
+        {
+            "name": "bower-asset/ckeditor-audio-plugin",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/harentius/ckeditor-audio-plugin.git",
+                "reference": "f41dceeaca91283a6135d4138094943b087c47fa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/harentius/ckeditor-audio-plugin/zipball/f41dceeaca91283a6135d4138094943b087c47fa",
+                "reference": "f41dceeaca91283a6135d4138094943b087c47fa",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "description": "Ckeditor plugin for easy adding html5 audio.",
+            "keywords": [
+                "audio",
+                "ckeditor",
+                "plugin"
+            ]
+        },
+        {
+            "name": "bower-asset/ckeditor-readmore-plugin",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zionsg/CKEditor-More-plugin.git",
+                "reference": "bfaca49c84b482132384405178e90003d209ada5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zionsg/CKEditor-More-plugin/zipball/bfaca49c84b482132384405178e90003d209ada5",
+                "reference": "bfaca49c84b482132384405178e90003d209ada5",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "time": "2013-06-01 14:41:25"
+        },
+        {
+            "name": "bower-asset/ckeditor-youtube-plugin",
+            "version": "v2.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fonini/ckeditor-youtube-plugin.git",
+                "reference": "f6a31c550a402b0438707443dd0c88d262bdf555"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fonini/ckeditor-youtube-plugin/zipball/f6a31c550a402b0438707443dd0c88d262bdf555",
+                "reference": "f6a31c550a402b0438707443dd0c88d262bdf555",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/ckeditor": ">=4.0.0"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "node_modules",
+                    "bower_components",
+                    "test",
+                    "tests"
+                ]
+            },
+            "license": [
+                "MIT"
+            ]
+        },
+        {
+            "name": "bower-asset/components-font-awesome",
+            "version": "4.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/components/font-awesome.git",
+                "reference": "7dffacc72e566e5db6272244effc06f64fe9f185"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/components/font-awesome/zipball/7dffacc72e566e5db6272244effc06f64fe9f185",
+                "reference": "7dffacc72e566e5db6272244effc06f64fe9f185",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "css/font-awesome.css",
+                    "scss/font-awesome.scss",
+                    "fonts/fontawesome-webfont.eot",
+                    "fonts/fontawesome-webfont.woff",
+                    "fonts/fontawesome-webfont.woff2",
+                    "fonts/fontawesome-webfont.ttf",
+                    "fonts/fontawesome-webfont.svg"
+                ],
+                "bower-asset-ignore": [
+                    "Makefile",
+                    "component.json",
+                    "composer.json"
+                ]
+            },
+            "license": [
+                "MIT",
+                "OFL-1.1"
+            ],
+            "description": "Font Awesome, the iconic font designed for use with Twitter Bootstrap."
         },
         {
             "name": "bower-asset/jquery",
@@ -1078,21 +1215,79 @@
             "time": "2014-12-16 13:45:01"
         },
         {
-            "name": "fxp/composer-asset-plugin",
-            "version": "v1.0.0",
+            "name": "friendsofsymfony/jsrouting-bundle",
+            "version": "1.5.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/francoispluchino/composer-asset-plugin.git",
-                "reference": "dbc856439a09f07987de673aa8a264c1b88b0c6b"
+                "url": "https://github.com/FriendsOfSymfony/FOSJsRoutingBundle.git",
+                "reference": "539a6ac0c1fb6b010f92a1c877426a4caa5abba1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/francoispluchino/composer-asset-plugin/zipball/dbc856439a09f07987de673aa8a264c1b88b0c6b",
-                "reference": "dbc856439a09f07987de673aa8a264c1b88b0c6b",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSJsRoutingBundle/zipball/539a6ac0c1fb6b010f92a1c877426a4caa5abba1",
+                "reference": "539a6ac0c1fb6b010f92a1c877426a4caa5abba1",
                 "shasum": ""
             },
             "require": {
-                "composer-plugin-api": "1.0.0",
+                "php": ">=5.3.2",
+                "symfony/console": "~2.0",
+                "symfony/framework-bundle": "~2.0",
+                "symfony/serializer": "~2.0",
+                "willdurand/jsonp-callback-validator": "~1.0"
+            },
+            "require-dev": {
+                "symfony/expression-language": "~2.4"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.5-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "FOS\\JsRoutingBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "FriendsOfSymfony Community",
+                    "homepage": "https://github.com/friendsofsymfony/FOSJsRoutingBundle/contributors"
+                },
+                {
+                    "name": "William Durand",
+                    "email": "william.durand1@gmail.com"
+                }
+            ],
+            "description": "A pretty nice way to expose your Symfony2 routing to client applications.",
+            "homepage": "http://friendsofsymfony.github.com",
+            "keywords": [
+                "Js Routing",
+                "javascript",
+                "routing"
+            ],
+            "time": "2015-01-23 02:44:26"
+        },
+        {
+            "name": "fxp/composer-asset-plugin",
+            "version": "v1.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/francoispluchino/composer-asset-plugin.git",
+                "reference": "c2b0406ac19e9ea2d9556987e827d4e7f6924fde"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/francoispluchino/composer-asset-plugin/zipball/c2b0406ac19e9ea2d9556987e827d4e7f6924fde",
+                "reference": "c2b0406ac19e9ea2d9556987e827d4e7f6924fde",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0",
                 "php": ">=5.3.3"
             },
             "require-dev": {
@@ -1131,7 +1326,7 @@
                 "npm",
                 "package"
             ],
-            "time": "2015-01-25 13:24:06"
+            "time": "2015-07-29 12:23:21"
         },
         {
             "name": "fzaninotto/faker",
@@ -1745,16 +1940,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.14.0",
+            "version": "1.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "b287fbbe1ca27847064beff2bad7fb6920bf08cc"
+                "reference": "dc5150cc608f2334c72c3b6a553ec9668a4156b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/b287fbbe1ca27847064beff2bad7fb6920bf08cc",
-                "reference": "b287fbbe1ca27847064beff2bad7fb6920bf08cc",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/dc5150cc608f2334c72c3b6a553ec9668a4156b0",
+                "reference": "dc5150cc608f2334c72c3b6a553ec9668a4156b0",
                 "shasum": ""
             },
             "require": {
@@ -1791,7 +1986,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.14.x-dev"
+                    "dev-master": "1.15.x-dev"
                 }
             },
             "autoload": {
@@ -1817,7 +2012,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2015-06-19 13:29:54"
+            "time": "2015-07-12 13:54:09"
         },
         {
             "name": "nelmio/alice",
@@ -2827,16 +3022,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.7.1",
+            "version": "v2.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "932b6e7499c670f4db6d0b871477a4a3ca161e74"
+                "reference": "969d709ad428076bf1084e386dc26dd904d9fb84"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/932b6e7499c670f4db6d0b871477a4a3ca161e74",
-                "reference": "932b6e7499c670f4db6d0b871477a4a3ca161e74",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/969d709ad428076bf1084e386dc26dd904d9fb84",
+                "reference": "969d709ad428076bf1084e386dc26dd904d9fb84",
                 "shasum": ""
             },
             "require": {
@@ -2945,7 +3140,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2015-06-11 21:15:28"
+            "time": "2015-07-13 19:27:49"
         },
         {
             "name": "twig/extensions",
@@ -3098,13 +3293,54 @@
                 "symfony"
             ],
             "time": "2015-03-10 09:21:11"
+        },
+        {
+            "name": "willdurand/jsonp-callback-validator",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/willdurand/JsonpCallbackValidator.git",
+                "reference": "1a7d388bb521959e612ef50c5c7b1691b097e909"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/willdurand/JsonpCallbackValidator/zipball/1a7d388bb521959e612ef50c5c7b1691b097e909",
+                "reference": "1a7d388bb521959e612ef50c5c7b1691b097e909",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~3.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "JsonpCallbackValidator": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "William Durand",
+                    "email": "william.durand1@gmail.com",
+                    "homepage": "http://www.willdurand.fr"
+                }
+            ],
+            "description": "JSONP callback validator.",
+            "time": "2014-01-20 22:35:06"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "knplabs/knp-paginator-bundle": 20
+        "knplabs/knp-paginator-bundle": 20,
+        "bower-asset/ckeditor-readmore-plugin": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Harentius\BlogBundle\Entity\Article;
 use Harentius\BlogBundle\Entity\Category;
 use Harentius\BlogBundle\Entity\Page;
+use Harentius\BlogBundle\Entity\Tag;
 use Harentius\FolkprogBundle\Utils\FieldsCopier;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -28,11 +29,6 @@ class DatabaseLoadCommand extends ContainerAwareCommand
     private $fs;
 
     /**
-     * @var array
-     */
-    private $limits;
-
-    /**
      * @var EntityManagerInterface
      */
     private $em;
@@ -52,7 +48,6 @@ class DatabaseLoadCommand extends ContainerAwareCommand
             ->addOption('dir', null, InputOption::VALUE_REQUIRED)
             ->addOption('dump-file', 'f', InputOption::VALUE_REQUIRED, '', 'dump.yml')
             ->addOption('no-sql-logger', null, InputOption::VALUE_NONE)
-            ->addOption('limits', 'l', InputOption::VALUE_IS_ARRAY|InputOption::VALUE_REQUIRED)
         ;
     }
 
@@ -64,7 +59,6 @@ class DatabaseLoadCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->limits = $this->parseLimits($input->getOption('limits'));
         $directory = $input->getOption('dir');
         $dumpFile = sprintf('%s/%s', $directory, $input->getOption('dump-file'));
 
@@ -95,14 +89,15 @@ class DatabaseLoadCommand extends ContainerAwareCommand
 
         $processors = [
             'Categories' => 'loadCategories',
+            'Tags' => 'loadTags',
             'Articles' => 'loadArticles',
             'Pages' => 'loadPages',
         ];
 
         foreach ($processors as $name => $method) {
             $output->write(sprintf('<info>Importing %s data...</info>', $name));
-            $this->{$method}($rawData);
-            $output->writeln(sprintf('<info> done (loaded %s items)</info>', $name));
+            $count = $this->{$method}($rawData);
+            $output->writeln(sprintf('<info> done (loaded %s items)</info>', $count));
         }
 
         $output->writeln("<info>Loaded data from '$dumpFile'</info>");
@@ -125,7 +120,8 @@ class DatabaseLoadCommand extends ContainerAwareCommand
 
             $this->fieldsCopier->copy(
                 ['name', 'slug', 'metaDescription', 'metaKeywords'],
-                $categoryData, $category
+                $categoryData,
+                $category
             );
 
             if ($categoryData['parent']) {
@@ -134,6 +130,34 @@ class DatabaseLoadCommand extends ContainerAwareCommand
 
             $this->em->persist($category);
             $this->setReference($id, $category);
+            $count++;
+        }
+
+        $this->em->flush();
+
+        return $count;
+    }
+
+
+    /**
+     * @param array $rawData
+     * @return int
+     */
+    protected function loadTags($rawData)
+    {
+        $count = 0;
+
+        foreach ($rawData[Tag::class] as $id => $tagData) {
+            $tag = new Tag();
+
+            $this->fieldsCopier->copy(
+                ['name', 'slug'],
+                $tagData,
+                $tag
+            );
+
+            $this->em->persist($tag);
+            $this->setReference($id, $tag);
             $count++;
         }
 
@@ -163,30 +187,49 @@ class DatabaseLoadCommand extends ContainerAwareCommand
     /**
      * @param $rawData
      * @param $entityClass
-     * @param bool|true $categoryRequired
+     * @param bool|true $isArticle
      * @return int
      */
-    private function loadAbstractPostData($rawData, $entityClass, $categoryRequired = true)
+    private function loadAbstractPostData($rawData, $entityClass, $isArticle = true)
     {
         $count = 0;
+        $adminUser = $this->getContainer()->get('doctrine.orm.entity_manager')
+            ->getRepository('HarentiusBlogBundle:AdminUser')
+            ->findOneBy(['username' => 'admin'])
+        ;
+
+        if (!$adminUser) {
+            throw new \LogicException('Admin user now found');
+        }
 
         foreach ($rawData[$entityClass] as $id => $articleData) {
             /** @var Article|Page $article */
             $article = new $entityClass();
 
             $this->fieldsCopier->copy(
-                ['title', 'slug', 'text', 'isPublished', 'metaDescription', 'metaKeywords'],
-                $articleData, $article
+                array_merge(
+                    ['title', 'slug', 'text', 'isPublished', 'metaDescription', 'metaKeywords'],
+                    $isArticle ? ['viewsCount', 'likesCount', 'dislikesCount'] : []
+                ),
+                $articleData,
+                $article
             );
 
             if ($articleData['publishedAt']) {
                 $article->setpublishedAt(new \DateTime($articleData['publishedAt']));
             }
 
-            if ($categoryRequired) {
+            if ($isArticle) {
                 $article->setCategory($this->getReference($articleData['category']));
             }
 
+            if (isset($articleData['tags'])) {
+                foreach ($articleData['tags'] as $tag) {
+                    $article->addTag($this->getReference($tag));
+                }
+            }
+
+            $article->setAuthor($adminUser);
             $this->em->persist($article);
             $this->setReference($id, $article);
             $count++;
@@ -239,25 +282,5 @@ class DatabaseLoadCommand extends ContainerAwareCommand
         }
 
         return $this->references[$reference];
-    }
-
-    /**
-     * @param array $limits
-     * @return array
-     */
-    private function parseLimits(array $limits)
-    {
-        $result = [];
-
-        foreach ($limits as $item) {
-            @list($class, $limit) = explode(':', $item, 2);
-            $limit = (int) $limit;
-
-            if ($limit > 0) {
-                $result[$class] = $limit;
-            }
-        }
-
-        return $result;
     }
 }

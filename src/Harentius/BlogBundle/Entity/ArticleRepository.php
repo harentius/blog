@@ -3,14 +3,15 @@
 namespace Harentius\BlogBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
 
 class ArticleRepository extends EntityRepository
 {
     /**
      * @param Category $category
-     * @return Article[]
+     * @return Query
      */
-    public function findPublishedByCategory(Category $category)
+    public function findPublishedByCategoryQuery(Category $category)
     {
         $qb = $this->createQueryBuilder('a');
 
@@ -26,32 +27,32 @@ class ArticleRepository extends EntityRepository
                 ':root' => $category->getRoot(),
                 ':isPublished' => true,
             ])
+            ->orderBy('a.publishedAt', 'DESC')
             ->getQuery()
-            ->execute()
         ;
     }
 
     /**
      * @param Tag $tag
-     * @return Article[]
+     * @return Query
      */
-    public function findByTag(Tag $tag)
+    public function findByTagQuery(Tag $tag)
     {
         return $this->createQueryBuilder('a')
             ->join('a.tags', 't')
             ->where('t = :tag')
             ->setParameter(':tag', $tag)
+            ->orderBy('a.publishedAt', 'DESC')
             ->getQuery()
-            ->execute()
         ;
     }
 
     /**
      * @param string $year
      * @param string $month
-     * @return Article[]
+     * @return Query
      */
-    public function findPublishedByYearMonth($year, $month = null)
+    public function findPublishedByYearMonthQuery($year, $month = null)
     {
         $qb = $this->createQueryBuilder('a');
 
@@ -62,6 +63,7 @@ class ArticleRepository extends EntityRepository
                 ':year' => $year,
                 ':isPublished' => true,
             ])
+            ->orderBy('a.publishedAt', 'DESC')
         ;
 
         if ($month) {
@@ -71,6 +73,29 @@ class ArticleRepository extends EntityRepository
             ;
         }
 
-        return $qb->getQuery()->execute();
+        return $qb->getQuery();
+    }
+
+    /**
+     * @param null $categorySlug
+     * @return mixed
+     */
+    public function findByCategorySlugLimitedQuery($categorySlug = null)
+    {
+        $qb = $this->createQueryBuilder('a');
+
+        $qb
+            ->orderBy('a.publishedAt', 'DESC')
+        ;
+
+        if ($categorySlug !== null) {
+            $qb
+                ->join('a.category', 'c')
+                ->where('c.slug = :slug')
+                ->setParameter(':slug', $categorySlug)
+            ;
+        }
+
+        return $qb->getQuery();
     }
 }

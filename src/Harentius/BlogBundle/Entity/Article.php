@@ -3,35 +3,18 @@
 namespace Harentius\BlogBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Harentius\BlogBundle\Entity\Base\Article as BaseArticle;
+use Harentius\BlogBundle\Entity\Base\AbstractPost;
+use Harentius\BlogBundle\Entity\Base\ArticleChangeableFieldsEntityTrait;
 use Symfony\Component\Validator\Constraints as SymfonyConstraints;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Harentius\BlogBundle\Entity\ArticleRepository")
  */
-class Article extends BaseArticle
+class Article extends AbstractPost
 {
-    /**
-     * @var Category
-     *
-     * @ORM\ManyToOne(
-     *      targetEntity="Harentius\BlogBundle\Entity\Category",
-     *      inversedBy="articles"
-     * )
-     * @SymfonyConstraints\NotNull()
-     */
-    private $category;
-
-    /**
-     * @var Tag[]
-     *
-     * @ORM\ManyToMany(
-     *      targetEntity="Harentius\BlogBundle\Entity\Tag",
-     *      inversedBy="articles"
-     * )
-     */
-    private $tags;
+    use ArticleChangeableFieldsEntityTrait;
 
     /**
      * @var int
@@ -44,51 +27,35 @@ class Article extends BaseArticle
     private $viewsCount;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     * @SymfonyConstraints\Type(type="integer")
+     * @SymfonyConstraints\Range(min=0)
+     * @SymfonyConstraints\NotNull()
+     */
+    private $likesCount;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     * @SymfonyConstraints\Type(type="integer")
+     * @SymfonyConstraints\Range(min=0)
+     * @SymfonyConstraints\NotNull()
+     */
+    private $disLikesCount;
+
+    /**
      *
      */
     public function __construct()
     {
-        parent::__construct();
-        $this->tags = new ArrayCollection();
+        $this->isPublished = false;
         $this->viewsCount = 0;
-    }
-
-    /**
-     * @return Category
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
-
-    /**
-     * @param Category $value
-     * @return $this
-     */
-    public function setCategory($value)
-    {
-        $this->category = $value;
-
-        return $this;
-    }
-
-    /**
-     * @return Tag[]|ArrayCollection
-     */
-    public function getTags()
-    {
-        return $this->tags;
-    }
-
-    /**
-     * @param Tag[] $value
-     * @return $this
-     */
-    public function setTags($value)
-    {
-        $this->tags = $value;
-
-        return $this;
+        $this->likesCount = 0;
+        $this->disLikesCount = 0;
+        $this->tags = new ArrayCollection();
     }
 
     /**
@@ -108,5 +75,67 @@ class Article extends BaseArticle
         $this->viewsCount = $value;
 
         return $this;
+    }
+
+    /**
+     *
+     */
+    public function increaseViewsCount()
+    {
+        $this->viewsCount = $this->getViewsCount() + 1;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLikesCount()
+    {
+        return $this->likesCount;
+    }
+
+    /**
+     * @param int $value
+     * @return $this
+     */
+    public function setLikesCount($value)
+    {
+        $this->likesCount = $value;
+
+        return $this;
+    }
+
+    /**
+     *
+     */
+    public function increaseLikesCount()
+    {
+        $this->likesCount = $this->getLikesCount() + 1;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDisLikesCount()
+    {
+        return $this->disLikesCount;
+    }
+
+    /**
+     * @param int $value
+     * @return $this
+     */
+    public function setDisLikesCount($value)
+    {
+        $this->disLikesCount = $value;
+
+        return $this;
+    }
+
+    /**
+     *
+     */
+    public function increaseDisLikesCount()
+    {
+        $this->disLikesCount = $this->getDisLikesCount() + 1;
     }
 }

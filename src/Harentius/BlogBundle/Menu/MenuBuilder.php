@@ -45,12 +45,14 @@ class MenuBuilder
     public function createMainMenu()
     {
         /** @var Page[] $pages */
-        $pages = $this->em->getRepository('HarentiusBlogBundle:Page')->findPublishedNotSlugOrdered($this->homepageSlug);
+        $pages = $this->em->getRepository('HarentiusBlogBundle:Page')
+            ->findPublishedNotSlugOrdered($this->homepageSlug)
+        ;
         $menu = $this->factory->createItem('root');
 
         foreach ($pages as $page) {
             $menu->addChild($page->getTitle(), [
-                'route' => 'blog_show',
+                'route' => 'harentius_blog_show',
                 'routeParameters' => ['slug' => $page->getSlug()],
             ]);
         }
