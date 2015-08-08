@@ -297,11 +297,15 @@ class DatabaseDumpCommand extends ContainerAwareCommand
                     $newStyle = '';
 
                     if (strpos($currentClass, 'alignleft') !== false) {
-                        $newStyle .= ' float:left';
+                        $newStyle .= ' float:left;';
                     }
 
                     if (strpos($currentClass, 'alignright') !== false) {
-                        $newStyle .= ' float:right';
+                        $newStyle .= ' float:right;';
+                    }
+
+                    if (strpos($currentClass, 'aligncenter') !== false) {
+                        $newStyle .= ' display:block;margin: 15px auto;';
                     }
 
                     if ($newStyle) {

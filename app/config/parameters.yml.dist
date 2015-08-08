@@ -29,3 +29,4 @@ parameters:
     homepage_feed_number: 6
     homepage_feed_category: ~
     list_posts_per_page: 40
+    vk_appi_id: 5025064
