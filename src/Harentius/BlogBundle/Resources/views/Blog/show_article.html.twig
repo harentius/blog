@@ -7,7 +7,7 @@
             {{ include('HarentiusBlogBundle:Blog:_socials.html.twig') }}
         </div>
 
-        <div class="pull-right text-right col-lg-9 col-md-9 col-sm-9 col-xs-12 likes-wrapper">
+        <div class="pull-right text-right col-lg-3 col-md-3 col-sm-3 col-xs-12 likes-wrapper">
             <span class="like">
                 <i
                     class="{% if is_article_liked(entity) %}fa-thumbs-up{% else %}fa-thumbs-o-up{% endif %}{% if(is_article_rated(entity)) %} disabled{% endif %}"
@@ -27,6 +27,8 @@
             </span>
         </div>
     </div>
+
+    <div class="vk-comments" id="vk-comments"></div>
 {% endblock %}
 
 {% block head_extra %}
@@ -38,7 +40,10 @@
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
     <script type="text/javascript" src="//yastatic.net/share/share.js" charset="utf-8"></script>
-    <script type="text/javascript">VK.Widgets.Like("vk-like", {type: "full"});</script>
+    <script type="text/javascript">
+        VK.Widgets.Like("vk-like", {type: "full"});
+        VK.Widgets.Comments("vk-comments", {limit: 20, width: "826", attach: "*"});
+    </script>
 {% endblock javascripts %}
 
 {% block stylesheets %}
