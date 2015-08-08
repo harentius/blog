@@ -2,8 +2,8 @@
 
 {% block after_post_content%}
     {% include 'HarentiusBlogBundle:Blog:_post_info.html.twig' with {'article': entity} %}
-    <div class="row social-wrapper" data-id="{{ entity.id }}">
-        <div class="pull-left text-left col-lg-9 col-md-9 col-sm-9 col-xs-12">
+    <div class="row social-and-shares-wrapper" data-id="{{ entity.id }}">
+        <div class="pull-left text-left col-lg-9 col-md-9 col-sm-9 col-xs-12 social-wrapper">
             {{ include('HarentiusBlogBundle:Blog:_socials.html.twig') }}
         </div>
 
