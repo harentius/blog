@@ -293,14 +293,22 @@ class DatabaseDumpCommand extends ContainerAwareCommand
                     $path = $this->loadFile($oldSrc, $this->directory . '/assets/');
                     $newSrc = $assetsResolver->pathToUri(realpath($path));
                     $imageNode->setAttribute('src', $newSrc);
-                    $imageNode->setAttribute(
-                        'class',
-                        str_replace(
-                            ['alignleft', 'alignright'],
-                            ['pull-left', 'pull-right'],
-                            $imageNode->getAttribute('class')
-                        )
-                    );
+                    $currentClass = $imageNode->getAttribute('class');
+                    $newStyle = '';
+
+                    if (strpos($currentClass, 'alignleft') !== false) {
+                        $newStyle .= ' float:left';
+                    }
+
+                    if (strpos($currentClass, 'alignright') !== false) {
+                        $newStyle .= ' float:right';
+                    }
+
+                    if ($newStyle) {
+                        $imageNode->setAttribute('style', trim($imageNode->getAttribute('style') . $newStyle));
+                    }
+
+                    $imageNode->removeAttribute('class');
 
                     if ($imageNode->getAttribute('width') > 826) {
                         $imageNode->removeAttribute('width');
