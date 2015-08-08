@@ -13,6 +13,7 @@
                 'assets/vendor/bootstrap/dist/css/bootstrap.min.css'
                 'assets/vendor/ckeditor/plugins/codesnippet/lib/highlight/styles/default.css'
                 'bundles/harentiusblog/css/common.less'
+                'bundles/harentiusblog/css/twbs-extension.less'
                 'bundles/harentiusblog/css/main.less'
             %}
             <link href="{{ asset_url }}" media="all" rel="stylesheet" type="text/css" />
@@ -34,12 +35,12 @@
             </div>
 
             <div class="row">
-                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 page-content">
+                <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 page-content">
                     {{ wo_render_breadcrumbs() }}
                     {% block content %}{% endblock %}
                 </div>
 
-                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
                     {% block sidebar %}
                         {{ include('HarentiusBlogBundle:Sidebar:index.html.twig') }}
                     {% endblock %}

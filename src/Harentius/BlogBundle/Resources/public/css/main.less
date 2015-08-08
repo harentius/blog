@@ -44,7 +44,7 @@ figcaption {
 
 .page-content {
   img {
-    max-width: 826px;
+    max-width: 100%;
   }
 }
 
@@ -126,6 +126,10 @@ figcaption {
     margin-right: 2px;
   }
 
+  .post-stats, .post-tags {
+    margin-top: 5px;
+  }
+
   .post-stats {
     span:not(:last-child):after {
       content: '|';
@@ -179,6 +183,12 @@ figcaption {
         color: #c32620;
       }
     }
+  }
+}
+
+.post-preview-wrapper {
+  p:last-child {
+    margin-bottom: 0;
   }
 }
 

@@ -340,6 +340,9 @@ class DatabaseDumpCommand extends ContainerAwareCommand
                     );
                 }, $result);
 
+                // Fixing broken tags
+                $result = str_replace('<p><!--more--></p>', '<!--more-->', $result);
+
                 return $result;
             },
             'isPublished' => function ($v) {
