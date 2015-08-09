@@ -10,7 +10,7 @@ jQuery(($) ->
     $(this).closest('.year-content-wrapper').find('.months-list').slideToggle()
   )
 
-  articleId = $('.social-wrapper').data('id')
+  articleId = $('.social-and-shares-wrapper').data('id')
 
   increaseValue = ($selector) ->
     $value = $selector.find('.value')
