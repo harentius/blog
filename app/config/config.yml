@@ -36,6 +36,8 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    globals:
+        vk_appi_id: %vk_appi_id%
 
 # Assetic Configuration
 assetic:

@@ -293,14 +293,32 @@ class DatabaseDumpCommand extends ContainerAwareCommand
                     $path = $this->loadFile($oldSrc, $this->directory . '/assets/');
                     $newSrc = $assetsResolver->pathToUri(realpath($path));
                     $imageNode->setAttribute('src', $newSrc);
-                    $imageNode->setAttribute(
-                        'class',
-                        str_replace(
-                            ['alignleft', 'alignright'],
-                            ['pull-left', 'pull-right'],
-                            $imageNode->getAttribute('class')
-                        )
-                    );
+                    $currentClass = $imageNode->getAttribute('class');
+                    $newStyle = '';
+
+                    if (strpos($currentClass, 'alignleft') !== false) {
+                        $newStyle .= ' float:left;';
+                    }
+
+                    if (strpos($currentClass, 'alignright') !== false) {
+                        $newStyle .= ' float:right;';
+                    }
+
+                    if (strpos($currentClass, 'aligncenter') !== false) {
+                        $newStyle .= ' display:block;margin: 15px auto;';
+                    }
+
+                    if ($newStyle) {
+                        $imageNode->setAttribute('style', trim($imageNode->getAttribute('style') . $newStyle));
+                    }
+
+                    $imageNode->removeAttribute('class');
+
+                    if ($imageNode->getAttribute('width') > 826) {
+                        $imageNode->removeAttribute('width');
+                        $imageNode->removeAttribute('height');
+                    }
+
                     $parentNode = $imageNode->parentNode;
 
                     if ($parentNode->tagName === 'a' && $parentNode->getAttribute('href') === $oldSrc) {
@@ -321,6 +339,9 @@ class DatabaseDumpCommand extends ContainerAwareCommand
                         $assetsResolver->pathToUri(realpath($path))
                     );
                 }, $result);
+
+                // Fixing broken tags
+                $result = str_replace('<p><!--more--></p>', '<!--more-->', $result);
 
                 return $result;
             },

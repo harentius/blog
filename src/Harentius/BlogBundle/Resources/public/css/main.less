@@ -42,6 +42,12 @@ figcaption {
   padding: 10px;
 }
 
+.page-content {
+  img {
+    max-width: 100%;
+  }
+}
+
 .main-menu-wrapper {
   margin: 15px 0;
 
@@ -120,6 +126,10 @@ figcaption {
     margin-right: 2px;
   }
 
+  .post-stats, .post-tags {
+    margin-top: 5px;
+  }
+
   .post-stats {
     span:not(:last-child):after {
       content: '|';
@@ -134,8 +144,12 @@ figcaption {
   }
 }
 
-.social-wrapper {
+.social-and-shares-wrapper {
   margin-top: 15px;
+
+  .social-wrapper {
+    height: 22px;
+  }
 
   .likes-wrapper {
     font-size: 17px;
@@ -170,4 +184,33 @@ figcaption {
       }
     }
   }
+}
+
+.post-preview-wrapper {
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Socials
+.b-share_theme_counter, .vk-like {
+  display: inline-block;
+}
+
+.b-share_theme_counter {
+  height: 22px;
+}
+
+.vk-like iframe{
+  margin-bottom: 1px;
+}
+
+.b-share_theme_counter .b-share {
+  // Need important, because plugin inlines styles
+  vertical-align: baseline !important;
+  padding: 0 !important;
+}
+
+.vk-comments {
+  margin-top: 20px;
 }

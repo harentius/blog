@@ -2,12 +2,12 @@
 
 {% block after_post_content%}
     {% include 'HarentiusBlogBundle:Blog:_post_info.html.twig' with {'article': entity} %}
-    <div class="row social-wrapper" data-id="{{ entity.id }}">
-        <div class="pull-left text-right col-lg-6 col-md-6 col-xs-12">
-            {# TODO: social icons #}
+    <div class="row social-and-shares-wrapper" data-id="{{ entity.id }}">
+        <div class="pull-left text-left col-lg-9 col-md-9 col-sm-9 col-xs-12 social-wrapper">
+            {{ include('HarentiusBlogBundle:Blog:_socials.html.twig') }}
         </div>
 
-        <div class="pull-right text-right col-lg-6 col-md-6 col-xs-12 likes-wrapper">
+        <div class="pull-right text-right col-lg-3 col-md-3 col-sm-3 col-xs-12 likes-wrapper">
             <span class="like">
                 <i
                     class="{% if is_article_liked(entity) %}fa-thumbs-up{% else %}fa-thumbs-o-up{% endif %}{% if(is_article_rated(entity)) %} disabled{% endif %}"
@@ -27,11 +27,23 @@
             </span>
         </div>
     </div>
+
+    <div class="vk-comments" id="vk-comments"></div>
+{% endblock %}
+
+{% block head_extra %}
+    <script type="text/javascript" src="//vk.com/js/api/openapi.js?116"></script>
+    <script type="text/javascript">VK.init({apiId: {{ vk_appi_id }}, onlyWidgets: true});</script>
 {% endblock %}
 
 {% block javascripts %}
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+    <script type="text/javascript" src="//yastatic.net/share/share.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        VK.Widgets.Like("vk-like", {type: "full"});
+        VK.Widgets.Comments("vk-comments", {limit: 20, attach: "*"});
+    </script>
 {% endblock javascripts %}
 
 {% block stylesheets %}
