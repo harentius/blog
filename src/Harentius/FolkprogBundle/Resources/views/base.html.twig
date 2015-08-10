@@ -1,5 +1,10 @@
 {% extends 'HarentiusBlogBundle::_base.html.twig' %}
 
-{% block header %}
-    <img src="{{ asset('bundles/harentiusfolkprog/img/logo.jpg') }}" style="height: 130px">
+{% block common_stylesheets %}
+     {{ parent() }}
+    {% stylesheets
+        'bundles/harentiusfolkprog/css/main.less'
+    %}
+    <link href="{{ asset_url }}" media="all" rel="stylesheet" type="text/css" />
+    {% endstylesheets %}
 {% endblock %}

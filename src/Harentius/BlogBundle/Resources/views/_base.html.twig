@@ -28,12 +28,21 @@
 
     <body>
         <div class="container">
-            {% block header %}{% endblock %}
-            <div class="row">
+            {% block menu %}
+            <div class="row padded-content">
                 <div class="col-lg-12 main-menu-wrapper">
-                    {{ knp_menu_render('main') }}
+                    <nav class="navbar navbar-default project-header">
+                        <div class="navbar-header">
+                            <a class="logo" href="{{ path('harentius_blog_homepage') }}"></a>
+                        </div>
+
+                        <div class="collapse navbar-collapse">
+                           {{ knp_menu_render('main', {'currentClass': 'active', 'template': 'HarentiusBlogBundle:Menu:knp_menu.html.twig'}) }}
+                        </div>
+                   </nav>
                 </div>
             </div>
+            {% endblock %}
 
             <div class="row">
                 <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12 page-content">

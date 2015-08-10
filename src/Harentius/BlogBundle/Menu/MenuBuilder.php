@@ -49,6 +49,7 @@ class MenuBuilder
             ->findPublishedNotSlugOrdered($this->homepageSlug)
         ;
         $menu = $this->factory->createItem('root');
+        $menu->setChildrenAttribute('class', 'nav navbar-nav');
 
         foreach ($pages as $page) {
             $menu->addChild($page->getTitle(), [
