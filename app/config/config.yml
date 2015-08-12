@@ -103,6 +103,10 @@ swiftmailer:
 white_october_breadcrumbs:
     separator: ~
 
+knp_paginator:
+    template:
+        pagination: KnpPaginatorBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig
+
 harentius_blog:
     sidebar:
         # ~ - no cache, 0 - unlimited cache
