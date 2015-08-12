@@ -1,12 +1,39 @@
-.project-header {
-  .navbar-header, .logo {
-    height: 30px;
+.main-menu-wrapper {
+  .navbar-header, {
+    line-height: 0.4;
+    height: 50px;
+    padding: 0;
   }
 
   .logo {
     margin: 10px;
     width: 37px;
+    height: 30px;
     background: url('../img/logo.png') no-repeat;
     display: inline-block;
+  }
+
+  .navbar-header, .navbar-nav {
+    display: inline-block;
+    float: left;
+  }
+
+  .navbar-nav {
+    margin: 0;
+  }
+
+  .navbar-nav > li {
+    float: none;
+    display: inline-block;
+  }
+  .navbar-nav > li > a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+  .navbar-nav > li.open > ul.dropdown-menu {
+    position: absolute;
+    border: 1px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
   }
 }

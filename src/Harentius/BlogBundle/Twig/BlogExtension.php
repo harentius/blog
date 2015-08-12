@@ -76,11 +76,22 @@ class BlogExtension extends HttpKernelExtension
     {
         $key = $controllerReference->controller;
 
-        if (!$this->apcCache->contains($key)) {
-            $this->apcCache->save($key, $this->renderFragment($controllerReference, $options));
+        if ($controllerReference->attributes !== []) {
+            $key .= json_encode($controllerReference->attributes);
         }
 
-        return $this->apcCache->fetch($key);
+        if ($controllerReference->query !== []) {
+            $key .= json_encode($controllerReference->query);
+        }
+
+        if ($this->apcCache->contains($key)) {
+            return $this->apcCache->fetch($key);
+        }
+
+        $renderedContent = $this->renderFragment($controllerReference, $options);
+        $this->apcCache->save($key, $renderedContent);
+
+        return $renderedContent;
     }
 
     /**

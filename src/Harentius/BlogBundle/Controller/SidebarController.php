@@ -8,18 +8,19 @@ use Symfony\Component\HttpFoundation\Response;
 class SidebarController extends Controller
 {
     /**
+     * @param bool $showNumber
      * @return Response
      */
-    public function categoriesAction()
+    public function categoriesAction($showNumber = true)
     {
         return $this->render('HarentiusBlogBundle:Sidebar:categories.html.twig', [
             'categories' => $this->get('harentius_blog.sidebar.categories')->getList([
                 'decorate' => true,
                 'representationField' => 'slug',
                 'html' => true,
-                'nodeDecorator' => function($node) {
+                'nodeDecorator' => function($node) use ($showNumber) {
                     // Silent missing IDE warning
-                    return sprintf('<a href=' . '"%s">%s</a> (%d)',
+                    return sprintf('<a href=' . '"%s">%s</a>' . ($showNumber ? ' (%d)': ''),
                         $this->generateUrl('harentius_blog_list', [
                             'filtrationType' => 'category',
                             'criteria' => $node['slug']

@@ -29,18 +29,21 @@
     <body>
         <div class="container">
             {% block menu %}
-            <div class="row padded-content">
-                <div class="col-lg-12 main-menu-wrapper">
-                    <nav class="navbar navbar-default project-header">
+            <div class="padded-content main-menu-wrapper">
+                <nav class="navbar navbar-default" role="navigation">
+                    <div class="clearfix">
                         <div class="navbar-header">
                             <a class="logo" href="{{ path('harentius_blog_homepage') }}"></a>
                         </div>
-
-                        <div class="collapse navbar-collapse">
-                           {{ knp_menu_render('main', {'currentClass': 'active', 'template': 'HarentiusBlogBundle:Menu:knp_menu.html.twig'}) }}
+                        {{ knp_menu_render('main', {'currentClass': 'active', 'template': 'HarentiusBlogBundle:Menu:knp_menu.html.twig'}) }}
+                        <button type="button" class="glyphicon glyphicon-menu-hamburger hidden-lg hidden-md categories-menu-button" data-toggle="collapse" data-target="#categories-menu"></button>
+                    </div>
+                    <div class="clearfix">
+                        <div class="collapse out categories-menu" id="categories-menu">
+                        {{ render_cached(controller('HarentiusBlogBundle:Sidebar:categories', { showNumber: false })) }}
                         </div>
-                   </nav>
-                </div>
+                    </div>
+               </nav>
             </div>
             {% endblock %}
 
@@ -50,7 +53,7 @@
                     {% block content %}{% endblock %}
                 </div>
 
-                <div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
+                <div class="col-lg-3 col-md-3 hidden-sm hidden-xs sidebar">
                     {% block sidebar %}
                         {{ include('HarentiusBlogBundle:Sidebar:index.html.twig') }}
                     {% endblock %}
@@ -62,6 +65,7 @@
             {% javascripts
                 'assets/vendor/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js'
                 'assets/vendor/jquery/dist/jquery.min.js'
+                'assets/vendor/bootstrap/js/collapse.js'
                 '@HarentiusBlogBundle/Resources/public/js/common.coffee'
             %}
             <script src="{{ asset_url }}"></script>
