@@ -32,6 +32,7 @@ services:
             - ~
             - @harentius_blog.rating
             - %sidebar_cache_filefime%
+            - %sidebar_cache_lifetime%
         tags:
             - { name: twig.extension }
 
