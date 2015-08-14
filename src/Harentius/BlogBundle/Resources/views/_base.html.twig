@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>{% block page_title -%}{%- endblock %}</title>
+        <title>
+            {%- block raw_title -%}
+                {% if block('page_title') is not empty %}{% block page_title %}{% endblock %} | {% endif %}{{ get_setting('project_name') }}
+            {%- endblock -%}
+        </title>
         <meta name="description" content="" />
         <meta name="keywords" content="" />
         <meta charset="UTF-8" />

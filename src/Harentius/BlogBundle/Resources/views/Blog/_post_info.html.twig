@@ -1,5 +1,5 @@
 <div class="post-info row">
-    <div class="pull-left col-lg-7 col-md-7 col-sm-12 col-xs-12 post-stats">
+    <div class="pull-left col-lg-8 col-md-8 col-sm-12 col-xs-12 post-stats">
         <span>
             <i class="glyphicon glyphicon-calendar"></i>
             {{ article.publishedAt|date('d/m/Y') }}
@@ -22,7 +22,7 @@
             {{ article.viewsCount }}
         </span>
     </div>
-    <div class="post-tags col-lg-5 col-md-5 col-sm-12 col-xs-12 text-lg-right text-md-right">
+    <div class="post-tags col-lg-4 col-md-4 col-sm-12 col-xs-12 text-lg-right text-md-right">
         {% for tag in article.tags %}
             {% spaceless %}
         <span>

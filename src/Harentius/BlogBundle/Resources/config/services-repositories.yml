@@ -19,3 +19,10 @@ services:
         factory_service: doctrine.orm.entity_manager
         factory_method: getRepository
         arguments: [ HarentiusBlogBundle:Tag ]
+
+    harentius_blog.entity.setting_repository:
+        public: false
+        class: Harentius\BlogBundle\Entity\Setting
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments: [ HarentiusBlogBundle:Setting ]

@@ -25,13 +25,18 @@ services:
         calls:
             - [ setNamespace, [ harentius_blog_sidebar ] ]
 
+    harentius_blog.settings.cache:
+        class: Doctrine\Common\Cache\ApcCache
+        calls:
+            - [ setNamespace, [ harentius_blog_settings ] ]
+
     harentius_blog.twig.blog_extension:
         class: Harentius\BlogBundle\Twig\BlogExtension
         arguments:
             - @fragment.handler
             - ~
             - @harentius_blog.rating
-            - %sidebar_cache_filefime%
+            - @harentius_blog.settings_provider
             - %sidebar_cache_lifetime%
         tags:
             - { name: twig.extension }
@@ -74,3 +79,9 @@ services:
         class: Harentius\BlogBundle\Assets\Manager
         arguments:
             - @harentius_blog.assets.resolver
+
+    harentius_blog.settings_provider:
+        class: Harentius\BlogBundle\SettingsProvider
+        arguments:
+             - @harentius_blog.entity.setting_repository
+             - @harentius_blog.settings.cache
