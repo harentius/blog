@@ -59,6 +59,12 @@
                     {% endblock %}
                 </div>
             </div>
+
+            {% block footer %}
+            <footer class="padded-content footer">
+                {% block footer_content %}All right reserved. {% endblock %}
+            </footer>
+            {% endblock %}
         </div>
 
         {% block common_javascripts %}

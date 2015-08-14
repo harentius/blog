@@ -8,3 +8,10 @@
     <link href="{{ asset_url }}" media="all" rel="stylesheet" type="text/css" />
     {% endstylesheets %}
 {% endblock %}
+
+{% block footer_content %}
+    <p>© <a href="{{ url('harentius_blog_homepage') }}">folkprog.net</a>, 2012-{{ 'now'|date('Y') }}</p>
+    <p>All right reserved.</p>
+    <p>Копирование материалов не запрещается.</p>
+    <p>За указание ссылки на источник - спасибо.</p>
+{% endblock %}
