@@ -19,18 +19,13 @@ class BlogController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $indexPageContent = $this->getDoctrine()->getRepository('HarentiusBlogBundle:Page')
-            ->findOneBy([
-                'slug' => $this->getParameter('harentius_blog.homepage.page_slug'),
-                'isPublished' => true
-            ])
-        ;
+        $homepage = $this->get('harentius_blog.homepage');
 
         return $this->render('HarentiusBlogBundle:Blog:index.html.twig', [
-            'page' => $indexPageContent,
+            'page' => $homepage->getPage(),
             'articles' => $this->knpPaginateCustomPerPage(
                 $request,
-                $this->get('harentius_blog.feed')->fetch(),
+                $homepage->getFeed(),
                 $this->getParameter('harentius_blog.homepage.feed.number')
             ),
         ]);

@@ -58,11 +58,13 @@ services:
         arguments:
             - @harentius_blog.entity.article_repository
 
-    harentius_blog.feed:
-        class: Harentius\BlogBundle\Feed
+    harentius_blog.homepage:
+        class: Harentius\BlogBundle\Homepage
         arguments:
             - @harentius_blog.entity.article_repository
+            - @harentius_blog.entity.page_repository
             - %harentius_blog.homepage.feed.category%
+            - %harentius_blog.homepage.page_slug%
 
     harentius_blog.rating:
         class: Harentius\BlogBundle\Rating
