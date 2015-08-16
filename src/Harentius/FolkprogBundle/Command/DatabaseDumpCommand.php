@@ -8,6 +8,7 @@ use Harentius\BlogBundle\Assets\AssetFile;
 use Harentius\BlogBundle\Entity\Article;
 use Harentius\BlogBundle\Entity\Category;
 use Harentius\BlogBundle\Entity\Page;
+use Harentius\BlogBundle\Entity\Setting;
 use Harentius\BlogBundle\Entity\Tag;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\DomCrawler\Crawler;
@@ -80,6 +81,7 @@ class DatabaseDumpCommand extends ContainerAwareCommand
             'Tags' => 'dumpTags',
             'Articles' => 'dumpArticles',
             'Pages' => 'dumpPages',
+            'Settings' => 'dumpSettings',
         ];
 
         foreach ($dumps as $name => $method) {
@@ -98,17 +100,12 @@ class DatabaseDumpCommand extends ContainerAwareCommand
     protected function dumpCategories()
     {
         $getMeta = function ($v, $key) {
-            $result = $this->connection->fetchAssoc("
-                SELECT option_value FROM p2a44_options
-                WHERE option_name = 'wpseo_taxonomy_meta'"
-            );
-
-            $optionValue = unserialize($result['option_value']);
+            $optionValue = unserialize($this->getOption('wpseo_taxonomy_meta'));
 
             return $optionValue && isset($optionValue['category'][$v['term_id']][$key])
                 ? $optionValue['category'][$v['term_id']][$key]
                 : null
-                ;
+            ;
         };
 
         $this->dumpAbstractTaxonomyData('category', Category::class, [
@@ -216,6 +213,28 @@ class DatabaseDumpCommand extends ContainerAwareCommand
     }
 
     /**
+     *
+     */
+    protected function dumpSettings()
+    {
+        $seoData = unserialize($this->getOption('aioseop_options'));
+        $result = [];
+        $result[] = [
+            'key' => 'project_name',
+            'value' => $this->getOption('blogname'),
+        ];
+        $result[] = [
+            'key' => 'homepage_meta_description',
+            'value' => $seoData['aiosp_home_description'],
+        ];
+        $result[] = [
+            'key' => 'homepage_meta_keywords',
+            'value' => $seoData['aiosp_home_keywords'],
+        ];
+        $this->data[Setting::class] = $result;
+    }
+
+    /**
      * @param $type
      * @param $entityClass
      * @param array $additionalData
@@ -246,6 +265,20 @@ class DatabaseDumpCommand extends ContainerAwareCommand
         );
 
         return $result['meta_value'];
+    }
+
+    /**
+     * @param string $key
+     * @return string
+     */
+    private function getOption($key)
+    {
+        $result = $this->connection->fetchAssoc("
+            SELECT option_value FROM p2a44_options
+            WHERE option_name = :option_name", [':option_name' => $key]
+        );
+
+        return $result['option_value'];
     }
 
     /**

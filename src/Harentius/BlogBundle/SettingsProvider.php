@@ -34,7 +34,7 @@ class SettingsProvider
      */
     public function get($key)
     {
-        if ($this->cache->contains($key)) {
+        if (!$this->cache->contains($key)) {
             $this->loadSettings();
         }
 

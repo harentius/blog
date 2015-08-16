@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Harentius\BlogBundle\Entity\Article;
 use Harentius\BlogBundle\Entity\Category;
 use Harentius\BlogBundle\Entity\Page;
+use Harentius\BlogBundle\Entity\Setting;
 use Harentius\BlogBundle\Entity\Tag;
 use Harentius\FolkprogBundle\Utils\FieldsCopier;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -92,6 +93,7 @@ class DatabaseLoadCommand extends ContainerAwareCommand
             'Tags' => 'loadTags',
             'Articles' => 'loadArticles',
             'Pages' => 'loadPages',
+            'Settings' => 'loadSettings',
         ];
 
         foreach ($processors as $name => $method) {
@@ -182,6 +184,28 @@ class DatabaseLoadCommand extends ContainerAwareCommand
     protected function loadPages($rawData)
     {
         return $this->loadAbstractPostData($rawData, Page::class, false);
+    }
+
+    /**
+     * @param $rawData
+     */
+    protected function loadSettings($rawData)
+    {
+        $settingsRepository = $this->em->getRepository('HarentiusBlogBundle:Setting');
+
+        foreach ($rawData[Setting::class] as $settingData) {
+            $setting = $settingsRepository->findOneBy(['key' => $settingData['key']]);
+
+            if (!$setting) {
+                $setting = new Setting();
+                $setting->setKey($settingData['key']);
+                $this->em->persist($setting);
+            }
+
+            $setting->setValue($settingData['value']);
+        }
+
+        $this->em->flush();
     }
 
     /**

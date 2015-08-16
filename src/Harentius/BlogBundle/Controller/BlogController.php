@@ -44,12 +44,14 @@ class BlogController extends Controller
         $breadcrumbs = $this->get('white_october_breadcrumbs');
         $breadcrumbs->addItem('Blog', $this->generateUrl('harentius_blog_homepage'));
         $noIndex = false;
+        $parent = null;
 
         switch ($filtrationType) {
             case 'category':
                 $category = $this->getDoctrine()->getRepository('HarentiusBlogBundle:Category')
                     ->findOneBy(['slug' => $criteria])
                 ;
+                $parent = $category;
                 $breadcrumbs->addItem($category->getName());
                 $articlesQuery = $articlesRepository->findPublishedByCategoryQuery($category);
                 break;
@@ -57,6 +59,7 @@ class BlogController extends Controller
                 $tag = $this->getDoctrine()->getRepository('HarentiusBlogBundle:Tag')
                     ->findOneBy(['slug' => $criteria])
                 ;
+                $parent = $tag;
                 $breadcrumbs->addItem($tag->getName());
                 $articlesQuery = $articlesRepository->findByTagQuery($tag);
                 $noIndex = true;
@@ -67,6 +70,7 @@ class BlogController extends Controller
 
         return $this->render('HarentiusBlogBundle:Blog:list.html.twig', [
             'articles' => $this->knpPaginate($request, $articlesQuery),
+            'parent' => $parent,
             'noIndex' => $noIndex,
         ]);
     }
@@ -93,6 +97,8 @@ class BlogController extends Controller
 
         return $this->render('HarentiusBlogBundle:Blog:list.html.twig', [
             'articles' => $this->knpPaginate($request, $articlesQuery),
+            'year' => $year,
+            'month' => $month,
         ]);
     }
 

@@ -6,8 +6,15 @@
                 {% if block('page_title') is not empty %}{% block page_title %}{% endblock %} | {% endif %}{{ get_setting('project_name') }}
             {%- endblock -%}
         </title>
-        <meta name="description" content="" />
-        <meta name="keywords" content="" />
+
+        {% if block('page_meta_description') is not empty -%}
+        <meta name="description" content="{% block page_meta_description %}{% endblock %}" />
+        {%- endif %}
+
+        {% if block('page_meta_keywords') is not empty -%}
+            <meta name="keywords" content="{% block page_meta_keywords %}{% endblock %}" />
+        {%- endif %}
+
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="viewport" content="width=device-width" />

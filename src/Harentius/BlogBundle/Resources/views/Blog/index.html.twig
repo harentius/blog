@@ -1,5 +1,17 @@
 {% extends 'HarentiusBlogBundle::base.html.twig' %}
 
+{% block page_title %}
+    {%- if page %}{{ page.title }}{% endif -%}
+{% endblock %}
+
+{% block page_meta_description %}
+    {{- get_setting('homepage_meta_description') -}}
+{% endblock %}
+
+{% block page_meta_keywords %}
+    {{- get_setting('homepage_meta_keywords') -}}
+{% endblock %}
+
 {% block content %}
     {% if page %}
     <div class="padded-content">
