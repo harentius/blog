@@ -80,11 +80,13 @@ class ArticleRepository extends EntityRepository
      * @param null $categorySlug
      * @return Query
      */
-    public function findByCategorySlugLimitedQuery($categorySlug = null)
+    public function findPublishedByCategorySlugLimitedQuery($categorySlug = null)
     {
         $qb = $this->createQueryBuilder('a');
 
         $qb
+            ->where('a.isPublished = :isPublished')
+            ->setParameter(':isPublished', true)
             ->orderBy('a.publishedAt', 'DESC')
         ;
 

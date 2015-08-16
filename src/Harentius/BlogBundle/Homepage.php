@@ -49,7 +49,7 @@ class Homepage
      */
     public function getFeed()
     {
-        return $this->articleRepository->findByCategorySlugLimitedQuery($this->category);
+        return $this->articleRepository->findPublishedByCategorySlugLimitedQuery($this->category);
     }
 
     /**
