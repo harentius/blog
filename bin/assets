@@ -1,2 +1,4 @@
+#!/bin/sh
+
 app/console assetic:dump "$@"
 app/console assets:install "$@"
