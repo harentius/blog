@@ -11,11 +11,11 @@
 {% endblock %}
 
 {% block page_meta_description %}
-    {%- if parent is defined %}{{ parent.metaDescription }}{% endif -%}
+    {%- if parent is defined and parent.metaDescription is defined %}{{ parent.metaDescription }}{% endif -%}
 {% endblock %}
 
 {% block page_meta_keywords %}
-    {%- if parent is defined %}{{ parent.metaKeywords }}{% endif -%}
+    {%- if parent is defined and parent.metaKeywords is defined %}{{ parent.metaKeywords }}{% endif -%}
 {% endblock %}
 
 {% block meta_extra %}

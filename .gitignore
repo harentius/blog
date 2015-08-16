@@ -21,4 +21,5 @@
 !/web/assets/audios/.gitignore
 /var/dump/*
 !/var/dump/.gitkeep
+!/var/tmp/.gitkeep
 /web/sitemap.*

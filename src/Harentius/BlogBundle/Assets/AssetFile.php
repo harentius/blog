@@ -8,6 +8,7 @@ class AssetFile
 {
     const TYPE_IMAGE = 'image';
     const TYPE_AUDIO = 'audio';
+    const TYPE_OTHER = 'file';
 
     /**
      * @var File
@@ -42,6 +43,13 @@ class AssetFile
         self::TYPE_AUDIO => [
             'audio/mpeg' => ['mpga', 'mp2', 'mp2a', 'mp3', 'm2a', 'm3a'],
             'audio/x-wav' => ['wav'],
+        ],
+        self::TYPE_OTHER => [
+            'application/x-rar-compressed' => ['rar'],
+            'application/x-rar' => ['rar'],
+            'application/zip' => ['zip'],
+            'application/x-tar' => ['tar'],
+            'application/x-gzip' => ['gz'],
         ],
     ];
 
