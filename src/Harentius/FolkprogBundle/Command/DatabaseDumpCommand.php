@@ -390,6 +390,8 @@ class DatabaseDumpCommand extends ContainerAwareCommand
                     return null;
                 }
             },
+            'createdAt' => 'post_modified',
+            'updatedAt' => 'post_modified',
             'metaDescription' => function ($v) {
                 return $this->getPostMeta($v, '_yoast_wpseo_metadesc');
             },
