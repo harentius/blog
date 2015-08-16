@@ -43,6 +43,7 @@ class BlogController extends Controller
 
         $breadcrumbs = $this->get('white_october_breadcrumbs');
         $breadcrumbs->addItem('Blog', $this->generateUrl('harentius_blog_homepage'));
+        $noIndex = false;
 
         switch ($filtrationType) {
             case 'category':
@@ -58,6 +59,7 @@ class BlogController extends Controller
                 ;
                 $breadcrumbs->addItem($tag->getName());
                 $articlesQuery = $articlesRepository->findByTagQuery($tag);
+                $noIndex = true;
                 break;
             default:
                 throw $this->createNotFoundException('Unknown filtration type');
@@ -65,6 +67,7 @@ class BlogController extends Controller
 
         return $this->render('HarentiusBlogBundle:Blog:list.html.twig', [
             'articles' => $this->knpPaginate($request, $articlesQuery),
+            'noIndex' => $noIndex,
         ]);
     }
 

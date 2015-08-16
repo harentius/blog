@@ -2,6 +2,8 @@
 
 namespace Harentius\BlogBundle;
 
+use Doctrine\ORM\Query;
+use Harentius\BlogBundle\Entity\Article;
 use Harentius\BlogBundle\Entity\ArticleRepository;
 use Harentius\BlogBundle\Entity\Page;
 use Harentius\BlogBundle\Entity\PageRepository;
@@ -43,7 +45,7 @@ class Homepage
     }
 
     /**
-     * @return array
+     * @return Query
      */
     public function getFeed()
     {
@@ -59,5 +61,27 @@ class Homepage
             'slug' => $this->homepageSlug,
             'isPublished' => true
         ]);
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getUpdatedAt()
+    {
+        $page = $this->getPage();
+        $updatedAt = null;
+
+        if ($page) {
+            $updatedAt = $page->getUpdatedAt();
+        }
+
+        /** @var Article $article */
+        foreach ($this->getFeed()->execute() as $article) {
+            if (($articleUpdatedAt = $article->getUpdatedAt()) > $updatedAt) {
+                $updatedAt = $articleUpdatedAt;
+            }
+        }
+
+        return $updatedAt;
     }
 }

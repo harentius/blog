@@ -8,7 +8,7 @@ class PageRepository extends EntityRepository
 {
     /**
      * @param $slug
-     * @return mixed
+     * @return Page[]
      */
     public function findPublishedNotSlugOrdered($slug)
     {

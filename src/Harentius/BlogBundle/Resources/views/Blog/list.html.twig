@@ -1,5 +1,11 @@
 {% extends 'HarentiusBlogBundle::base.html.twig' %}
 
+{% block meta_extra %}
+    {% if noIndex is defined and noIndex %}
+    <meta name="robots" content="noindex,follow">
+    {% endif %}
+{% endblock %}
+
 {% block content %}
     {% include('HarentiusBlogBundle:Blog:_articles.html.twig') %}
 

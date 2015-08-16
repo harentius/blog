@@ -78,7 +78,7 @@ class ArticleRepository extends EntityRepository
 
     /**
      * @param null $categorySlug
-     * @return mixed
+     * @return Query
      */
     public function findByCategorySlugLimitedQuery($categorySlug = null)
     {
