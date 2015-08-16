@@ -73,9 +73,7 @@ class DatabaseLoadCommand extends ContainerAwareCommand
         $this->fieldsCopier->setIgnoreMissingSourceFields(true);
         $this->em = $this->getContainer()->get('doctrine.orm.entity_manager');
 
-        $rootDir = $this->getContainer()->getParameter('kernel.root_dir') . '/..';
         $importAssetsDir = $directory . '/assets';
-        $assetsDir = $rootDir . '/web/assets';
         $this->fs = new Filesystem();
         $this->createDirectory($importAssetsDir);
 
@@ -239,8 +237,13 @@ class DatabaseLoadCommand extends ContainerAwareCommand
                 $article
             );
 
+            $article
+                ->setCreatedAt(new \DateTime($articleData['createdAt']))
+                ->setUpdatedAt(new \DateTime($articleData['updatedAt']))
+            ;
+
             if ($articleData['publishedAt']) {
-                $article->setpublishedAt(new \DateTime($articleData['publishedAt']));
+                $article->setPublishedAt(new \DateTime($articleData['publishedAt']));
             }
 
             if ($isArticle) {
