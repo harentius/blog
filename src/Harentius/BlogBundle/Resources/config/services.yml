@@ -87,3 +87,16 @@ services:
         arguments:
              - @harentius_blog.entity.setting_repository
              - @harentius_blog.settings.cache
+
+    harentius_blog.event_listener.sitemap_listener:
+        class: Harentius\BlogBundle\EventListener\SitemapListener
+        arguments:
+            - @router
+            - @harentius_blog.homepage
+            - @harentius_blog.sidebar.archive
+            - @harentius_blog.entity.article_repository
+            - @harentius_blog.entity.page_repository
+            - @harentius_blog.entity.category_repository
+            - %homepage_page_slug%
+        tags:
+            - { name: presta.sitemap.listener }
