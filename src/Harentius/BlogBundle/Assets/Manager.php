@@ -41,7 +41,7 @@ class Manager
                 'targetUri' => ['string', 'null'],
             ])
             ->setAllowedValues([
-                'type' => ['image', 'audio', null],
+                'type' => ['image', 'audio', 'file', null],
             ])
         ;
         $options = $resolver->resolve($options);
