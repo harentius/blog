@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Harentius\BlogBundle\Entity\Article;
 use Harentius\BlogBundle\Entity\Category;
 use Harentius\BlogBundle\Entity\Page;
+use Harentius\BlogBundle\Entity\Setting;
 use Harentius\BlogBundle\Entity\Tag;
 use Harentius\FolkprogBundle\Utils\FieldsCopier;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -72,9 +73,7 @@ class DatabaseLoadCommand extends ContainerAwareCommand
         $this->fieldsCopier->setIgnoreMissingSourceFields(true);
         $this->em = $this->getContainer()->get('doctrine.orm.entity_manager');
 
-        $rootDir = $this->getContainer()->getParameter('kernel.root_dir') . '/..';
         $importAssetsDir = $directory . '/assets';
-        $assetsDir = $rootDir . '/web/assets';
         $this->fs = new Filesystem();
         $this->createDirectory($importAssetsDir);
 
@@ -92,6 +91,7 @@ class DatabaseLoadCommand extends ContainerAwareCommand
             'Tags' => 'loadTags',
             'Articles' => 'loadArticles',
             'Pages' => 'loadPages',
+            'Settings' => 'loadSettings',
         ];
 
         foreach ($processors as $name => $method) {
@@ -186,6 +186,28 @@ class DatabaseLoadCommand extends ContainerAwareCommand
 
     /**
      * @param $rawData
+     */
+    protected function loadSettings($rawData)
+    {
+        $settingsRepository = $this->em->getRepository('HarentiusBlogBundle:Setting');
+
+        foreach ($rawData[Setting::class] as $settingData) {
+            $setting = $settingsRepository->findOneBy(['key' => $settingData['key']]);
+
+            if (!$setting) {
+                $setting = new Setting();
+                $setting->setKey($settingData['key']);
+                $this->em->persist($setting);
+            }
+
+            $setting->setValue($settingData['value']);
+        }
+
+        $this->em->flush();
+    }
+
+    /**
+     * @param $rawData
      * @param $entityClass
      * @param bool|true $isArticle
      * @return int
@@ -215,8 +237,13 @@ class DatabaseLoadCommand extends ContainerAwareCommand
                 $article
             );
 
+            $article
+                ->setCreatedAt(new \DateTime($articleData['createdAt']))
+                ->setUpdatedAt(new \DateTime($articleData['updatedAt']))
+            ;
+
             if ($articleData['publishedAt']) {
-                $article->setpublishedAt(new \DateTime($articleData['publishedAt']));
+                $article->setPublishedAt(new \DateTime($articleData['publishedAt']));
             }
 
             if ($isArticle) {

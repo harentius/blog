@@ -19,18 +19,13 @@ class BlogController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $indexPageContent = $this->getDoctrine()->getRepository('HarentiusBlogBundle:Page')
-            ->findOneBy([
-                'slug' => $this->getParameter('harentius_blog.homepage.page_slug'),
-                'isPublished' => true
-            ])
-        ;
+        $homepage = $this->get('harentius_blog.homepage');
 
         return $this->render('HarentiusBlogBundle:Blog:index.html.twig', [
-            'page' => $indexPageContent,
+            'page' => $homepage->getPage(),
             'articles' => $this->knpPaginateCustomPerPage(
                 $request,
-                $this->get('harentius_blog.feed')->fetch(),
+                $homepage->getFeed(),
                 $this->getParameter('harentius_blog.homepage.feed.number')
             ),
         ]);
@@ -48,12 +43,15 @@ class BlogController extends Controller
 
         $breadcrumbs = $this->get('white_october_breadcrumbs');
         $breadcrumbs->addItem('Blog', $this->generateUrl('harentius_blog_homepage'));
+        $noIndex = false;
+        $parent = null;
 
         switch ($filtrationType) {
             case 'category':
                 $category = $this->getDoctrine()->getRepository('HarentiusBlogBundle:Category')
                     ->findOneBy(['slug' => $criteria])
                 ;
+                $parent = $category;
                 $breadcrumbs->addItem($category->getName());
                 $articlesQuery = $articlesRepository->findPublishedByCategoryQuery($category);
                 break;
@@ -61,8 +59,10 @@ class BlogController extends Controller
                 $tag = $this->getDoctrine()->getRepository('HarentiusBlogBundle:Tag')
                     ->findOneBy(['slug' => $criteria])
                 ;
+                $parent = $tag;
                 $breadcrumbs->addItem($tag->getName());
                 $articlesQuery = $articlesRepository->findByTagQuery($tag);
+                $noIndex = true;
                 break;
             default:
                 throw $this->createNotFoundException('Unknown filtration type');
@@ -70,6 +70,8 @@ class BlogController extends Controller
 
         return $this->render('HarentiusBlogBundle:Blog:list.html.twig', [
             'articles' => $this->knpPaginate($request, $articlesQuery),
+            'parent' => $parent,
+            'noIndex' => $noIndex,
         ]);
     }
 
@@ -95,6 +97,8 @@ class BlogController extends Controller
 
         return $this->render('HarentiusBlogBundle:Blog:list.html.twig', [
             'articles' => $this->knpPaginate($request, $articlesQuery),
+            'year' => $year,
+            'month' => $month,
         ]);
     }
 

@@ -25,13 +25,19 @@ services:
         calls:
             - [ setNamespace, [ harentius_blog_sidebar ] ]
 
+    harentius_blog.settings.cache:
+        class: Doctrine\Common\Cache\ApcCache
+        calls:
+            - [ setNamespace, [ harentius_blog_settings ] ]
+
     harentius_blog.twig.blog_extension:
         class: Harentius\BlogBundle\Twig\BlogExtension
         arguments:
             - @fragment.handler
             - ~
             - @harentius_blog.rating
-            - %sidebar_cache_filefime%
+            - @harentius_blog.settings_provider
+            - %sidebar_cache_lifetime%
         tags:
             - { name: twig.extension }
 
@@ -52,11 +58,13 @@ services:
         arguments:
             - @harentius_blog.entity.article_repository
 
-    harentius_blog.feed:
-        class: Harentius\BlogBundle\Feed
+    harentius_blog.homepage:
+        class: Harentius\BlogBundle\Homepage
         arguments:
             - @harentius_blog.entity.article_repository
+            - @harentius_blog.entity.page_repository
             - %harentius_blog.homepage.feed.category%
+            - %harentius_blog.homepage.page_slug%
 
     harentius_blog.rating:
         class: Harentius\BlogBundle\Rating
@@ -73,3 +81,22 @@ services:
         class: Harentius\BlogBundle\Assets\Manager
         arguments:
             - @harentius_blog.assets.resolver
+
+    harentius_blog.settings_provider:
+        class: Harentius\BlogBundle\SettingsProvider
+        arguments:
+             - @harentius_blog.entity.setting_repository
+             - @harentius_blog.settings.cache
+
+    harentius_blog.event_listener.sitemap_listener:
+        class: Harentius\BlogBundle\EventListener\SitemapListener
+        arguments:
+            - @router
+            - @harentius_blog.homepage
+            - @harentius_blog.sidebar.archive
+            - @harentius_blog.entity.article_repository
+            - @harentius_blog.entity.page_repository
+            - @harentius_blog.entity.category_repository
+            - %homepage_page_slug%
+        tags:
+            - { name: presta.sitemap.listener }

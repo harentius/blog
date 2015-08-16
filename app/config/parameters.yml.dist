@@ -22,7 +22,7 @@ parameters:
     nodejs.modules_path: /usr/lib/node_modules
     bin_coffee: /usr/bin/coffee
 
-    sidebar_cache_filefime: 0
+    sidebar_cache_lifetime: 0
     sidebar_tags_limit: 10
     sidebar_tag_sizes: [65, 80, 100]
     homepage_page_slug: index

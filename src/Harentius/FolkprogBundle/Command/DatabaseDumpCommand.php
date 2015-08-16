@@ -8,6 +8,7 @@ use Harentius\BlogBundle\Assets\AssetFile;
 use Harentius\BlogBundle\Entity\Article;
 use Harentius\BlogBundle\Entity\Category;
 use Harentius\BlogBundle\Entity\Page;
+use Harentius\BlogBundle\Entity\Setting;
 use Harentius\BlogBundle\Entity\Tag;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\DomCrawler\Crawler;
@@ -35,6 +36,11 @@ class DatabaseDumpCommand extends ContainerAwareCommand
      * @var array
      */
     private $data = [];
+
+    /**
+     * @var string
+     */
+    private $siteHost  = 'folkprog.net';
 
     /**
      * {@inheritdoc}
@@ -80,6 +86,7 @@ class DatabaseDumpCommand extends ContainerAwareCommand
             'Tags' => 'dumpTags',
             'Articles' => 'dumpArticles',
             'Pages' => 'dumpPages',
+            'Settings' => 'dumpSettings',
         ];
 
         foreach ($dumps as $name => $method) {
@@ -98,17 +105,12 @@ class DatabaseDumpCommand extends ContainerAwareCommand
     protected function dumpCategories()
     {
         $getMeta = function ($v, $key) {
-            $result = $this->connection->fetchAssoc("
-                SELECT option_value FROM p2a44_options
-                WHERE option_name = 'wpseo_taxonomy_meta'"
-            );
-
-            $optionValue = unserialize($result['option_value']);
+            $optionValue = unserialize($this->getOption('wpseo_taxonomy_meta'));
 
             return $optionValue && isset($optionValue['category'][$v['term_id']][$key])
                 ? $optionValue['category'][$v['term_id']][$key]
                 : null
-                ;
+            ;
         };
 
         $this->dumpAbstractTaxonomyData('category', Category::class, [
@@ -216,6 +218,28 @@ class DatabaseDumpCommand extends ContainerAwareCommand
     }
 
     /**
+     *
+     */
+    protected function dumpSettings()
+    {
+        $seoData = unserialize($this->getOption('aioseop_options'));
+        $result = [];
+        $result[] = [
+            'key' => 'project_name',
+            'value' => $this->getOption('blogname'),
+        ];
+        $result[] = [
+            'key' => 'homepage_meta_description',
+            'value' => $seoData['aiosp_home_description'],
+        ];
+        $result[] = [
+            'key' => 'homepage_meta_keywords',
+            'value' => $seoData['aiosp_home_keywords'],
+        ];
+        $this->data[Setting::class] = $result;
+    }
+
+    /**
      * @param $type
      * @param $entityClass
      * @param array $additionalData
@@ -246,6 +270,20 @@ class DatabaseDumpCommand extends ContainerAwareCommand
         );
 
         return $result['meta_value'];
+    }
+
+    /**
+     * @param string $key
+     * @return string
+     */
+    private function getOption($key)
+    {
+        $result = $this->connection->fetchAssoc("
+            SELECT option_value FROM p2a44_options
+            WHERE option_name = :option_name", [':option_name' => $key]
+        );
+
+        return $result['option_value'];
     }
 
     /**
@@ -283,14 +321,15 @@ class DatabaseDumpCommand extends ContainerAwareCommand
                     );
                 }, $result);
 
-                // Dumping photos
                 $crawler = new Crawler();
                 $crawler->addHtmlContent($result, 'UTF-8');
+
+                // Dumping images
                 $crawler->filter('img')->each(function ($node) use ($fs, $assetsResolver) {
                     /** @var Crawler $node */
                     $imageNode = $node->getNode(0);
                     $oldSrc = $imageNode->getAttribute('src');
-                    $path = $this->loadFile($oldSrc, $this->directory . '/assets/');
+                    $path = $this->loadFile($oldSrc, $this->directory . '/tmp/');
                     $newSrc = $assetsResolver->pathToUri(realpath($path));
                     $imageNode->setAttribute('src', $newSrc);
                     $currentClass = $imageNode->getAttribute('class');
@@ -326,12 +365,32 @@ class DatabaseDumpCommand extends ContainerAwareCommand
                     }
                 });
 
+                //Dumping archives
+                $crawler->filter('a')->each(function ($node) use ($fs, $assetsResolver) {
+                    /** @var Crawler $node */
+                    $linkNode = $node->getNode(0);
+                    $oldSrc = $linkNode->getAttribute('href');
+
+                    $pathInfo = pathinfo($oldSrc);
+                    $parsedUrl = parse_url($oldSrc);
+
+                    if (
+                        (isset($pathInfo['extension']) && in_array($pathInfo['extension'], ['rar', 'zip', 'tar', 'gz']))
+                            &&
+                        (!isset($parsedUrl['host']) || $parsedUrl['host'] === $this->siteHost)
+                    ) {
+                        $path = $this->loadFile($oldSrc, $this->directory . '/tmp/');
+                        $newSrc = $assetsResolver->pathToUri(realpath($path));
+                        $linkNode->setAttribute('href', $newSrc);
+                    }
+                });
+
                 $result = $crawler->filter('body')->html();
 
                 //Dumping mp3s
                 $regExp = '/\[ca_audio\s*url=\"(?<url>.*?)\".*\]/';
                 $result = preg_replace_callback($regExp, function($matches) use ($assetsResolver) {
-                    $path = $this->loadFile($matches['url'], $this->directory . '/assets/');
+                    $path = $this->loadFile($matches['url'], $this->directory . '/tmp/');
 
                     return sprintf(
                         // Silent missing IDE warning
@@ -357,6 +416,8 @@ class DatabaseDumpCommand extends ContainerAwareCommand
                     return null;
                 }
             },
+            'createdAt' => 'post_modified',
+            'updatedAt' => 'post_modified',
             'metaDescription' => function ($v) {
                 return $this->getPostMeta($v, '_yoast_wpseo_metadesc');
             },
@@ -424,7 +485,7 @@ class DatabaseDumpCommand extends ContainerAwareCommand
             $url =  ltrim($uri, '/');
 
             if (strpos($uri, 'http://') === false) {
-                $url = 'http://folkprog.net/' . $url;
+                $url = 'http://' . $this->siteHost . '/' . $url;
             }
 
             $fileData = @file_get_contents($url);
@@ -439,9 +500,15 @@ class DatabaseDumpCommand extends ContainerAwareCommand
         }
 
         $file = new AssetFile(new File($targetFile));
+        $type = $file->getType();
+
+        if (!$type) {
+            throw new \LogicException(sprintf("Unsupported file %s", $file->getOriginalName()));
+        }
+
         $finalPath = sprintf('%s/../web/assets/%ss/%s',
             $this->getContainer()->getParameter('kernel.root_dir'),
-            $file->getType(),
+            $type,
             pathinfo($targetFile, PATHINFO_BASENAME)
         );
         $fs->copy($targetFile, $finalPath);

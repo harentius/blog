@@ -4,6 +4,7 @@ namespace Harentius\BlogBundle\Twig;
 
 use Doctrine\Common\Cache\Cache;
 use Harentius\BlogBundle\Rating;
+use Harentius\BlogBundle\SettingsProvider;
 use Symfony\Bridge\Twig\Extension\HttpKernelExtension;
 use Symfony\Component\HttpKernel\Controller\ControllerReference;
 use Symfony\Component\HttpKernel\Fragment\FragmentHandler;
@@ -14,7 +15,7 @@ class BlogExtension extends HttpKernelExtension
     /**
      * @var Cache
      */
-    private $apcCache;
+    private $cache;
 
     /**
      * @var int
@@ -27,21 +28,29 @@ class BlogExtension extends HttpKernelExtension
     private $rating;
 
     /**
+     * @var SettingsProvider
+     */
+    private $settingsProvider;
+
+    /**
      * @param FragmentHandler $handler A FragmentHandler instance
-     * @param Cache $apcCache
+     * @param Cache $cache
      * @param Rating $rating
+     * @param SettingsProvider $settingsProvider
      * @param int $sidebarCacheLifeTime
      */
     public function __construct(
         FragmentHandler $handler,
-        Cache $apcCache,
+        Cache $cache,
         Rating $rating,
+        SettingsProvider $settingsProvider,
         $sidebarCacheLifeTime
     ) {
         parent::__construct($handler);
-        $this->apcCache = $apcCache;
-        $this->sidebarCacheLifeTime = $sidebarCacheLifeTime;
+        $this->cache = $cache;
         $this->rating = $rating;
+        $this->settingsProvider = $settingsProvider;
+        $this->sidebarCacheLifeTime = $sidebarCacheLifeTime;
     }
 
     /**
@@ -51,6 +60,7 @@ class BlogExtension extends HttpKernelExtension
     {
         return array(
             new \Twig_SimpleFunction('render_cached', [$this, 'renderCached'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFunction('get_setting', [$this, 'getSetting']),
             new \Twig_SimpleFunction('is_article_liked', [$this, 'isArticleLiked']),
             new \Twig_SimpleFunction('is_article_disliked', [$this, 'isArticleDisLiked']),
             new \Twig_SimpleFunction('is_article_rated', [$this, 'isArticleRated']),
@@ -76,11 +86,22 @@ class BlogExtension extends HttpKernelExtension
     {
         $key = $controllerReference->controller;
 
-        if (!$this->apcCache->contains($key)) {
-            $this->apcCache->save($key, $this->renderFragment($controllerReference, $options));
+        if ($controllerReference->attributes !== []) {
+            $key .= json_encode($controllerReference->attributes);
         }
 
-        return $this->apcCache->fetch($key);
+        if ($controllerReference->query !== []) {
+            $key .= json_encode($controllerReference->query);
+        }
+
+        if ($this->cache->contains($key)) {
+            return $this->cache->fetch($key);
+        }
+
+        $renderedContent = $this->renderFragment($controllerReference, $options);
+        $this->cache->save($key, $renderedContent);
+
+        return $renderedContent;
     }
 
     /**
@@ -99,6 +120,15 @@ class BlogExtension extends HttpKernelExtension
         }
 
         return $content;
+    }
+
+    /**
+     * @param string $key
+     * @return mixed|null
+     */
+    public function getSetting($key)
+    {
+        return $this->settingsProvider->get($key);
     }
 
     /**

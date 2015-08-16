@@ -23,7 +23,7 @@ class HarentiusBlogExtension extends Extension
         $loader->load('services-admin.yml');
 
         $twigExtensionDefinition = $container->getDefinition('harentius_blog.twig.blog_extension');
-        $cacheService = ($config['sidebar']['cache_filefime'] === null)
+        $cacheService = ($config['sidebar']['cache_lifetime'] === null)
             ? 'harentius_blog.array_cache'
             : 'harentius_blog.sidebar.cache'
         ;

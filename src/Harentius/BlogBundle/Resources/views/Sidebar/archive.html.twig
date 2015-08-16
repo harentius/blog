@@ -1,15 +1,14 @@
 <div class="sidebar-block archive">
-    <h3>{{ 'Archive'|trans }}</h3>
     <ul>
     {% for year, months in archivesList %}
         <li class="year-content-wrapper">
             <i class="glyphicon glyphicon-menu-down months-expander"></i>
             <a href="{{ path('harentius_blog_archive_year', {'year': year}) }}">{{ year }}</a>
             <ul class="months-list display-none">
-        {% for month in months %}
+        {% for month, monthName in months %}
                 <li>
-                    <a href="{{ path('harentius_blog_archive_month', {'year': year, 'month': month|localizeddate('none', 'none', 'ru', null, "LL") }) }}">
-                        {{ month|localizeddate('none', 'none', app.request.locale, null, 'LLLL')|capitalize }}
+                    <a href="{{ path('harentius_blog_archive_month', {'year': year, 'month': month }) }}">
+                        {{ monthName|localizeddate('none', 'none', app.request.locale, null, 'LLLL')|capitalize }}
                     </a>
                 </li>
         {% endfor %}

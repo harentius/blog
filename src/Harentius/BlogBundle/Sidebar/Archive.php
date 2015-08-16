@@ -26,12 +26,12 @@ class Archive
     public function getList()
     {
         /** @var Article[] $articles */
-        $articles = $this->articleRepository->findAll();
+        $articles = $this->articleRepository->findBy(['isPublished' => true], ['publishedAt' => 'DESC']);
         $list = [];
 
         foreach ($articles as $article) {
             $publishedAt = $article->getPublishedAt();
-            $list[$publishedAt->format('Y')][$publishedAt->format('M')] = $publishedAt->format('F');
+            $list[$publishedAt->format('Y')][$publishedAt->format('m')] = $publishedAt->format('F');
         }
 
         return $list;

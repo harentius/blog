@@ -1,6 +1,10 @@
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 
+PrestaSitemapBundle:
+    resource: "@PrestaSitemapBundle/Resources/config/routing.yml"
+    prefix:   /
+
 blog:
     resource: "@HarentiusBlogBundle/Resources/config/routing.yml"
     prefix:   /

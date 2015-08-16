@@ -1,12 +1,28 @@
 {% extends 'HarentiusBlogBundle::base.html.twig' %}
 
+{% block page_title %}
+    {%- if page %}{{ page.title }}{% endif -%}
+{% endblock %}
+
+{% block page_meta_description %}
+    {{- get_setting('homepage_meta_description') -}}
+{% endblock %}
+
+{% block page_meta_keywords %}
+    {{- get_setting('homepage_meta_keywords') -}}
+{% endblock %}
+
 {% block content %}
-<div class="padded-content">
-    <h1>{{ page.title }}</h1>
-    <div>{{ page.text|raw }}</div>
-</div>
-{% include('HarentiusBlogBundle:Blog:_articles.html.twig') %}
-<div class="paginator">
-    {{ knp_pagination_render(articles) }}
-</div>
+    {% if page %}
+    <div class="padded-content">
+        <h1>{{ page.title }}</h1>
+        <div>{{ page.text|raw }}</div>
+    </div>
+    {% endif %}
+
+    {% include('HarentiusBlogBundle:Blog:_articles.html.twig') %}
+
+    <div class="paginator">
+        {{ knp_pagination_render(articles) }}
+    </div>
 {% endblock %}
