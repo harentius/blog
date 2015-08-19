@@ -1,0 +1,30 @@
+#!/bin/sh
+
+set -e; set -u
+. "$(dirname $0)/common"
+
+
+generate_assets_version() {
+    local h="$(date +'%F-%T-%N' | md5sum)"
+    echo "$(expr substr "$h" 1 8)"
+}
+
+update_assets_version() {
+    local file="$APP_DIR/config/parameters.yml"
+
+    if [ ! -f "$file" ]; then
+        write_line "parameters file is missing"
+        exit 1
+    fi
+
+    local tmp_file="$(mktemp)"
+    local new_version="$(generate_assets_version)"
+
+    cat "$file" | sed -e "s/^\(\s\+assets_version:\s*\).*\$/\1$new_version/" > "$tmp_file"
+    mv "$tmp_file" "$file"
+    chmod a+r "$file"
+}
+
+
+write_title "Updating assets version"
+update_assets_version
