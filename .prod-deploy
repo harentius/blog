@@ -13,13 +13,11 @@ updater=".prod-deploy"
 
 
 do_rebuild() {
-#   TODO: Add clear apc
+#TODO: Add clear apc
     COMPOSER_BIN="$HOME/local/bin/composer" bin/update
 }
 
-do_before_update() {
-
-}
+do_before_update() {}
 
 
 
@@ -97,3 +95,6 @@ else
         exec "$updater_pathname" "$(get_hook_file)"
         exit
     fi
+
+    execute_rebuild
+fi
