@@ -1,0 +1,120 @@
+BIN_DIR=$(cd $(dirname $0) && pwd)
+BASE_DIR=$(cd "$BIN_DIR/.." && pwd)
+APP_DIR="$BASE_DIR/app"
+WEB_DIR="$BASE_DIR/web"
+VENDOR_DIR="$BASE_DIR/vendor"
+CONSOLE="$APP_DIR/console"
+UNSAFE_BINS_FLAG="$BASE_DIR/.allow_unsafe_bins"
+COMPOSER_INSTALL_PROD_OPTIONS="--no-dev --no-interaction"
+COMPOSER_INSTALL_DEV_OPTIONS=""
+
+
+cd $BASE_DIR
+[ -f "$BASE_DIR/.bin-config" ] && . "$BASE_DIR/.bin-config"
+
+
+detect_composer() {
+    local env_composer="${COMPOSER_BIN:-}"
+
+    if [ ! -z "$env_composer" -a -f "$env_composer" -a -x "$env_composer" ]; then
+        echo "$env_composer"
+        return
+    fi
+
+    set +e
+    local system_composer=$(which "composer")
+    set -e
+
+    if [ ! -z "$system_composer" -a -x "$system_composer" ]; then
+        echo "$system_composer"
+        return
+    fi
+
+    local composer="$BASE_DIR/composer"
+
+    for composer in "$BASE_DIR/composer" "$BASE_DIR/composer.phar"; do
+        if [ -f "$composer" ]; then
+            echo "$(which php) $composer"
+            return
+        fi
+    done
+}
+
+COMPOSER="$(detect_composer)"
+
+unsafe_bin() {
+    if [ ! -f "$UNSAFE_BINS_FLAG" ]; then
+        echo "This script ($0) is unsafe and can lead to data loss. If nevertheless you want to run it, create file '$UNSAFE_BINS_FLAG'"
+        exit 1
+    fi
+}
+
+exec_console() {
+    cmd=$1
+    shift
+    $CONSOLE $cmd "$@"
+}
+
+exec_bin() {
+    bin=$1
+    shift
+    "$BIN_DIR/$bin" "$@"
+}
+
+exec_vendor_bin() {
+    bin=$1
+    shift
+    "$VENDOR_DIR/bin/$bin" "$@"
+}
+
+exec_composer() {
+    if [ -z "$COMPOSER" ]; then
+        echo "Can't find composer"
+        exit 1
+    fi
+
+    $COMPOSER "$@"
+}
+
+exec_composer_install_prod() {
+    exec_composer install $COMPOSER_INSTALL_PROD_OPTIONS
+}
+
+exec_composer_install_dev() {
+    exec_composer install $COMPOSER_INSTALL_DEV_OPTIONS
+}
+
+write_title() {
+    echo "======= $@"
+}
+
+write_line() {
+    echo " * $@"
+}
+
+read_symfony_parameter() {
+    parameters_file="$APP_DIR/config/parameters.yml"
+
+    if [ ! -f "$parameters_file" ]; then
+        return
+    fi
+
+    default="${2:-}"
+    parameter="$(cat "$parameters_file" | sed -n "s/^\s\+$1:\s*\(.*\)\$/\1/p")"
+
+    if [ "$parameter" = "null" ]; then
+        parameter=""
+    fi
+
+    if [ -z "$parameter" ]; then
+        parameter="$default"
+    fi
+
+    echo -n "$parameter"
+}
+
+get_switch() {
+    if [ ! -z "$2" ]; then
+        echo -n "$1$2"
+    fi
+}
