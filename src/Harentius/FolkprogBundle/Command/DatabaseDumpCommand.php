@@ -321,17 +321,19 @@ class DatabaseDumpCommand extends ContainerAwareCommand
                     );
                 }, $result);
 
-                $crawler = new Crawler();
-                $crawler->addHtmlContent($result, 'UTF-8');
+                //Dumping mp3s
+                $regExp = '/\[ca_audio\s*url=\"(?<url>.*?)\".*\]/';
+                $result = preg_replace_callback($regExp, function($matches) use ($assetsResolver) {
+                    $path = $this->loadFile($matches['url'], $this->directory . '/tmp/');
 
-                // Processing images
-                $crawler->filter('img')->each(function ($node) use ($fs, $assetsResolver) {
-                    /** @var Crawler $node */
-                    $imageNode = $node->getNode(0);
-                    $oldSrc = $imageNode->getAttribute('src');
-                    $path = $this->loadFile($oldSrc, $this->directory . '/tmp/');
-                    $newSrc = $assetsResolver->pathToUri(realpath($path));
-                    $imageNode->setAttribute('src', $newSrc);
+                    return sprintf(
+                    // Silent missing IDE warning
+                        '<audio src=' . '"%s" controls="controls"></audio>',
+                        $assetsResolver->pathToUri(realpath($path))
+                    );
+                }, $result);
+
+                $processAttributes = function ($imageNode) {
                     $currentClass = $imageNode->getAttribute('class');
                     $newStyle = '';
 
@@ -348,7 +350,7 @@ class DatabaseDumpCommand extends ContainerAwareCommand
                     }
 
                     if ($newStyle) {
-                        $imageNode->setAttribute('style', trim($imageNode->getAttribute('style') . $newStyle));
+                        $imageNode->setAttribute('style', trim($imageNode->getAttribute('style') . ';' . $newStyle));
                     }
 
                     $imageNode->removeAttribute('class');
@@ -358,9 +360,66 @@ class DatabaseDumpCommand extends ContainerAwareCommand
                     }
 
                     $imageNode->removeAttribute('height');
+                };
+
+                //Dumping captioned images
+                $regExp = '/\[caption.*align=\"(?<align>.*?)\".*width=\"(?<width>.*?)\".*\](?<content><.*\/>)(?<caption>.*?)\[\/caption\]/';
+                $result = preg_replace_callback($regExp, function(&$matches) {
+                    if (isset($matches['content'])) {
+                        $crawler = new Crawler();
+                        $crawler->addHtmlContent($matches['content'], 'UTF-8');
+                        $crawler->filter('img')->each(function ($node) {
+                            /** @var Crawler $node */
+                            $imageNode = $node->getNode(0);
+                            $imageNode->removeAttribute('style');
+                        });
+                        $matches['img'] = $crawler->filter('body')->html();
+                    } else {
+                        $matches['img'] = '';
+                    }
+
+                    if (!isset($matches['width'])) {
+                        $matches['width'] = 'auto';
+                    } else {
+                        $matches['width'] = ((int) $matches['width']) . 'px';
+                    }
+
+                    if (!isset($matches['align'])) {
+                        $matches['align'] = '';
+                    }
+
+                    if (!isset($matches['caption'])) {
+                        $matches['caption'] = '';
+                    }
+
+                    return sprintf(
+                    // Silent missing IDE warning
+                        '<figure %s>%s<figcaption>%s</figcaption></figure>',
+                        "style=\"width:{$matches['width']}\" class=\"{$matches['align']}\"",
+                        trim($matches['img']),
+                        trim($matches['caption'])
+                    );
+                }, $result);
+
+                $crawler = new Crawler();
+                $crawler->addHtmlContent($result, 'UTF-8');
+
+                // Processing images
+                $crawler->filter('figure')->each(function ($node) use ($processAttributes) {
+                    $processAttributes($imageNode = $node->getNode(0));
+                });
+
+                $crawler->filter('img')->each(function ($node) use ($fs, $assetsResolver, $processAttributes) {
+                    /** @var Crawler $node */
+                    $imageNode = $node->getNode(0);
+                    $oldSrc = $imageNode->getAttribute('src');
+                    $path = $this->loadFile($oldSrc, $this->directory . '/tmp/');
+                    $newSrc = $assetsResolver->pathToUri(realpath($path));
+                    $imageNode->setAttribute('src', $newSrc);
+                    $processAttributes($imageNode);
                     $parentNode = $imageNode->parentNode;
 
-                    if ($parentNode->tagName === 'a' && $parentNode->getAttribute('href') === $oldSrc) {
+                    if ($parentNode->tagName === 'a' && $parentNode->getAttribute('href') === $imageNode) {
                         $parentNode->setAttribute('href', $newSrc);
                     }
                 });
@@ -398,18 +457,6 @@ class DatabaseDumpCommand extends ContainerAwareCommand
                 });
 
                 $result = $crawler->filter('body')->html();
-
-                //Dumping mp3s
-                $regExp = '/\[ca_audio\s*url=\"(?<url>.*?)\".*\]/';
-                $result = preg_replace_callback($regExp, function($matches) use ($assetsResolver) {
-                    $path = $this->loadFile($matches['url'], $this->directory . '/tmp/');
-
-                    return sprintf(
-                        // Silent missing IDE warning
-                        '<audio src=' . '"%s" controls="controls"></audio>',
-                        $assetsResolver->pathToUri(realpath($path))
-                    );
-                }, $result);
 
                 // Fixing broken tags
                 $result = str_replace('<p><!--more--></p>', '<!--more-->', $result);
