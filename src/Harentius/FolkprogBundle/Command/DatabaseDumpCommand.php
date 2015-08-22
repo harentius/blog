@@ -324,7 +324,7 @@ class DatabaseDumpCommand extends ContainerAwareCommand
                 $crawler = new Crawler();
                 $crawler->addHtmlContent($result, 'UTF-8');
 
-                // Dumping images
+                // Processing images
                 $crawler->filter('img')->each(function ($node) use ($fs, $assetsResolver) {
                     /** @var Crawler $node */
                     $imageNode = $node->getNode(0);
@@ -363,6 +363,18 @@ class DatabaseDumpCommand extends ContainerAwareCommand
                     if ($parentNode->tagName === 'a' && $parentNode->getAttribute('href') === $oldSrc) {
                         $parentNode->setAttribute('href', $newSrc);
                     }
+                });
+
+                // Processing iframes
+                $crawler->filter('iframe')->each(function ($node) {
+                    /** @var Crawler $node */
+                    $iframeNode = $node->getNode(0);
+                    $newStyle = $iframeNode->getAttribute('style') . ' width:100%;height:100%;position:absolute;top:0;left:0;';
+                    $iframeNode->setAttribute('style', $newStyle);
+                    $iframeNode->removeAttribute('width');
+                    $iframeNode->removeAttribute('height');
+                    $newStyle = $iframeNode->parentNode->getAttribute('style') . ' width:100%;height:auto;position:relative;padding-bottom:60%;';
+                    $iframeNode->parentNode->setAttribute('style', $newStyle);
                 });
 
                 //Dumping archives
