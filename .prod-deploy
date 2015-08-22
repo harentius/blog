@@ -7,7 +7,7 @@ set -e; set -u
 umask 0002
 
 
-project_root="$HOME/projects/beta.folkprog.net"
+project_root="$HOME/projects/folkprog.net"
 branch="prod"
 updater=".prod-deploy"
 
