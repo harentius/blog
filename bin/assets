@@ -1,4 +1,14 @@
 #!/bin/sh
 
-app/console assetic:dump "$@"
-app/console assets:install "$@"
+set -e; set -u
+. "$(dirname $0)/common"
+
+write_title "Cleaning assets"
+rm -f "$WEB_DIR/js/"*
+rm -f "$WEB_DIR/css/"*
+
+write_title "Installing assets"
+exec_console assets:install --symlink "$@"
+
+write_title "Building assets"
+exec_console assetic:dump "$@"
