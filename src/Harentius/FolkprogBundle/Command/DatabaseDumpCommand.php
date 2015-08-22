@@ -419,7 +419,7 @@ class DatabaseDumpCommand extends ContainerAwareCommand
                     $processAttributes($imageNode);
                     $parentNode = $imageNode->parentNode;
 
-                    if ($parentNode->tagName === 'a' && $parentNode->getAttribute('href') === $imageNode) {
+                    if ($parentNode->tagName === 'a' && $parentNode->getAttribute('href') === $oldSrc) {
                         $parentNode->setAttribute('href', $newSrc);
                     }
                 });
