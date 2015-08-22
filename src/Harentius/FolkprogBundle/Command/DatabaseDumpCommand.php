@@ -355,9 +355,9 @@ class DatabaseDumpCommand extends ContainerAwareCommand
 
                     if ($imageNode->getAttribute('width') > 826) {
                         $imageNode->removeAttribute('width');
-                        $imageNode->removeAttribute('height');
                     }
 
+                    $imageNode->removeAttribute('height');
                     $parentNode = $imageNode->parentNode;
 
                     if ($parentNode->tagName === 'a' && $parentNode->getAttribute('href') === $oldSrc) {
