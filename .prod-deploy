@@ -14,7 +14,7 @@ updater=".prod-deploy"
 
 do_rebuild() {
 #TODO: Add clear apc
-    COMPOSER_BIN="$HOME/local/bin/composer" bin/update -e=prod
+    COMPOSER_BIN="$HOME/local/bin/composer" bin/update
 }
 
 do_before_update() {

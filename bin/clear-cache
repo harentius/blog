@@ -1,3 +1,8 @@
 #!/bin/sh
 
-app/console cache:clear "$@"
+set -e; set -u
+. "$(dirname $0)/common"
+
+
+write_title "Clearing cache"
+exec_console cache:clear --no-warmup "$@"
