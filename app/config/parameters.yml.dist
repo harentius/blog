@@ -16,7 +16,7 @@ parameters:
     mailer_password:   ~
 
     # A secret key that's used to generate certain security-related tokens
-    secret:            ThisTokenIsNotSoSecretChangeIt
+    secret:            c3f38db32e345346c1965fa7573944508f739b8a
 
     nodejs.path: /usr/bin/node
     nodejs.modules_path: /usr/lib/node_modules
