@@ -419,7 +419,15 @@ class DatabaseDumpCommand extends ContainerAwareCommand
                     $processAttributes($imageNode);
                     $parentNode = $imageNode->parentNode;
 
-                    if ($parentNode->tagName === 'a' && $parentNode->getAttribute('href') === $oldSrc) {
+                    if ($parentNode->tagName === 'a') {
+                        $href = $parentNode->getAttribute('href');
+                        $regExp = "/(http:\/\/{$this->siteHost}|\/)(?<url>.*\.(jpg|png))/";
+
+                        if (($href !== $oldSrc) && preg_match($regExp, $href, $matches)) {
+                            $path = $this->loadFile($matches['url'], $this->directory . '/tmp/');
+                            $newSrc = $assetsResolver->pathToUri(realpath($path));
+                        }
+
                         $parentNode->setAttribute('href', $newSrc);
                     }
                 });
