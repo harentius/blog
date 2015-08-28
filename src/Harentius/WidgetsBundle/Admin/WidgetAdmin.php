@@ -29,11 +29,13 @@ class WidgetAdmin extends Admin
     {
         $formMapper
             ->add('name', 'text')
-            ->add('route')
+            ->add('route', 'harentius_widget_route', [
+                'label' => false,
+                'required' => false,
+            ])
             ->add('position', 'harentius_widget_position')
             ->add('isPhpUse', null, [
                 'label' => 'Contains php code',
-                'required' => false,
             ])
             ->add('content')
             ->add('backLink', 'text', [

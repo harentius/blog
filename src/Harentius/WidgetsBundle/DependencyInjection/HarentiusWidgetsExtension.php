@@ -20,5 +20,16 @@ class HarentiusWidgetsExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+        $positionType = $container->findDefinition('harentius_widgets.form.type.position');
+
+        foreach ($config['widgets'] as $key => $name) {
+            $positionType->addMethodCall('registerPosition', [$key, $name]);
+        }
+
+        $routeType = $container->findDefinition('harentius_widgets.form.type.route');
+
+        foreach ($config['routes'] as $key => $name) {
+            $routeType->addMethodCall('registerRoute', [$key, $name]);
+        }
     }
 }
