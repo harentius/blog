@@ -1,0 +1,20 @@
+services:
+    harentius_widgets.admin.widget:
+        class: Harentius\WidgetsBundle\Admin\WidgetAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Content, label: Widgets, show_in_dashboard: true }
+        arguments:
+            - ~
+            - Harentius\WidgetsBundle\Entity\Widget
+            - ~
+
+
+    harentius_widgets.form.type.route:
+        class: Harentius\WidgetsBundle\Form\Type\RouteType
+        tags:
+            - { name: form.type, alias: harentius_widget_route }
+
+    harentius_widgets.form.type.position:
+        class: Harentius\WidgetsBundle\Form\Type\PositionType
+        tags:
+            - { name: form.type, alias: harentius_widget_position }

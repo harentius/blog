@@ -27,6 +27,7 @@ class AppKernel extends Kernel
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Presta\SitemapBundle\PrestaSitemapBundle(),
             new Harentius\BlogBundle\HarentiusBlogBundle(),
+            new Harentius\WidgetsBundle\HarentiusWidgetsBundle(),
             new Harentius\FolkprogBundle\HarentiusFolkprogBundle(),
         );
 
