@@ -40,21 +40,14 @@ class RouteType extends AbstractType
             'choices' => $routesChoice,
             'empty_data' => null,
             'placeholder' => 'All'
-        ])->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($options) {
-            $this->formModifier($event->getForm(), $options['route']);
+        ])->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event) use ($options) {
+            $formData = $event->getData();
+            $this->formModifier($event->getForm(), isset($formData['name']) ? $formData['name'] : null);
         });
 
-        $builder->get('name')->addEventListener(FormEvents::POST_SUBMIT, function (FormEvent $event) use ($options) {
+        $builder->get('name')->addEventListener(FormEvents::POST_SUBMIT, function(FormEvent $event) use ($options) {
             $this->formModifier($event->getForm()->getParent(), $event->getForm()->getData());
         });
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefault('route', null);
     }
 
     /**
@@ -82,7 +75,10 @@ class RouteType extends AbstractType
     {
         $form->add('parameters', 'harentius_widget_route_fields', [
             'route' => $route,
-            'label' => $route ? 'Parameters' : false,
+            'label' => 'Parameters:',
+            'attr' => [
+                'class' => 'route-fields',
+            ]
         ]);
     }
 }

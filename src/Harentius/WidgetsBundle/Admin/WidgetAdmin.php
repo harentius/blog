@@ -15,10 +15,15 @@ class WidgetAdmin extends Admin
     {
         $listMapper
             ->add('name')
-            ->add('route')
             ->add('position')
             ->add('isPhpUse')
             ->add('backLink')
+            ->add('_action', 'actions', [
+                'actions' => [
+                    'edit' => [],
+                    'delete' => [],
+                ]
+            ])
         ;
     }
 
@@ -36,6 +41,7 @@ class WidgetAdmin extends Admin
             ->add('position', 'harentius_widget_position')
             ->add('isPhpUse', null, [
                 'label' => 'Contains php code',
+                'required' => false,
             ])
             ->add('content')
             ->add('backLink', 'text', [

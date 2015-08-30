@@ -2,9 +2,11 @@
 
 namespace Harentius\WidgetsBundle\Form\Type;
 
+use Doctrine\ORM\EntityManager;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class RouteFieldsType extends AbstractType
 {
@@ -14,11 +16,17 @@ class RouteFieldsType extends AbstractType
     private $routes;
 
     /**
-     *
+     * @var EntityManager
      */
-    public function __construct()
+    private $em;
+
+    /**
+     * @param EntityManager $em
+     */
+    public function __construct(EntityManager $em)
     {
         $this->routes = [];
+        $this->em = $em;
     }
 
     /**
@@ -34,12 +42,23 @@ class RouteFieldsType extends AbstractType
             throw new \InvalidArgumentException(sprintf('Unknown route "%s"', $options['route']));
         }
 
+        $propertyAccessor = PropertyAccess::createPropertyAccessor();
         $routeParameters = $this->routes[$options['route']]['parameters'];
 
         foreach ($routeParameters as $key => $parameter) {
-            $builder->add($key, 'entity', [
-                'class' => $parameter['source']['class'],
-                'property' => $parameter['source']['identityField'],
+            // TODO: Allow use other than 'findAll' query
+            $entities = $this->em->getRepository($parameter['source']['class'])->findAll();
+            $choices = [];
+
+            foreach ($entities as $entity) {
+                $choices[$propertyAccessor->getValue($entity, $parameter['source']['field'])] = $propertyAccessor->getValue($entity, $parameter['source']['identity']);
+            }
+
+            $builder->add($key, 'choice', [
+                'choices' => $choices,
+                'placeholder' => 'Select',
+                'multiple' => true,
+                'required' => true,
             ]);
         }
     }
@@ -49,7 +68,11 @@ class RouteFieldsType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefault('route', null);
+        $resolver->setDefaults([
+            'route' => null,
+            'csrf_protection' => false,
+            'label' => false,
+        ]);
     }
 
     /**

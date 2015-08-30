@@ -138,7 +138,7 @@ harentius_widgets:
                     source:
                         class: HarentiusBlogBundle:Article
                         field: slug
-                        identityField: title
+                        identity: title
     widgets:
         adverts_block_sidebar: Sidebar
         adverts_block_bottom: Bottom

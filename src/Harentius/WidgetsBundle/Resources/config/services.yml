@@ -19,6 +19,8 @@ services:
 
     harentius_widgets.form.type.route_fields:
         class: Harentius\WidgetsBundle\Form\Type\RouteFieldsType
+        arguments:
+            - @doctrine.orm.entity_manager
         tags:
             - { name: form.type, alias: harentius_widget_route_fields }
 

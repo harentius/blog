@@ -30,7 +30,7 @@ class Configuration implements ConfigurationInterface
                                             ->children()
                                                 ->scalarNode('class')->isRequired()->end()
                                                 ->scalarNode('field')->isRequired()->end()
-                                                ->scalarNode('identityField')->isRequired()->end()
+                                                ->scalarNode('identity')->isRequired()->end()
                                             ->end()
                                         ->end()
                                     ->end()
