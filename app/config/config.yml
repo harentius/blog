@@ -140,5 +140,5 @@ harentius_widgets:
                         field: slug
                         identity: title
     widgets:
-        adverts_block_sidebar: Sidebar
-        adverts_block_bottom: Bottom
+        widgets_block_sidebar: Sidebar
+        widgets_block_bottom: Bottom

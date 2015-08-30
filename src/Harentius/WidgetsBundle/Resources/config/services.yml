@@ -28,3 +28,8 @@ services:
         class: Harentius\WidgetsBundle\Form\Type\PositionType
         tags:
             - { name: form.type, alias: harentius_widget_position }
+
+    harentius_widgets.twig.widgets_extension:
+        class: Harentius\WidgetsBundle\Twig\WidgetsExtension
+        tags:
+            - { name: twig.extension }
