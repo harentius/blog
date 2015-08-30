@@ -2,6 +2,8 @@
 
 namespace Harentius\WidgetsBundle\Admin;
 
+use Harentius\WidgetsBundle\Entity\Widget;
+use Harentius\WidgetsBundle\Form\DataTransformer\WidgetAdminDataTransformer;
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -34,7 +36,7 @@ class WidgetAdmin extends Admin
     {
         $formMapper
             ->add('name', 'text')
-            ->add('route', 'harentius_widget_route', [
+            ->add('routeData', 'harentius_widget_route', [
                 'label' => false,
                 'required' => false,
             ])
@@ -49,5 +51,7 @@ class WidgetAdmin extends Admin
                 'required' => false,
             ])
         ;
+
+        $formMapper->getFormBuilder()->addViewTransformer(new WidgetAdminDataTransformer());
     }
 }

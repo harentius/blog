@@ -57,8 +57,7 @@ class RouteFieldsType extends AbstractType
             $builder->add($key, 'choice', [
                 'choices' => $choices,
                 'placeholder' => 'Select',
-                'multiple' => true,
-                'required' => true,
+                'required' => false,
             ]);
         }
     }

@@ -33,3 +33,10 @@ services:
         class: Harentius\WidgetsBundle\Twig\WidgetsExtension
         tags:
             - { name: twig.extension }
+
+    harentius_widgets.event_listener.widgets_content_injector_listener:
+        class: Harentius\WidgetsBundle\EventListener\WidgetsContentInjectorListener
+        arguments:
+            - @twig
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
