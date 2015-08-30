@@ -2,7 +2,6 @@
 
 namespace Harentius\WidgetsBundle\DependencyInjection;
 
-use Harentius\WidgetsBundle\DependencyInjection\Configuration;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -27,9 +26,11 @@ class HarentiusWidgetsExtension extends Extension
         }
 
         $routeType = $container->findDefinition('harentius_widgets.form.type.route');
+        $routeFieldsType = $container->findDefinition('harentius_widgets.form.type.route_fields');
 
         foreach ($config['routes'] as $key => $name) {
             $routeType->addMethodCall('registerRoute', [$key, $name]);
+            $routeFieldsType->addMethodCall('registerRoute', [$key, $name]);
         }
     }
 }

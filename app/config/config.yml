@@ -135,9 +135,10 @@ harentius_widgets:
             name: Article
             parameters:
                 slug:
-                    entity: HarentiusBlogBundle:Article
-                    field: slug
-                    identityField: name
+                    source:
+                        class: HarentiusBlogBundle:Article
+                        field: slug
+                        identityField: title
     widgets:
         adverts_block_sidebar: Sidebar
         adverts_block_bottom: Bottom

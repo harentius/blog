@@ -7,12 +7,20 @@ services:
             - ~
             - Harentius\WidgetsBundle\Entity\Widget
             - ~
+        calls:
+            - [ setTranslationDomain, [HarentiusWidgetsBundle]]
+            - [ setTemplate, [edit, HarentiusWidgetsBundle:Widget:edit.html.twig]]
 
 
     harentius_widgets.form.type.route:
         class: Harentius\WidgetsBundle\Form\Type\RouteType
         tags:
             - { name: form.type, alias: harentius_widget_route }
+
+    harentius_widgets.form.type.route_fields:
+        class: Harentius\WidgetsBundle\Form\Type\RouteFieldsType
+        tags:
+            - { name: form.type, alias: harentius_widget_route_fields }
 
     harentius_widgets.form.type.position:
         class: Harentius\WidgetsBundle\Form\Type\PositionType
