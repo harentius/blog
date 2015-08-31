@@ -67,16 +67,19 @@
                     {% block sidebar %}
                         {{ include('HarentiusBlogBundle:Sidebar:index.html.twig') }}
                     {% endblock %}
+                    {% block sidebar_after_content %}{% endblock %}
                 </div>
             </div>
 
             {% block footer %}
             <footer class="padded-content footer">
                 {% block footer_content %}All right reserved. {% endblock %}
+                {% block footer_after_content %}{% endblock %}
             </footer>
             {% endblock %}
+            {% block last_container_content %}{% endblock %}
         </div>
-
+        {% block last_body_content %}{% endblock %}
         {% block common_javascripts %}
             {% javascripts
                 'assets/vendor/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js'

@@ -126,3 +126,19 @@ harentius_blog:
             number: %homepage_feed_number%
     list:
         posts_per_page: %list_posts_per_page%
+
+harentius_widgets:
+    routes:
+        harentius_blog_homepage:
+            name: Homepage
+        harentius_blog_show:
+            name: Article
+            parameters:
+                slug:
+                    source:
+                        class: HarentiusBlogBundle:Article
+                        field: slug
+                        identity: title
+    widgets:
+        widgets_block_sidebar: Sidebar
+        widgets_block_bottom: Bottom

@@ -15,3 +15,11 @@
     <p>Копирование материалов не запрещается.</p>
     <p>За указание ссылки на источник - спасибо.</p>
 {% endblock %}
+
+{% block sidebar_after_content %}
+    {{ harentius_widget('widgets_block_sidebar') }}
+{% endblock %}
+
+{% block last_body_content %}
+    {{ harentius_widget('widgets_block_bottom') }}
+{% endblock %}

@@ -12,3 +12,6 @@ blog:
 admin:
     resource: "@HarentiusBlogBundle/Resources/config/routing-admin.yml"
     prefix:   /admin
+
+widgets:
+    resource: "@HarentiusWidgetsBundle/Resources/config/routing.yml"
