@@ -40,7 +40,9 @@ class WidgetAdmin extends Admin
             ])
             ->add('position', 'harentius_widget_position')
             ->add('priority')
-            ->add('content')
+            ->add('content', 'textarea', [
+                'attr' => ['class' => 'widget-content']
+            ])
             ->add('backLink', 'text', [
                 'label' => 'Backlink',
                 'required' => false,

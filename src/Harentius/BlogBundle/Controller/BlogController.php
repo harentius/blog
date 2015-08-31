@@ -42,7 +42,7 @@ class BlogController extends Controller
         $articlesRepository = $this->getDoctrine()->getRepository('HarentiusBlogBundle:Article');
 
         $breadcrumbs = $this->get('white_october_breadcrumbs');
-        $breadcrumbs->addItem('Blog', $this->generateUrl('harentius_blog_homepage'));
+        $breadcrumbs->addItem('Homepage', $this->generateUrl('harentius_blog_homepage'));
         $noIndex = false;
         $parent = null;
 
@@ -86,7 +86,7 @@ class BlogController extends Controller
         $articlesRepository = $this->getDoctrine()->getRepository('HarentiusBlogBundle:Article');
 
         $breadcrumbs = $this->get('white_october_breadcrumbs');
-        $breadcrumbs->addItem('Blog', $this->generateUrl('harentius_blog_homepage'));
+        $breadcrumbs->addItem('Homepage', $this->generateUrl('harentius_blog_homepage'));
         $breadcrumbs->addItem($year, $this->generateUrl('harentius_blog_archive_year', ['year' => $year]));
 
         if ($month) {
@@ -113,7 +113,7 @@ class BlogController extends Controller
         ;
 
         $breadcrumbs = $this->get('white_october_breadcrumbs');
-        $breadcrumbs->addItem('Blog', $this->generateUrl('harentius_blog_homepage'));
+        $breadcrumbs->addItem('Homepage', $this->generateUrl('harentius_blog_homepage'));
 
         if ($entity) {
             $category = $entity->getCategory();
