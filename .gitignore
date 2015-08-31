@@ -22,6 +22,8 @@
 /var/dump/*
 !/var/dump/.gitkeep
 !/var/tmp/.gitkeep
+/var/db-dumps/*
 /web/sitemap.*
 /.env
+/.allow_unsafe_bins
 /bin/dump-and-load-prod-data
