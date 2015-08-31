@@ -32,20 +32,12 @@ class Widget
     private $content;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(type="string", nullable=true)
-     * @SymfonyConstraints\Type(type="string")
-     */
-    private $route;
-
-    /**
      * @var array
      *
      * @ORM\Column(type="array", nullable=true)
      * @SymfonyConstraints\Type(type="array")
      */
-    private $routeParameters;
+    private $route;
 
     /**
      * @var string
@@ -57,6 +49,15 @@ class Widget
     private $position;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(type="integer")
+     * @SymfonyConstraints\Type(type="integer")
+     * @SymfonyConstraints\NotBlank()
+     */
+    private $priority;
+
+    /**
      * @var string
      *
      * @ORM\Column(type="text", nullable=true)
@@ -65,25 +66,12 @@ class Widget
     private $backLink;
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(type="boolean")
-     * @SymfonyConstraints\Type(type="boolean")
-     * @SymfonyConstraints\NotNull()
-     */
-    private $isPhpUse;
-
-    /**
-     * @var array
-     */
-    private $routeData;
-
-    /**
      *
      */
     public function __construct()
     {
         $this->isPhpUse = false;
+        $this->priority = 0;
     }
 
     /**
@@ -125,7 +113,7 @@ class Widget
     }
 
     /**
-     * @return string
+     * @return array
      */
     public function getRoute()
     {
@@ -133,31 +121,12 @@ class Widget
     }
 
     /**
-     * @param string $value
+     * @param array $value
      * @return $this
      */
     public function setRoute($value)
     {
         $this->route = $value;
-
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getRouteParameters()
-    {
-        return $this->routeParameters;
-    }
-
-    /**
-     * @param array $value
-     * @return $this
-     */
-    public function setRouteParameters($value)
-    {
-        $this->routeParameters = $value;
 
         return $this;
     }
@@ -182,6 +151,25 @@ class Widget
     }
 
     /**
+     * @return int
+     */
+    public function getPriority()
+    {
+        return $this->priority;
+    }
+
+    /**
+     * @param int $value
+     * @return $this
+     */
+    public function setPriority($value)
+    {
+        $this->priority = $value;
+
+        return $this;
+    }
+
+    /**
      * @return string
      */
     public function getBackLink()
@@ -196,44 +184,6 @@ class Widget
     public function setBackLink($value)
     {
         $this->backLink = $value;
-
-        return $this;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function isIsPhpUse()
-    {
-        return $this->isPhpUse;
-    }
-
-    /**
-     * @param boolean $value
-     * @return $this
-     */
-    public function setIsPhpUse($value)
-    {
-        $this->isPhpUse = $value;
-
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getRouteData()
-    {
-        return $this->routeData;
-    }
-
-    /**
-     * @param array $value
-     * @return $this
-     */
-    public function setRouteData($value)
-    {
-        $this->routeData = $value;
 
         return $this;
     }

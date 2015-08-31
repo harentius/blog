@@ -29,14 +29,17 @@ services:
         tags:
             - { name: form.type, alias: harentius_widget_position }
 
+    harentius_widgets.entity.widgets_repository:
+        public: false
+        class: Harentius\WidgetsBundle\Entity\Widget
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments: [ HarentiusWidgetsBundle:Widget ]
+
     harentius_widgets.twig.widgets_extension:
         class: Harentius\WidgetsBundle\Twig\WidgetsExtension
+        arguments:
+            - @request_stack
+            - @harentius_widgets.entity.widgets_repository
         tags:
             - { name: twig.extension }
-
-    harentius_widgets.event_listener.widgets_content_injector_listener:
-        class: Harentius\WidgetsBundle\EventListener\WidgetsContentInjectorListener
-        arguments:
-            - @twig
-        tags:
-            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }

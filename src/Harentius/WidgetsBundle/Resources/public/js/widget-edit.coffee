@@ -8,7 +8,7 @@ jQuery(($) ->
   $('.route-fields').closest('.form-group').append('<div class="route-fields-wrapper"></div>')
   $routeFieldsWrapper = $('.route-fields-wrapper')
 
-  $('select[name$="[routeData][name]"]').on('change', () ->
+  $('select[name$="[route][name]"]').on('change', () ->
     $selectRouteName = $(this)
     partName = $selectRouteName.attr('name').replace(/\[name\]$/, '[parameters]')
     val = $selectRouteName.val()

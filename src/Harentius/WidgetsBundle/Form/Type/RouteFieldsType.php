@@ -44,6 +44,7 @@ class RouteFieldsType extends AbstractType
 
         $propertyAccessor = PropertyAccess::createPropertyAccessor();
         $routeParameters = $this->routes[$options['route']]['parameters'];
+        ksort($routeParameters);
 
         foreach ($routeParameters as $key => $parameter) {
             // TODO: Allow use other than 'findAll' query
