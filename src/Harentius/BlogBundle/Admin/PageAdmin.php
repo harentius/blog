@@ -5,7 +5,7 @@ namespace Harentius\BlogBundle\Admin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
-class ArticleAdmin extends AbstractPostAdmin
+class PageAdmin extends AbstractPostAdmin
 {
     /**
      * {@inheritDoc}
@@ -15,8 +15,6 @@ class ArticleAdmin extends AbstractPostAdmin
         $listMapper
             ->add('title')
             ->add('slug')
-            ->add('category')
-            ->add('tags')
             ->add('author')
             ->add('isPublished')
             ->add('publishedAt')
@@ -41,11 +39,6 @@ class ArticleAdmin extends AbstractPostAdmin
             ->add('slug', null, [
                 'required' => false,
             ])
-            ->add('category')
-//            ->add('tags', 'sonata_type_model_autocomplete', array(
-//                'property' => 'name',
-//                'multiple' => 'true',
-//            ))
             ->add('text', 'textarea', [
                 'attr' => ['class' => 'blog-page-edit'],
             ])
