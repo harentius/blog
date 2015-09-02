@@ -2,11 +2,41 @@
 
 namespace Harentius\BlogBundle\Admin;
 
+use Doctrine\Common\Cache\CacheProvider;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
 class ArticleAdmin extends AbstractPostAdmin
 {
+    /**
+     * @var CacheProvider
+     */
+    private $cache;
+
+    /**
+     * {@inheritDoc}
+     */
+    public function prePersist($object)
+    {
+        $this->cache->deleteAll();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function preUpdate($object)
+    {
+        $this->cache->deleteAll();
+    }
+
+    /**
+     * @param CacheProvider $cache
+     */
+    public function setControllerCache(CacheProvider $cache)
+    {
+        $this->cache = $cache;
+    }
+
     /**
      * {@inheritDoc}
      */

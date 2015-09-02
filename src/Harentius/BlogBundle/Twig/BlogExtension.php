@@ -2,7 +2,7 @@
 
 namespace Harentius\BlogBundle\Twig;
 
-use Doctrine\Common\Cache\Cache;
+use Doctrine\Common\Cache\CacheProvider;
 use Harentius\BlogBundle\Rating;
 use Harentius\BlogBundle\SettingsProvider;
 use Symfony\Bridge\Twig\Extension\HttpKernelExtension;
@@ -13,7 +13,7 @@ use Harentius\BlogBundle\Entity\Article;
 class BlogExtension extends HttpKernelExtension
 {
     /**
-     * @var Cache
+     * @var CacheProvider
      */
     private $cache;
 
@@ -34,14 +34,14 @@ class BlogExtension extends HttpKernelExtension
 
     /**
      * @param FragmentHandler $handler A FragmentHandler instance
-     * @param Cache $cache
+     * @param CacheProvider $cache
      * @param Rating $rating
      * @param SettingsProvider $settingsProvider
      * @param int $sidebarCacheLifeTime
      */
     public function __construct(
         FragmentHandler $handler,
-        Cache $cache,
+        CacheProvider $cache,
         Rating $rating,
         SettingsProvider $settingsProvider,
         $sidebarCacheLifeTime
