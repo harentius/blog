@@ -27,8 +27,11 @@ class HarentiusBlogExtension extends Extension
             ? 'harentius_blog.array_cache'
             : 'harentius_blog.sidebar.cache'
         ;
+        $cacheServiceDefinition = $container->getDefinition($cacheService);
 
-        $twigExtensionDefinition->replaceArgument(1, $container->getDefinition($cacheService));
+        $twigExtensionDefinition->replaceArgument(1, $cacheServiceDefinition);
+        $articleAdminDefinition = $container->getDefinition('harentius_blog.admin.article');
+        $articleAdminDefinition->addMethodCall('setControllerCache', [$cacheServiceDefinition]);
 
         $container->setParameter('harentius_blog.sidebar.tags_limit', $config['sidebar']['tags_limit']);
         $container->setParameter('harentius_blog.sidebar.tag_sizes', $config['sidebar']['tag_sizes']);

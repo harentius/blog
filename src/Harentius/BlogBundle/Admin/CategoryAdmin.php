@@ -34,7 +34,9 @@ class CategoryAdmin extends Admin
     {
         $formMapper
             ->add('name')
-            ->add('slug')
+            ->add('slug', null, [
+                'required' => false,
+            ])
             ->add('parent')
         ;
     }
