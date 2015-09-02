@@ -35,7 +35,8 @@
         "bower-asset/jquery": "~2.1",
         "friendsofsymfony/jsrouting-bundle": "~1.5.4",
         "bower-asset/components-font-awesome": "^4.4",
-        "presta/sitemap-bundle": "~1.4"
+        "presta/sitemap-bundle": "~1.4",
+        "bower-asset/ckeditor-wordcount-plugin": "~1.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
@@ -86,7 +87,13 @@
                 "type": "bower-vcs",
                 "url": "https://github.com/zionsg/CKEditor-More-plugin.git",
                 "name": "bower-asset/ckeditor-readmore-plugin"
+            },
+            {
+                "type": "bower-vcs",
+                "url": "https://github.com/w8tcha/CKEditor-WordCount-Plugin.git",
+                "name": "bower-asset/ckeditor-wordcount-plugin"
             }
+
         ]
     }
 }

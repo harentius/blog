@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f238293ebe24add58e35c26e2ad44132",
+    "hash": "2cdab87ae1acf8bb0cdd266d047eab48",
     "packages": [
         {
             "name": "beberlei/DoctrineExtensions",
@@ -225,6 +225,22 @@
             },
             "type": "bower-asset-library",
             "time": "2013-06-01 14:41:25"
+        },
+        {
+            "name": "bower-asset/ckeditor-wordcount-plugin",
+            "version": "v1.12",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/w8tcha/CKEditor-WordCount-Plugin.git",
+                "reference": "f8852f687b6ea3537b59ef03a2967391841ebeaf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/w8tcha/CKEditor-WordCount-Plugin/zipball/f8852f687b6ea3537b59ef03a2967391841ebeaf",
+                "reference": "f8852f687b6ea3537b59ef03a2967391841ebeaf",
+                "shasum": ""
+            },
+            "type": "bower-asset-library"
         },
         {
             "name": "bower-asset/ckeditor-youtube-plugin",
@@ -1813,7 +1829,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/84accca9c921dcbdc9c4be3ba0366a25f8d779b3",
+                "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/1908c05d0e6a6319fff185f761070fac121c7423",
                 "reference": "84accca9c921dcbdc9c4be3ba0366a25f8d779b3",
                 "shasum": ""
             },
