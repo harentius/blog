@@ -52,8 +52,9 @@ class ArticleAdmin extends AbstractPostAdmin
             ->add('isPublished', null, [
                 'required' => false,
             ])
-            ->add('publishedAt', 'datetime', [
+            ->add('publishedAt', 'sonata_type_date_picker', [
                 'required' => false,
+                'format' => 'dd MM y',
             ])
             ->add('author')
             ->add('metaDescription', 'textarea', [
