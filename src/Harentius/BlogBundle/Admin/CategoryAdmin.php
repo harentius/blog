@@ -18,6 +18,8 @@ class CategoryAdmin extends Admin
             ->add('slug')
             ->add('parent')
             ->add('children')
+            ->add('metaDescription')
+            ->add('metaKeywords')
             ->add('_action', 'actions', [
                 'actions' => [
                     'edit' => [],
@@ -38,6 +40,8 @@ class CategoryAdmin extends Admin
                 'required' => false,
             ])
             ->add('parent')
+            ->add('metaDescription')
+            ->add('metaKeywords')
         ;
     }
 }
