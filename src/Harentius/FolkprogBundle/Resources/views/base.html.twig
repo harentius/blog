@@ -9,6 +9,15 @@
     {% endstylesheets %}
 {% endblock %}
 
+{% block head_extra %}
+    {% if app.environment != 'dev' %}
+    <!-- SAPE RTB JS -->
+    <script async="async" src="//cdn-rtb.sape.ru/rtb-b/js/987/2/1987.js" type="text/javascript"></script>
+    <!-- SAPE RTB END -->
+
+    {% endif %}
+{% endblock %}
+
 {% block footer_content %}
     <p>© <a href="{{ url('harentius_blog_homepage') }}">folkprog.net</a>, 2012-{{ 'now'|date('Y') }}</p>
     <p>All right reserved.</p>
@@ -18,7 +27,12 @@
 
 {% block sidebar_after_content %}
     {{ harentius_widget('widgets_block_sidebar') }}
-    {{ sape_return_block_links() }}
+    {% if app.environment != 'dev' %}
+        {{ sape_return_block_links() }}
+        <!-- SAPE RTB DIV 240x400 -->
+        <div id="SRTB_4516"></div>
+        <!-- SAPE RTB END -->
+    {% endif %}
 {% endblock %}
 
 {% block last_body_content %}

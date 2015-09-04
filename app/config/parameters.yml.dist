@@ -32,3 +32,5 @@ parameters:
     vk_appi_id: 5025064
     sape_user: ~
     sape_options: {'block_orientation': 0, 'charset': 'utf8'}
+    google_analytics.id: UA-40176382-1
+    google_analytics.hostname: auto
