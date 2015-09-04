@@ -45,6 +45,9 @@ class PageAdmin extends AbstractPostAdmin
             ->add('isPublished', null, [
                 'required' => false,
             ])
+            ->add('showInMainMenu', null, [
+                'required' => false,
+            ])
             ->add('publishedAt', 'sonata_type_date_picker', [
                 'required' => false,
                 'format' => 'dd MM y',

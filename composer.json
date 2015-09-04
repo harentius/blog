@@ -77,7 +77,7 @@
         },
         "branch-alias": {
             "dev-master": "2.7-dev",
-            "dev-ckeditor-4": "ckeditor-4"
+            "dev-ckeditor-4": "4.0-dev"
         },
         "asset-installer-paths": {
           "npm-asset-library": "web/assets/vendor",
