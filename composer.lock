@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "anh/sape-bundle",
-            "version": "v2.0.0",
+            "version": "v2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/hilobok/AnhSapeBundle.git",
-                "reference": "ffcfcd6b9baf052acab00d2d15b77a5acbe99c9a"
+                "reference": "5a7929f3fc976219b8cc138b83bd144a53587186"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hilobok/AnhSapeBundle/zipball/ffcfcd6b9baf052acab00d2d15b77a5acbe99c9a",
-                "reference": "ffcfcd6b9baf052acab00d2d15b77a5acbe99c9a",
+                "url": "https://api.github.com/repos/hilobok/AnhSapeBundle/zipball/5a7929f3fc976219b8cc138b83bd144a53587186",
+                "reference": "5a7929f3fc976219b8cc138b83bd144a53587186",
                 "shasum": ""
             },
             "require": {
@@ -45,7 +45,7 @@
                 }
             ],
             "description": "Bundle provides symfony integration for sape.ru",
-            "time": "2015-09-03 12:48:43"
+            "time": "2015-09-04 18:34:47"
         },
         {
             "name": "anh/sape-php-client",
@@ -1475,12 +1475,12 @@
             "version": "v2.3.12",
             "source": {
                 "type": "git",
-                "url": "git@github.com:Atlantic18/DoctrineExtensions.git",
+                "url": "https://github.com/Atlantic18/DoctrineExtensions.git",
                 "reference": "c3ff3c73c95b01e107af33d4fe3abf80794e2df9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Atlantic18/DoctrineExtensions/zipball/5512c9f1800bcef5760e4dac1db3ae0e251fd1a6",
+                "url": "https://api.github.com/repos/Atlantic18/DoctrineExtensions/zipball/c3ff3c73c95b01e107af33d4fe3abf80794e2df9",
                 "reference": "c3ff3c73c95b01e107af33d4fe3abf80794e2df9",
                 "shasum": ""
             },
