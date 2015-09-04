@@ -38,6 +38,8 @@ twig:
     strict_variables: "%kernel.debug%"
     globals:
         vk_appi_id: %vk_appi_id%
+        google_analytics_id: %google_analytics.id%
+        google_analytics_hostname: %google_analytics.hostname%
     form:
         resources:
             - 'SonataCoreBundle:Form:datepicker.html.twig'
@@ -145,3 +147,7 @@ harentius_widgets:
     widgets:
         widgets_block_sidebar: Sidebar
         widgets_block_bottom: Bottom
+
+anh_sape:
+    user: %sape_user%
+    client_options: %sape_options%

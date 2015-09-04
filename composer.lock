@@ -4,8 +4,82 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "2cdab87ae1acf8bb0cdd266d047eab48",
+    "hash": "674762ecce6c5484dd6572deb064f479",
     "packages": [
+        {
+            "name": "anh/sape-bundle",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hilobok/AnhSapeBundle.git",
+                "reference": "ffcfcd6b9baf052acab00d2d15b77a5acbe99c9a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hilobok/AnhSapeBundle/zipball/ffcfcd6b9baf052acab00d2d15b77a5acbe99c9a",
+                "reference": "ffcfcd6b9baf052acab00d2d15b77a5acbe99c9a",
+                "shasum": ""
+            },
+            "require": {
+                "anh/sape-php-client": "~1.2"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Anh\\SapeBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andrew Hilobok",
+                    "email": "hilobok@gmail.com"
+                }
+            ],
+            "description": "Bundle provides symfony integration for sape.ru",
+            "time": "2015-09-03 12:48:43"
+        },
+        {
+            "name": "anh/sape-php-client",
+            "version": "v1.2.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hilobok/sape-php-client.git",
+                "reference": "630f7c23b274f269af9c5f660c4ac8ae385e4543"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hilobok/sape-php-client/zipball/630f7c23b274f269af9c5f660c4ac8ae385e4543",
+                "reference": "630f7c23b274f269af9c5f660c4ac8ae385e4543",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "sape.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Sape",
+                    "homepage": "http://sape.ru"
+                }
+            ],
+            "description": "PHP client for sape.ru",
+            "time": "2015-09-02 18:28:41"
+        },
         {
             "name": "beberlei/DoctrineExtensions",
             "version": "v1.0.1",
@@ -1401,12 +1475,12 @@
             "version": "v2.3.12",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Atlantic18/DoctrineExtensions.git",
+                "url": "git@github.com:Atlantic18/DoctrineExtensions.git",
                 "reference": "c3ff3c73c95b01e107af33d4fe3abf80794e2df9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Atlantic18/DoctrineExtensions/zipball/c3ff3c73c95b01e107af33d4fe3abf80794e2df9",
+                "url": "https://api.github.com/repos/Atlantic18/DoctrineExtensions/zipball/5512c9f1800bcef5760e4dac1db3ae0e251fd1a6",
                 "reference": "c3ff3c73c95b01e107af33d4fe3abf80794e2df9",
                 "shasum": ""
             },
@@ -1829,7 +1903,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/1908c05d0e6a6319fff185f761070fac121c7423",
+                "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/29da11f8aef51a70ed5b4e0eb6540197f3336e1a",
                 "reference": "84accca9c921dcbdc9c4be3ba0366a25f8d779b3",
                 "shasum": ""
             },
