@@ -30,3 +30,5 @@ parameters:
     homepage_feed_category: ~
     list_posts_per_page: 40
     vk_appi_id: 5025064
+    sape_user: ~
+    sape_options: {'block_orientation': 0, 'charset': 'utf8'}

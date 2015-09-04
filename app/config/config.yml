@@ -145,3 +145,7 @@ harentius_widgets:
     widgets:
         widgets_block_sidebar: Sidebar
         widgets_block_bottom: Bottom
+
+anh_sape:
+    user: %sape_user%
+    client_options: %sape_options%

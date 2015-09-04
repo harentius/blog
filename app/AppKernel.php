@@ -26,6 +26,7 @@ class AppKernel extends Kernel
             new Sonata\AdminBundle\SonataAdminBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Presta\SitemapBundle\PrestaSitemapBundle(),
+            new Anh\SapeBundle\AnhSapeBundle(),
             new Harentius\BlogBundle\HarentiusBlogBundle(),
             new Harentius\WidgetsBundle\HarentiusWidgetsBundle(),
             new Harentius\FolkprogBundle\HarentiusFolkprogBundle(),
