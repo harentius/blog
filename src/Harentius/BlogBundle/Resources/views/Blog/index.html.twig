@@ -6,7 +6,7 @@
 
 {% block page_meta_description %}
     {% if page and page.metaDescription %}
-        {{ page.metaDescription }}
+        {{- page.metaDescription -}}
     {% else %}
         {{- get_setting('homepage_meta_description') -}}
     {% endif %}
@@ -14,9 +14,9 @@
 
 {% block page_meta_keywords %}
     {% if page and page.metaKeywords %}
-        {{ page.metaKeywords }}
+        {{- page.metaKeywords -}}
     {% else %}
-    {{- get_setting('homepage_meta_keywords') -}}
+        {{- get_setting('homepage_meta_keywords') -}}
     {% endif %}
 {% endblock %}
 
