@@ -70,7 +70,6 @@ class Widget
      */
     public function __construct()
     {
-        $this->isPhpUse = false;
         $this->priority = 0;
     }
 

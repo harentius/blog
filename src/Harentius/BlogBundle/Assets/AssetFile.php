@@ -70,7 +70,7 @@ class AssetFile
 
     /**
      * @param File $value
-     * @param null $fallbackType
+     * @param int|null $fallbackType
      */
     public function setFile(File $value = null, $fallbackType = null)
     {
