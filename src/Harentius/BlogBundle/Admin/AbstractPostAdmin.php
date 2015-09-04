@@ -39,11 +39,11 @@ class AbstractPostAdmin extends Admin
      */
     public function preUpdate($object)
     {
-        // Em and finding in it for detecting field IsPublished changes
+        // TODO: refactor to entity listener with changeset
         /** @var Article $object*/
         $article = $this->em->getRepository('HarentiusBlogBundle:Article')->find($object->getId());
 
-        if (!$article->getIsPublished() && $object->getIsPublished() && !$object->getPublishedAt()) {
+        if ((!$article || !$article->getIsPublished()) && $object->getIsPublished() && !$object->getPublishedAt()) {
             $object->setPublishedAt(new \DateTime());
         }
     }
