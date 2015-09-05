@@ -5,6 +5,7 @@ namespace Harentius\BlogBundle\Controller;
 use Doctrine\ORM\EntityManager;
 use Harentius\BlogBundle\Entity\Article;
 use Harentius\BlogBundle\Entity\Page;
+use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -50,6 +51,11 @@ class BlogController extends Controller
                 $category = $this->getDoctrine()->getRepository('HarentiusBlogBundle:Category')
                     ->find($criteria)
                 ;
+
+                if (!$category) {
+                    throw $this->createNotFoundException('Category not found');
+                }
+
                 $parent = $category;
                 $breadcrumbs->addItem($category->getName());
                 $articlesQuery = $articlesRepository->findPublishedByCategoryQuery($category);
@@ -58,6 +64,11 @@ class BlogController extends Controller
                 $tag = $this->getDoctrine()->getRepository('HarentiusBlogBundle:Tag')
                     ->findOneBy(['slug' => $criteria])
                 ;
+
+                if (!$tag) {
+                    throw $this->createNotFoundException('Tag not found');
+                }
+
                 $parent = $tag;
                 $breadcrumbs->addItem($tag->getName());
                 $articlesQuery = $articlesRepository->findByTagQuery($tag);
@@ -93,9 +104,15 @@ class BlogController extends Controller
         }
 
         $articlesQuery = $articlesRepository->findPublishedByYearMonthQuery($year, $month);
+        /** @var SlidingPagination $articles */
+        $articles = $this->knpPaginate($request, $articlesQuery);
+
+        if ($articles->count() == 0) {
+            throw $this->createNotFoundException('Page not found');
+        }
 
         return $this->render('HarentiusBlogBundle:Blog:list.html.twig', [
-            'articles' => $this->knpPaginate($request, $articlesQuery),
+            'articles' => $articles,
             'year' => $year,
             'month' => $month,
         ]);
