@@ -58,7 +58,7 @@ class AbstractPostAdmin extends Admin
         $alias = $query->getRootAliases()[0];
         $query
             ->orderBy($alias . '.isPublished', 'ASC')
-            ->addOrderBy($alias . '.updatedAt', 'DESC')
+            ->addOrderBy($alias . '.publishedAt', 'DESC')
         ;
 
         return $query;
