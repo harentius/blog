@@ -3,6 +3,7 @@
 namespace Harentius\BlogBundle\Admin;
 
 use Doctrine\Common\Cache\CacheProvider;
+use Harentius\BlogBundle\Router\CategorySlugProvider;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
@@ -14,11 +15,16 @@ class ArticleAdmin extends AbstractPostAdmin
     private $cache;
 
     /**
+     * @var CategorySlugProvider
+     */
+    private $categorySlugProvider;
+
+    /**
      * {@inheritDoc}
      */
     public function prePersist($object)
     {
-        $this->cache->deleteAll();
+        $this->clearCache();
     }
 
     /**
@@ -26,7 +32,7 @@ class ArticleAdmin extends AbstractPostAdmin
      */
     public function preUpdate($object)
     {
-        $this->cache->deleteAll();
+        $this->clearCache();
     }
 
     /**
@@ -35,6 +41,14 @@ class ArticleAdmin extends AbstractPostAdmin
     public function setControllerCache(CacheProvider $cache)
     {
         $this->cache = $cache;
+    }
+
+    /**
+     * @param CategorySlugProvider $categorySlugProvider
+     */
+    public function setCategorySlugProvider(CategorySlugProvider $categorySlugProvider)
+    {
+        $this->categorySlugProvider = $categorySlugProvider;
     }
 
     /**
@@ -94,5 +108,14 @@ class ArticleAdmin extends AbstractPostAdmin
                 'required' => false,
             ])
         ;
+    }
+
+    /**
+     *
+     */
+    private function clearCache()
+    {
+        $this->cache->deleteAll();
+        $this->categorySlugProvider->clearAll();
     }
 }

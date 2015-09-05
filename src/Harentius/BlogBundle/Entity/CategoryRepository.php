@@ -13,7 +13,7 @@ class CategoryRepository extends NestedTreeRepository
     public function notEmptyChildrenHierarchy(array $options = [])
     {
         $qb = $this->createQueryBuilder('c')
-            ->select('c.slug, c.name, c.level')
+            ->select('c.slug, c.name, c.level', 'c.id')
             ->addSelect('COUNT(a) AS articles_number')
                 ->from('HarentiusBlogBundle:Article', 'a')
                 ->where('a.category IN
@@ -28,5 +28,21 @@ class CategoryRepository extends NestedTreeRepository
         ;
 
         return $this->buildTree($qb->getArrayResult(), $options);
+    }
+
+    public function findWithPublishedArticles()
+    {
+        return $this->createQueryBuilder('c')
+            ->from('HarentiusBlogBundle:Article', 'a')
+            ->where('a.category IN
+                    (SELECT cc FROM HarentiusBlogBundle:Category cc
+                     WHERE cc.left >= c.left AND cc.right <= c.right AND cc.root = c.root)'
+            )
+            ->andWhere('a.isPublished = :isPublished')
+            ->setParameter('isPublished', true)
+            ->groupBy('c')
+            ->getQuery()
+            ->execute()
+        ;
     }
 }

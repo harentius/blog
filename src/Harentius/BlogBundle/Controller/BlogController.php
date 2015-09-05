@@ -48,7 +48,7 @@ class BlogController extends Controller
         switch ($filtrationType) {
             case 'category':
                 $category = $this->getDoctrine()->getRepository('HarentiusBlogBundle:Category')
-                    ->findOneBy(['slug' => $criteria])
+                    ->find($criteria)
                 ;
                 $parent = $category;
                 $breadcrumbs->addItem($category->getName());
