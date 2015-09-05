@@ -44,12 +44,11 @@ class BlogController extends Controller
         $breadcrumbs = $this->get('white_october_breadcrumbs');
         $breadcrumbs->addItem('Homepage', $this->generateUrl('harentius_blog_homepage'));
         $noIndex = false;
-        $parent = null;
 
         switch ($filtrationType) {
             case 'category':
                 $category = $this->getDoctrine()->getRepository('HarentiusBlogBundle:Category')
-                    ->findOneBy(['slug' => $criteria])
+                    ->find($criteria)
                 ;
                 $parent = $category;
                 $breadcrumbs->addItem($category->getName());
@@ -78,7 +77,7 @@ class BlogController extends Controller
     /**
      * @param Request $request
      * @param string $year
-     * @param string $month
+     * @param null|string $month
      * @return Response
      */
     public function archiveAction(Request $request, $year, $month = null)

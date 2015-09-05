@@ -151,3 +151,12 @@ harentius_widgets:
 anh_sape:
     user: %sape_user%
     client_options: %sape_options%
+
+cmf_routing:
+    chain:
+        routers_by_id:
+            cmf_routing.dynamic_router: 200
+            router.default:             100
+    dynamic:
+        enabled: true
+        route_provider_service_id: harentius_blog.router.route_provider

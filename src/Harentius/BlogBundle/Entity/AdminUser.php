@@ -118,8 +118,8 @@ class AdminUser implements UserInterface, \Serializable
         return $this;
     }
 
-      /**
-     * @return array
+    /**
+     * @inheritdoc
      */
     public function getRoles()
     {

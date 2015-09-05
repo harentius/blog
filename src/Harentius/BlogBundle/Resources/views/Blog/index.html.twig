@@ -5,19 +5,19 @@
 {% endblock %}
 
 {% block page_meta_description %}
-    {% if page and page.metaDescription %}
+    {%- if page and page.metaDescription -%}
         {{- page.metaDescription -}}
     {% else %}
         {{- get_setting('homepage_meta_description') -}}
-    {% endif %}
+    {%- endif -%}
 {% endblock %}
 
 {% block page_meta_keywords %}
-    {% if page and page.metaKeywords %}
+    {%- if page and page.metaKeywords -%}
         {{- page.metaKeywords -}}
-    {% else %}
+    {%- else -%}
         {{- get_setting('homepage_meta_keywords') -}}
-    {% endif %}
+    {%- endif -%}
 {% endblock %}
 
 {% block content %}

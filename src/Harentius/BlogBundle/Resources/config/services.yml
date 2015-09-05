@@ -100,3 +100,19 @@ services:
             - %homepage_page_slug%
         tags:
             - { name: presta.sitemap.listener }
+
+    harentius_blog.router.category_slug_provider_cache:
+        class: Doctrine\Common\Cache\ApcCache
+        calls:
+            - [ setNamespace, [ harentius_blog_router_category ] ]
+
+    harentius_blog.router.category_slug_provider:
+          class: Harentius\BlogBundle\Router\CategorySlugProvider
+          arguments:
+              - @harentius_blog.entity.category_repository
+              - @harentius_blog.router.category_slug_provider_cache
+
+    harentius_blog.router.route_provider:
+          class: Harentius\BlogBundle\Router\RouteProvider
+          arguments:
+              - @service_container
