@@ -146,7 +146,8 @@ harentius_widgets:
                         identity: title
     widgets:
         widgets_block_sidebar: Sidebar
-        widgets_block_bottom: Bottom
+        widgets_block_bottom_left: Bottom left
+        widgets_block_bottom_right: Bottom right
 
 anh_sape:
     user: %sape_user%
