@@ -48,7 +48,7 @@
         VK.Widgets.Comments(
             "vk-comments",
             { limit: 20, attach: "*", pageUrl: "{{ url('harentius_blog_show', {'slug': entity.slug}) }}" }
-            {% if entity.attributes.original_id is defined %}, {{ entity.attributes.original_id }}}{% endif %}
+            {% if entity.attributes.original_id is defined %}, {{ entity.attributes.original_id }}{% endif %}
         );
     </script>
 {% endblock javascripts %}
