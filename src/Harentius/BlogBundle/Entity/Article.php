@@ -47,6 +47,15 @@ class Article extends AbstractPost
     private $disLikesCount;
 
     /**
+     * @var array
+     *
+     * @ORM\Column(type="array", nullable=false)
+     * @SymfonyConstraints\Type(type="array")
+     * @SymfonyConstraints\NotNull()
+     */
+    private $attributes;
+
+    /**
      *
      */
     public function __construct()
@@ -56,6 +65,7 @@ class Article extends AbstractPost
         $this->likesCount = 0;
         $this->disLikesCount = 0;
         $this->tags = new ArrayCollection();
+        $this->attributes = [];
     }
 
     /**
@@ -137,5 +147,24 @@ class Article extends AbstractPost
     public function increaseDisLikesCount()
     {
         $this->disLikesCount = $this->getDisLikesCount() + 1;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAttributes()
+    {
+        return $this->attributes;
+    }
+
+    /**
+     * @param array $value
+     * @return $this
+     */
+    public function setAttributes($value)
+    {
+        $this->attributes = $value;
+
+        return $this;
     }
 }

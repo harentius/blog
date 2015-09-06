@@ -11,8 +11,8 @@ exec_bin update-assets-version
 
 exec_bin clear-cache
 
-#write_title "Running migrations"
-#exec_console doctrine:migrations:migrate --no-interaction
+write_title "Running migrations"
+exec_console doctrine:migrations:migrate --no-interaction
 
 write_title "Populating initial database values"
 exec_console blog:database:populate

@@ -28,6 +28,7 @@ class AppKernel extends Kernel
             new Presta\SitemapBundle\PrestaSitemapBundle(),
             new Anh\SapeBundle\AnhSapeBundle(),
             new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
+            new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Harentius\BlogBundle\HarentiusBlogBundle(),
             new Harentius\WidgetsBundle\HarentiusWidgetsBundle(),
             new Harentius\FolkprogBundle\HarentiusFolkprogBundle(),

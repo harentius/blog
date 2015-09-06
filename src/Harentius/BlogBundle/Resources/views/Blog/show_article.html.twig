@@ -43,8 +43,13 @@
     <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
     <script type="text/javascript" src="//yastatic.net/share/share.js" charset="utf-8"></script>
     <script type="text/javascript">
+        {# TODO: move to other (not core blog) bundle #}
         VK.Widgets.Like("vk-like", {type: "full", width: '100%', height: 24});
-        VK.Widgets.Comments("vk-comments", {limit: 20, attach: "*", pageUrl: "{{ url('harentius_blog_show', {'slug': entity.slug}) }}" });
+        VK.Widgets.Comments(
+            "vk-comments",
+            { limit: 20, attach: "*", pageUrl: "{{ url('harentius_blog_show', {'slug': entity.slug}) }}" }
+            {% if entity.attributes.original_id is defined %}, {{ entity.attributes.original_id }}}{% endif %}
+        );
     </script>
 {% endblock javascripts %}
 
