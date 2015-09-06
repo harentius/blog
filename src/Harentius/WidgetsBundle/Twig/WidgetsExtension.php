@@ -44,14 +44,21 @@ class WidgetsExtension extends \Twig_Extension
      */
     public function harentiusWidget($position)
     {
-        $parameters = $this->request->attributes->get('_route_params');
+        $requestAttributes = $this->request->attributes;
+        $result = '';
+
+        // TODO: Add supporting of multi page
+        if ($this->request->query->get('page', 1) !== 1) {
+            return $result;
+        }
+
+        $parameters = $requestAttributes->get('_route_params');
         ksort($parameters);
         $route = [
-            'name' => $this->request->attributes->get('_route'),
+            'name' => $requestAttributes->get('_route'),
             'parameters' => $parameters
         ];
         $widgets = $this->widgetRepository->findByRouteOrNullRouteAndPositionOrderedByPriority($route, $position);
-        $result = '';
 
         foreach ($widgets as $widget) {
             $result .= $widget->getContent();
