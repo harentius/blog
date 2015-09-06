@@ -36,7 +36,7 @@ case "${1:-apply}" in
     apply)
         write_title "Setting up permissions"
         set_acl_full \
-            "$APP_DIR/cache" "$APP_DIR/logs" "$BASE_DIR/var" \
+            "$APP_DIR/cache" "$APP_DIR/logs" "$BASE_DIR/var" "$APP_DIR/cache/prod/sape" \
             "$WEB_DIR/assets/audios" "$WEB_DIR/assets/files" "$WEB_DIR/assets/images"
     ;;
 
