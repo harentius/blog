@@ -48,7 +48,7 @@ class WidgetsExtension extends \Twig_Extension
         $result = '';
 
         // TODO: Add supporting of multi page
-        if ($this->request->query->get('page', 1) != 1) {
+        if ((int) $this->request->query->get('page', 1) !== 1) {
             return $result;
         }
 
