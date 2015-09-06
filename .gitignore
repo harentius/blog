@@ -12,6 +12,7 @@
 /bin/doctrine
 /bin/doctrine.php
 /bin/security-checker
+/bin/doctrine-migrations
 
 /web/bundles/*
 /web/css/*
