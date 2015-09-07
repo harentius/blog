@@ -27,7 +27,7 @@ class BlogController extends Controller
         );
 
         return $this->render('HarentiusBlogBundle:Blog:index.html.twig', [
-            'page' => $homepage->getPage(),
+            'page' => $paginator->getCurrentPageNumber() === 1 ? $homepage->getPage() : null,
             'articles' => $paginator,
             'hasToPaginate' => $paginator->getPageCount() > 1,
         ]);
