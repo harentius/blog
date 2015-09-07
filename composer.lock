@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9b7afe031102a1db4bc5fc0cd2c87011",
+    "hash": "55d56546af8babfabc0bdbede652ebdb",
     "packages": [
         {
             "name": "anh/sape-bundle",
@@ -2027,7 +2027,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/29da11f8aef51a70ed5b4e0eb6540197f3336e1a",
+                "url": "https://api.github.com/repos/KnpLabs/KnpPaginatorBundle/zipball/4a1daf55560ca7cf9c13b357135d72f4dc13375f",
                 "reference": "29da11f8aef51a70ed5b4e0eb6540197f3336e1a",
                 "shasum": ""
             },

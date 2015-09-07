@@ -66,11 +66,20 @@ class Widget
     private $backLink;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string", nullable=true)
+     * @SymfonyConstraints\Type(type="string")
+     */
+    private $showOnPages;
+
+    /**
      *
      */
     public function __construct()
     {
         $this->priority = 0;
+        $this->showOnPages = [];
     }
 
     /**
@@ -183,6 +192,25 @@ class Widget
     public function setBackLink($value)
     {
         $this->backLink = $value;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getShowOnPages()
+    {
+        return $this->showOnPages;
+    }
+
+    /**
+     * @param array $value
+     * @return $this
+     */
+    public function setShowOnPages($value)
+    {
+        $this->showOnPages = $value;
 
         return $this;
     }

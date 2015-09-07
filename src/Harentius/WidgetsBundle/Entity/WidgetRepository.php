@@ -8,10 +8,11 @@ class WidgetRepository extends EntityRepository
 {
     /**
      * @param array $route
-     * @param $position
+     * @param int $page
+     * @param string $position
      * @return Widget[]
      */
-    public function findByRouteOrNullRouteAndPositionOrderedByPriority(array $route, $position)
+    public function findByRouteOrNullRouteAndPositionAndPageOrderedByPriority(array $route, $page, $position)
     {
         $qb = $this->createQueryBuilder('w');
 
@@ -20,8 +21,15 @@ class WidgetRepository extends EntityRepository
                 serialize($route),
                 serialize(['name' => null, 'parameters' => []])
             ]))
+            ->andWhere($qb->expr()->orX(
+                'FIND_IN_SET(:page, w.showOnPages) > 0',
+                $qb->expr()->isNull('w.showOnPages')
+            ))
             ->andWhere('w.position = :position')
-            ->setParameter(':position', $position)
+            ->setParameters([
+                ':position' => $position,
+                ':page' => $page,
+            ])
             ->orderBy('w.priority', 'DESC')
             ->getQuery()
             ->execute()
