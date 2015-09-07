@@ -6,7 +6,6 @@ use Doctrine\ORM\EntityManager;
 use Harentius\BlogBundle\Entity\Article;
 use Harentius\BlogBundle\Entity\Page;
 use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
-use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,14 +20,16 @@ class BlogController extends Controller
     public function indexAction(Request $request)
     {
         $homepage = $this->get('harentius_blog.homepage');
+        $paginator = $this->knpPaginateCustomPerPage(
+            $request,
+            $homepage->getFeed(),
+            $this->getParameter('harentius_blog.homepage.feed.number')
+        );
 
         return $this->render('HarentiusBlogBundle:Blog:index.html.twig', [
             'page' => $homepage->getPage(),
-            'articles' => $this->knpPaginateCustomPerPage(
-                $request,
-                $homepage->getFeed(),
-                $this->getParameter('harentius_blog.homepage.feed.number')
-            ),
+            'articles' => $paginator,
+            'hasToPaginate' => $paginator->getPageCount() > 1,
         ]);
     }
 
@@ -78,10 +79,13 @@ class BlogController extends Controller
                 throw $this->createNotFoundException('Unknown filtration type');
         }
 
+        $paginator = $this->knpPaginate($request, $articlesQuery);
+
         return $this->render('HarentiusBlogBundle:Blog:list.html.twig', [
-            'articles' => $this->knpPaginate($request, $articlesQuery),
+            'articles' => $paginator,
             'parent' => $parent,
             'noIndex' => $noIndex,
+            'hasToPaginate' => $paginator->getPageCount() > 1,
         ]);
     }
 
@@ -104,17 +108,17 @@ class BlogController extends Controller
         }
 
         $articlesQuery = $articlesRepository->findPublishedByYearMonthQuery($year, $month);
-        /** @var SlidingPagination $articles */
-        $articles = $this->knpPaginate($request, $articlesQuery);
+        $paginator = $this->knpPaginate($request, $articlesQuery);
 
-        if ($articles->count() == 0) {
+        if ($paginator->count() === 0) {
             throw $this->createNotFoundException('Page not found');
         }
 
         return $this->render('HarentiusBlogBundle:Blog:list.html.twig', [
-            'articles' => $articles,
+            'articles' => $paginator,
             'year' => $year,
             'month' => $month,
+            'hasToPaginate' => $paginator->getPageCount() > 1,
         ]);
     }
 
@@ -176,7 +180,7 @@ class BlogController extends Controller
      * @param Request $request
      * @param mixed $target
      * @param array $options
-     * @return PaginationInterface
+     * @return SlidingPagination
      */
     private function knpPaginate(Request $request, $target, array $options = [])
     {
@@ -190,7 +194,7 @@ class BlogController extends Controller
      * @param mixed $target
      * @param $maxResults
      * @param array $options
-     * @return PaginationInterface
+     * @return SlidingPagination
      */
     private function knpPaginateCustomPerPage(Request $request, $target, $maxResults, array $options = [])
     {
