@@ -31,7 +31,7 @@ parameters:
     list_posts_per_page: 40
     vk_appi_id: 5025064
     sape_user: ~
-    sape_options: {'block_orientation': 0, 'charset': 'utf8'}
+    sape_options: {'block_orientation': 0, 'charset': 'utf8', 'host': 'folkprog.net'}
     google_analytics.id: UA-40176382-1
     google_analytics.hostname: auto
     jar_yui: /home/deploy/local/bin/yuicompressor.jar

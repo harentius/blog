@@ -16,6 +16,7 @@ class WidgetAdmin extends Admin
         $listMapper
             ->add('name')
             ->add('position')
+            ->add('showOnPages')
             ->add('priority')
             ->add('backLink')
             ->add('_action', 'actions', [
@@ -40,6 +41,7 @@ class WidgetAdmin extends Admin
             ])
             ->add('position', 'harentius_widget_position')
             ->add('priority')
+            ->add('showOnPages')
             ->add('content', 'textarea', [
                 'attr' => ['class' => 'widget-content']
             ])
