@@ -15,11 +15,6 @@ class ArticleAdmin extends AbstractPostAdmin
     private $cache;
 
     /**
-     * @var CategorySlugProvider
-     */
-    private $categorySlugProvider;
-
-    /**
      * {@inheritDoc}
      */
     public function prePersist($object)
@@ -41,14 +36,6 @@ class ArticleAdmin extends AbstractPostAdmin
     public function setControllerCache(CacheProvider $cache)
     {
         $this->cache = $cache;
-    }
-
-    /**
-     * @param CategorySlugProvider $categorySlugProvider
-     */
-    public function setCategorySlugProvider(CategorySlugProvider $categorySlugProvider)
-    {
-        $this->categorySlugProvider = $categorySlugProvider;
     }
 
     /**
@@ -115,7 +102,9 @@ class ArticleAdmin extends AbstractPostAdmin
      */
     private function clearCache()
     {
+        $container = $this->getConfigurationPool()->getContainer();
+        $container->get('harentius_blog.router.category_slug_provider')->clearAll();
         $this->cache->deleteAll();
-        $this->categorySlugProvider->clearAll();
+        $container->get('harentius_blog.controller.feed_cache')->deleteAll();
     }
 }

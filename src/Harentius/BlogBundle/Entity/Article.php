@@ -3,6 +3,7 @@
 namespace Harentius\BlogBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Eko\FeedBundle\Item\Writer\ItemInterface;
 use Harentius\BlogBundle\Entity\Base\AbstractPost;
 use Harentius\BlogBundle\Entity\Base\ArticleChangeableFieldsEntityTrait;
 use Symfony\Component\Validator\Constraints as SymfonyConstraints;
@@ -12,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="Harentius\BlogBundle\Entity\ArticleRepository")
  */
-class Article extends AbstractPost
+class Article extends AbstractPost implements ItemInterface
 {
     use ArticleChangeableFieldsEntityTrait;
 
@@ -166,5 +167,38 @@ class Article extends AbstractPost
         $this->attributes = $value;
 
         return $this;
+    }
+
+    // RSS
+    /**
+     * @inheritdoc
+     */
+    public function getFeedItemTitle()
+    {
+        return $this->getTitle();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getFeedItemDescription()
+    {
+        return $this->getMetaDescription();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getFeedItemLink()
+    {
+        return $this->getSlug();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getFeedItemPubDate()
+    {
+        return $this->getPublishedAt();
     }
 }

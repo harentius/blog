@@ -100,4 +100,18 @@ class ArticleRepository extends EntityRepository
 
         return $qb->getQuery();
     }
+
+    /**
+     * @return Article[]
+     */
+    public function findPublishedOrderedByPublishDate()
+    {
+        return $this->createQueryBuilder('a')
+            ->where('a.isPublished = :isPublished')
+            ->setParameter(':isPublished', true)
+            ->orderBy('a.publishedAt', 'DESC')
+            ->getQuery()
+            ->execute()
+        ;
+    }
 }

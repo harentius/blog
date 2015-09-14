@@ -177,6 +177,14 @@ class BlogController extends Controller
     }
 
     /**
+     * @return Response
+     */
+    public function feedAction()
+    {
+        return new Response($this->get('harentius_blog.feed')->get());
+    }
+
+    /**
      * @param Request $request
      * @param mixed $target
      * @param array $options

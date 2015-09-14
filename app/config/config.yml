@@ -156,3 +156,13 @@ cmf_routing:
     dynamic:
         enabled: true
         route_provider_service_id: harentius_blog.router.route_provider
+
+eko_feed:
+    feeds:
+        article:
+            title: Народное программирование (folkprog.net)
+            description: Новые публикации
+            link:
+                route_name: harentius_blog_homepage
+            encoding: utf-8
+            author: Harentius

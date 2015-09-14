@@ -11,7 +11,6 @@ services:
             - [ setTranslationDomain, [ HarentiusBlogBundle ] ]
             - [ setTemplate, [ edit, HarentiusBlogBundle:Admin:edit.html.twig ] ]
             - [ setEntityManager, [ @doctrine.orm.entity_manager ] ]
-            - [ setCategorySlugProvider, [ @harentius_blog.router.category_slug_provider ] ]
 
     harentius_blog.admin.page:
         class: Harentius\BlogBundle\Admin\PageAdmin
