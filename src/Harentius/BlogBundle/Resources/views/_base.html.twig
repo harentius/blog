@@ -23,6 +23,7 @@
             {% stylesheets
                 'assets/vendor/bootstrap/dist/css/bootstrap.min.css'
                 'assets/vendor/ckeditor/plugins/codesnippet/lib/highlight/styles/default.css'
+                'assets/vendor/components-font-awesome/css/font-awesome.min.css'
                 'bundles/harentiusblog/css/common.less'
                 'bundles/harentiusblog/css/twbs-extension.less'
                 'bundles/harentiusblog/css/main.less'
@@ -49,7 +50,8 @@
                             <a class="logo" href="{{ path('harentius_blog_homepage') }}"></a>
                         </div>
                         {{ knp_menu_render('main', {'currentClass': 'active', 'template': 'HarentiusBlogBundle:Menu:knp_menu.html.twig'}) }}
-                        <button type="button" class="glyphicon glyphicon-menu-hamburger hidden-lg hidden-md categories-menu-button" data-toggle="collapse" data-target="#categories-menu"></button>
+                        <button type="button" class="main-menu-button glyphicon glyphicon-menu-hamburger hidden-lg hidden-md categories-menu-button" data-toggle="collapse" data-target="#categories-menu"></button>
+                        <a href="{{ path('harentius_blog_feed') }}" class="main-menu-button rss-feed"><i class="fa-feed"></i></a>
                     </div>
                     <div class="clearfix">
                         <div class="collapse out categories-menu" id="categories-menu">

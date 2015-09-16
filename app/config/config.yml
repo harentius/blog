@@ -160,7 +160,7 @@ cmf_routing:
 eko_feed:
     feeds:
         article:
-            title: Народное программирование (folkprog.net)
+            title: Народное программирование
             description: Новые публикации
             link:
                 route_name: harentius_blog_homepage
