@@ -87,7 +87,7 @@ figcaption {
     }
   }
 
-  .categories-menu-button {
+  .main-menu-button {
     position: relative;
     float: right;
     padding: 9px 10px;
@@ -95,8 +95,27 @@ figcaption {
     margin-right: 15px;
     margin-bottom: 8px;
     background: transparent none;
+    color: #454545;
+
+    &:hover {
+      color: #337ab7;
+    }
+  }
+
+  .categories-menu-button {
     border: 1px solid #ddd;
-    border-radius: 4px;
+  }
+
+  .rss-feed {
+    font-family: FontAwesome, serif;
+    width: 36px;
+    height: 36px;
+    line-height: 20px;
+    font-size: 24px;
+
+    &:hover, &:focus {
+      text-decoration: none;
+    }
   }
 }
 
