@@ -12,7 +12,7 @@
 
         <span>
             <i class="glyphicon glyphicon-folder-close"></i>
-            <a href="{{ path('harentius_blog_list', { 'filtrationType': 'category', 'criteria': article.category.slug }) }}">
+            <a href="{{ path('harentius_blog_category_' ~ article.category.id) }}">
                 {{ article.category.name }}
             </a>
         </span>

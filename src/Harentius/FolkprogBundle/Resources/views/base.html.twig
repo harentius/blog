@@ -1,8 +1,13 @@
 {% extends 'HarentiusBlogBundle::_base.html.twig' %}
 
 {% block common_stylesheets %}
-    {{ parent() }}
     {% stylesheets
+        'assets/vendor/bootstrap/dist/css/bootstrap.min.css'
+        'assets/vendor/ckeditor/plugins/codesnippet/lib/highlight/styles/default.css'
+        'assets/vendor/components-font-awesome/css/font-awesome.min.css'
+        'bundles/harentiusblog/css/common.less'
+        'bundles/harentiusblog/css/twbs-extension.less'
+        'bundles/harentiusblog/css/main.less'
         'bundles/harentiusfolkprog/css/main.less'
     %}
     <link href="{{ asset_url }}" media="all" rel="stylesheet" type="text/css" />
