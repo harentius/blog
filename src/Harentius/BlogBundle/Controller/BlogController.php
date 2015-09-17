@@ -4,12 +4,14 @@ namespace Harentius\BlogBundle\Controller;
 
 use Doctrine\ORM\EntityManager;
 use Harentius\BlogBundle\Entity\Article;
+use Harentius\BlogBundle\Entity\Category;
 use Harentius\BlogBundle\Entity\Page;
 use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use WhiteOctober\BreadcrumbsBundle\Model\Breadcrumbs;
 
 class BlogController extends Controller
 {
@@ -44,7 +46,6 @@ class BlogController extends Controller
         $articlesRepository = $this->getDoctrine()->getRepository('HarentiusBlogBundle:Article');
 
         $breadcrumbs = $this->get('white_october_breadcrumbs');
-        $breadcrumbs->addItem('Homepage', $this->generateUrl('harentius_blog_homepage'));
         $noIndex = false;
 
         switch ($filtrationType) {
@@ -58,7 +59,7 @@ class BlogController extends Controller
                 }
 
                 $parent = $category;
-                $breadcrumbs->addItem($category->getName());
+                $this->addCategoryHierarchyToBreadcrumbs($category, $breadcrumbs);
                 $articlesQuery = $articlesRepository->findPublishedByCategoryQuery($category);
                 break;
             case 'tag':
@@ -79,6 +80,7 @@ class BlogController extends Controller
                 throw $this->createNotFoundException('Unknown filtration type');
         }
 
+        $breadcrumbs->prependItem('Homepage', $this->generateUrl('harentius_blog_homepage'));
         $paginator = $this->knpPaginate($request, $articlesQuery);
 
         return $this->render('HarentiusBlogBundle:Blog:list.html.twig', [
@@ -133,16 +135,9 @@ class BlogController extends Controller
         ;
 
         $breadcrumbs = $this->get('white_october_breadcrumbs');
-        $breadcrumbs->addItem('Homepage', $this->generateUrl('harentius_blog_homepage'));
 
         if ($entity) {
-            $category = $entity->getCategory();
-
-            $breadcrumbs->addItem($category->getName(), $this->generateUrl('harentius_blog_list', [
-                'filtrationType' => 'category',
-                'criteria' => $category->getSlug(),
-            ]));
-
+            $this->addCategoryHierarchyToBreadcrumbs($entity->getCategory(), $breadcrumbs);
             $entity->increaseViewsCount();
             /** @var EntityManager $em */
             $em = $this->getDoctrine()->getManager();
@@ -158,6 +153,7 @@ class BlogController extends Controller
         }
 
         $breadcrumbs->addItem($entity->getTitle());
+        $breadcrumbs->prependItem('Homepage', $this->generateUrl('harentius_blog_homepage'));
         $class = get_class($entity);
         $type = strtolower(substr($class, strrpos($class, '\\') + 1));
 
@@ -182,6 +178,17 @@ class BlogController extends Controller
     public function feedAction()
     {
         return new Response($this->get('harentius_blog.feed')->get());
+    }
+
+    /**
+     * @param Category $category
+     * @param Breadcrumbs $breadcrumbs
+     */
+    private function addCategoryHierarchyToBreadcrumbs(Category $category, Breadcrumbs $breadcrumbs)
+    {
+        do {
+            $breadcrumbs->prependItem($category->getName(), $this->generateUrl("harentius_blog_category_{$category->getId()}"));
+        } while ($category = $category->getParent());
     }
 
     /**
