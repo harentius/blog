@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c48fa73e2f51f84e38ac9efc346806c5",
+    "hash": "4e63a5f6f17fa2bfb44330a7b32caaa3",
     "packages": [
         {
             "name": "anh/sape-bundle",
@@ -427,6 +427,28 @@
                 "jquery",
                 "library"
             ]
+        },
+        {
+            "name": "bower-asset/js-cookie",
+            "version": "v2.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/js-cookie/js-cookie.git",
+                "reference": "d827e087e1f919a4cd106ebe8542f3408d8fe124"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/js-cookie/js-cookie/zipball/d827e087e1f919a4cd106ebe8542f3408d8fe124",
+                "reference": "d827e087e1f919a4cd106ebe8542f3408d8fe124",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "src/js.cookie.js"
+                ],
+                "bower-asset-ignore": []
+            }
         },
         {
             "name": "cocur/slugify",
