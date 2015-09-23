@@ -8,7 +8,7 @@ class CategoryRepository extends NestedTreeRepository
 {
     /**
      * @param array $options
-     * @return mixed
+     * @return Category[]
      */
     public function notEmptyChildrenHierarchy(array $options = [])
     {
@@ -30,6 +30,9 @@ class CategoryRepository extends NestedTreeRepository
         return $this->buildTree($qb->getArrayResult(), $options);
     }
 
+    /**
+     * @return Category[]
+     */
     public function findWithPublishedArticles()
     {
         return $this->createQueryBuilder('c')
