@@ -128,7 +128,7 @@ class SitemapListener implements SitemapListenerInterface
             foreach ($categories as $category) {
                 $event->getGenerator()->addUrl(
                     new UrlConcrete(
-                        $this->router->generate('harentius_blog_list', ['filtrationType' => 'category',  'criteria' => $category['slug']], true),
+                        $this->router->generate("harentius_blog_category_{$category['id']}", [], true),
                         null,
                         UrlConcrete::CHANGEFREQ_MONTHLY,
                         0.8
