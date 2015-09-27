@@ -4,7 +4,7 @@
     {% if parent is defined %}
         {{- parent.name -}}
     {% elseif month is defined and month is not null and year is defined %}
-        {{- month|localizeddate('none', 'none', app.request.locale, null, 'LLLL')|capitalize }} {{ year -}}
+        {{- month }} {{ year -}}
     {% elseif year is defined %}
         {{- year -}}
     {% endif %}

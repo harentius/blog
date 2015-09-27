@@ -105,15 +105,16 @@ class BlogController extends Controller
         $breadcrumbs->addItem('Homepage', $this->generateUrl('harentius_blog_homepage'));
         $breadcrumbs->addItem($year, $this->generateUrl('harentius_blog_archive_year', ['year' => $year]));
 
-        if ($month) {
-            $breadcrumbs->addItem($this->numberToMonth($month, $request->getLocale()));
-        }
-
         $articlesQuery = $articlesRepository->findPublishedByYearMonthQuery($year, $month);
         $paginator = $this->knpPaginate($request, $articlesQuery);
 
         if ($paginator->count() === 0) {
             throw $this->createNotFoundException('Page not found');
+        }
+
+        if ($month) {
+            $month = $this->numberToMonth($month, $request->getLocale());
+            $breadcrumbs->addItem($month);
         }
 
         return $this->render('HarentiusBlogBundle:Blog:list.html.twig', [
