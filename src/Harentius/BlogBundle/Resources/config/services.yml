@@ -114,19 +114,19 @@ services:
     harentius_blog.sidebar.cache:
         class: Doctrine\Common\Cache\ApcCache
         calls:
-            - [ setNamespace, [ harentius_blog_sidebar ] ]
+            - [ setNamespace, [ %harentius_blog.apc_global_prefix%_sidebar ] ]
 
     harentius_blog.settings.cache:
         class: Doctrine\Common\Cache\ApcCache
         calls:
-            - [ setNamespace, [ harentius_blog_settings ] ]
+            - [ setNamespace, [ %harentius_blog.apc_global_prefix%_settings ] ]
 
     harentius_blog.router.category_slug_provider_cache:
         class: Doctrine\Common\Cache\ApcCache
         calls:
-            - [ setNamespace, [ harentius_blog_router_category ] ]
+            - [ setNamespace, [ %harentius_blog.apc_global_prefix%_router_category ] ]
 
     harentius_blog.controller.feed_cache:
         class: Doctrine\Common\Cache\ApcCache
         calls:
-            - [ setNamespace, [ harentius_blog_feed ] ]
+            - [ setNamespace, [ %harentius_blog.apc_global_prefix%_feed ] ]

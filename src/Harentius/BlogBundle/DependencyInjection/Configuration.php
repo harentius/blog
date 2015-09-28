@@ -43,6 +43,7 @@ class Configuration implements ConfigurationInterface
                     ->integerNode('posts_per_page')->defaultValue(10)->end()
                 ->end()
             ->end()
+            ->scalarNode('apc_global_prefix')->defaultValue('harentius_blog')->end()
         ;
 
         return $treeBuilder;

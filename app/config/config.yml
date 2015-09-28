@@ -126,6 +126,8 @@ harentius_blog:
             number: %homepage_feed_number%
     list:
         posts_per_page: %list_posts_per_page%
+    # For avoiding internal apc cache conflicts if run multiple sites on one server.
+    apc_global_prefix: %apc_global_prefix%
 
 harentius_widgets:
     routes:
