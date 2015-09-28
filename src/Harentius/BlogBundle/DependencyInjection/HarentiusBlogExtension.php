@@ -40,6 +40,7 @@ class HarentiusBlogExtension extends Extension
         $container->setParameter('harentius_blog.homepage.feed.category', $config['homepage']['feed']['category']);
         $container->setParameter('harentius_blog.homepage.feed.number', $config['homepage']['feed']['number']);
         $container->setParameter('harentius_blog.list.posts_per_page', $config['list']['posts_per_page']);
-        $container->setParameter('harentius_blog.apc_global_prefix', $config['apc_global_prefix']);
+        $container->setParameter('harentius_blog.cache.apc_global_prefix', $config['cache']['apc_global_prefix']);
+        $container->setParameter('harentius_blog.cache.statistics_cache_lifetime', $config['cache']['statistics_cache_lifetime']);
     }
 }

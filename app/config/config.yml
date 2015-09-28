@@ -127,7 +127,9 @@ harentius_blog:
     list:
         posts_per_page: %list_posts_per_page%
     # For avoiding internal apc cache conflicts if run multiple sites on one server.
-    apc_global_prefix: %apc_global_prefix%
+    cache:
+        apc_global_prefix: %apc_global_prefix%
+        statistics_cache_lifetime: %statistics_cache_lifetime%
 
 harentius_widgets:
     routes:
