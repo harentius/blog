@@ -50,6 +50,9 @@ class MenuBuilder
         ;
         $menu = $this->factory->createItem('root');
         $menu->setChildrenAttribute('class', 'nav navbar-nav');
+        $menu->addChild('About', [
+            'route' => 'harentius_blog_page_about',
+        ]);
 
         foreach ($pages as $page) {
             $menu->addChild($page->getTitle(), [

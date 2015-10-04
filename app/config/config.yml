@@ -40,6 +40,7 @@ twig:
         vk_appi_id: %vk_appi_id%
         google_analytics_id: %google_analytics.id%
         google_analytics_hostname: %google_analytics.hostname%
+        statistics: @harentius_blog.statistics
     form:
         resources:
             - 'SonataCoreBundle:Form:datepicker.html.twig'

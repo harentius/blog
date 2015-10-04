@@ -113,6 +113,8 @@ services:
         class: Harentius\BlogBundle\Statistics
         arguments:
             - @harentius_blog.statistics_cache
+            - %harentius_blog.cache.statistics_cache_lifetime%
+            - @harentius_blog.entity.article_repository
 
 
     # Cache
