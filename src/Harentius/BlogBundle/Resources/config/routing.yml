@@ -6,6 +6,10 @@ harentius_blog_feed:
     path:     /feed
     defaults: { _controller: HarentiusBlogBundle:Blog:feed }
 
+harentius_blog_page_about:
+    path:     /about
+    defaults: { _controller: HarentiusBlogBundle:Page:about }
+
 # So terrible way for compability with my old wp site ...(
 # (need closing slashes, but symfony router doesn't pass optional parameters with closing slash)
 harentius_blog_archive_year:

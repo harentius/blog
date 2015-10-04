@@ -35,3 +35,5 @@ parameters:
     google_analytics.id: UA-40176382-1
     google_analytics.hostname: auto
     jar_yui: /home/deploy/local/bin/yuicompressor.jar
+    apc_global_prefix: folkprog_net
+    statistics_cache_lifetime: 43200

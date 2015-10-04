@@ -109,24 +109,36 @@ services:
             - @eko_feed.feed.manager
             - @harentius_blog.controller.feed_cache
 
+    harentius_blog.statistics:
+        class: Harentius\BlogBundle\Statistics
+        arguments:
+            - @harentius_blog.statistics_cache
+            - %harentius_blog.cache.statistics_cache_lifetime%
+            - @harentius_blog.entity.article_repository
+
 
     # Cache
     harentius_blog.sidebar.cache:
         class: Doctrine\Common\Cache\ApcCache
         calls:
-            - [ setNamespace, [ harentius_blog_sidebar ] ]
+            - [ setNamespace, [ %harentius_blog.cache.apc_global_prefix%_sidebar ] ]
 
     harentius_blog.settings.cache:
         class: Doctrine\Common\Cache\ApcCache
         calls:
-            - [ setNamespace, [ harentius_blog_settings ] ]
+            - [ setNamespace, [ %harentius_blog.cache.apc_global_prefix%_settings ] ]
 
     harentius_blog.router.category_slug_provider_cache:
         class: Doctrine\Common\Cache\ApcCache
         calls:
-            - [ setNamespace, [ harentius_blog_router_category ] ]
+            - [ setNamespace, [ %harentius_blog.cache.apc_global_prefix%_router_category ] ]
 
     harentius_blog.controller.feed_cache:
         class: Doctrine\Common\Cache\ApcCache
         calls:
-            - [ setNamespace, [ harentius_blog_feed ] ]
+            - [ setNamespace, [ %harentius_blog.cache.apc_global_prefix%_feed ] ]
+
+    harentius_blog.statistics_cache:
+        class: Doctrine\Common\Cache\ApcCache
+        calls:
+            - [ setNamespace, [ %harentius_blog.cache.apc_global_prefix%_statistics ] ]

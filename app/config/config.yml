@@ -40,6 +40,7 @@ twig:
         vk_appi_id: %vk_appi_id%
         google_analytics_id: %google_analytics.id%
         google_analytics_hostname: %google_analytics.hostname%
+        statistics: @harentius_blog.statistics
     form:
         resources:
             - 'SonataCoreBundle:Form:datepicker.html.twig'
@@ -126,6 +127,10 @@ harentius_blog:
             number: %homepage_feed_number%
     list:
         posts_per_page: %list_posts_per_page%
+    # For avoiding internal apc cache conflicts if run multiple sites on one server.
+    cache:
+        apc_global_prefix: %apc_global_prefix%
+        statistics_cache_lifetime: %statistics_cache_lifetime%
 
 harentius_widgets:
     routes:

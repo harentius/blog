@@ -33,11 +33,14 @@ class HarentiusBlogExtension extends Extension
         $articleAdminDefinition = $container->getDefinition('harentius_blog.admin.article');
         $articleAdminDefinition->addMethodCall('setControllerCache', [$cacheServiceDefinition]);
 
+        // TODO: find way to escape following hell
         $container->setParameter('harentius_blog.sidebar.tags_limit', $config['sidebar']['tags_limit']);
         $container->setParameter('harentius_blog.sidebar.tag_sizes', $config['sidebar']['tag_sizes']);
         $container->setParameter('harentius_blog.homepage.page_slug', $config['homepage']['page_slug']);
         $container->setParameter('harentius_blog.homepage.feed.category', $config['homepage']['feed']['category']);
         $container->setParameter('harentius_blog.homepage.feed.number', $config['homepage']['feed']['number']);
         $container->setParameter('harentius_blog.list.posts_per_page', $config['list']['posts_per_page']);
+        $container->setParameter('harentius_blog.cache.apc_global_prefix', $config['cache']['apc_global_prefix']);
+        $container->setParameter('harentius_blog.cache.statistics_cache_lifetime', $config['cache']['statistics_cache_lifetime']);
     }
 }

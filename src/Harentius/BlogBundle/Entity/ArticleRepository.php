@@ -114,4 +114,52 @@ class ArticleRepository extends EntityRepository
             ->execute()
         ;
     }
+
+    /**
+     * @return \DateTime
+     */
+    public function findFirstArticlePublicationDate()
+    {
+        return $this->createQueryBuilder('a')
+            ->select('a.publishedAt')
+            ->where('a.isPublished = :isPublished')
+            ->setParameter(':isPublished', true)
+            ->orderBy('a.publishedAt', 'ASC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->setHydrationMode(Query::HYDRATE_OBJECT)
+            ->getSingleScalarResult()
+        ;
+    }
+
+    /**
+     * @return array
+     */
+    public function findStatistics()
+    {
+        $q = $this->createQueryBuilder('a');
+        $q1 = $this->createQueryBuilder('ap');
+
+        return $q
+            ->select('COUNT(a.id) AS countPublished,
+                SUM(a.viewsCount) AS viewsCount,
+                SUM(a.likesCount) AS likesCount,
+                SUM(a.disLikesCount) as disLikesCount
+            ')
+            ->addSelect('(' .
+                $q1
+                    ->select('MIN(ap.publishedAt)')
+                    ->where('a.isPublished = :isPublished')
+                    ->setParameter(':isPublished', true)
+                    ->orderBy('a.publishedAt', 'ASC')
+                    ->setMaxResults(1)
+                    ->getDQL()
+                . ')' . 'AS firstArticlePublicationDate'
+            )
+            ->where('a.isPublished = :isPublished')
+            ->setParameter(':isPublished', true)
+            ->getQuery()
+            ->getSingleResult()
+        ;
+    }
 }
