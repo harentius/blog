@@ -149,9 +149,9 @@ class ArticleRepository extends EntityRepository
             ->addSelect('(' .
                 $q1
                     ->select('MIN(ap.publishedAt)')
-                    ->where('a.isPublished = :isPublished')
+                    ->where('ap.isPublished = :isPublished')
                     ->setParameter(':isPublished', true)
-                    ->orderBy('a.publishedAt', 'ASC')
+                    ->orderBy('ap.publishedAt', 'ASC')
                     ->setMaxResults(1)
                     ->getDQL()
                 . ')' . 'AS firstArticlePublicationDate'
@@ -160,6 +160,21 @@ class ArticleRepository extends EntityRepository
             ->setParameter(':isPublished', true)
             ->getQuery()
             ->getSingleResult()
+        ;
+    }
+
+    /**
+     * @return Article
+     */
+    public function findMostPopular()
+    {
+        return $this->createQueryBuilder('a')
+            ->where('a.isPublished = :isPublished')
+            ->setParameter(':isPublished', true)
+            ->orderBy('a.viewsCount', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult()
         ;
     }
 }
