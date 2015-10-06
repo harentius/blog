@@ -48,6 +48,12 @@ class Statistics
         }
 
         $statistics = $this->articleRepository->findStatistics();
+        $mostPopularArticle = $this->articleRepository->findMostPopular();
+        $statistics['mostPopularArticleData'] = [
+            'slug' => $mostPopularArticle->getSlug(),
+            'title' => $mostPopularArticle->getTitle(),
+            'viewsCount' => $mostPopularArticle->getViewsCount(),
+        ];
         $this->cache->save($key, $statistics, $this->cacheLifetime);
 
         return $statistics;
