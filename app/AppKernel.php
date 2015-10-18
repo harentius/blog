@@ -30,8 +30,8 @@ class AppKernel extends Kernel
             new Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Eko\FeedBundle\EkoFeedBundle(),
-            new Harentius\BlogBundle\HarentiusBlogBundle(),
             new Harentius\WidgetsBundle\HarentiusWidgetsBundle(),
+            new Harentius\BlogBundle\HarentiusBlogBundle(),
             new Harentius\FolkprogBundle\HarentiusFolkprogBundle(),
         );
 

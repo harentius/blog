@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4e63a5f6f17fa2bfb44330a7b32caaa3",
+    "hash": "cccb956ef7648b19fc3fa3ff4589ed89",
     "packages": [
         {
             "name": "anh/sape-bundle",
@@ -1781,6 +1781,52 @@
             "time": "2015-08-28 11:07:14"
         },
         {
+            "name": "harentius/widgets-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/harentius/widgets-bundle.git",
+                "reference": "bcfda3dc957647ef2543fc6cccbb156ea0a600fd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/harentius/widgets-bundle/zipball/bcfda3dc957647ef2543fc6cccbb156ea0a600fd",
+                "reference": "bcfda3dc957647ef2543fc6cccbb156ea0a600fd",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "sonata-project/admin-bundle": "~2.3",
+                "symfony/framework-bundle": ">=2.5"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "Harentius\\WidgetsBundle\\": ""
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Yaroslav Osypenko",
+                    "email": "yaroslav.osypenko@gmail.com",
+                    "homepage": "http://folkprog.net"
+                }
+            ],
+            "description": "Symfony Bundle for easy creating and managing client-side widgets",
+            "homepage": "https://github.com/harentius/widgets-bundle",
+            "keywords": [
+                "Symfony widgets"
+            ],
+            "support": {
+                "source": "https://github.com/harentius/widgets-bundle/tree/master",
+                "issues": "https://github.com/harentius/widgets-bundle/issues"
+            },
+            "time": "2015-10-13 22:39:41"
+        },
+        {
             "name": "hautelook/alice-bundle",
             "version": "0.2",
             "source": {
@@ -3358,12 +3404,12 @@
             "version": "v2.7.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/AsseticBundle.git",
+                "url": "https://github.com/symfony/assetic-bundle.git",
                 "reference": "3ae5c8ca3079b6e0033cc9fbfb6500e2bc964da5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/AsseticBundle/zipball/3ae5c8ca3079b6e0033cc9fbfb6500e2bc964da5",
+                "url": "https://api.github.com/repos/symfony/assetic-bundle/zipball/3ae5c8ca3079b6e0033cc9fbfb6500e2bc964da5",
                 "reference": "3ae5c8ca3079b6e0033cc9fbfb6500e2bc964da5",
                 "shasum": ""
             },
@@ -3428,12 +3474,12 @@
             "version": "v2.7.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/MonologBundle.git",
+                "url": "https://github.com/symfony/monolog-bundle.git",
                 "reference": "9320b6863404c70ebe111e9040dab96f251de7ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/MonologBundle/zipball/9320b6863404c70ebe111e9040dab96f251de7ac",
+                "url": "https://api.github.com/repos/symfony/monolog-bundle/zipball/9320b6863404c70ebe111e9040dab96f251de7ac",
                 "reference": "9320b6863404c70ebe111e9040dab96f251de7ac",
                 "shasum": ""
             },
@@ -3487,12 +3533,12 @@
             "version": "v2.3.8",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/SwiftmailerBundle.git",
+                "url": "https://github.com/symfony/swiftmailer-bundle.git",
                 "reference": "970b13d01871207e81d17b17ddda025e7e21e797"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/SwiftmailerBundle/zipball/970b13d01871207e81d17b17ddda025e7e21e797",
+                "url": "https://api.github.com/repos/symfony/swiftmailer-bundle/zipball/970b13d01871207e81d17b17ddda025e7e21e797",
                 "reference": "970b13d01871207e81d17b17ddda025e7e21e797",
                 "shasum": ""
             },
@@ -4280,7 +4326,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "knplabs/knp-paginator-bundle": 20,
-        "bower-asset/ckeditor-readmore-plugin": 20
+        "bower-asset/ckeditor-readmore-plugin": 20,
+        "harentius/widgets-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
