@@ -4,7 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cccb956ef7648b19fc3fa3ff4589ed89",
+    "hash": "6826ce9fa5f8bb61b3fc400dd1f2e2f9",
+    "content-hash": "ce262657081dc9ed5cfe47b87bf6b14e",
     "packages": [
         {
             "name": "anh/sape-bundle",
@@ -1782,21 +1783,21 @@
         },
         {
             "name": "harentius/widgets-bundle",
-            "version": "dev-master",
+            "version": "v1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/harentius/widgets-bundle.git",
-                "reference": "bcfda3dc957647ef2543fc6cccbb156ea0a600fd"
+                "reference": "463c909dde41ce4c224a7459b6cd2f59e121d6c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/harentius/widgets-bundle/zipball/bcfda3dc957647ef2543fc6cccbb156ea0a600fd",
-                "reference": "bcfda3dc957647ef2543fc6cccbb156ea0a600fd",
+                "url": "https://api.github.com/repos/harentius/widgets-bundle/zipball/463c909dde41ce4c224a7459b6cd2f59e121d6c7",
+                "reference": "463c909dde41ce4c224a7459b6cd2f59e121d6c7",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.4.0",
-                "sonata-project/admin-bundle": "~2.3",
+                "sonata-project/admin-bundle": ">=2.1",
                 "symfony/framework-bundle": ">=2.5"
             },
             "type": "symfony-bundle",
@@ -1821,10 +1822,10 @@
                 "Symfony widgets"
             ],
             "support": {
-                "source": "https://github.com/harentius/widgets-bundle/tree/master",
+                "source": "https://github.com/harentius/widgets-bundle/tree/v1.0",
                 "issues": "https://github.com/harentius/widgets-bundle/issues"
             },
-            "time": "2015-10-13 22:39:41"
+            "time": "2015-10-15 20:08:57"
         },
         {
             "name": "hautelook/alice-bundle",
@@ -4326,8 +4327,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "knplabs/knp-paginator-bundle": 20,
-        "bower-asset/ckeditor-readmore-plugin": 20,
-        "harentius/widgets-bundle": 20
+        "bower-asset/ckeditor-readmore-plugin": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
