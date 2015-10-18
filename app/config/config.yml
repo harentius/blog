@@ -3,6 +3,7 @@ imports:
     - { resource: services.yml }
     - { resource: "@HarentiusBlogBundle/Resources/config/config.yml" }
     - { resource: "@HarentiusBlogBundle/Resources/config/security.yml" }
+    - { resource: "@HarentiusWidgetsBundle/Resources/config/config.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -83,8 +84,6 @@ doctrine:
             datetime_functions:
                 year: DoctrineExtensions\Query\Mysql\Year
                 month: DoctrineExtensions\Query\Mysql\Month
-            string_functions:
-                find_in_set: DoctrineExtensions\Query\Mysql\FindInSet
 
 stof_doctrine_extensions:
     default_locale: %locale%
