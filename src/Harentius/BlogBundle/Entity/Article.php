@@ -9,13 +9,17 @@ use Harentius\BlogBundle\Entity\Base\ArticleChangeableFieldsEntityTrait;
 use Symfony\Component\Validator\Constraints as SymfonyConstraints;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use Sonata\TranslationBundle\Model\Gedmo\TranslatableInterface;
+use Sonata\TranslationBundle\Traits\Gedmo\PersonalTranslatable;
 
 /**
  * @ORM\Entity(repositoryClass="Harentius\BlogBundle\Entity\ArticleRepository")
+ * @Gedmo\TranslationEntity(class="Harentius\BlogBundle\Entity\ArticleTranslation")
  */
-class Article extends AbstractPost implements ItemInterface
+class Article extends AbstractPost implements ItemInterface, TranslatableInterface
 {
     use ArticleChangeableFieldsEntityTrait;
+    use PersonalTranslatable;
 
     /**
      * @var int
@@ -25,7 +29,7 @@ class Article extends AbstractPost implements ItemInterface
      * @SymfonyConstraints\Range(min=0)
      * @SymfonyConstraints\NotNull()
      */
-    private $viewsCount;
+    protected $viewsCount;
 
     /**
      * @var int
@@ -35,7 +39,7 @@ class Article extends AbstractPost implements ItemInterface
      * @SymfonyConstraints\Range(min=0)
      * @SymfonyConstraints\NotNull()
      */
-    private $likesCount;
+    protected $likesCount;
 
     /**
      * @var int
@@ -45,7 +49,7 @@ class Article extends AbstractPost implements ItemInterface
      * @SymfonyConstraints\Range(min=0)
      * @SymfonyConstraints\NotNull()
      */
-    private $disLikesCount;
+    protected $disLikesCount;
 
     /**
      * @var array
@@ -54,7 +58,18 @@ class Article extends AbstractPost implements ItemInterface
      * @SymfonyConstraints\Type(type="array")
      * @SymfonyConstraints\NotNull()
      */
-    private $attributes;
+    protected $attributes;
+
+    /**
+     * @var array
+     *
+     * @ORM\OneToMany(
+     *     targetEntity="Harentius\BlogBundle\Entity\ArticleTranslation",
+     *     mappedBy="object",
+     *     cascade={"persist", "remove"}
+     * )
+     */
+    protected $translations;
 
     /**
      *
@@ -200,5 +215,24 @@ class Article extends AbstractPost implements ItemInterface
     public function getFeedItemPubDate()
     {
         return $this->getPublishedAt();
+    }
+
+    /**
+     * @return array
+     */
+    public function getTranslations()
+    {
+        return $this->translations;
+    }
+
+    /**
+     * @param array $value
+     * @return $this
+     */
+    public function setTranslations($value)
+    {
+        $this->translations = $value;
+
+        return $this;
     }
 }

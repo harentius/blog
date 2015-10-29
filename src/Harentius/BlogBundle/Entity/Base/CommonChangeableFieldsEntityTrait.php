@@ -3,6 +3,7 @@
 namespace Harentius\BlogBundle\Entity\Base;
 
 use Harentius\BlogBundle\Entity\AdminUser;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 trait CommonChangeableFieldsEntityTrait
 {
@@ -13,6 +14,7 @@ trait CommonChangeableFieldsEntityTrait
      * @var string
      *
      * @ORM\Column(type="string", length=1000)
+     * @Gedmo\Translatable()
      * @SymfonyConstraints\Type(type="string")
      * @SymfonyConstraints\Length(max=1000)
      * @SymfonyConstraints\NotBlank()
@@ -23,7 +25,7 @@ trait CommonChangeableFieldsEntityTrait
      * @var string
      *
      * @ORM\Column(type="string", length=1000)
-     * @Gedmo\Slug(fields={"title"}, unique=true)
+     * @Gedmo\Slug(fields={"title"}, unique=true, updatable=false)
      * @SymfonyConstraints\Type(type="string")
      * @SymfonyConstraints\Length(max=1000)
      */
@@ -33,6 +35,7 @@ trait CommonChangeableFieldsEntityTrait
      * @var string
      *
      * @ORM\Column(type="text")
+     * @Gedmo\Translatable()
      * @SymfonyConstraints\Type(type="string")
      * @SymfonyConstraints\NotBlank()
      */

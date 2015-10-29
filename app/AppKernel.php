@@ -24,6 +24,7 @@ class AppKernel extends Kernel
             new Sonata\BlockBundle\SonataBlockBundle(),
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
             new Sonata\AdminBundle\SonataAdminBundle(),
+            new Sonata\TranslationBundle\SonataTranslationBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
             new Presta\SitemapBundle\PrestaSitemapBundle(),
             new Anh\SapeBundle\AnhSapeBundle(),
