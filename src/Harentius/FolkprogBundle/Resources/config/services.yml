@@ -1,0 +1,19 @@
+services:
+    harentius_folkprog.router.article_and_page_slug_requirement_provider:
+          class: Harentius\FolkprogBundle\Router\ArticleAndPageSlugRequirementProvider
+          arguments:
+              - @harentius_blog.entity.article_repository
+              - @harentius_blog.entity.page_repository
+              - @harentius_folkprog.router.article_and_page_slug_provider_cache
+
+    #Cache
+    harentius_folkprog.router.article_and_page_slug_provider_cache:
+        class: Doctrine\Common\Cache\ApcCache
+        calls:
+            - [ setNamespace, [ %harentius_blog.cache.apc_global_prefix%_router_category ] ]
+
+    #Override base router
+    harentius_blog.router.route_provider:
+          class: Harentius\FolkprogBundle\Router\RouteProvider
+          arguments:
+              - @service_container

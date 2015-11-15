@@ -5,11 +5,6 @@ imports:
     - { resource: "@HarentiusBlogBundle/Resources/config/security.yml" }
     - { resource: "@HarentiusWidgetsBundle/Resources/config/config.yml" }
 
-# Put parameters here that don't need to change on each machine where the app is deployed
-# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
-parameters:
-    locale: ru
-
 framework:
     #esi:             ~
     translator:      { fallbacks: ["%locale%"] }
@@ -42,6 +37,7 @@ twig:
         google_analytics_id: %google_analytics.id%
         google_analytics_hostname: %google_analytics.hostname%
         statistics: @harentius_blog.statistics
+        default_locale: %locale%
     form:
         resources:
             - 'SonataCoreBundle:Form:datepicker.html.twig'
@@ -92,6 +88,7 @@ stof_doctrine_extensions:
             timestampable: true
             sluggable: true
             tree: true
+            translatable: true
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"
