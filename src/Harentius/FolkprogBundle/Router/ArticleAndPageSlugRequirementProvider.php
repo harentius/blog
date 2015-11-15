@@ -65,7 +65,8 @@ class ArticleAndPageSlugRequirementProvider
             $slugs[] = $page->getSlug();
         }
 
-        $this->cache->save($key, implode('|', $slugs));
+        $slugs = implode('|', $slugs);
+        $this->cache->save($key, $slugs);
 
         return $slugs;
     }

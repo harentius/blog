@@ -19,7 +19,10 @@ class RouteProvider extends BaseRouteProvider
         $this->routes->add("harentius_blog_show_en", new Route(
             "{_locale}/{slug}/",
             ['_controller' => 'HarentiusBlogBundle:Blog:show', '_locale' => 'en'],
-            ['slug' => $slugProvider->getRequirement()]
+            [
+                'slug' => $slugProvider->getRequirement(),
+                '_locale' => 'en',
+            ]
         ));
 
         return $this->routes;
