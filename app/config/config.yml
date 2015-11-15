@@ -89,6 +89,7 @@ stof_doctrine_extensions:
             sluggable: true
             tree: true
             translatable: true
+    translation_fallback: true
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"
