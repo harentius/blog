@@ -13,7 +13,7 @@ updater=".prod-deploy"
 
 
 do_rebuild() {
-#TODO: Add clear apc
+    sudo /opt/bin/apc-clear
     COMPOSER_BIN="$HOME/local/bin/composer" bin/update
 }
 
