@@ -1596,16 +1596,16 @@
         },
         {
             "name": "fxp/composer-asset-plugin",
-            "version": "v1.0.3",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/francoispluchino/composer-asset-plugin.git",
-                "reference": "c2b0406ac19e9ea2d9556987e827d4e7f6924fde"
+                "reference": "daca454b94539a4e6d30937dfc6b817eceb03f28"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/francoispluchino/composer-asset-plugin/zipball/c2b0406ac19e9ea2d9556987e827d4e7f6924fde",
-                "reference": "c2b0406ac19e9ea2d9556987e827d4e7f6924fde",
+                "url": "https://api.github.com/repos/francoispluchino/composer-asset-plugin/zipball/daca454b94539a4e6d30937dfc6b817eceb03f28",
+                "reference": "daca454b94539a4e6d30937dfc6b817eceb03f28",
                 "shasum": ""
             },
             "require": {
@@ -1619,7 +1619,7 @@
             "extra": {
                 "class": "Fxp\\Composer\\AssetPlugin\\FxpAssetPlugin",
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-master": "1.1-dev"
                 }
             },
             "autoload": {
@@ -1648,7 +1648,7 @@
                 "npm",
                 "package"
             ],
-            "time": "2015-07-29 12:23:21"
+            "time": "2015-11-20 14:58:24"
         },
         {
             "name": "fzaninotto/faker",
@@ -1787,12 +1787,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/harentius/blog-bundle.git",
-                "reference": "0151e10f5e180c924dca18c9bf10cdd2d1615d87"
+                "reference": "262b3d5bb5ab40c5cc086573bd9c83b59d85ab75"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/harentius/blog-bundle/zipball/0151e10f5e180c924dca18c9bf10cdd2d1615d87",
-                "reference": "0151e10f5e180c924dca18c9bf10cdd2d1615d87",
+                "url": "https://api.github.com/repos/harentius/blog-bundle/zipball/262b3d5bb5ab40c5cc086573bd9c83b59d85ab75",
+                "reference": "262b3d5bb5ab40c5cc086573bd9c83b59d85ab75",
                 "shasum": ""
             },
             "require": {
@@ -1847,7 +1847,7 @@
                 "source": "https://github.com/harentius/blog-bundle/tree/master",
                 "issues": "https://github.com/harentius/blog-bundle/issues"
             },
-            "time": "2015-12-13 00:03:51"
+            "time": "2015-12-13 19:58:14"
         },
         {
             "name": "harentius/widgets-bundle",

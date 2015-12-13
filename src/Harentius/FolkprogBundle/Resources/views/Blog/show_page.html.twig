@@ -1,44 +1,5 @@
-{% extends 'HarentiusBlogBundle::base.html.twig' %}
-
-{% block page_title %}
-    {{- entity.title -}}
-{% endblock %}
-
-{% block page_meta_description %}
-    {{- entity.metaDescription -}}
-{% endblock %}
-
-{% block page_meta_keywords %}
-    {{- entity.metaKeywords -}}
-{%- endblock %}
-
-{% block content %}
-<div class="padded-content article-wrapper">
-    <article>
-        <h1>{{ entity.title }}</h1>
-        {{ entity.text|raw }}
-    </article>
-    {% block after_post_content%}{% endblock %}
-</div>
-{% endblock %}
+{% extends 'HarentiusBlogBundle:Blog:_show_page.html.twig' %}
 
 {% block after_breadcrumbs_content %}
-<div class="languages-wrapper pull-right">
-    {% set translations = translations_list(entity) %}
-    {% set currentLocale = app.request.locale %}
-
-    {% if translations|length > 1 %}
-        {% for locale in translations %}
-            {% if currentLocale == locale %}
-                <span>{{ locale }}</span>
-            {% else %}
-                {% if locale == default_locale %}
-                    <a href="{{ path('harentius_blog_show', {'slug': entity.slug}) }}">{{ locale }}</a>
-                {% else %}
-                    <a href="{{ path('harentius_blog_show_' ~ locale, {'slug': entity.slug, '_locale': locale}) }}">{{ locale }}</a>
-                {% endif %}
-            {% endif %}
-        {% endfor %}
-    {% endif %}
-</div>
+    {{ include('HarentiusFolkprogBundle:Blog:_translations_list.html.twig') }}
 {% endblock %}
