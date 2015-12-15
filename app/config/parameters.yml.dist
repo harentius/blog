@@ -38,3 +38,4 @@ parameters:
     apc_global_prefix: folkprog_net
     statistics_cache_lifetime: 43200
     locale: ru
+    discuss_user_name: folkprog

@@ -1787,12 +1787,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/harentius/blog-bundle.git",
-                "reference": "262b3d5bb5ab40c5cc086573bd9c83b59d85ab75"
+                "reference": "4677f7bc2ca6e8bba6260c13e29f9225c00007b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/harentius/blog-bundle/zipball/262b3d5bb5ab40c5cc086573bd9c83b59d85ab75",
-                "reference": "262b3d5bb5ab40c5cc086573bd9c83b59d85ab75",
+                "url": "https://api.github.com/repos/harentius/blog-bundle/zipball/4677f7bc2ca6e8bba6260c13e29f9225c00007b6",
+                "reference": "4677f7bc2ca6e8bba6260c13e29f9225c00007b6",
                 "shasum": ""
             },
             "require": {
@@ -1847,7 +1847,7 @@
                 "source": "https://github.com/harentius/blog-bundle/tree/master",
                 "issues": "https://github.com/harentius/blog-bundle/issues"
             },
-            "time": "2015-12-13 19:58:14"
+            "time": "2015-12-15 20:55:56"
         },
         {
             "name": "harentius/widgets-bundle",

@@ -38,6 +38,7 @@ twig:
         google_analytics_hostname: %google_analytics.hostname%
         statistics: @harentius_blog.statistics
         default_locale: %locale%
+        discuss_user_name: %discuss_user_name%
     form:
         resources:
             - 'SonataCoreBundle:Form:datepicker.html.twig'
