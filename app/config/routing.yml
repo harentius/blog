@@ -5,13 +5,13 @@ PrestaSitemapBundle:
     resource: "@PrestaSitemapBundle/Resources/config/routing.yml"
     prefix:   /
 
-blog:
-    resource: "@HarentiusBlogBundle/Resources/config/routing.yml"
-    prefix:   /
-
 admin:
     resource: "@HarentiusBlogBundle/Resources/config/routing-admin.yml"
     prefix:   /admin
+
+blog:
+    resource: "@HarentiusBlogBundle/Resources/config/routing.yml"
+    prefix:   /
 
 widgets:
     resource: "@HarentiusWidgetsBundle/Resources/config/routing.yml"
