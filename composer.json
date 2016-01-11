@@ -56,10 +56,6 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "git@github.com:harentius/widgets-bundle.git"
-        },
-        {
-            "type": "vcs",
             "url": "git@github.com:harentius/blog-bundle.git"
         }
     ],

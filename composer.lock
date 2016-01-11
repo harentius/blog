@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1660893e121b1010a0bb8bf8ae1e8504",
-    "content-hash": "9bcbd12e94077631c36e12b8961bb6a7",
+    "hash": "218538933e7eb79d2ddf78ceedbcff8a",
+    "content-hash": "e49980138412aa449471a4d8f28923c1",
     "packages": [
         {
             "name": "anh/sape-bundle",
@@ -1604,7 +1604,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/francoispluchino/composer-asset-plugin/zipball/daca454b94539a4e6d30937dfc6b817eceb03f28",
+                "url": "https://api.github.com/repos/francoispluchino/composer-asset-plugin/zipball/550c98e61045eaabee1b687f1a94a1cb166cd4c0",
                 "reference": "daca454b94539a4e6d30937dfc6b817eceb03f28",
                 "shasum": ""
             },
