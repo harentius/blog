@@ -6,8 +6,6 @@ imports:
     - { resource: "@HarentiusWidgetsBundle/Resources/config/config.yml" }
 
 framework:
-    #esi:             ~
-    translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -36,7 +34,6 @@ twig:
         vk_appi_id: %vk_appi_id%
         google_analytics_id: %google_analytics.id%
         google_analytics_hostname: %google_analytics.hostname%
-        statistics: @harentius_blog.statistics
         default_locale: %locale%
         discuss_user_name: %discuss_user_name%
     form:
@@ -82,15 +79,6 @@ doctrine:
                 year: DoctrineExtensions\Query\Mysql\Year
                 month: DoctrineExtensions\Query\Mysql\Month
 
-stof_doctrine_extensions:
-    default_locale: %locale%
-    orm:
-        default:
-            timestampable: true
-            sluggable: true
-            tree: true
-            translatable: true
-    translation_fallback: true
 # Swiftmailer Configuration
 swiftmailer:
     transport: "%mailer_transport%"
@@ -98,13 +86,6 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
-
-white_october_breadcrumbs:
-    separator: ~
-
-knp_paginator:
-    template:
-        pagination: KnpPaginatorBundle:Pagination:twitter_bootstrap_v3_pagination.html.twig
 
 harentius_blog:
     sidebar:
@@ -150,15 +131,6 @@ harentius_widgets:
 anh_sape:
     user: %sape_user%
     client_options: %sape_options%
-
-cmf_routing:
-    chain:
-        routers_by_id:
-            cmf_routing.dynamic_router: 200
-            router.default:             100
-    dynamic:
-        enabled: true
-        route_provider_service_id: harentius_blog.router.route_provider
 
 eko_feed:
     feeds:
