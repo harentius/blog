@@ -10,19 +10,10 @@
     "require": {
         "php": ">=5.3.3",
         "symfony/symfony": "~2.7",
-        "doctrine/orm": "~2.2,>=2.2.3,<2.5",
-        "doctrine/dbal": "<2.5",
-        "doctrine/doctrine-bundle": "~1.4",
-        "symfony/assetic-bundle": "~2.3",
-        "symfony/swiftmailer-bundle": "~2.3",
-        "symfony/monolog-bundle": "~2.4",
-        "sensio/distribution-bundle": "~4.0",
-        "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
-        "incenteev/composer-parameter-handler": "~2.0",
         "doctrine/doctrine-migrations-bundle": "~1.0",
         "anh/sape-bundle": "~2.0",
         "harentius/widgets-bundle": "~1.0",
-        "harentius/blog-bundle": "dev-master"
+        "harentius/blog-bundle": "~1.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
@@ -53,12 +44,6 @@
     "config": {
         "bin-dir": "bin"
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@github.com:harentius/blog-bundle.git"
-        }
-    ],
     "extra": {
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",
