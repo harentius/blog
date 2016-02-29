@@ -1783,16 +1783,16 @@
         },
         {
             "name": "harentius/blog-bundle",
-            "version": "v1.0.1",
+            "version": "v1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/harentius/blog-bundle.git",
-                "reference": "7aff014cd9ffe8517181c6f0772e1cac00675488"
+                "reference": "3e8f947a390094dbb02b14f61e1e48c27addfa18"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/harentius/blog-bundle/zipball/7aff014cd9ffe8517181c6f0772e1cac00675488",
-                "reference": "7aff014cd9ffe8517181c6f0772e1cac00675488",
+                "url": "https://api.github.com/repos/harentius/blog-bundle/zipball/3e8f947a390094dbb02b14f61e1e48c27addfa18",
+                "reference": "3e8f947a390094dbb02b14f61e1e48c27addfa18",
                 "shasum": ""
             },
             "require": {
@@ -1854,19 +1854,19 @@
             "keywords": [
                 "harentius blog bundle Symfony cms"
             ],
-            "time": "2016-02-27 18:15:55"
+            "time": "2016-02-29 20:48:15"
         },
         {
             "name": "harentius/widgets-bundle",
             "version": "v1.0",
             "source": {
                 "type": "git",
-                "url": "git@github.com:harentius/widgets-bundle.git",
-                "reference": "6c6ffa83f0bf00ccc28031b04f205ada04095073"
+                "url": "https://github.com/harentius/widgets-bundle.git",
+                "reference": "2ac783d42b68baab68780fd41dd7b428d2d554ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/harentius/widgets-bundle/zipball/6c6ffa83f0bf00ccc28031b04f205ada04095073",
+                "url": "https://api.github.com/repos/harentius/widgets-bundle/zipball/2ac783d42b68baab68780fd41dd7b428d2d554ee",
                 "reference": "463c909dde41ce4c224a7459b6cd2f59e121d6c7",
                 "shasum": ""
             },
