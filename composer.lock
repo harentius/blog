@@ -1783,16 +1783,16 @@
         },
         {
             "name": "harentius/blog-bundle",
-            "version": "v1.0.3",
+            "version": "v1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/harentius/blog-bundle.git",
-                "reference": "3e8f947a390094dbb02b14f61e1e48c27addfa18"
+                "reference": "55c94a80bd60dec1cabc0a4358f17a7761ac74de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/harentius/blog-bundle/zipball/3e8f947a390094dbb02b14f61e1e48c27addfa18",
-                "reference": "3e8f947a390094dbb02b14f61e1e48c27addfa18",
+                "url": "https://api.github.com/repos/harentius/blog-bundle/zipball/55c94a80bd60dec1cabc0a4358f17a7761ac74de",
+                "reference": "55c94a80bd60dec1cabc0a4358f17a7761ac74de",
                 "shasum": ""
             },
             "require": {
@@ -1854,7 +1854,7 @@
             "keywords": [
                 "harentius blog bundle Symfony cms"
             ],
-            "time": "2016-02-29 20:48:15"
+            "time": "2016-03-01 21:39:15"
         },
         {
             "name": "harentius/widgets-bundle",
