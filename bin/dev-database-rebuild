@@ -1,16 +1,27 @@
 #!/bin/sh
 
-echo "Dropping database"
-app/console doctrine:database:drop --force --quiet "$@"
+set -e; set -u
+. "$(dirname $0)/common"
 
-echo "Creating database"
-app/console doctrine:database:create "$@"
+unsafe_bin
 
-echo "Updating database schema"
-app/console doctrine:schema:update --force "$@"
 
-echo "Populating database"
-app/console blog:database:populate
+set +e
+write_title "Dropping database"
+exec_console doctrine:database:drop --force --quiet "$@"
+set -e
 
-echo "Loading Data"
-bin/dump-and-load-prod-data "$@"
+write_title "Cleaning assets"
+exec_bin clean-assets
+
+write_title "Creating database"
+exec_console doctrine:database:create "$@"
+
+write_title "Updating database schema"
+exec_console doctrine:schema:update --force "$@"
+
+write_title "Setting all migrations as migrated"
+exec_console doctrine:migrations:version --add --all --no-interaction "$@"
+
+write_title "Loading fixtures"
+exec_console doctrine:fixtures:load --no-interaction --append "$@"
