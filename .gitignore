@@ -30,3 +30,4 @@
 /.env
 /.allow_unsafe_bins
 /bin/dump-and-load-prod-data
+/sitemap.*
