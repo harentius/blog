@@ -6,7 +6,6 @@
     {% set stats = statistics.getAll %}
     <div class="padded-content article-wrapper">
         <h1>О проекте</h1>
-        <p>Проект "<strong>Народное программирование</strong>" - <strong>блог web разработчика</strong>, специализирующегося, преимущественно на <strong>Symfony framework</strong>.</p>
         <p>
             <img class="pull-left" src="{{ asset('bundles/harentiusfolkprog/img/scientist_vs_programmer.jpg') }}" />
             Был запущен <span class="stat-value">{{ stats.firstArticlePublicationDate|localizeddate('long', 'none') }}</span>.
