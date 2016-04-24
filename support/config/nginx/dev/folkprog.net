@@ -1,0 +1,42 @@
+server {
+    listen 80;
+    server_name folkprog;
+    root /var/www/folkprog;
+
+    location / {
+        client_max_body_size 80m;
+        # try to serve file directly, fallback to rewrite
+        try_files $uri @rewriteapp;
+    }
+
+    location @rewriteapp {
+        # rewrite all to app.php
+        rewrite ^(.*)$ /app_dev.php/$1 last;
+    }
+
+    location ~ ^/app_dev\.php(/|$) {
+        client_max_body_size 80m;
+        fastcgi_pass unix:/var/run/php-fpm/php-fpm.sock;
+        fastcgi_split_path_info ^(.+\.php)(/.*)$;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+        fastcgi_param DOCUMENT_ROOT $realpath_root;
+    }
+
+    location ~ ^/(img|bundles|css|js|assets)/ {
+        access_log off;
+        expires 30d;
+        try_files $uri @rewriteapp;
+    }
+
+    location ~ /assets/images/preview/(.*)?(\.[0-9a-z]+)$ {
+        try_files $uri @rewritepreview;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+
+    access_log /var/log/nginx/folkprog.net.access.log;
+    error_log  /var/log/nginx/folkprog.net.error.log;
+}

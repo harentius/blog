@@ -27,6 +27,7 @@ framework:
     http_method_override: true
 
 # Twig Configuration
+# TODO: auto register
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
@@ -36,6 +37,8 @@ twig:
         google_analytics_hostname: %google_analytics.hostname%
         default_locale: %locale%
         discuss_user_name: %discuss_user_name%
+        generate_image_previews: %generate_image_previews%
+        image_previews_base_uri: %image_previews_base_uri%
     form:
         resources:
             - 'SonataCoreBundle:Form:datepicker.html.twig'
@@ -88,6 +91,9 @@ swiftmailer:
     spool:     { type: memory }
 
 harentius_blog:
+    articles:
+        generate_image_previews: %generate_image_previews%
+        image_previews_base_uri: %image_previews_base_uri%
     sidebar:
         # ~ - no cache, 0 - unlimited cache
         cache_lifetime: %sidebar_cache_lifetime%
