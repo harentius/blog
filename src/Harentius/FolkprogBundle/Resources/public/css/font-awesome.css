@@ -19,3 +19,6 @@
 .fa-thumbs-o-down:before {
   content: "\f088";
 }
+.fa-feed:before {
+  content: "\f09e";
+}
