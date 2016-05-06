@@ -40,12 +40,12 @@ server {
         try_files $uri @rewriteapp;
     }
 
-    location /assets/ {
+    location ~ ^/assets/ {
         access_log off;
         expires 30d;
         try_files $uri @rewriteapp;
 
-        location /assets/images/preview/ {
+        location ~ ^/assets/images/preview/ {
             proxy_pass http://localhost:8083;
             proxy_cache img_resize;
             proxy_cache_valid  200      24h;
