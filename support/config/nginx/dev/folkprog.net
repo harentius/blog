@@ -3,7 +3,7 @@ proxy_cache_path /home/yaros/projects/folkprog/web/assets/images/preview levels=
 server {
     listen localhost:8083;
 
-    location ~ ^\/assets\/images\/preview\/(?<name>[^\/]*?)(_(?<width>\d+)x(?<height>\d+))?(\.(?<extension>[0-9a-z]+))$ {
+    location ~ ^\/assets\/images\/preview\/(?<name>[^\/]*?)(_(?<width>(\d+|-))x(?<height>(\d+|-)))?(\.(?<extension>[0-9a-z]+))$ {
         alias /home/yaros/projects/folkprog/web/assets/images/$name.$extension;
         image_filter resize $width $height;
     }

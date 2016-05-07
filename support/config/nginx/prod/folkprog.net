@@ -1,3 +1,14 @@
+proxy_cache_path /home/deploy/projects/folkprog.net/web/assets/images/preview levels=1:2 keys_zone=img_resize:10m inactive=24h max_size=5G;
+
+server {
+    listen localhost:8083;
+
+    location ~ ^\/assets\/images\/preview\/(?<name>[^\/]*?)(_(?<width>(\d+|-))x(?<height>(\d+|-)))?(\.(?<extension>[0-9a-z]+))$ {
+        alias /home/deploy/projects/folkprog.net/web/assets/images/$name.$extension;
+        image_filter resize $width $height;
+    }
+}
+
 server {
     listen 80;
     server_name www.folkprog.net;
@@ -30,14 +41,23 @@ server {
         fastcgi_param DOCUMENT_ROOT $realpath_root;
     }
 
-    location ~ ^/(img|bundles|css|js|assets)/ {
+    location ~ ^/(bundles|css|js|img)/ {
         access_log off;
         expires 30d;
         try_files $uri @rewriteapp;
     }
 
-    location ~ /assets/images/preview/(.*)?(\.[0-9a-z]+)$ {
-        try_files $uri @rewritepreview;
+    location ~ ^/assets/ {
+        access_log off;
+        expires 30d;
+        try_files $uri @rewriteapp;
+
+        location ~ ^/assets/images/preview/ {
+            proxy_pass http://localhost:8083;
+            proxy_cache img_resize;
+            proxy_cache_valid  200      24h;
+            proxy_cache_valid  404 415  1m;
+        }
     }
 
     location ~ /\.ht {
