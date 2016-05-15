@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e; set -u
+. "$(dirname $0)/common"
+
+write_title "Optimizing images"
+cd "$WEB_DIR/assets/images"
+find -type f -name '*.png' -mtime -1 | xargs optipng -o7
+find -type f -name '*.jpg' -mtime -1 | xargs jpegoptim
+
