@@ -22,3 +22,9 @@
 .fa-feed:before {
   content: "\f09e";
 }
+.fa-thumbs-up:before {
+  content: "\f164";
+}
+.fa-thumbs-down:before {
+  content: "\f165";
+}
