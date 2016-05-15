@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "657854d2426f5bee0561d6e233c48337",
-    "content-hash": "447db07674a6b00caf575125a82d9016",
+    "hash": "c44e0d08f691ce06d29c2b363f1fbb83",
+    "content-hash": "e4748acf958b347f4cf22a89b6c7c08e",
     "packages": [
         {
             "name": "anh/sape-bundle",
@@ -1022,13 +1022,13 @@
             "target-dir": "Doctrine/Bundle/DoctrineCacheBundle",
             "source": {
                 "type": "git",
-                "url": "git@github.com:doctrine/DoctrineCacheBundle.git",
+                "url": "https://github.com/doctrine/DoctrineCacheBundle.git",
                 "reference": "9b7b22cea3aaaf6d53088c46a2cb08801ea38ace"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/doctrine/DoctrineCacheBundle/zipball/9b7b22cea3aaaf6d53088c46a2cb08801ea38ace",
-                "reference": "e4b6f810aa047f9cbfe41c3d6a3d7e83d7477a9d",
+                "reference": "9b7b22cea3aaaf6d53088c46a2cb08801ea38ace",
                 "shasum": ""
             },
             "require": {
@@ -1604,7 +1604,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/francoispluchino/composer-asset-plugin/zipball/c3d803cc890fad5a7fb61a4036c5d973faae34af",
+                "url": "https://api.github.com/repos/francoispluchino/composer-asset-plugin/zipball/62d2cdc302de2534f3985a1a2f5d4a783de4a5eb",
                 "reference": "62d2cdc302de2534f3985a1a2f5d4a783de4a5eb",
                 "shasum": ""
             },
@@ -1783,16 +1783,16 @@
         },
         {
             "name": "harentius/blog-bundle",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/harentius/blog-bundle.git",
-                "reference": "e56ba30b29e0f638f9015963e154e971dc3fe099"
+                "reference": "88fe2d71afcdb16cc1b5ca5e740e57755f66d902"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/harentius/blog-bundle/zipball/e56ba30b29e0f638f9015963e154e971dc3fe099",
-                "reference": "e56ba30b29e0f638f9015963e154e971dc3fe099",
+                "url": "https://api.github.com/repos/harentius/blog-bundle/zipball/88fe2d71afcdb16cc1b5ca5e740e57755f66d902",
+                "reference": "88fe2d71afcdb16cc1b5ca5e740e57755f66d902",
                 "shasum": ""
             },
             "require": {
@@ -1855,7 +1855,7 @@
             "keywords": [
                 "harentius blog bundle Symfony cms"
             ],
-            "time": "2016-04-24 14:51:48"
+            "time": "2016-05-15 17:13:36"
         },
         {
             "name": "harentius/widgets-bundle",
@@ -1868,7 +1868,7 @@
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/harentius/widgets-bundle/zipball/2ac783d42b68baab68780fd41dd7b428d2d554ee",
-                "reference": "463c909dde41ce4c224a7459b6cd2f59e121d6c7",
+                "reference": "2ac783d42b68baab68780fd41dd7b428d2d554ee",
                 "shasum": ""
             },
             "require": {
