@@ -24,4 +24,4 @@ write_title "Setting all migrations as migrated"
 exec_console doctrine:migrations:version --add --all --no-interaction "$@"
 
 write_title "Loading fixtures"
-exec_console doctrine:fixtures:load --no-interaction --append "$@"
+exec_console hautelook_alice:doctrine:fixtures:load --no-interaction --append "$@"
