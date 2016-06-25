@@ -1,0 +1,3 @@
+harentius_blog_show:
+    path:     /{slug}/
+    defaults: { _controller: HarentiusBlogBundle:Blog:show }

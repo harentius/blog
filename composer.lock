@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "75f6a63796d0703be9a8e8d912ec7464",
-    "content-hash": "97993f6ac02c78cd72075b47898df479",
+    "hash": "966108716f1d4a43c94208875bf8bfad",
+    "content-hash": "fd86a97f4edaa5a6077930a651c99db8",
     "packages": [
         {
             "name": "anh/sape-bundle",
@@ -1614,12 +1614,12 @@
             "version": "v1.1.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/francoispluchino/composer-asset-plugin.git",
+                "url": "https://github.com/fxpio/composer-asset-plugin.git",
                 "reference": "c3d803cc890fad5a7fb61a4036c5d973faae34af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/francoispluchino/composer-asset-plugin/zipball/c3d803cc890fad5a7fb61a4036c5d973faae34af",
+                "url": "https://api.github.com/repos/fxpio/composer-asset-plugin/zipball/c3d803cc890fad5a7fb61a4036c5d973faae34af",
                 "reference": "c3d803cc890fad5a7fb61a4036c5d973faae34af",
                 "shasum": ""
             },
@@ -1794,16 +1794,16 @@
         },
         {
             "name": "harentius/blog-bundle",
-            "version": "v1.1.3",
+            "version": "v1.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/harentius/blog-bundle.git",
-                "reference": "48c3a7a3970d1865ecaaa88d9bfb20e239ba2c5b"
+                "reference": "e5d600412de8ad87fe6e214442bf677efc779cef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/harentius/blog-bundle/zipball/48c3a7a3970d1865ecaaa88d9bfb20e239ba2c5b",
-                "reference": "48c3a7a3970d1865ecaaa88d9bfb20e239ba2c5b",
+                "url": "https://api.github.com/repos/harentius/blog-bundle/zipball/e5d600412de8ad87fe6e214442bf677efc779cef",
+                "reference": "e5d600412de8ad87fe6e214442bf677efc779cef",
                 "shasum": ""
             },
             "require": {
@@ -1867,7 +1867,7 @@
             "keywords": [
                 "harentius blog bundle Symfony cms"
             ],
-            "time": "2016-06-11 21:19:00"
+            "time": "2016-06-25 17:39:28"
         },
         {
             "name": "harentius/widgets-bundle",

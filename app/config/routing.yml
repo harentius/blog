@@ -13,5 +13,9 @@ blog:
     resource: "@HarentiusBlogBundle/Resources/config/routing.yml"
     prefix:   /
 
+blog_override:
+    resource: "@HarentiusFolkprogBundle/Resources/config/routing-override.yml"
+    prefix:   /
+
 widgets:
     resource: "@HarentiusWidgetsBundle/Resources/config/routing.yml"
