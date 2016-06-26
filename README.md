@@ -17,4 +17,7 @@ Installation:
 $ composer.phar create-project harentius/blog-bundle
 ```
 
-2) bin/install
+2)
+```bash
+$ bin/install
+```
