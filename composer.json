@@ -1,7 +1,9 @@
 {
-    "name": "Harentius Blog",
+    "name": "harentius/blog",
     "license": "MIT",
     "type": "project",
+    "description": "Simple Symfony blog/cms",
+    "keywords": ["harentius blog Symfony cms"],
     "minimum-stability": "dev",
     "prefer-stable": true,
     "autoload": {
