@@ -1,5 +1,5 @@
 #!/bin/sh
-#TODO: reload fpm on install vendors (or every time for reliability)
+
 # post-receive git hook
 # v1
 
@@ -13,7 +13,7 @@ updater=".prod-deploy"
 
 
 do_rebuild() {
-    sudo /opt/bin/apc-clear
+    sudo /opt/bin/php7.0-fpm-restart
     COMPOSER_BIN="$HOME/local/bin/composer" bin/update
 }
 
