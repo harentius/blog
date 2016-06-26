@@ -1,0 +1,21 @@
+#!/bin/sh
+
+set -e; set -u
+. "$(dirname $0)/common"
+
+
+echo 'prod' > "$BASE_DIR/.env"
+write_title "Creating database"
+exec_console doctrine:database:create "$@"
+
+write_title "Updating database schema"
+exec_console doctrine:schema:update --force "$@"
+
+write_title "Loading fixtures"
+exec_console hautelook_alice:doctrine:fixtures:load --no-interaction --append "$@"
+
+write_title "Building assets"
+exec_bin assets "$@"
+
+write_title "Fixing permissions"
+exec_bin fix-permissions 2> /dev/null

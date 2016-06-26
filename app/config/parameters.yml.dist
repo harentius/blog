@@ -1,0 +1,40 @@
+# This file is a "template" of what your parameters.yml file should look like
+# Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
+# http://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
+parameters:
+    database_host:     127.0.0.1
+    database_port:     ~
+    database_name:     symfony
+    database_user:     root
+    database_password: ~
+    # You should uncomment this if you want use pdo_sqlite
+    # database_path: "%kernel.root_dir%/data.db3"
+
+    mailer_transport:  smtp
+    mailer_host:       127.0.0.1
+    mailer_user:       ~
+    mailer_password:   ~
+
+    # A secret key that's used to generate certain security-related tokens
+    secret:            c3f38db32e345346c1965fa7573944508f739b8a
+
+    nodejs.path: /usr/bin/node
+    nodejs.modules_path: /usr/lib/node_modules
+    bin_coffee: /usr/bin/coffee
+
+    sidebar_cache_lifetime: 0
+    sidebar_tags_limit: 10
+    sidebar_tag_sizes: [65, 80, 100]
+    homepage_page_slug: index
+    homepage_feed_number: 6
+    homepage_feed_category: ~
+    list_posts_per_page: 40
+    vk_appi_id: ~
+    google_analytics.id: ~
+    google_analytics.hostname: auto
+    apc_global_prefix: harentius_blog
+    statistics_cache_lifetime: 43200
+    locale: en
+    discuss_user_name: ~
+    generate_image_previews: true
+    image_previews_base_uri: /assets/images/preview/
