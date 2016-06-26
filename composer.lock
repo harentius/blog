@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "966108716f1d4a43c94208875bf8bfad",
-    "content-hash": "fd86a97f4edaa5a6077930a651c99db8",
+    "hash": "274397701225523b207012e7fcbc603d",
+    "content-hash": "876f9901e06492af8416a874ee7c4be6",
     "packages": [
         {
             "name": "anh/sape-bundle",
@@ -2901,16 +2901,16 @@
         },
         {
             "name": "presta/sitemap-bundle",
-            "version": "v1.5.0",
+            "version": "v1.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/prestaconcept/PrestaSitemapBundle.git",
-                "reference": "f6286d4e2bc19015bc77288f5cf944e0777f1932"
+                "reference": "62a78b9b70fece250799bcdb674e55ee86c68677"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/prestaconcept/PrestaSitemapBundle/zipball/f6286d4e2bc19015bc77288f5cf944e0777f1932",
-                "reference": "f6286d4e2bc19015bc77288f5cf944e0777f1932",
+                "url": "https://api.github.com/repos/prestaconcept/PrestaSitemapBundle/zipball/62a78b9b70fece250799bcdb674e55ee86c68677",
+                "reference": "62a78b9b70fece250799bcdb674e55ee86c68677",
                 "shasum": ""
             },
             "require": {
@@ -2921,12 +2921,12 @@
                 "symfony/phpunit-bridge": "~2.7|~3.0"
             },
             "suggest": {
-                "doctrine/doctrine-cache-bundle": "Allows to store sitemaps in cache"
+                "liip/doctrine-cache-bundle": "Allows to store sitemaps in cache"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.5.x-dev"
+                    "dev-master": "1.3.x-dev"
                 }
             },
             "autoload": {
@@ -2958,7 +2958,7 @@
                 "prestaconcept",
                 "xml"
             ],
-            "time": "2016-06-08 15:43:17"
+            "time": "2015-12-28 10:54:30"
         },
         {
             "name": "psr/log",

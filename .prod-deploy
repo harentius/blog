@@ -1,5 +1,5 @@
 #!/bin/sh
-
+#TODO: reload fpm on install vendors (or every time for reliability)
 # post-receive git hook
 # v1
 
