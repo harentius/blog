@@ -1,6 +1,6 @@
 {
-    "name": "yaros/.",
-    "license": "proprietary",
+    "name": "Harentius Blog",
+    "license": "MIT",
     "type": "project",
     "minimum-stability": "dev",
     "prefer-stable": true,
