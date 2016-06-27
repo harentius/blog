@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ec632b08313d1e0da179f921d1ebce9c",
-    "content-hash": "9fd003b655498805a691acc54d94dc41",
+    "hash": "0d8356ef85581d0d6e931822f0d3da8f",
+    "content-hash": "3aa281afa8339a540c835d93296acd89",
     "packages": [
         {
             "name": "beberlei/DoctrineExtensions",
@@ -1595,12 +1595,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/harentius/blog-bundle.git",
-                "reference": "2ce0916817fd1f2cc8ce3a56987527bf86b16a0e"
+                "reference": "a6b913e30063e51d6eccaaf8556a1e4c069f2897"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/harentius/blog-bundle/zipball/2ce0916817fd1f2cc8ce3a56987527bf86b16a0e",
-                "reference": "2ce0916817fd1f2cc8ce3a56987527bf86b16a0e",
+                "url": "https://api.github.com/repos/harentius/blog-bundle/zipball/a6b913e30063e51d6eccaaf8556a1e4c069f2897",
+                "reference": "a6b913e30063e51d6eccaaf8556a1e4c069f2897",
                 "shasum": ""
             },
             "require": {
@@ -1614,7 +1614,7 @@
                 "bower-asset/components-font-awesome": "~4.4",
                 "bower-asset/jquery": "~2.1|~3.0",
                 "bower-asset/js-cookie": "~2.0",
-                "doctrine/dbal": "<2.5",
+                "doctrine/dbal": "~2.4",
                 "doctrine/doctrine-bundle": "~1.4",
                 "doctrine/doctrine-fixtures-bundle": "~2.3",
                 "doctrine/orm": "~2.2,>=2.2.3,<2.5",
@@ -1664,7 +1664,7 @@
             "keywords": [
                 "harentius blog bundle Symfony cms"
             ],
-            "time": "2016-06-26 19:50:22"
+            "time": "2016-06-26 21:02:19"
         },
         {
             "name": "hautelook/alice-bundle",
