@@ -24,6 +24,16 @@
         "sensio/generator-bundle": "~3.0",
         "symfony/phpunit-bridge": "~2.7"
     },
+    "scripts": {
+        "post-install-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+        ],
+        "post-update-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+        ]
+    },
     "config": {
         "bin-dir": "bin"
     },
