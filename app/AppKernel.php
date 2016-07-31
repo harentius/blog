@@ -32,6 +32,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Eko\FeedBundle\EkoFeedBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
+            new Hautelook\AliceBundle\HautelookAliceBundle(),
             new Harentius\WidgetsBundle\HarentiusWidgetsBundle(),
             new Harentius\BlogBundle\HarentiusBlogBundle(),
             new Harentius\FolkprogBundle\HarentiusFolkprogBundle(),
@@ -42,7 +43,6 @@ class AppKernel extends Kernel
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
-            $bundles[] = new Hautelook\AliceBundle\HautelookAliceBundle();
         }
 
         return $bundles;

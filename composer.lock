@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "274397701225523b207012e7fcbc603d",
-    "content-hash": "876f9901e06492af8416a874ee7c4be6",
+    "hash": "966108716f1d4a43c94208875bf8bfad",
+    "content-hash": "fd86a97f4edaa5a6077930a651c99db8",
     "packages": [
         {
             "name": "anh/sape-bundle",
@@ -1794,16 +1794,16 @@
         },
         {
             "name": "harentius/blog-bundle",
-            "version": "v1.1.4",
+            "version": "v1.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/harentius/blog-bundle.git",
-                "reference": "e5d600412de8ad87fe6e214442bf677efc779cef"
+                "reference": "a6b913e30063e51d6eccaaf8556a1e4c069f2897"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/harentius/blog-bundle/zipball/e5d600412de8ad87fe6e214442bf677efc779cef",
-                "reference": "e5d600412de8ad87fe6e214442bf677efc779cef",
+                "url": "https://api.github.com/repos/harentius/blog-bundle/zipball/a6b913e30063e51d6eccaaf8556a1e4c069f2897",
+                "reference": "a6b913e30063e51d6eccaaf8556a1e4c069f2897",
                 "shasum": ""
             },
             "require": {
@@ -1817,7 +1817,7 @@
                 "bower-asset/components-font-awesome": "~4.4",
                 "bower-asset/jquery": "~2.1|~3.0",
                 "bower-asset/js-cookie": "~2.0",
-                "doctrine/dbal": "<2.5",
+                "doctrine/dbal": "~2.4",
                 "doctrine/doctrine-bundle": "~1.4",
                 "doctrine/doctrine-fixtures-bundle": "~2.3",
                 "doctrine/orm": "~2.2,>=2.2.3,<2.5",
@@ -1830,8 +1830,8 @@
                 "knplabs/knp-paginator-bundle": "~2.4",
                 "liip/imagine-bundle": "~1.5",
                 "php": ">=5.4",
-                "presta/sitemap-bundle": "~1.4",
-                "sensio/distribution-bundle": "~4.0",
+                "presta/sitemap-bundle": "~1.4.2",
+                "sensio/distribution-bundle": "~4.0|~5.0",
                 "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
                 "sonata-project/admin-bundle": "~2.2",
                 "sonata-project/block-bundle": "~2.2,>=2.2.7,<2.3",
@@ -1867,7 +1867,7 @@
             "keywords": [
                 "harentius blog bundle Symfony cms"
             ],
-            "time": "2016-06-25 17:39:28"
+            "time": "2016-06-27 20:10:32"
         },
         {
             "name": "harentius/widgets-bundle",
