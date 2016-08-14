@@ -10,4 +10,8 @@
         {% include 'HarentiusBlogBundle:Blog:_post_info.html.twig' %}
     {% endblock %}
 </div>
+
+    {% if loop.index == 2 %}
+        {{ harentius_widget('widgets_block_after_second_article_preview') }}
+    {% endif %}
 {% endfor %}

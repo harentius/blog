@@ -1871,16 +1871,16 @@
         },
         {
             "name": "harentius/widgets-bundle",
-            "version": "v1.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/harentius/widgets-bundle.git",
-                "reference": "2ac783d42b68baab68780fd41dd7b428d2d554ee"
+                "reference": "df7bbcacbbb522bbcbe04aac15546845e12120ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/harentius/widgets-bundle/zipball/2ac783d42b68baab68780fd41dd7b428d2d554ee",
-                "reference": "2ac783d42b68baab68780fd41dd7b428d2d554ee",
+                "url": "https://api.github.com/repos/harentius/widgets-bundle/zipball/df7bbcacbbb522bbcbe04aac15546845e12120ca",
+                "reference": "df7bbcacbbb522bbcbe04aac15546845e12120ca",
                 "shasum": ""
             },
             "require": {
@@ -1894,6 +1894,7 @@
                     "Harentius\\WidgetsBundle\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1905,15 +1906,11 @@
                 }
             ],
             "description": "Symfony Bundle for easy creating and managing client-side widgets",
-            "homepage": "https://github.com/harentius/widgets-bundle",
+            "homepage": "http://folkprog.net/en/widgets-bundle/",
             "keywords": [
                 "Symfony widgets"
             ],
-            "support": {
-                "source": "https://github.com/harentius/widgets-bundle/tree/v1.0",
-                "issues": "https://github.com/harentius/widgets-bundle/issues"
-            },
-            "time": "2015-10-15 20:08:57"
+            "time": "2016-08-14 19:28:14"
         },
         {
             "name": "hautelook/alice-bundle",

@@ -133,6 +133,7 @@ harentius_widgets:
         widgets_block_sidebar: Sidebar
         widgets_block_bottom_left: Bottom left
         widgets_block_bottom_right: Bottom right
+        widgets_block_after_second_article_preview: After second article preview
 
 anh_sape:
     user: %sape_user%
