@@ -24,7 +24,7 @@
 
     if $adsenceCategoryLoader.length > 0
       global.adsbygoogle.push({})
-      $adsenceArticlesLoader.html(
+      $adsenceCategoryLoader.html(
         '<ins class="adsbygoogle"
            style="display:block"
            data-ad-client="ca-pub-8463813510139079"
