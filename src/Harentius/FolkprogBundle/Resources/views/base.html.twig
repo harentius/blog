@@ -14,6 +14,15 @@
     {% endstylesheets %}
 {% endblock %}
 
+{% block common_javascripts %}
+    {{ parent() }}
+    {% javascripts
+        'bundles/harentiusfolkprog/js/common-folkprog.coffee'
+    %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock javascripts %}
+
 {% block head_extra %}
     {% if app.environment != 'dev' %}
     <!-- SAPE RTB JS -->

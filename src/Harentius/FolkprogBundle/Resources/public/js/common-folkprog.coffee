@@ -4,9 +4,9 @@
   $(() ->
     $adsenceArticlesLoader = $('.content-12345')
     $adsenceCategoryLoader = $('.a-content-category')
-    hasToShowCategoryAd = location.href.match(/\/category\//)
+    isShowCategoryAd = location.href.match(/\/category\//)
 
-    if ($adsenceArticlesLoader.length == 0) && (!hasToShowCategoryAd || $adsenceCategoryLoader.length == 0)
+    if ($adsenceArticlesLoader.length == 0) && (!isShowCategoryAd || $adsenceCategoryLoader.length == 0)
       return
 
     $.getScript( "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")
@@ -16,13 +16,13 @@
       global.adsbygoogle.push({})
       $adsenceArticlesLoader.html(
         '<ins class="adsbygoogle"
-              style="display:inline-block;width:336px;height:280px"
-              data-ad-client="ca-pub-8463813510139079"
-              data-ad-slot="7797505349"
+            style="display:inline-block;width:336px;height:280px"
+            data-ad-client="ca-pub-8463813510139079"
+            data-ad-slot="7797505349"
         ></ins>'
       )
 
-    if $adsenceCategoryLoader.length > 0
+    if isShowCategoryAd && $adsenceCategoryLoader.length > 0
       global.adsbygoogle.push({})
       $adsenceCategoryLoader.html(
         '<ins class="adsbygoogle"
