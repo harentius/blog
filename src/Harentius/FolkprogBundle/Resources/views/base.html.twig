@@ -24,12 +24,12 @@
 {% endblock common_javascripts %}
 
 {% block head_extra %}
-    {% if app.environment != 'dev' %}
-    <!-- SAPE RTB JS -->
-    <script async="async" src="//cdn-rtb.sape.ru/rtb-b/js/987/2/1987.js" type="text/javascript"></script>
-    <!-- SAPE RTB END -->
+    {#{% if app.environment != 'dev' %}#}
+    {#<!-- SAPE RTB JS -->#}
+    {#<script async="async" src="//cdn-rtb.sape.ru/rtb-b/js/987/2/1987.js" type="text/javascript"></script>#}
+    {#<!-- SAPE RTB END -->#}
 
-    {% endif %}
+    {#{% endif %}#}
 {% endblock %}
 
 {% block footer_content %}
@@ -53,7 +53,17 @@
     {{ harentius_widget('widgets_block_sidebar') }}
     {% if app.environment != 'dev' %}
         {#{{ sape_return_block_links() }}#}
-        <div id="SRTB_4516"></div>
+        {#<div id="SRTB_4516"></div>#}
+        <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- folkprog regular -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-8463813510139079"
+             data-ad-slot="8719005747"
+             data-ad-format="auto"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
     {% endif %}
 {% endblock %}
 
