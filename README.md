@@ -14,7 +14,7 @@ Installation:
 
 1)
 ```bash
-$ composer.phar create-project harentius/blog-bundle
+$ composer.phar create-project harentius/blog
 ```
 
 2)
