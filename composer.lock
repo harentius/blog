@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d19c8118c8d10f8a5011e43196c91769",
-    "content-hash": "6e0823e84733e5d6aa7e461dc24cc027",
+    "hash": "966108716f1d4a43c94208875bf8bfad",
+    "content-hash": "fd86a97f4edaa5a6077930a651c99db8",
     "packages": [
         {
             "name": "anh/sape-bundle",
@@ -1794,16 +1794,16 @@
         },
         {
             "name": "harentius/blog-bundle",
-            "version": "v1.1.8",
+            "version": "v1.1.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/harentius/blog-bundle.git",
-                "reference": "a61fc9194234c5945a35777890f454b571973f84"
+                "reference": "bbf835805dee56f68cc94738b0650ce82b0fd0fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/harentius/blog-bundle/zipball/a61fc9194234c5945a35777890f454b571973f84",
-                "reference": "a61fc9194234c5945a35777890f454b571973f84",
+                "url": "https://api.github.com/repos/harentius/blog-bundle/zipball/bbf835805dee56f68cc94738b0650ce82b0fd0fb",
+                "reference": "bbf835805dee56f68cc94738b0650ce82b0fd0fb",
                 "shasum": ""
             },
             "require": {
@@ -1867,7 +1867,7 @@
             "keywords": [
                 "harentius blog bundle Symfony cms"
             ],
-            "time": "2016-08-16 10:07:59"
+            "time": "2017-02-02 20:17:13"
         },
         {
             "name": "harentius/widgets-bundle",
@@ -5522,9 +5522,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "sonata-project/translation-bundle": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
