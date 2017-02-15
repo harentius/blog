@@ -10,7 +10,7 @@
     return
 
   if $adsenceArticlesLoader.length > 0
-    (global.adsbygoogle = global.adsbygoogle || []).push({});
+    (adsbygoogle = global.adsbygoogle || []).push({});
     $adsenceArticlesLoader.html(
       '<ins class="adsbygoogle"
           style="display:inline-block;width:336px;height:280px"
@@ -20,7 +20,7 @@
     )
 
   if isShowCategoryAd && $adsenceCategoryLoader.length > 0
-    (global.adsbygoogle = global.adsbygoogle || []).push({});
+    (adsbygoogle = global.adsbygoogle || []).push({});
     $adsenceCategoryLoader.html(
       '<ins class="adsbygoogle"
          style="display:block"
