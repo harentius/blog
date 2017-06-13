@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "55a3a1dbcd2d8612d35423dd4d838355",
+    "content-hash": "78732fb8140e05249d15debcdf4614f0",
     "packages": [
         {
             "name": "beberlei/DoctrineExtensions",
@@ -1777,12 +1777,17 @@
         },
         {
             "name": "harentius/blog-bundle",
-            "version": "dev-master",
+            "version": "v2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/harentius/blog-bundle.git",
+                "reference": "190d2789d2ad4e5fc254950d8ecbe90ca1414f9c"
+            },
             "dist": {
-                "type": "path",
-                "url": "../blog-bundle",
-                "reference": "6d70239195d737718ef0d0e860d5cb920387f148",
-                "shasum": null
+                "type": "zip",
+                "url": "https://api.github.com/repos/harentius/blog-bundle/zipball/190d2789d2ad4e5fc254950d8ecbe90ca1414f9c",
+                "reference": "190d2789d2ad4e5fc254950d8ecbe90ca1414f9c",
+                "shasum": ""
             },
             "require": {
                 "beberlei/doctrineextensions": "~1.0",
@@ -1829,6 +1834,7 @@
                     "Harentius\\BlogBundle\\": "src/"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1843,7 +1849,8 @@
             "homepage": "http://folkprog.net/symfony-blog-bundle/",
             "keywords": [
                 "harentius blog bundle Symfony cms"
-            ]
+            ],
+            "time": "2017-06-13T20:44:42+00:00"
         },
         {
             "name": "hautelook/alice-bundle",
@@ -5500,16 +5507,11 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "harentius/blog-bundle": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": ">=5.5.9"
     },
-    "platform-dev": [],
-    "platform-overrides": {
-        "php": "7.1.5"
-    }
+    "platform-dev": []
 }
