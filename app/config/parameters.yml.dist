@@ -21,3 +21,4 @@ parameters:
     nodejs.path: /usr/bin/node
     nodejs.modules_path: /usr/lib/node_modules
     bin_coffee: /usr/bin/coffee
+    image_previews_base_uri: /assets/images/preview/
