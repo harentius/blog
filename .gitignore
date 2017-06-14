@@ -31,3 +31,7 @@
 /.allow_unsafe_bins
 /bin/dump-and-load-prod-data
 /sitemap.*
+/bin/doctrine
+/bin/doctrine.php
+/bin/security-checker
+/bin/doctrine-migrations
