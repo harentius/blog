@@ -29,8 +29,8 @@ monolog:
 assetic:
     filters:
         yui_css:
-            apply_to: "\.css$"
-            jar: %jar_yui%
+            apply_to: '.css$'
+            jar: '%jar_yui%'
         yui_js:
-            apply_to: "\.js$"
-            jar: %jar_yui%
+            apply_to: '\.js$'
+            jar: '%jar_yui%'
