@@ -34,7 +34,8 @@ RUN mkdir -p /usr/bin \
 RUN phpbrew init \
     && echo '[[ -e ~/.phpbrew/bashrc ]] && source ~/.phpbrew/bashrc' >> /root/.bashrc \
     && source ~/.phpbrew/bashrc \
-    && phpbrew install $PHP_VERSION +default
+    && phpbrew install $PHP_VERSION +default \
+    && phpbrew use $PHP_VERSION
 
 # Inslall php extensions
 RUN phpbrew ext install apcu
