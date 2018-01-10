@@ -9,6 +9,3 @@ rm -f "$WEB_DIR/css/"*
 
 write_title "Installing assets"
 exec_console assets:install --symlink "$@"
-
-write_title "Building assets"
-exec_console assetic:dump "$@"

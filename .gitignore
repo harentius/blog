@@ -35,3 +35,4 @@
 /bin/doctrine.php
 /bin/security-checker
 /bin/doctrine-migrations
+/node_modules/

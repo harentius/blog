@@ -27,6 +27,8 @@ framework:
         handler_id:  ~
     fragments:       ~
     http_method_override: true
+    assets:
+        json_manifest_path: '%kernel.project_dir%/web/bundles/harentiusfolkprog/manifest.json'
 
 # Twig Configuration
 # TODO: auto register
