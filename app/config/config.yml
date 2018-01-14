@@ -71,8 +71,6 @@ swiftmailer:
 
 harentius_blog:
     articles:
-        # Is generate preview when resize images in CKEditor
-        generate_image_previews: true
         # Path where previews stored
         image_previews_base_uri: /assets/images/preview/
     sidebar:
@@ -97,17 +95,3 @@ harentius_blog:
     cache:
         apc_global_prefix: blog
         statistics_cache_lifetime: 3600
-
-assetic:
-    debug:          '%kernel.debug%'
-    use_controller: false
-    filters:
-        cssrewrite:
-            apply_to: '.css$'
-        less:
-            node: '%nodejs.path%'
-            node_paths: ['%nodejs.modules_path%']
-            apply_to: '.less$'
-        coffee:
-            bin:       '%bin_coffee%'
-            apply_to:  '.coffee$'
