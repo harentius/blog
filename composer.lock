@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "bf05f3b9fb6dbd353e443efb507c1f10",
+    "content-hash": "6278b6ab779f27c1237b7f275a9842bf",
     "packages": [
         {
             "name": "beberlei/DoctrineExtensions",
@@ -1585,16 +1585,16 @@
         },
         {
             "name": "harentius/blog-bundle",
-            "version": "dev-master",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/harentius/blog-bundle.git",
-                "reference": "2e68b6241b4c96b977d8314cbab988032e2d74e7"
+                "reference": "00a5e831d5dba9bcf99bab322ccdbb563fe68c66"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/harentius/blog-bundle/zipball/2e68b6241b4c96b977d8314cbab988032e2d74e7",
-                "reference": "2e68b6241b4c96b977d8314cbab988032e2d74e7",
+                "url": "https://api.github.com/repos/harentius/blog-bundle/zipball/00a5e831d5dba9bcf99bab322ccdbb563fe68c66",
+                "reference": "00a5e831d5dba9bcf99bab322ccdbb563fe68c66",
                 "shasum": ""
             },
             "require": {
@@ -1650,7 +1650,7 @@
                 "cms",
                 "symfony"
             ],
-            "time": "2018-01-14 14:07:51"
+            "time": "2018-01-14T20:11:55+00:00"
         },
         {
             "name": "harentius/widgets-bundle",
@@ -5394,9 +5394,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "harentius/blog-bundle": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
