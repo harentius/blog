@@ -13,10 +13,9 @@
         "php": ">=5.6",
         "doctrine/doctrine-migrations-bundle": "~1.0",
         "harentius/widgets-bundle": "~1.0",
-        "harentius/blog-bundle": "~2.0",
+        "harentius/blog-bundle": "dev-master",
         "symfony/symfony": "~3.3",
-        "doctrine/orm": "~2.5",
-        "sensio/generator-bundle": "~3.0"
+        "doctrine/orm": "~2.5"
     },
     "require-dev": {
     },

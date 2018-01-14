@@ -39,5 +39,4 @@ parameters:
     statistics_cache_lifetime: 43200
     locale: ru
     discuss_user_name: folkprog
-    generate_image_previews: true
     image_previews_base_uri: /assets/images/preview/
