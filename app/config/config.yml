@@ -103,3 +103,8 @@ eko_feed:
                 route_name: 'harentius_blog_homepage'
             encoding: 'utf-8'
             author: 'Harentius'
+
+doctrine:
+    dbal:
+        driver: pdo_mysql
+        server_version: 5.5
