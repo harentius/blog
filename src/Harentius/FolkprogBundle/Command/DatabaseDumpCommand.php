@@ -555,7 +555,7 @@ class DatabaseDumpCommand extends ContainerAwareCommand
                 $url = 'http://' . $this->siteHost . '/' . $url;
             }
 
-            $fileData = @file_get_contents($url);
+            $fileData = file_get_contents($url);
 
             if (!$fileData) {
                 throw new \RuntimeException(sprintf("Unable to download file '%s'", $url));
