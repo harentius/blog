@@ -16,4 +16,4 @@ services:
     harentius_blog.router.route_provider:
           class: Harentius\FolkprogBundle\Router\RouteProvider
           arguments:
-              - '@service_container'
+              - '@harentius_blog.router.category_slug_provider'
