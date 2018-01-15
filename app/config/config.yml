@@ -32,7 +32,6 @@ framework:
         json_manifest_path: '%kernel.project_dir%/web/bundles/harentiusfolkprog/manifest.json'
 
 # Twig Configuration
-# TODO: auto register
 twig:
     debug:            '%kernel.debug%'
     strict_variables: '%kernel.debug%'
@@ -40,7 +39,6 @@ twig:
         vk_appi_id: '%vk_appi_id%'
         google_analytics_id: '%google_analytics.id%'
         google_analytics_hostname: '%google_analytics.hostname%'
-        default_locale: '%locale%'
         discuss_user_name: '%discuss_user_name%'
 
 # Swiftmailer Configuration
