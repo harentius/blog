@@ -1,7 +1,7 @@
 const Encore = require('@symfony/webpack-encore');
 
 Encore
-  .setOutputPath('web/bundles/harentiusfolkprog/')
+  .setOutputPath('src/Harentius/FolkprogBundle/Resources/public/js/build/')
   .setPublicPath('/bundles/harentiusfolkprog/')
   .setManifestKeyPrefix('bundles/harentiusfolkprog/')
   .cleanupOutputBeforeBuild()

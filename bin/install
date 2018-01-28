@@ -3,17 +3,19 @@
 set -e; set -u
 . "$(dirname $0)/common"
 
-unsafe_bin
-
-
-write_title "Installing vendors (without dev packages)"
-exec_composer_install_prod
-
-write_title "Creating database"
-exec_console doctrine:database:create "$@"
+write_title "Setting up full permissions on var dir"
+find "$app_dir/cache" -type d -exec chmod 777 {} +
+find "$app_dir/logs" -type d -exec chmod 777 {} +
+find "$base_dir/var" -type d -exec chmod 777 {} +
 
 write_title "Updating database schema"
 exec_console doctrine:schema:update --force "$@"
 
-exec_bin assets "$@"
-exec_bin fix-permissions 2> /dev/null
+write_title "Loading fixtures"
+exec_console hautelook_alice:doctrine:fixtures:load --no-interaction "$@"
+
+write_title "Install assets"
+exec_console assets:install --symlink
+
+write_title "Warming up cache"
+exec_console cache:warmup

@@ -15,7 +15,10 @@
         "harentius/widgets-bundle": "~1.0",
         "harentius/blog-bundle": "~3.0",
         "symfony/symfony": "~3.3",
-        "doctrine/orm": "~2.5"
+        "doctrine/orm": "~2.5",
+        "behat/behat": "^3.4",
+        "behat/mink-selenium2-driver": "^1.3",
+        "behat/mink-extension": "2.2"
     },
     "require-dev": {
     },

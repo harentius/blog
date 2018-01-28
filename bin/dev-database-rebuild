@@ -11,9 +11,6 @@ write_title "Dropping database"
 exec_console doctrine:database:drop --force --quiet "$@"
 set -e
 
-write_title "Cleaning assets"
-exec_bin clean-assets
-
 write_title "Creating database"
 exec_console doctrine:database:create "$@"
 
