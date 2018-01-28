@@ -1,17 +1,7 @@
-{% for article in articles %}
-<div class="padded-content post-preview-wrapper{% if not loop.last or hasToPaginate %} bordered{% endif %}">
-    <article class="clearfix">
-        {%  include 'HarentiusBlogBundle:Blog:_translations_list.html.twig' with { 'entity': article } %}
-        <h2><a href="{{ path('harentius_blog_show', {'slug': article.slug}) }}">{{ article.title }}</a></h2>
-        <div>{{ article.text|read_more }}</div>
-    </article>
+{% extends 'HarentiusBlogBundle:Blog:_base_articles.html.twig' %}
 
-    {% block post_info %}
-        {% include 'HarentiusBlogBundle:Blog:_post_info.html.twig' %}
-    {% endblock %}
-</div>
-
+{% block loop_end %}
     {% if loop.index == 2 %}
         {{ harentius_widget('widgets_block_after_second_article_preview') }}
     {% endif %}
-{% endfor %}
+{% endblock %}

@@ -50,6 +50,7 @@ swiftmailer:
     spool:     { type: memory }
 
 harentius_blog:
+    locales: ['en', 'ru']
     articles:
         image_previews_base_uri: '%image_previews_base_uri%'
     sidebar:
