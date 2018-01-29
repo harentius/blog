@@ -28,6 +28,6 @@ jobs:
           while ! docker exec -it folkprog_app php -r "new PDO('mysql:host=mysql', 'root', '1111');" ; do
             sleep 1;
           done
-        - docker exec -it folkprog_app /app/bin/install
+        - docker exec -it folkprog_app /app/bin/test-install
       script:
         - docker exec -it folkprog_app /app/vendor/bin/behat -c /app/behat.yml.dist
