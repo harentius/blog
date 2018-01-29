@@ -3,6 +3,7 @@
 use Symfony\Component\Debug\Debug;
 use Symfony\Component\HttpFoundation\Request;
 
+umask(0000);
 require __DIR__.'/../vendor/autoload.php';
 
 Debug::enable();
