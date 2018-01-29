@@ -13,7 +13,7 @@ default:
                 - MinkContext
                 - AuthContext
                 - BackUpContext:
-                    - '%paths.base%//vendor/harentius/blog-bundle/tests/app'
+                    - '%paths.base%'
 
     extensions:
         Behat\MinkExtension:
