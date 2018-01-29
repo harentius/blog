@@ -29,7 +29,7 @@ framework:
     fragments:       ~
     http_method_override: true
     assets:
-        json_manifest_path: '%kernel.project_dir%/src/Harentius/FolkprogBundle/Resources/public/build/manifest.json'
+        json_manifest_path: '%kernel.project_dir%/src/Harentius/FolkprogBundle/Resources/public/js/build/manifest.json'
 
 # Twig Configuration
 twig:
