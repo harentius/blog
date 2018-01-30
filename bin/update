@@ -7,8 +7,6 @@ set -e; set -u
 write_title "Installing vendors (without dev packages)"
 exec_composer_install_prod
 
-exec_bin update-assets-version
-
 exec_bin clear-cache
 
 write_title "Running migrations"

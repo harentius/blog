@@ -15,7 +15,10 @@
         "harentius/widgets-bundle": "~1.0",
         "harentius/blog-bundle": "~3.0",
         "symfony/symfony": "~3.3",
-        "doctrine/orm": "~2.5"
+        "doctrine/orm": "~2.5",
+        "behat/behat": "^3.4",
+        "behat/mink-selenium2-driver": "^1.3",
+        "behat/mink-extension": "2.2"
     },
     "require-dev": {
     },
@@ -24,12 +27,14 @@
             "SymfonyStandard\\Composer::hookRootPackageInstall"
         ],
         "post-install-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
         ],
         "post-update-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
         ]
     },
     "config": {
-        "bin-dir": "bin"
+        "bin-dir": "vendor/bin"
     },
     "extra": {
         "symfony-app-dir": "app",
