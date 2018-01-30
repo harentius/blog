@@ -39,4 +39,4 @@ jobs:
         - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
       script:
          - docker build . -f support/prod/Dockerfile -t "$IMAGE_NAME"
-         - docker push "${IMAGE_NAME}"
+         - docker push "${IMAGE_NAME}:latest"
