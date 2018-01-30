@@ -31,3 +31,12 @@ jobs:
         - docker exec -it folkprog_app /app/bin/test-install
       script:
         - docker exec -it folkprog_app /app/vendor/bin/behat -c /app/behat.yml.dist
+
+    - stage: deploy
+      if: branch = master
+      before_script:
+        - composer install --no-interaction --no-dev
+        - docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASS"
+      script:
+         - docker build "$IMAGE_NAME" support/prod/Dockerfile
+         - docker push "${IMAGE_NAME}:latest"

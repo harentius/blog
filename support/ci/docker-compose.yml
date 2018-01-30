@@ -32,5 +32,3 @@ services:
             - ./support/ci/nginx.conf:/etc/nginx/conf.d/default.conf:ro
         links:
             - app
-        ports:
-            - "4000:80"
