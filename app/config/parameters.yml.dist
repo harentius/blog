@@ -14,23 +14,9 @@ parameters:
 
     nodejs.path: ~
     nodejs.modules_path: ~
-    bin_coffee: ~
 
-    sidebar_cache_lifetime: 0
-    sidebar_tags_limit: 10
-    sidebar_tag_sizes: [65, 80, 100]
-    homepage_page_slug: index
-    homepage_feed_number: 6
-    homepage_feed_category: ~
-    list_posts_per_page: 40
     vk_appi_id: 5025064
-    sape_user: ~
-    sape_options: {'block_orientation': 0, 'charset': 'utf8', 'host': 'folkprog.net'}
+
     google_analytics.id: UA-40176382-1
     google_analytics.hostname: auto
-    jar_yui: /home/deploy/local/bin/yuicompressor.jar
-    apc_global_prefix: folkprog_net
-    statistics_cache_lifetime: 43200
-    locale: en
     discuss_user_name: folkprog
-    image_previews_base_uri: /assets/images/preview/
