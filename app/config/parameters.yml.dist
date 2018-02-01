@@ -18,7 +18,4 @@ parameters:
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
 
-    nodejs.path: /usr/bin/node
-    nodejs.modules_path: /usr/lib/node_modules
-    bin_coffee: /usr/bin/coffee
     image_previews_base_uri: /assets/images/preview/
