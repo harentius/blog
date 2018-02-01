@@ -3,9 +3,6 @@
 set -e; set -u
 . "$(dirname $0)/common"
 
-unsafe_bin
-
-
 set +e
 write_title "Dropping database"
 exec_console doctrine:database:drop --force --quiet "$@"
