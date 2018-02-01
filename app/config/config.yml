@@ -70,6 +70,7 @@ swiftmailer:
     spool: { type: memory }
 
 harentius_blog:
+    locales: ['en', 'ru']
     articles:
         # Path where previews stored
         image_previews_base_uri: /assets/images/preview/
