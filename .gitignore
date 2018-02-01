@@ -37,3 +37,4 @@
 /bin/doctrine-migrations
 /node_modules/
 /behat.yml
+!/web/assets/build
