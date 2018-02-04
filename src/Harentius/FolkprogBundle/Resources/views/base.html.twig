@@ -2,12 +2,12 @@
 
 {% block common_stylesheets %}
     {{ parent() }}
-    <link href="{{ asset('bundles/harentiusfolkprog/main.css') }}" media="all" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('assets/build/main.css') }}" media="all" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block common_javascripts %}
     {{ parent() }}
-    <script src="{{ asset('bundles/harentiusfolkprog/common-folkprog.js') }}"></script>
+    <script src="{{ asset('assets/build/common-folkprog.js') }}"></script>
 {% endblock common_javascripts %}
 
 {% block footer_content %}
