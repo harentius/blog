@@ -25,25 +25,18 @@ write_title() {
     echo "======= $@"
 }
 
-read_symfony_parameter() {
-    parameters_file="$config_dir/parameters.yml"
+read_env_parameter() {
+    dot_env_file_path="$base_dir/.env.dist"
+    parameter_name=$1
+    env_val=${!parameter_name:-}
 
-    if [ ! -f "$parameters_file" ]; then
-        return
+    if [ ! -z "$env_val" ]; then
+        parameter_value="$env_val"
+    else
+        parameter_value="$(cat "$dot_env_file_path" | sed -n "s/^$1=\(.*\)$/\1/p")"
     fi
 
-    default="${2:-}"
-    parameter="$(cat "$parameters_file" | sed -n "s/^\s\+$1:\s*\(.*\)\$/\1/p")"
-
-    if [ "$parameter" = "null" ]; then
-        parameter=""
-    fi
-
-    if [ -z "$parameter" ]; then
-        parameter="$default"
-    fi
-
-    env echo -n "$parameter"
+    env echo -n "$parameter_value"
 }
 
 get_switch() {

@@ -4,6 +4,7 @@
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Debug\Debug;
+use Symfony\Component\Dotenv\Dotenv;
 
 umask(0000);
 
@@ -12,34 +13,27 @@ set_time_limit(0);
 /** @var Composer\Autoload\ClassLoader $loader */
 $loader = require __DIR__.'/../vendor/autoload.php';
 
-$input = new ArgvInput();
-$readEnvFile = function () {
-    $envFile = __DIR__.'/../.env';
+if (!isset($_SERVER['APP_ENV'])) {
+    $filesPaths = [__DIR__.'/../.env.dist'];
+    $overwrittenDotEnvFilePath = __DIR__.'/../.env';
 
-    if (!is_file($envFile)) {
-        return null;
+    if (is_readable($overwrittenDotEnvFilePath)) {
+        $filesPaths[] = $overwrittenDotEnvFilePath;
     }
 
-    $parts = explode(':', preg_replace('/\s+/', ' ', trim(file_get_contents($envFile))), 2);
+    $dotenv = new Dotenv();
+    $dotenv->load(...$filesPaths);
+}
 
-    return array(
-        isset($parts[0]) ? $parts[0] : null,
-        isset($parts[1]) && $parts[1] === 'no-debug',
-    );
-};
-list($envOverride, $noDebugOverride) = $readEnvFile();
-
-$env = $input->getParameterOption(
-    array('--env', '-e'),
-    getenv('SYMFONY_ENV') ?: ($envOverride ?: 'dev')
-);
-$debug = getenv('SYMFONY_DEBUG') !== '0' && !$input->hasParameterOption(array('--no-debug', ''))
-    && $env !== 'prod' && !$noDebugOverride
-;
-unset($readEnvFile, $envOverride, $noDebugOverride);
+$input = new ArgvInput();
+$env = $input->getParameterOption(['--env', '-e'], $_SERVER['APP_ENV'] ?? 'dev');
+$debug = ($_SERVER['APP_DEBUG'] ?? ('prod' !== $env)) && !$input->hasParameterOption(['--no-debug', '']);
 
 if ($debug) {
-    Debug::enable();
+    umask(0000);
+    if (class_exists(Debug::class)) {
+        Debug::enable();
+    }
 }
 
 $kernel = new AppKernel($env, $debug);

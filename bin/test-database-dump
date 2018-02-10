@@ -25,11 +25,11 @@ fi
 write_title "Dumping database to '$dump_file'"
 
 mysqldump \
-    $(get_switch "-u " "$(read_symfony_parameter database_user root)") \
-    $(get_switch "-p" "$(read_symfony_parameter database_password)") \
-    $(get_switch "-h " "$(read_symfony_parameter database_host localhost)") \
-    $(get_switch "-P " "$(read_symfony_parameter database_port 3306)") \
-    "$(read_symfony_parameter database_name)" \
+    $(get_switch "-u " "$(read_env_parameter DATABASE_USER root)") \
+    $(get_switch "-p" "$(read_env_parameter DATABASE_PASSWORD)") \
+    $(get_switch "-h " "$(read_env_parameter DATABASE_HOST localhost)") \
+    $(get_switch "-P " "$(read_env_parameter DATABASE_PORT 3306)") \
+    "$(read_env_parameter DATABASE_NAME)" \
     --skip-add-drop-table \
     --single-transaction \
     | sed -r 's/CREATE TABLE (`[^`]+`)/TRUNCATE TABLE \1; CREATE TABLE IF NOT EXISTS \1/g' | gzip -c > "$dump_file"

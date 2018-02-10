@@ -12,8 +12,8 @@ fi
 
 write_title "Importing dump"
 zcat < "$dump_file" | mysql \
-    $(get_switch "-u " "$(read_symfony_parameter database_user root)") \
-    $(get_switch "-p" "$(read_symfony_parameter database_password)") \
-    $(get_switch "-h " "$(read_symfony_parameter database_host localhost)") \
-    $(get_switch "-P " "$(read_symfony_parameter database_port 3306)") \
-    "$(read_symfony_parameter database_name)"
+    $(get_switch "-u " "$(read_env_parameter DATABASE_USER root)") \
+    $(get_switch "-p" "$(read_env_parameter DATABASE_PASSWORD)") \
+    $(get_switch "-h " "$(read_env_parameter DATABASE_HOST localhost)") \
+    $(get_switch "-P " "$(read_env_parameter DATABASE_PORT 3306)") \
+    "$(read_env_parameter DATABASE_NAME)"

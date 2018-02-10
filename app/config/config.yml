@@ -23,6 +23,12 @@ parameters:
     image_previews_base_uri: /assets/images/preview/
     apc_global_prefix: folkprog_net
 
+    database_host: '%env(DATABASE_HOST)%'
+    database_port: '%env(DATABASE_PORT)%'
+    database_name: '%env(DATABASE_NAME)%'
+    database_user: '%env(DATABASE_USER)%'
+    database_password: '%env(DATABASE_PASSWORD)%'
+
 framework:
     secret: '%secret%'
     router:
