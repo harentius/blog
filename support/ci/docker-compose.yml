@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
     folkprog:
-        image: harentius/blog-bundle-base-php
+        image: harentius/blog-bundle-base
         container_name: folkprog_app
         links:
             - mysql
