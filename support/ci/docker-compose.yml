@@ -1,13 +1,14 @@
 version: '3.4'
 
 services:
-    app:
-        image: harentius/blog-bundle-base-php
+    folkprog:
+        image: harentius/blog-bundle-base
         container_name: folkprog_app
         links:
             - mysql
         volumes:
             - ./:/app
+            - ./support/ci/nginx.vh.conf:/etc/nginx/conf.d/default.conf:ro
         links:
             - mysql
 
@@ -23,15 +24,4 @@ services:
     selenium:
         image: selenium/standalone-chrome
         links:
-            - nginx
-
-    nginx:
-        image: nginx
-        volumes:
-            - ./:/app
-            - ./support/ci/nginx.conf:/etc/nginx/conf.d/default.conf:ro
-        links:
-            - app
-        # for debug purposes
-        ports:
-          - "8080:80"
+            - folkprog

@@ -1,6 +1,6 @@
-FROM harentius/blog-bundle-base-php
+FROM harentius/blog-bundle-base
 
 ENV project_dir='/app'
-COPY ./ ${project_dir}
 
-EXPOSE 9000
+COPY support/prod/nginx.vh.conf /etc/nginx/conf.d/default.conf
+COPY ./ ${project_dir}
