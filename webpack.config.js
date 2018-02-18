@@ -1,9 +1,9 @@
 const Encore = require('@symfony/webpack-encore');
 
 Encore
-  .setOutputPath('web/assets/build/')
-  .setPublicPath('/assets/build/')
-  .setManifestKeyPrefix('assets/build/')
+  .setOutputPath('web/build/')
+  .setPublicPath('/build/')
+  .setManifestKeyPrefix('build/')
   .cleanupOutputBeforeBuild()
   .addEntry('common-folkprog', './src/Harentius/FolkprogBundle/Resources/js/common-folkprog.js')
   .addStyleEntry('main', './src/Harentius/FolkprogBundle/Resources/css/main.less')
