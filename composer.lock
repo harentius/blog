@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "5a10d2b0bc30d19b2129e1b4e14f845d",
+    "content-hash": "487fa656996e74041a725c5fe76537e5",
     "packages": [
         {
             "name": "beberlei/DoctrineExtensions",
@@ -1918,16 +1918,16 @@
         },
         {
             "name": "harentius/blog-bundle",
-            "version": "v3.0.7",
+            "version": "v3.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/harentius/blog-bundle.git",
-                "reference": "6edc1d2c10610722400dced37f3bd95af61c1de1"
+                "reference": "a6c9b1f305ca66592a8d8660582cb3c5fb2cafc5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/harentius/blog-bundle/zipball/6edc1d2c10610722400dced37f3bd95af61c1de1",
-                "reference": "6edc1d2c10610722400dced37f3bd95af61c1de1",
+                "url": "https://api.github.com/repos/harentius/blog-bundle/zipball/a6c9b1f305ca66592a8d8660582cb3c5fb2cafc5",
+                "reference": "a6c9b1f305ca66592a8d8660582cb3c5fb2cafc5",
                 "shasum": ""
             },
             "require": {
@@ -1989,7 +1989,7 @@
                 "cms",
                 "symfony"
             ],
-            "time": "2018-02-21T18:27:21+00:00"
+            "time": "2018-02-24T22:11:44+00:00"
         },
         {
             "name": "harentius/widgets-bundle",
@@ -3709,16 +3709,16 @@
         },
         {
             "name": "sonata-project/core-bundle",
-            "version": "3.9.0",
+            "version": "3.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataCoreBundle.git",
-                "reference": "d6be7dd79a69dfeb63d75b4b0e4871d9cf4133a0"
+                "reference": "57f81fd5ec48d8260096959a8dfe9fc62a4ca836"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataCoreBundle/zipball/d6be7dd79a69dfeb63d75b4b0e4871d9cf4133a0",
-                "reference": "d6be7dd79a69dfeb63d75b4b0e4871d9cf4133a0",
+                "url": "https://api.github.com/repos/sonata-project/SonataCoreBundle/zipball/57f81fd5ec48d8260096959a8dfe9fc62a4ca836",
+                "reference": "57f81fd5ec48d8260096959a8dfe9fc62a4ca836",
                 "shasum": ""
             },
             "require": {
@@ -3726,11 +3726,15 @@
                 "php": "^5.6 || ^7.0",
                 "sonata-project/datagrid-bundle": "^2.0",
                 "symfony/config": "^2.8 || ^3.2 || ^4.0",
+                "symfony/dependency-injection": "^2.8 || ^3.2 || ^4.0",
+                "symfony/event-dispatcher": "^2.8 || ^3.2 || ^4.0",
                 "symfony/form": "^2.8 || ^3.2 || ^4.0",
                 "symfony/framework-bundle": "^2.8 || ^3.2 || ^4.0",
                 "symfony/http-foundation": "^2.8 || ^3.2 || ^4.0",
+                "symfony/http-kernel": "^2.8 || ^3.2 || ^4.0",
+                "symfony/options-resolver": "^2.8 || ^3.2 || ^4.0",
                 "symfony/property-access": "^2.8 || ^3.2 || ^4.0",
-                "symfony/security": "^2.8 || ^3.2 || ^4.0",
+                "symfony/security-csrf": "^2.8 || ^3.2 || ^4.0",
                 "symfony/translation": "^2.8 || ^3.2 || ^4.0",
                 "symfony/twig-bridge": "^2.8 || ^3.2 || ^4.0",
                 "symfony/validator": "^2.8 || ^3.2 || ^4.0",
@@ -3740,15 +3744,13 @@
             "require-dev": {
                 "doctrine/orm": "^2.4",
                 "doctrine/phpcr-odm": "^1.0",
-                "friendsofsymfony/rest-bundle": "^1.1 || ^2.0",
                 "jackalope/jackalope-doctrine-dbal": "^1.0",
-                "jms/serializer-bundle": "0.11 - 0.13 || ^1.0",
-                "matthiasnoback/symfony-config-test": "^1.1",
-                "matthiasnoback/symfony-dependency-injection-test": "^0.7",
+                "jms/serializer-bundle": "^1.0 || ^2.0",
+                "matthiasnoback/symfony-config-test": "^2.1",
+                "matthiasnoback/symfony-dependency-injection-test": "^1.1",
                 "nelmio/api-doc-bundle": "^2.11",
-                "sensio/framework-extra-bundle": "^3.0 || ^4.0 || ^5.0",
                 "sonata-project/exporter": "^1.3",
-                "symfony/phpunit-bridge": "^3.3.12 || ^4.0"
+                "symfony/phpunit-bridge": "^4.0"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -3780,7 +3782,7 @@
             "keywords": [
                 "sonata"
             ],
-            "time": "2018-01-07T10:18:00+00:00"
+            "time": "2018-02-23T16:42:24+00:00"
         },
         {
             "name": "sonata-project/datagrid-bundle",
@@ -5115,22 +5117,27 @@
         },
         {
             "name": "whiteoctober/breadcrumbs-bundle",
-            "version": "1.3.0",
+            "version": "1.4.0",
             "target-dir": "WhiteOctober/BreadcrumbsBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/whiteoctober/BreadcrumbsBundle.git",
-                "reference": "db2418502f7f7048fcd5ff81d0f5d290cded6853"
+                "reference": "640df8f8a67ee6a6f12435d10ff3bf07a6cf1473"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/whiteoctober/BreadcrumbsBundle/zipball/db2418502f7f7048fcd5ff81d0f5d290cded6853",
-                "reference": "db2418502f7f7048fcd5ff81d0f5d290cded6853",
+                "url": "https://api.github.com/repos/whiteoctober/BreadcrumbsBundle/zipball/640df8f8a67ee6a6f12435d10ff3bf07a6cf1473",
+                "reference": "640df8f8a67ee6a6f12435d10ff3bf07a6cf1473",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2",
-                "symfony/framework-bundle": "~2.0|~3.0"
+                "symfony/framework-bundle": "~2.0|~3.0|^4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^6.4",
+                "symfony/browser-kit": "~2.7|~3.0|^4.0",
+                "symfony/templating": "^3.4|^4.0"
             },
             "type": "symfony-bundle",
             "autoload": {
@@ -5154,7 +5161,7 @@
                 "breadcrumbs",
                 "symfony"
             ],
-            "time": "2018-01-09T12:58:14+00:00"
+            "time": "2018-02-22T09:14:13+00:00"
         },
         {
             "name": "willdurand/jsonp-callback-validator",
@@ -5744,7 +5751,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.6"
+        "php": ">=7.0"
     },
     "platform-dev": []
 }
