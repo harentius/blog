@@ -1918,16 +1918,16 @@
         },
         {
             "name": "harentius/blog-bundle",
-            "version": "v3.0.7",
+            "version": "v3.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/harentius/blog-bundle.git",
-                "reference": "6edc1d2c10610722400dced37f3bd95af61c1de1"
+                "reference": "a6c9b1f305ca66592a8d8660582cb3c5fb2cafc5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/harentius/blog-bundle/zipball/6edc1d2c10610722400dced37f3bd95af61c1de1",
-                "reference": "6edc1d2c10610722400dced37f3bd95af61c1de1",
+                "url": "https://api.github.com/repos/harentius/blog-bundle/zipball/a6c9b1f305ca66592a8d8660582cb3c5fb2cafc5",
+                "reference": "a6c9b1f305ca66592a8d8660582cb3c5fb2cafc5",
                 "shasum": ""
             },
             "require": {
@@ -1989,7 +1989,7 @@
                 "cms",
                 "symfony"
             ],
-            "time": "2018-02-21T18:27:21+00:00"
+            "time": "2018-02-24T22:11:44+00:00"
         },
         {
             "name": "harentius/widgets-bundle",
