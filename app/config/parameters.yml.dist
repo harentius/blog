@@ -11,3 +11,4 @@ parameters:
     google_analytics.id: UA-40176382-1
     google_analytics.hostname: auto
     discuss_user_name: folkprog
+    sharethis_property: 5a93088ce3b02a00133b311a
