@@ -1918,16 +1918,16 @@
         },
         {
             "name": "harentius/blog-bundle",
-            "version": "v3.0.8",
+            "version": "v3.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/harentius/blog-bundle.git",
-                "reference": "a6c9b1f305ca66592a8d8660582cb3c5fb2cafc5"
+                "reference": "ba2775f7af2c0b58613d3d7ab6e946e90fd66bb6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/harentius/blog-bundle/zipball/a6c9b1f305ca66592a8d8660582cb3c5fb2cafc5",
-                "reference": "a6c9b1f305ca66592a8d8660582cb3c5fb2cafc5",
+                "url": "https://api.github.com/repos/harentius/blog-bundle/zipball/ba2775f7af2c0b58613d3d7ab6e946e90fd66bb6",
+                "reference": "ba2775f7af2c0b58613d3d7ab6e946e90fd66bb6",
                 "shasum": ""
             },
             "require": {
@@ -1943,7 +1943,7 @@
                 "knplabs/knp-menu-bundle": "~2.0",
                 "knplabs/knp-paginator-bundle": "~2.4",
                 "liip/imagine-bundle": "~1.5",
-                "php": ">=5.6",
+                "php": "^7.0",
                 "presta/sitemap-bundle": "~1.4.2",
                 "sensio/distribution-bundle": "~4.0|~5.0",
                 "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
@@ -1962,6 +1962,7 @@
                 "behat/behat": "^3.4",
                 "behat/mink-extension": "2.2",
                 "behat/mink-selenium2-driver": "^1.3",
+                "behat/symfony2-extension": "^2.1",
                 "phpunit/phpunit": "~6.5"
             },
             "type": "symfony-bundle",
@@ -1989,7 +1990,7 @@
                 "cms",
                 "symfony"
             ],
-            "time": "2018-02-24T22:11:44+00:00"
+            "time": "2018-02-25T20:18:37+00:00"
         },
         {
             "name": "harentius/widgets-bundle",
