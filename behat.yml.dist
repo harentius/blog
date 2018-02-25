@@ -15,7 +15,7 @@ default:
                 - SonataListContext
                 - CleanContext
                 - BackUpContext:
-                    rootDir: '%paths.base%/tests/app'
+                    rootDir: '%paths.base%'
 
     extensions:
         Behat\MinkExtension:
