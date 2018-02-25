@@ -13,7 +13,7 @@ default:
                 - MinkContext
                 - AuthContext
                 - SonataListContext
-                - CleanContext
+#                - CleanContext
                 - BackUpContext:
                     rootDir: '%paths.base%'
 
@@ -29,4 +29,4 @@ default:
                         chromeOptions:
                             args:
                                 - "--window-size=1980,1080"
-        Behat\Symfony2Extension: ~
+#        Behat\Symfony2Extension: ~
