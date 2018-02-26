@@ -4,8 +4,8 @@ set -e; set -u
 . "$(dirname $0)/common"
 
 write_title "Cleaning assets"
-rm -f "$WEB_DIR/js/"*
-rm -f "$WEB_DIR/css/"*
+rm -f "$web_dir/js/"*
+rm -f "$web_dir/css/"*
 
 write_title "Installing assets"
 exec_console assets:install --symlink "$@"
