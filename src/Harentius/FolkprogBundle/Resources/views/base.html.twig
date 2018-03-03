@@ -10,6 +10,18 @@
     <script src="{{ asset('build/common-folkprog.js') }}"></script>
 {% endblock common_javascripts %}
 
+{% block head_extra %}
+    {% if app.environment == 'prod' %}
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-8463813510139079",
+        enable_page_level_ads: true
+      });
+    </script>
+    {% endif %}
+{% endblock %}
+
 {% block footer_content %}
 <div class="row">
     <div class="col-lg-4 col-md-4 col-sm-3 col-xs-3 text-left footer-widgets">
@@ -29,7 +41,7 @@
 
 {% block sidebar_after_content %}
     {{ harentius_widget('widgets_block_sidebar') }}
-    {% if app.environment != 'dev' %}
+    {% if app.environment == 'prod' %}
         <!-- folkprog regular -->
         <ins class="adsbygoogle"
              style="display:block"
@@ -42,6 +54,3 @@
     {% endif %}
 {% endblock %}
 
-{% block last_body_content %}
-    {#<div class="text-center footer-counters">{{ harentius_widget('widgets_block_bottom') }}</div>#}
-{% endblock %}

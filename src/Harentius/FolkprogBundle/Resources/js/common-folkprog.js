@@ -2,7 +2,6 @@
 import $ from 'jquery';
 
 $(function() {
-  $.getScript( "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js");
   const $adsenceArticlesLoader = $('.content-12345');
   const $adsenceCategoryLoader = $('.a-content-category');
   const isShowCategoryAd = location.href.match(/\/category\//);
