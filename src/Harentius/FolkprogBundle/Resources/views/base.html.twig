@@ -7,7 +7,15 @@
 
 {% block common_javascripts %}
     {{ parent() }}
-    <script src="{{ asset('build/common-folkprog.js') }}"></script>
+    {% if app.environment != 'dev' %}
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-8463813510139079",
+        enable_page_level_ads: true
+      });
+    </script>
+    {% endif %}
 {% endblock common_javascripts %}
 
 {% block footer_content %}
@@ -29,19 +37,4 @@
 
 {% block sidebar_after_content %}
     {{ harentius_widget('widgets_block_sidebar') }}
-    {% if app.environment != 'dev' %}
-        <!-- folkprog regular -->
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-8463813510139079"
-             data-ad-slot="8719005747"
-             data-ad-format="auto"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    {% endif %}
-{% endblock %}
-
-{% block last_body_content %}
-    {#<div class="text-center footer-counters">{{ harentius_widget('widgets_block_bottom') }}</div>#}
 {% endblock %}
