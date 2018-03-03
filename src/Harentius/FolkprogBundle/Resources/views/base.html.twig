@@ -7,7 +7,7 @@
 
 {% block common_javascripts %}
     {{ parent() }}
-    {% if app.environment === 'prod' %}
+    {% if app.environment != 'dev' %}
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({
