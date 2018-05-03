@@ -11,9 +11,14 @@ services:
             - ./support/ci/nginx.vh.conf:/etc/nginx/conf.d/default.conf:ro
         links:
             - mysql
-
+        environment:
+            DATABASE_HOST: mysql
+            DATABASE_PORT: 3306
+            DATABASE_NAME: folkprog
+            DATABASE_USER: root
+            DATABASE_PASSWORD: 1111
     mysql:
-        image: mysql
+        image: mysql:5.7
         container_name: folkprog_mysql
         environment:
             MYSQL_ROOT_PASSWORD: 1111
