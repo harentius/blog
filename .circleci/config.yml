@@ -13,9 +13,9 @@ jobs:
             - composer-bin-cs-fixer-v1-
       - run: (cd vendor-bin/php-cs-fixer && composer install --no-interaction)
       - save_cache:
-          key: composer-bin-cs-fixer-{{ checksum "vendor-bin/php-cs-fixer/composer.lock" }}
+          key: composer-bin-cs-fixer-v1-{{ checksum "vendor-bin/php-cs-fixer/composer.lock" }}
           paths:
-            - vendor-bin/php-cs-fixer-v1/vendor
+            - vendor-bin/php-cs-fixer/vendor
       - run: composer cs-check
 
 workflows:
