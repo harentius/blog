@@ -57,7 +57,6 @@
         "bamarni-bin": {
             "bin-links": false
         }
-
     },
     "require-dev": {
         "bamarni/composer-bin-plugin": "^1.3"
