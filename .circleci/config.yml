@@ -9,13 +9,11 @@ jobs:
       - run: sudo composer self-update
       - restore_cache:
           keys:
-            - composer-v1-{{ checksum "vendor-bin/php-cs-fixer/composer.lock" }}
-            - composer-v1-
-          paths:
-            - vendor-bin/php-cs-fixer/vendor
+            - composer-bin-cs-fixer-{{ checksum "vendor-bin/php-cs-fixer/composer.lock" }}
+            - composer-bin-cs-fixer-
       - run: (cd vendor-bin/php-cs-fixer && composer install --no-interaction)
       - save_cache:
-          key: composer-v1-{{ checksum "vendor-bin/php-cs-fixer/composer.lock" }}
+          key: composer-bin-cs-fixer-{{ checksum "vendor-bin/php-cs-fixer/composer.lock" }}
           paths:
             - vendor-bin/php-cs-fixer/vendor
       - run: composer cs-check
