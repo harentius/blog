@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "7410787595ac7bd12e0db84f2ea819aa",
+    "content-hash": "6da7b37016f094383bbeab6a9b7636c7",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -1476,64 +1476,6 @@
                 "reflection"
             ],
             "time": "2018-06-14T14:45:07+00:00"
-        },
-        {
-            "name": "egulias/email-validator",
-            "version": "2.1.11",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/egulias/EmailValidator.git",
-                "reference": "92dd169c32f6f55ba570c309d83f5209cefb5e23"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/92dd169c32f6f55ba570c309d83f5209cefb5e23",
-                "reference": "92dd169c32f6f55ba570c309d83f5209cefb5e23",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/lexer": "^1.0.1",
-                "php": ">= 5.5"
-            },
-            "require-dev": {
-                "dominicsayers/isemail": "dev-master",
-                "phpunit/phpunit": "^4.8.35||^5.7||^6.0",
-                "satooshi/php-coveralls": "^1.0.1",
-                "symfony/phpunit-bridge": "^4.4@dev"
-            },
-            "suggest": {
-                "ext-intl": "PHP Internationalization Libraries are required to use the SpoofChecking validation"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Egulias\\EmailValidator\\": "EmailValidator"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Eduardo Gulias Davis"
-                }
-            ],
-            "description": "A library for validating emails against several RFCs",
-            "homepage": "https://github.com/egulias/EmailValidator",
-            "keywords": [
-                "email",
-                "emailvalidation",
-                "emailvalidator",
-                "validation",
-                "validator"
-            ],
-            "time": "2019-08-13T17:33:27+00:00"
         },
         {
             "name": "eko/feedbundle",
@@ -3267,16 +3209,16 @@
         },
         {
             "name": "sonata-project/admin-bundle",
-            "version": "3.54.1",
+            "version": "3.55.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "98d54eac2b80c9c5ebe774c5a01194e59f70f70e"
+                "reference": "223ba5c7f3d1c306a164fc0d06dace2a1ae53e2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/98d54eac2b80c9c5ebe774c5a01194e59f70f70e",
-                "reference": "98d54eac2b80c9c5ebe774c5a01194e59f70f70e",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/223ba5c7f3d1c306a164fc0d06dace2a1ae53e2f",
+                "reference": "223ba5c7f3d1c306a164fc0d06dace2a1ae53e2f",
                 "shasum": ""
             },
             "require": {
@@ -3314,6 +3256,7 @@
                 "twig/twig": "^2.10"
             },
             "conflict": {
+                "doctrine/doctrine-bundle": ">=2",
                 "jms/di-extra-bundle": "<1.9",
                 "sonata-project/media-bundle": "<3.7",
                 "sonata-project/user-bundle": "<3.3"
@@ -3369,7 +3312,7 @@
                 "bootstrap",
                 "sonata"
             ],
-            "time": "2019-10-14T17:16:15+00:00"
+            "time": "2019-11-25T21:49:56+00:00"
         },
         {
             "name": "sonata-project/block-bundle",
@@ -4041,68 +3984,6 @@
             "time": "2017-12-24T16:06:50+00:00"
         },
         {
-            "name": "swiftmailer/swiftmailer",
-            "version": "v6.2.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "149cfdf118b169f7840bbe3ef0d4bc795d1780c9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/149cfdf118b169f7840bbe3ef0d4bc795d1780c9",
-                "reference": "149cfdf118b169f7840bbe3ef0d4bc795d1780c9",
-                "shasum": ""
-            },
-            "require": {
-                "egulias/email-validator": "~2.0",
-                "php": ">=7.0.0",
-                "symfony/polyfill-iconv": "^1.0",
-                "symfony/polyfill-intl-idn": "^1.10",
-                "symfony/polyfill-mbstring": "^1.0"
-            },
-            "require-dev": {
-                "mockery/mockery": "~0.9.1",
-                "symfony/phpunit-bridge": "^3.4.19|^4.1.8"
-            },
-            "suggest": {
-                "ext-intl": "Needed to support internationalized email addresses",
-                "true/punycode": "Needed to support internationalized email addresses, if ext-intl is not installed"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "6.2-dev"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "lib/swift_required.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Chris Corbyn"
-                },
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                }
-            ],
-            "description": "Swiftmailer, free feature-rich PHP mailer",
-            "homepage": "https://swiftmailer.symfony.com",
-            "keywords": [
-                "email",
-                "mail",
-                "mailer"
-            ],
-            "time": "2019-11-12T09:31:26+00:00"
-        },
-        {
             "name": "symfony-cmf/routing",
             "version": "2.1.0",
             "source": {
@@ -4424,65 +4305,6 @@
                 "ctype",
                 "polyfill",
                 "portable"
-            ],
-            "time": "2019-08-06T08:03:45+00:00"
-        },
-        {
-            "name": "symfony/polyfill-iconv",
-            "version": "v1.12.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/polyfill-iconv.git",
-                "reference": "685968b11e61a347c18bf25db32effa478be610f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-iconv/zipball/685968b11e61a347c18bf25db32effa478be610f",
-                "reference": "685968b11e61a347c18bf25db32effa478be610f",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "suggest": {
-                "ext-iconv": "For best performance"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.12-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Iconv\\": ""
-                },
-                "files": [
-                    "bootstrap.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Grekas",
-                    "email": "p@tchwork.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony polyfill for the Iconv extension",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "compatibility",
-                "iconv",
-                "polyfill",
-                "portable",
-                "shim"
             ],
             "time": "2019-08-06T08:03:45+00:00"
         },
@@ -4840,71 +4662,6 @@
             "time": "2018-12-13T16:51:15+00:00"
         },
         {
-            "name": "symfony/swiftmailer-bundle",
-            "version": "v3.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/swiftmailer-bundle.git",
-                "reference": "553d2474288349faed873da8ab7c1551a00d26ae"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/swiftmailer-bundle/zipball/553d2474288349faed873da8ab7c1551a00d26ae",
-                "reference": "553d2474288349faed873da8ab7c1551a00d26ae",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.1",
-                "swiftmailer/swiftmailer": "^6.1.3",
-                "symfony/config": "^4.3.8|^5.0",
-                "symfony/dependency-injection": "^4.3.8|^5.0",
-                "symfony/http-kernel": "^4.3.8|^5.0"
-            },
-            "conflict": {
-                "twig/twig": "<1.41|<2.10"
-            },
-            "require-dev": {
-                "symfony/console": "^4.3.8|^5.0",
-                "symfony/framework-bundle": "^4.3.8|^5.0",
-                "symfony/phpunit-bridge": "^4.3.8|^5.0",
-                "symfony/yaml": "^4.3.8|^5.0"
-            },
-            "suggest": {
-                "psr/log": "Allows logging"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.4-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Bundle\\SwiftmailerBundle\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "http://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony SwiftmailerBundle",
-            "homepage": "http://symfony.com",
-            "time": "2019-11-14T16:18:31+00:00"
-        },
-        {
             "name": "symfony/symfony",
             "version": "v4.4.0",
             "source": {
@@ -5080,6 +4837,34 @@
             "time": "2019-11-21T07:08:41+00:00"
         },
         {
+            "name": "symfony/twig-pack",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/twig-pack.git",
+                "reference": "8b278ea4b61fba7c051f172aacae6d87ef4be0e0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/twig-pack/zipball/8b278ea4b61fba7c051f172aacae6d87ef4be0e0",
+                "reference": "8b278ea4b61fba7c051f172aacae6d87ef4be0e0",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0",
+                "symfony/twig-bundle": "*",
+                "twig/extra-bundle": "^2.12|^3.0",
+                "twig/twig": "^2.12|^3.0"
+            },
+            "type": "symfony-pack",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A Twig pack for Symfony projects",
+            "time": "2019-10-17T05:44:22+00:00"
+        },
+        {
             "name": "theofidry/alice-data-fixtures",
             "version": "v1.1.1",
             "source": {
@@ -5212,6 +4997,65 @@
                 "text"
             ],
             "time": "2018-12-05T18:34:18+00:00"
+        },
+        {
+            "name": "twig/extra-bundle",
+            "version": "v3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twigphp/twig-extra-bundle.git",
+                "reference": "c56821429490e351003a09b7ed0c917feec2355f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twigphp/twig-extra-bundle/zipball/c56821429490e351003a09b7ed0c917feec2355f",
+                "reference": "c56821429490e351003a09b7ed0c917feec2355f",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1.3",
+                "symfony/framework-bundle": "^4.3|^5.0",
+                "symfony/twig-bundle": "^4.3|^5.0",
+                "twig/twig": "^2.4|^3.0"
+            },
+            "require-dev": {
+                "twig/cssinliner-extra": "^2.12|^3.0@dev",
+                "twig/html-extra": "^2.12@dev|^3.0@dev",
+                "twig/inky-extra": "^2.12@dev|^3.0@dev",
+                "twig/intl-extra": "^2.12@dev|^3.0@dev",
+                "twig/markdown-extra": "^2.12@dev|^3.0@dev"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Twig\\Extra\\TwigExtraBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com",
+                    "homepage": "http://fabien.potencier.org",
+                    "role": "Lead Developer"
+                }
+            ],
+            "description": "A Symfony bundle for extra Twig extensions",
+            "homepage": "https://twig.symfony.com",
+            "keywords": [
+                "bundle",
+                "extra",
+                "twig"
+            ],
+            "time": "2019-10-17T07:30:08+00:00"
         },
         {
             "name": "twig/twig",
