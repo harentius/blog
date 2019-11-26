@@ -36,7 +36,6 @@
 /bin/security-checker
 /bin/doctrine-migrations
 /node_modules/
-/behat.yml
 !/web/assets/build
 /.env
 /vendor-bin/**/vendor
