@@ -31,6 +31,8 @@ class AppKernel extends Kernel
             new Eko\FeedBundle\EkoFeedBundle(),
             new Liip\ImagineBundle\LiipImagineBundle(),
             new Hautelook\AliceBundle\HautelookAliceBundle(),
+            new Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle(),
+            new Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle(),
             new Harentius\WidgetsBundle\HarentiusWidgetsBundle(),
             new Harentius\BlogBundle\HarentiusBlogBundle(),
             new Harentius\FolkprogBundle\HarentiusFolkprogBundle(),
@@ -39,7 +41,6 @@ class AppKernel extends Kernel
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
             $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
-            $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
 
             if ('dev' === $this->getEnvironment()) {
                 $bundles[] = new Symfony\Bundle\WebServerBundle\WebServerBundle();

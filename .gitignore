@@ -39,3 +39,5 @@
 /behat.yml
 !/web/assets/build
 /.env
+/vendor-bin/**/vendor
+/.php_cs.cache
