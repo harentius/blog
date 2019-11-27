@@ -4,7 +4,7 @@ framework:
     assets:
         packages:
             harentius_blog:
-                json_manifest_path: '%kernel.project_dir%/web/bundles/harentiusblog/build/manifest.json'
+                json_manifest_path: '%kernel.project_dir%/public/bundles/harentiusblog/build/manifest.json'
 
 stof_doctrine_extensions:
     default_locale: '%locale%'
@@ -63,13 +63,17 @@ liip_imagine:
 
 doctrine:
     dbal:
-        driver:   'pdo_mysql'
-        host:     "%database_host%"
-        port:     "%database_port%"
-        dbname:   "%database_name%"
-        user:     "%database_user%"
-        password: "%database_password%"
-        charset:  'UTF8'
+        url: '%env(resolve:DATABASE_URL)%'
+
+        # IMPORTANT: You MUST configure your db driver and server version,
+        # either here or in the DATABASE_URL env var (see .env file)
+        #driver: 'mysql'
+        #server_version: '5.7'
+
+        # Only needed for MySQL (ignored otherwise)
+        charset: utf8mb4
+        default_table_options:
+            collate: utf8mb4_unicode_ci
     orm:
         auto_generate_proxy_classes: true
         naming_strategy: 'doctrine.orm.naming_strategy.underscore'
