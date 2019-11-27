@@ -1,9 +1,4 @@
 parameters:
-    mailer_transport:  smtp
-    mailer_host:       127.0.0.1
-    mailer_user:       ~
-    mailer_password:   ~
-
     secret:            c3f38db32e345346c1965fa7573944508f739b8a
 
     vk_appi_id: 5025064

@@ -1,17 +1,16 @@
 {
-    "name": "symfony/framework-standard-edition",
+    "name": "Folkprog",
     "license": "MIT",
     "type": "project",
-    "description": "The \"Symfony Standard Edition\" distribution",
+    "description": "Folkprog website sources",
     "minimum-stability": "dev",
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Harentius\\BlogBundle\\": "src/Harentius/BlogBundle/src",
-            "": "src/",
-            "SymfonyStandard\\": "app/"
-        },
-        "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
+            "Harentius\\FolkprogBundle\\": "src/Harentius/FolkprogBundle",
+            "App\\": "src/"
+        }
     },
     "require": {
         "php": "^7.0",

@@ -1,11 +1,4 @@
-/web/bundles/
-/app/bootstrap.php.cache
-/app/cache/*
-/app/config/parameters.yml
-/app/logs/*
-!app/cache/.gitkeep
-!app/logs/.gitkeep
-/app/phpunit.xml
+/config/packages/parameters.yml
 /build/
 /vendor/
 
@@ -14,19 +7,6 @@
 /bin/security-checker
 /bin/doctrine-migrations
 
-/web/bundles/*
-/web/css/*
-/web/js/*
-/web/assets/*
-/web/assets/images/*
-!/web/assets/images/.gitignore
-/web/assets/audios/*
-!/web/assets/audios/.gitignore
-/var/dump/*
-!/var/dump/.gitkeep
-!/var/tmp/.gitkeep
-/var/db-dumps/*
-/web/sitemap.*
 /.env
 /.allow_unsafe_bins
 /bin/dump-and-load-prod-data
@@ -36,7 +16,16 @@
 /bin/security-checker
 /bin/doctrine-migrations
 /node_modules/
-!/web/assets/build
+!/public/assets/build
 /.env
 /vendor-bin/**/vendor
 /.php_cs.cache
+/var/
+/public/bundles/
+/public/css/*
+/public/js/*
+/public/assets/*
+/public/assets/images/*
+!/public/assets/images/.gitignore
+/public/assets/audios/*
+!/public/assets/audios/.gitignore
