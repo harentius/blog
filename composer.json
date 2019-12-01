@@ -7,7 +7,7 @@
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "Harentius\\BlogBundle\\": "src/Harentius/BlogBundle/src",
+            "Harentius\\BlogBundle\\": "src/BlogBundle/src",
             "Harentius\\FolkprogBundle\\": "src/Harentius/FolkprogBundle",
             "App\\": "src/"
         }
@@ -27,7 +27,7 @@
         "symfony/twig-pack": "*",
         "symfony/yaml": "4.4.*",
         "stof/doctrine-extensions-bundle": "^1.3",
-        "sonata-project/admin-bundle": "^3.54",
+        "sonata-project/admin-bundle": "^3.55",
         "sonata-project/doctrine-orm-admin-bundle": "^3.12",
         "sonata-project/translation-bundle": "^2.4",
         "doctrine/orm": "^2.7",
