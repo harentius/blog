@@ -1,0 +1,22 @@
+framework:
+    secret: '%secret%'
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    #serializer:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+        form:
+            resources:
+                - 'SonataCoreBundle:Form:datepicker.html.twig'
+        #assets_version: SomeVersionScheme
+    default_locale:  '%locale%'
+    trusted_hosts:   ~
+    session:
+        # handler_id set to null will use default session handler from php.ini
+        handler_id:  ~
+        name: FOLKPROG_SESID
+    fragments:       ~
+    http_method_override: true
+    assets:
+        json_manifest_path: '%kernel.project_dir%/public/build/manifest.json'

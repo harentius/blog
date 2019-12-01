@@ -1,0 +1,7 @@
+twig:
+    debug: '%kernel.debug%'
+    strict_variables: '%kernel.debug%'
+    globals:
+        google_analytics_id: '%google_analytics.id%'
+        google_analytics_hostname: '%google_analytics.hostname%'
+        discuss_user_name: '%discuss_user_name%'

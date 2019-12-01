@@ -21,76 +21,6 @@ parameters:
     image_previews_base_uri: /assets/images/preview/
     apc_global_prefix: folkprog_net
 
-    database_host: '%env(DATABASE_HOST)%'
-    database_port: '%env(DATABASE_PORT)%'
-    database_name: '%env(DATABASE_NAME)%'
-    database_user: '%env(DATABASE_USER)%'
-    database_password: '%env(DATABASE_PASSWORD)%'
-
-framework:
-    secret: '%secret%'
-    form:            ~
-    csrf_protection: ~
-    validation:      { enable_annotations: true }
-    #serializer:      { enable_annotations: true }
-    templating:
-        engines: ['twig']
-        form:
-            resources:
-                - 'SonataCoreBundle:Form:datepicker.html.twig'
-        #assets_version: SomeVersionScheme
-    default_locale:  '%locale%'
-    trusted_hosts:   ~
-    session:
-        # handler_id set to null will use default session handler from php.ini
-        handler_id:  ~
-        name: FOLKPROG_SESID
-    fragments:       ~
-    http_method_override: true
-    assets:
-        json_manifest_path: '%kernel.project_dir%/public/build/manifest.json'
-
-# Twig Configuration
-twig:
-    debug:            '%kernel.debug%'
-    strict_variables: '%kernel.debug%'
-    globals:
-        vk_appi_id: '%vk_appi_id%'
-        google_analytics_id: '%google_analytics.id%'
-        google_analytics_hostname: '%google_analytics.hostname%'
-        discuss_user_name: '%discuss_user_name%'
-
-harentius_blog:
-    locales: ['en', 'ru']
-    primary_locale: 'ru'
-    articles:
-        image_previews_base_uri: '%image_previews_base_uri%'
-        sharethis:
-            property: '%sharethis_property%'
-            product: 'inline-share-buttons'
-    sidebar:
-        # ~ - no cache, 0 - unlimited cache
-        cache_lifetime: '%sidebar_cache_lifetime%'
-        # Max tags number (ordered by max popularity)
-        tags_limit: '%sidebar_tags_limit%'
-        # Percent tags size, unlimited variants number (valid values: [50, 100], [25, 50, 75, 100], etc)
-        tag_sizes: '%sidebar_tag_sizes%'
-    homepage:
-        # ~ - no page, feed only or page slug
-        page_slug: '%homepage_page_slug%'
-        # ~ - no feed
-        feed:
-            # ~ - all
-            category: '%homepage_feed_category%'
-            # Last articles number
-            number: '%homepage_feed_number%'
-    list:
-        posts_per_page: '%list_posts_per_page%'
-    # For avoiding internal apc cache conflicts if run multiple sites on one server.
-    cache:
-        apc_global_prefix: '%apc_global_prefix%'
-        statistics_cache_lifetime: '%statistics_cache_lifetime%'
-
 harentius_widgets:
     routes:
         harentius_blog_homepage:
@@ -109,17 +39,3 @@ harentius_widgets:
         widgets_block_bottom_right: 'Bottom right'
         widgets_block_after_second_article_preview: 'After second article preview'
 
-eko_feed:
-    feeds:
-        article:
-            title: 'Народное программирование'
-            description: 'Новые публикации'
-            link:
-                route_name: 'harentius_blog_homepage'
-            encoding: 'utf-8'
-            author: 'Harentius'
-
-doctrine:
-    dbal:
-        driver: pdo_mysql
-        server_version: 5.5

@@ -27,7 +27,6 @@ return [
     Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle::class => ['all' => true],
     Harentius\WidgetsBundle\HarentiusWidgetsBundle::class => ['all' => true],
     Harentius\BlogBundle\HarentiusBlogBundle::class => ['all' => true],
-    Harentius\FolkprogBundle\HarentiusFolkprogBundle::class => ['all' => true],
     Symfony\Bundle\DebugBundle\DebugBundle::class => ['dev' => true, 'test' => true],
     Symfony\Bundle\WebProfilerBundle\WebProfilerBundle::class => ['dev' => true, 'test' => true],
 ];

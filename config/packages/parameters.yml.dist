@@ -1,8 +1,5 @@
 parameters:
     secret:            c3f38db32e345346c1965fa7573944508f739b8a
-
-    vk_appi_id: 5025064
-
     google_analytics.id: UA-40176382-1
     google_analytics.hostname: auto
     discuss_user_name: folkprog
