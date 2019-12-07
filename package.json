@@ -4,13 +4,16 @@
   "repository": "git@github.com:harentius/folkprog.git",
   "author": "Yaroslav Osypenko <yaroslav.osypenko@gmail.com>",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "@symfony/webpack-encore": "^0.28.2"
+  },
   "devDependencies": {
     "pre-commit": "^1.2.2"
   },
   "scripts": {
     "build": "cd src/BlogBundle && OUTPUT_PATH='../../public/bundles/harentiusblog/build' ./node_modules/.bin/encore production",
     "watch": "cd src/BlogBundle && OUTPUT_PATH='../../public/bundles/harentiusblog/build' ./node_modules/.bin/encore dev --watch",
+    "build:folkprog": "encore production",
     "lint": "cd src/BlogBundle && ./node_modules/.bin/eslint src/Resources/js/**/**.js",
     "build-blog-and-git-add": "cd src/BlogBundle && npm run build && git add src/Resources/public/*"
   },

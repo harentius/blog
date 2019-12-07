@@ -1,7 +1,7 @@
-/config/packages/parameters.yml
-/build/
 /vendor/
-
+/node_modules/
+/config/packages/parameters.yml
+/public/build
 /bin/doctrine
 /bin/doctrine.php
 /bin/security-checker
@@ -15,7 +15,7 @@
 /bin/doctrine.php
 /bin/security-checker
 /bin/doctrine-migrations
-/node_modules/
+
 !/public/assets/build
 /.env
 /vendor-bin/**/vendor
