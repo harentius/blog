@@ -9,7 +9,7 @@
         "psr-4": {
             "Harentius\\BlogBundle\\": "src/BlogBundle/src",
             "Harentius\\FolkprogBundle\\": "src/Harentius/FolkprogBundle",
-            "App\\": "src/"
+            "App\\": "src/App/"
         }
     },
     "require": {
