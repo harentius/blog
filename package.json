@@ -14,7 +14,8 @@
     "build": "cd src/BlogBundle && OUTPUT_PATH='../../public/bundles/harentiusblog/build' ./node_modules/.bin/encore production",
     "watch": "cd src/BlogBundle && OUTPUT_PATH='../../public/bundles/harentiusblog/build' ./node_modules/.bin/encore dev --watch",
     "build:folkprog": "encore production",
-    "lint": "cd src/BlogBundle && ./node_modules/.bin/eslint src/Resources/js/**/**.js",
+    "lint": "cd src/BlogBundle && npm run lint",
+    "lint-fix": "cd src/BlogBundle && npm run lint-fix",
     "build-blog-and-git-add": "cd src/BlogBundle && npm run build && git add src/Resources/public/*"
   },
   "pre-commit": [
