@@ -28,7 +28,7 @@ jobs:
             keys:
               - composer-v1-{{ checksum "composer.lock" }}
               - composer-v1-
-      -   run: composer install --no-interaction
+      -   run: composer install --no-interaction --ignore-platform-reqs
       -   save_cache:
             key: composer-v1-{{ checksum "composer.lock" }}
             paths:
