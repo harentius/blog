@@ -16,6 +16,7 @@ return [
     Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle::class => ['all' => true],
     Sonata\AdminBundle\SonataAdminBundle::class => ['all' => true],
     Sonata\TranslationBundle\SonataTranslationBundle::class => ['all' => true],
+    Sonata\Doctrine\Bridge\Symfony\Bundle\SonataDoctrineBundle::class => ['all' => true],
     FOS\JsRoutingBundle\FOSJsRoutingBundle::class => ['all' => true],
     Presta\SitemapBundle\PrestaSitemapBundle::class => ['all' => true],
     Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle::class => ['all' => true],
