@@ -50,7 +50,8 @@
     "scripts": {
         "cs-check": "vendor-bin/php-cs-fixer/vendor/bin/php-cs-fixer fix --dry-run --diff -v --diff-format=udiff --ansi",
         "cs-fix": "vendor-bin/php-cs-fixer/vendor/bin/php-cs-fixer fix --diff -v --diff-format=udiff --ansi",
-        "phpstan": "vendor/bin/phpstan analyse src --memory-limit=768M --level=1"
+        "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon src --memory-limit=768M --level=2",
+        "phpstan-next": "vendor/bin/phpstan analyse -c phpstan.neon src --memory-limit=768M --level=3"
     },
     "config": {
         "bin-dir": "vendor/bin"
