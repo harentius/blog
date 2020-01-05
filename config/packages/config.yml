@@ -1,6 +1,5 @@
 imports:
     - { resource: '@HarentiusBlogBundle/Resources/config/config.yml' }
-    - { resource: '@HarentiusBlogBundle/Resources/config/security.yml' }
     - { resource: '@HarentiusWidgetsBundle/Resources/config/config.yml' }
 
 parameters:
