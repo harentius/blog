@@ -44,7 +44,8 @@
         "liip/imagine-bundle": "^2.2",
         "monolog/monolog": "^1.22",
         "symfony/dotenv": "^5.0",
-        "mhujer/breadcrumbs-bundle": "^1.5"
+        "mhujer/breadcrumbs-bundle": "^1.5",
+        "symfony/intl": "^4.4"
     },
     "scripts": {
         "cs-check": "vendor-bin/php-cs-fixer/vendor/bin/php-cs-fixer fix --dry-run --diff -v --diff-format=udiff --ansi",
