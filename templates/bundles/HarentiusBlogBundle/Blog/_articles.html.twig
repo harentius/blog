@@ -1,7 +1,5 @@
 {% extends '@HarentiusBlog/Blog/_base_articles.html.twig' %}
 
 {% block loop_end %}
-    {% if loop.index == 2 %}
-        {{ harentius_widget('widgets_block_after_second_article_preview') }}
-    {% endif %}
+    <div class="a-content-category"></div>
 {% endblock %}

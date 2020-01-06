@@ -25,7 +25,6 @@ return [
     Hautelook\AliceBundle\HautelookAliceBundle::class => ['all' => true],
     Fidry\AliceDataFixtures\Bridge\Symfony\FidryAliceDataFixturesBundle::class => ['all' => true],
     Nelmio\Alice\Bridge\Symfony\NelmioAliceBundle::class => ['all' => true],
-    Harentius\WidgetsBundle\HarentiusWidgetsBundle::class => ['all' => true],
     Harentius\BlogBundle\HarentiusBlogBundle::class => ['all' => true],
     Symfony\Bundle\DebugBundle\DebugBundle::class => ['dev' => true, 'test' => true],
     Symfony\Bundle\WebProfilerBundle\WebProfilerBundle::class => ['dev' => true, 'test' => true],

@@ -38,7 +38,7 @@ class Statistics
     /**
      * @return array
      */
-    public function getAll()
+    public function getAll(): array
     {
         $key = 'statistics';
 

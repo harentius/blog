@@ -25,7 +25,6 @@
 {% block footer_content %}
 <div class="row">
     <div class="col-lg-4 col-md-4 col-sm-3 col-xs-3 text-left footer-widgets">
-        {{ harentius_widget('widgets_block_bottom_left') }}
     </div>
     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 footer-copyright">
         <p>© <a href="{{ url('harentius_blog_homepage') }}">folkprog.net</a>, 2012-{{ 'now'|date('Y') }}</p>
@@ -34,13 +33,14 @@
         <p>За указание ссылки на источник - спасибо.</p>
     </div>
     <div class="col-lg-4 col-md-4 col-sm-3 col-xs-3 text-right footer-widgets">
-        {{ harentius_widget('widgets_block_bottom_right') }}
+        <a href="http://adment.org.ua" target="_blank">
+            <img width="88" height="31" src="/img/adment_88_31.png" alt="Админские развлечения - танцы с бубном на досуге" title="Админские развлечения - танцы с бубном на досуге"/>
+        </a>
     </div>
 </div>
 {% endblock %}
 
 {% block sidebar_after_content %}
-    {{ harentius_widget('widgets_block_sidebar') }}
     {% if app.environment == 'prod' %}
         <!-- folkprog regular -->
         <ins class="adsbygoogle"

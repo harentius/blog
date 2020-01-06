@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "72a80c4e5c8eec927b8a8ee2b09e8afc",
+    "content-hash": "3efce618e0d1f50872f4dd36437160e9",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -1728,49 +1728,6 @@
                 "uploadable"
             ],
             "time": "2019-11-08T22:33:07+00:00"
-        },
-        {
-            "name": "harentius/widgets-bundle",
-            "version": "v1.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/harentius/widgets-bundle.git",
-                "reference": "216b5d63838de2511e140373ec687a711c672ac5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/harentius/widgets-bundle/zipball/216b5d63838de2511e140373ec687a711c672ac5",
-                "reference": "216b5d63838de2511e140373ec687a711c672ac5",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0",
-                "sonata-project/admin-bundle": ">=2.1",
-                "symfony/framework-bundle": ">=2.5"
-            },
-            "type": "symfony-bundle",
-            "autoload": {
-                "psr-4": {
-                    "Harentius\\WidgetsBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Yaroslav Osypenko",
-                    "email": "yaroslav.osypenko@gmail.com",
-                    "homepage": "http://folkprog.net"
-                }
-            ],
-            "description": "Symfony Bundle for easy creating and managing client-side widgets",
-            "homepage": "http://folkprog.net/en/widgets-bundle/",
-            "keywords": [
-                "Symfony widgets"
-            ],
-            "time": "2017-06-13T19:55:08+00:00"
         },
         {
             "name": "hautelook/alice-bundle",
