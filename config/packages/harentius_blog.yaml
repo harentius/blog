@@ -27,4 +27,3 @@ harentius_blog:
     # For avoiding internal apc cache conflicts if run multiple sites on one server.
     cache:
         apc_global_prefix: '%apc_global_prefix%'
-        statistics_cache_lifetime: '%statistics_cache_lifetime%'

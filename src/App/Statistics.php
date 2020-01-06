@@ -1,6 +1,6 @@
 <?php
 
-namespace Harentius\BlogBundle;
+namespace App;
 
 use Doctrine\Common\Cache\CacheProvider;
 use Harentius\BlogBundle\Entity\ArticleRepository;

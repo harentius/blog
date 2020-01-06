@@ -1,9 +1,18 @@
-# Learn more about services, parameters and containers at
-# http://symfony.com/doc/current/book/service_container.html
+imports:
+    - { resource: 'services/*' }
+
 parameters:
-#    parameter_name: value
 
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    _defaults:
+        public: false
+        autowire: true
+
+    App\EventSubscriber\OverrideArticleRepositorySubscriber:
+        tags:
+            - { name: 'doctrine.event_subscriber' }
+
+    Harentius\BlogBundle\Menu\MenuBuilder:
+        class: App\Menu\MenuBuilder
+        arguments:
+            $homepageSlug: '%harentius_blog.homepage.page_slug%'

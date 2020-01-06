@@ -31,7 +31,7 @@
             просмотрено <span class="stat-value">{{ stats.viewsCount|localizednumber }}</span> страниц,
             поставлено <span class="stat-value">{{ stats.likesCount|localizednumber }}</span> лайк и
             <span class="stat-value">{{ stats.disLikesCount|localizednumber }}</span> дизлайк{% if stats.disLikesCount > 0 %} (простите за это =) ){% endif %}.
-            Наиболее популярная заметка: <a href="{{ publication_path_for_slug(stats.mostPopularArticleData.slug) }}">{{ stats.mostPopularArticleData.title }}</a>
+            Наиболее популярная заметка: <a href="{{ path('harentius_blog_show_default', {'slug': stats.mostPopularArticleData.slug}) }}">{{ stats.mostPopularArticleData.title }}</a>
             (<span class="stat-value">{{ stats.mostPopularArticleData.viewsCount }}</span> просмотров)
         </p>
         <h4>Ресурсы/благодарности</h4>

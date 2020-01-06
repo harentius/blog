@@ -1,0 +1,14 @@
+services:
+    _defaults:
+        public: false
+        autowire: true
+
+    harentius_blog.statistics_cache:
+        class: Doctrine\Common\Cache\ApcuCache
+        calls:
+            - [ setNamespace, [ '%harentius_blog.cache.apc_global_prefix%_statistics' ] ]
+
+    App\Statistics:
+        arguments:
+            $cache: '@harentius_blog.statistics_cache'
+            $cacheLifetime: '%statistics_cache_lifetime%'
