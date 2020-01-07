@@ -1,10 +1,52 @@
 #!/bin/sh
 
 set -e; set -u
-. "$(dirname $0)/common"
+. "$(dirname $0)/.common"
 
-write_title "Optimizing images"
-cd "$WEB_DIR/assets/images"
-find -type f -name '*.png' -mtime -1 | xargs optipng -o7
-find -type f -name '*.jpg' -mtime -1 | xargs jpegoptim
+if ! [ -x "$(command -v pngquant)" ]; then
+  echo 'Error: pngquant is not installed.' >&2
+  exit 1
+fi
+
+if ! [ -x "$(command -v jpegoptim)" ]; then
+  echo 'Error: jpegoptim is not installed.' >&2
+  exit 1
+fi
+
+source_dir="$images_dir"
+target_dir="$images_dir"
+mtime=${1:--1}
+
+find_png_files() {
+    find "$source_dir" -name '*.png' -mtime "$mtime"
+}
+
+find_jpg_files() {
+    find "$source_dir" -name '*.jpg' -mtime "$mtime"
+}
+
+echo "Optimizing images"
+
+find_png_files |
+while IFS= read -r i; do
+    echo "Optimizing ${i}"
+    filename=$(basename "${i:1}")
+    output_file="${target_dir}/${filename}"
+    output_dir=$(dirname "$output_file")
+    echo "Writing $output_file"
+
+    mkdir -p "$output_dir"
+    pngquant "$i" --strip --force --verbose --output "$output_file"
+done
+
+find_jpg_files |
+while IFS= read -r i; do
+    echo "Optimizing ${i}"
+    filename=$(basename ${i:1})
+    output_file="${target_dir}/${filename}"
+    output_dir=$(dirname "$output_file")
+
+    mkdir -p "$output_dir"
+    jpegoptim "${i}" --dest="$output_dir" --overwrite --strip-all
+done
 
