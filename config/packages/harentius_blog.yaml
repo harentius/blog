@@ -1,5 +1,5 @@
 harentius_blog:
-    locales: ['en', 'ru']
+    locales: ['en', 'ua', 'ru']
     primary_locale: 'ru'
     articles:
         image_previews_base_uri: '%image_previews_base_uri%'
