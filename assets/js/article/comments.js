@@ -1,5 +1,4 @@
-import configReader from '../config-reader';
-// TODO: replace disquss with something else
+import configReader from '../../../src/BlogBundle/src/Resources/js/config-reader';
 
 window.disqus_config = function () {
   this.page.url = configReader.get('article_url');

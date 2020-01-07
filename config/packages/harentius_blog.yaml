@@ -3,9 +3,6 @@ harentius_blog:
     primary_locale: 'ru'
     articles:
         image_previews_base_uri: '%image_previews_base_uri%'
-        sharethis:
-            property: '%sharethis_property%'
-            product: 'inline-share-buttons'
     sidebar:
         # ~ - no cache, 0 - unlimited cache
         cache_lifetime: '%sidebar_cache_lifetime%'

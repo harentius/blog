@@ -16,6 +16,7 @@ parameters:
     image_previews_base_uri: /assets/images/preview/
     apc_global_prefix: folkprog_net
     google_analytics.hostname: auto
+    sharethis_product: 'inline-share-buttons'
     # Secret parameters
     google_analytics.id: '%env(GOOGLE_ANALYTICS_ID)%'
     discuss_user_name: '%env(DISCUSS_USER_NAME)%'
