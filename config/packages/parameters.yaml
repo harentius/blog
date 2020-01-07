@@ -15,9 +15,8 @@ parameters:
     generate_image_previews: true
     image_previews_base_uri: /assets/images/preview/
     apc_global_prefix: folkprog_net
-    # Secret parameters
-    secret: ThisTokenIsNotSoSecretChangeIt
-    google_analytics.id: UA-40176382-1
     google_analytics.hostname: auto
-    discuss_user_name: folkprog
-    sharethis_property: 5a93088ce3b02a00133b311a
+    # Secret parameters
+    google_analytics.id: '%env(GOOGLE_ANALYTICS_ID)%'
+    discuss_user_name: '%env(DISCUSS_USER_NAME)%'
+    sharethis_property: '%env(SHARETHIS_PROPERTY)%'
