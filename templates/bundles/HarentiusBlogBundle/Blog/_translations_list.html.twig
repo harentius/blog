@@ -1,6 +1,6 @@
 <div class="languages-wrapper float-right">
     {% set translations = translations_list(entity) %}
-    {% set articel_default_locale = resolve_locale(entity)  %}
+    {% set articel_default_locale = resolve_default_locale(entity)  %}
 
     {% if translations|length > 1 %}
         {% for locale in translations %}

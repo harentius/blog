@@ -6,7 +6,7 @@ namespace App;
 
 use Harentius\BlogBundle\Entity\Article;
 
-class LocaleResolver
+class DefaultLocaleResolver
 {
     public const EN_LOCALE = 'en';
 
@@ -38,7 +38,7 @@ class LocaleResolver
     public function resolveLocale(Article $article): string
     {
         if ($article->getCreatedAt() > $this->enDefaultSince) {
-            return LocaleResolver::EN_LOCALE;
+            return DefaultLocaleResolver::EN_LOCALE;
         }
 
         return $this->primaryLocale;

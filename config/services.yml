@@ -12,7 +12,7 @@ services:
         tags:
             - { name: 'doctrine.event_subscriber' }
 
-    App\LocaleResolver:
+    App\DefaultLocaleResolver:
         $enDefaultSince: '%en_default_locale_since%'
         $primaryLocale: '%harentius_blog.primary_locale%'
 

@@ -2,7 +2,7 @@
 
 namespace App\Router;
 
-use App\LocaleResolver;
+use App\DefaultLocaleResolver;
 use Harentius\BlogBundle\Entity\AbstractPost;
 use Harentius\BlogBundle\Entity\Article;
 use Harentius\BlogBundle\Entity\TranslationRepository;
@@ -22,9 +22,9 @@ class PublicationUrlGenerator extends BasePublicationUrlGeneratorAlias
     private $primaryLocale;
 
     /**
-     * @var LocaleResolver
+     * @var DefaultLocaleResolver
      */
-    private $localeResolver;
+    private $defaultLocaleResolver;
 
     /**
      * @var TranslationRepository
@@ -33,19 +33,19 @@ class PublicationUrlGenerator extends BasePublicationUrlGeneratorAlias
 
     /**
      * @param UrlGeneratorInterface $urlGenerator
-     * @param LocaleResolver $localeResolver
+     * @param DefaultLocaleResolver $localeResolver
      * @param TranslationRepository $translationRepository
      * @param string $primaryLocale
      */
     public function __construct(
         UrlGeneratorInterface $urlGenerator,
-        LocaleResolver $localeResolver,
+        DefaultLocaleResolver $localeResolver,
         TranslationRepository $translationRepository,
         string $primaryLocale
     ) {
         parent::__construct($urlGenerator, $primaryLocale);
         $this->urlGenerator = $urlGenerator;
-        $this->localeResolver = $localeResolver;
+        $this->defaultLocaleResolver = $localeResolver;
         $this->primaryLocale = $primaryLocale;
         $this->translationRepository = $translationRepository;
     }
@@ -65,7 +65,7 @@ class PublicationUrlGenerator extends BasePublicationUrlGeneratorAlias
         $availableTranslations = $this->translationRepository->findTranslations($post);
 
         if ($post instanceof Article) {
-            $primaryLocale = $this->localeResolver->resolveLocale($post);
+            $primaryLocale = $this->defaultLocaleResolver->resolveLocale($post);
         }
 
         if (!\in_array($locale, $availableTranslations, true)) {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Twig;
 
-use App\LocaleResolver;
+use App\DefaultLocaleResolver;
 use Harentius\BlogBundle\Entity\Article;
 use Harentius\BlogBundle\Entity\TranslationRepository;
 use Harentius\BlogBundle\Twig\TranslationListExtension as BaseTranslationListExtensionAlias;
@@ -17,23 +17,23 @@ class TranslationListExtension extends BaseTranslationListExtensionAlias
     private $translationRepository;
 
     /**
-     * @var LocaleResolver
+     * @var DefaultLocaleResolver
      */
-    private $localeResolver;
+    private $defaultLocaleResolver;
 
     /**
      * @param TranslationRepository $translationRepository
-     * @param LocaleResolver $localeResolver
+     * @param DefaultLocaleResolver $localeResolver
      * @param string $primaryLocale
      */
     public function __construct(
         TranslationRepository $translationRepository,
-        LocaleResolver $localeResolver,
+        DefaultLocaleResolver $localeResolver,
         string $primaryLocale
     ) {
         parent::__construct($translationRepository, $primaryLocale);
         $this->translationRepository = $translationRepository;
-        $this->localeResolver = $localeResolver;
+        $this->defaultLocaleResolver = $localeResolver;
     }
 
     /**
@@ -44,6 +44,6 @@ class TranslationListExtension extends BaseTranslationListExtensionAlias
     {
         $translations = $this->translationRepository->findTranslations($article);
 
-        return array_merge([$this->localeResolver->resolveLocale($article)], $translations);
+        return array_merge([$this->defaultLocaleResolver->resolveLocale($article)], $translations);
     }
 }

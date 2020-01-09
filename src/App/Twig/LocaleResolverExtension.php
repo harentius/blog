@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Twig;
 
-use App\LocaleResolver;
+use App\DefaultLocaleResolver;
 use Harentius\BlogBundle\Entity\Article;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
@@ -12,16 +12,16 @@ use Twig\TwigFunction;
 class LocaleResolverExtension extends AbstractExtension
 {
     /**
-     * @var LocaleResolver
+     * @var DefaultLocaleResolver
      */
-    private $localeResolver;
+    private $defaultLocaleResolver;
 
     /**
-     * @param LocaleResolver $localeResolver
+     * @param DefaultLocaleResolver $localeResolver
      */
-    public function __construct(LocaleResolver $localeResolver)
+    public function __construct(DefaultLocaleResolver $localeResolver)
     {
-        $this->localeResolver = $localeResolver;
+        $this->defaultLocaleResolver = $localeResolver;
     }
 
     /**
@@ -30,7 +30,7 @@ class LocaleResolverExtension extends AbstractExtension
     public function getFunctions()
     {
         return [
-            new TwigFunction('resolve_locale', [$this, 'resolveLocale']),
+            new TwigFunction('resolve_default_locale', [$this, 'resolveDefaultLocale']),
         ];
     }
 
@@ -38,8 +38,8 @@ class LocaleResolverExtension extends AbstractExtension
      * @param Article $article
      * @return string
      */
-    public function resolveLocale(Article $article): string
+    public function resolveDefaultLocale(Article $article): string
     {
-        return $this->localeResolver->resolveLocale($article);
+        return $this->defaultLocaleResolver->resolveLocale($article);
     }
 }

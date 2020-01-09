@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\EventSubscriber;
 
-use App\LocaleResolver;
+use App\DefaultLocaleResolver;
 use Doctrine\ORM\EntityManagerInterface;
 use Gedmo\Translatable\TranslatableListener;
 use Harentius\BlogBundle\Entity\ArticleRepository;
@@ -30,27 +30,27 @@ class TranslationLocaleSubscriber implements EventSubscriberInterface
     private $entityManager;
 
     /**
-     * @var LocaleResolver
+     * @var DefaultLocaleResolver
      */
-    private $localeResolver;
+    private $defaultLocaleResolver;
 
     /**
      * @param TranslatableListener $translatableListener
      * @param ArticleRepository $articleRepository
      * @param EntityManagerInterface $entityManager
-     * @param LocaleResolver $localeResolver
+     * @param DefaultLocaleResolver $localeResolver
      * @throws \Exception
      */
     public function __construct(
         TranslatableListener $translatableListener,
         ArticleRepository $articleRepository,
         EntityManagerInterface $entityManager,
-        LocaleResolver $localeResolver
+        DefaultLocaleResolver $localeResolver
     ) {
         $this->translatableListener = $translatableListener;
         $this->articleRepository = $articleRepository;
         $this->entityManager = $entityManager;
-        $this->localeResolver = $localeResolver;
+        $this->defaultLocaleResolver = $localeResolver;
     }
 
     /**
@@ -74,17 +74,26 @@ class TranslationLocaleSubscriber implements EventSubscriberInterface
             ]);
 
             if ($article) {
-                $locale = $this->localeResolver->resolveLocale($article);
+                $defaultLocale = $this->defaultLocaleResolver->resolveLocale($article);
+                $requestLocale = $request->attributes->get('_locale');
 
-                if ($locale === LocaleResolver::EN_LOCALE) {
-                    $request->setLocale($locale);
-                    $this->translatableListener->setDefaultLocale(LocaleResolver::EN_LOCALE);
+                if ($defaultLocale === DefaultLocaleResolver::EN_LOCALE) {
+                    if ($requestLocale) {
+                        $this->entityManager->clear();
+                    }
+
+                    $oldLocale = $this->translatableListener->getDefaultLocale();
+                    $this->translatableListener->setDefaultLocale(DefaultLocaleResolver::EN_LOCALE);
+                    $this->articleRepository->findOneBy(['slug' => $request->attributes->get('slug')]);
+                    $request->setLocale($defaultLocale);
+
+                    $this->translatableListener->setDefaultLocale($oldLocale);
+                } else {
+                    $this->entityManager->clear();
                 }
             }
-
-            $this->entityManager->clear();
         } else {
-            $this->translatableListener->setDefaultLocale(LocaleResolver::EN_LOCALE);
+            $this->translatableListener->setDefaultLocale(DefaultLocaleResolver::EN_LOCALE);
         }
     }
 
