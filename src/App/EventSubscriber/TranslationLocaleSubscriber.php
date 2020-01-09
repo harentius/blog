@@ -77,13 +77,15 @@ class TranslationLocaleSubscriber implements EventSubscriberInterface
                 $locale = $this->localeResolver->resolveLocale($article);
 
                 if ($locale === LocaleResolver::EN_LOCALE) {
-                    $this->entityManager->clear();
                     $request->setLocale($locale);
+                    $this->translatableListener->setDefaultLocale(LocaleResolver::EN_LOCALE);
                 }
             }
-        }
 
-        $this->translatableListener->setDefaultLocale(LocaleResolver::EN_LOCALE);
+            $this->entityManager->clear();
+        } else {
+            $this->translatableListener->setDefaultLocale(LocaleResolver::EN_LOCALE);
+        }
     }
 
     /**
