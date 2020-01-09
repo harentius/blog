@@ -12,7 +12,33 @@ services:
         tags:
             - { name: 'doctrine.event_subscriber' }
 
+    App\LocaleResolver:
+        $enDefaultSince: '%en_default_locale_since%'
+        $primaryLocale: '%harentius_blog.primary_locale%'
+
+    App\EventSubscriber\TranslationLocaleSubscriber:
+        arguments:
+            $translatableListener: '@stof_doctrine_extensions.listener.translatable'
+        tags:
+            - { name: 'kernel.event_subscriber' }
+
+    Harentius\BlogBundle\Router\PublicationUrlGenerator:
+        class: App\Router\PublicationUrlGenerator
+        arguments:
+            $primaryLocale: '%harentius_blog.primary_locale%'
+
     Harentius\BlogBundle\Menu\MenuBuilder:
         class: App\Menu\MenuBuilder
         arguments:
             $homepageSlug: '%harentius_blog.homepage.page_slug%'
+
+    Harentius\BlogBundle\Twig\TranslationListExtension:
+        class: App\Twig\TranslationListExtension
+        arguments:
+            $primaryLocale: '%harentius_blog.primary_locale%'
+        tags:
+            - { name: twig.extension }
+
+    App\Twig\LocaleResolverExtension:
+        tags:
+            - { name: twig.extension }

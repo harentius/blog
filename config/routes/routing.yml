@@ -15,4 +15,4 @@ harentius_blog_show:
     path: /{_locale}/{slug}/
     defaults: { _controller: 'Harentius\BlogBundle\Controller\ShowController', _locale: '%kernel.default_locale%' }
     requirements:
-        _locale: "%harentius_blog.supported_locales_without_default%"
+        _locale: "%harentius_blog.locales_requirement%"

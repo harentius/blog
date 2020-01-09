@@ -1,10 +1,10 @@
 <div class="languages-wrapper float-right">
     {% set translations = translations_list(entity) %}
-    {% set currentLocale = app.request.locale %}
+    {% set articel_default_locale = resolve_locale(entity)  %}
 
     {% if translations|length > 1 %}
         {% for locale in translations %}
-            {% if currentLocale == locale %}
+            {% if articel_default_locale == locale %}
                 <span>{{ locale }}</span>
             {% else %}
                 <a href="{{ publication_path(entity, locale) }}">{{ locale }}</a>

@@ -1,11 +1,14 @@
 <?php
 
-namespace Harentius\BlogBundle\Router;
+namespace App\Router;
 
+use App\LocaleResolver;
 use Harentius\BlogBundle\Entity\AbstractPost;
+use Harentius\BlogBundle\Entity\Article;
+use Harentius\BlogBundle\Router\PublicationUrlGenerator as BasePublicationUrlGeneratorAlias;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-class PublicationUrlGenerator
+class PublicationUrlGenerator extends BasePublicationUrlGeneratorAlias
 {
     /**
      * @var UrlGeneratorInterface
@@ -18,12 +21,23 @@ class PublicationUrlGenerator
     private $primaryLocale;
 
     /**
+     * @var LocaleResolver
+     */
+    private $localeResolver;
+
+    /**
      * @param UrlGeneratorInterface $urlGenerator
+     * @param LocaleResolver $localeResolver
      * @param string $primaryLocale
      */
-    public function __construct(UrlGeneratorInterface $urlGenerator, string $primaryLocale)
-    {
+    public function __construct(
+        UrlGeneratorInterface $urlGenerator,
+        LocaleResolver $localeResolver,
+        string $primaryLocale
+    ) {
+        parent::__construct($urlGenerator, $primaryLocale);
         $this->urlGenerator = $urlGenerator;
+        $this->localeResolver = $localeResolver;
         $this->primaryLocale = $primaryLocale;
     }
 
@@ -38,7 +52,13 @@ class PublicationUrlGenerator
         string $locale,
         int $referenceType = UrlGeneratorInterface::ABSOLUTE_PATH
     ): string {
-        if ($locale === $this->primaryLocale) {
+        $primaryLocale = $this->primaryLocale;
+
+        if ($post instanceof Article) {
+            $primaryLocale = $this->localeResolver->resolveLocale($post);
+        }
+
+        if ($locale === $primaryLocale) {
             return $this->urlGenerator->generate('harentius_blog_show_default', [
                 'slug' => $post->getSlug(),
             ], $referenceType);
