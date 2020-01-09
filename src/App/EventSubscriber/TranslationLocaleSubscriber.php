@@ -84,6 +84,7 @@ class TranslationLocaleSubscriber implements EventSubscriberInterface
 
                     $oldLocale = $this->translatableListener->getDefaultLocale();
                     $this->translatableListener->setDefaultLocale(DefaultLocaleResolver::EN_LOCALE);
+                    // Load entity before change listener. Dirty workaround.
                     $this->articleRepository->findOneBy(['slug' => $request->attributes->get('slug')]);
                     $request->setLocale($defaultLocale);
                     $this->translatableListener->setDefaultLocale($oldLocale);
