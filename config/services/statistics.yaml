@@ -10,5 +10,6 @@ services:
 
     App\Statistics:
         arguments:
+            $articleRepository: '@Harentius\BlogBundle\Entity\ArticleRepository'
             $cache: '@harentius_blog.statistics_cache'
             $cacheLifetime: '%statistics_cache_lifetime%'
