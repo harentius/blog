@@ -61,10 +61,10 @@ class TranslationLocaleSubscriber implements EventSubscriberInterface
         $request = $event->getRequest();
 
         $route = $request->attributes->get('_route');
-        $routes = ['harentius_blog_show', 'harentius_blog_show_default'];
-        $isArticleShow = \in_array($route, $routes, true);
+        $isArticleShow = \in_array($route, ['harentius_blog_show', 'harentius_blog_show_default'], true);
+        $isArticleCreateOrEdit = \in_array($route, ['admin_harentius_blog_article_create', 'admin_harentius_blog_article_edit'], true);
 
-        if (!$route || (!$isArticleShow && strpos($route, 'admin_harentius_blog') === false)) {
+        if (!$route || (!$isArticleShow && !$isArticleCreateOrEdit)) {
             return;
         }
 
@@ -84,8 +84,12 @@ class TranslationLocaleSubscriber implements EventSubscriberInterface
 
                     $oldLocale = $this->translatableListener->getDefaultLocale();
                     $this->translatableListener->setDefaultLocale(DefaultLocaleResolver::EN_LOCALE);
-                    // Load entity before change listener. Dirty workaround.
-                    $this->articleRepository->findOneBy(['slug' => $request->attributes->get('slug')]);
+
+                    if ($request->attributes->get('_locale') !== 'uk') {
+                        // Load entity before change listener. Dirty workaround.
+                        $this->articleRepository->findOneBy(['slug' => $request->attributes->get('slug')]);
+                    }
+
                     $request->setLocale($defaultLocale);
                     $this->translatableListener->setDefaultLocale($oldLocale);
                 } else {
