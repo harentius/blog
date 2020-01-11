@@ -2,10 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Harentius\BlogBundle\Sitemap;
+namespace App\Sitemap;
 
+use App\DefaultLocaleResolver;
 use Harentius\BlogBundle\Entity\AbstractPost;
 use Harentius\BlogBundle\Entity\AbstractPostRepository;
+use Harentius\BlogBundle\Entity\Article;
 use Harentius\BlogBundle\Entity\TranslationRepository;
 use Harentius\BlogBundle\Router\PublicationUrlGenerator;
 use Presta\SitemapBundle\Event\SitemapPopulateEvent;
@@ -30,6 +32,11 @@ class PostsSubscriber implements EventSubscriberInterface
     private $translationRepository;
 
     /**
+     * @var DefaultLocaleResolver
+     */
+    private $defaultLocaleResolver;
+
+    /**
      * @var string
      */
     private $primaryLocale;
@@ -38,17 +45,20 @@ class PostsSubscriber implements EventSubscriberInterface
      * @param AbstractPostRepository $abstractPostRepository
      * @param PublicationUrlGenerator $publicationUrlGenerator
      * @param TranslationRepository $translationRepository
+     * @param DefaultLocaleResolver $defaultLocaleResolver
      * @param string $primaryLocale
      */
     public function __construct(
         AbstractPostRepository $abstractPostRepository,
         PublicationUrlGenerator $publicationUrlGenerator,
         TranslationRepository $translationRepository,
+        DefaultLocaleResolver $defaultLocaleResolver,
         string $primaryLocale
     ) {
         $this->abstractPostRepository = $abstractPostRepository;
         $this->publicationUrlGenerator = $publicationUrlGenerator;
         $this->translationRepository = $translationRepository;
+        $this->defaultLocaleResolver = $defaultLocaleResolver;
         $this->primaryLocale = $primaryLocale;
     }
 
@@ -60,7 +70,11 @@ class PostsSubscriber implements EventSubscriberInterface
         $posts = $this->abstractPostRepository->findPublished();
 
         foreach ($posts as $post) {
-            $this->addUrl($event, $post, $this->primaryLocale);
+            $primaryLocale = $post instanceof Article
+                ? $this->defaultLocaleResolver->resolveLocale($post)
+                : $this->primaryLocale
+            ;
+            $this->addUrl($event, $post, $primaryLocale);
             $locales = $this->translationRepository->findTranslations($post);
 
             foreach ($locales as $locale) {
