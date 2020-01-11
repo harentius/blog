@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Doctrine\Common\Cache\CacheProvider;
 use App\Entity\ArticleRepository;
+use Doctrine\Common\Cache\CacheProvider;
 
 class Statistics
 {
