@@ -2,6 +2,7 @@
 
 {% block head_extra %}
     {% if app.environment == 'prod' %}
+    {{ include('_google_analytics.html.twig') }}
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({
