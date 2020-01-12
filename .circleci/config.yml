@@ -63,5 +63,7 @@ workflows:
       - lint-php
       - phpstan
   unit-test:
+    requires:
+      - static
     jobs:
       - unit-test
