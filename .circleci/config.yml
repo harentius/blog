@@ -66,4 +66,3 @@ workflows:
           requires:
             - lint-php
             - phpstan
-
