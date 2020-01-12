@@ -58,12 +58,12 @@ jobs:
 
 workflows:
   version: 2
-  static:
+  default:
     jobs:
       - lint-php
       - phpstan
-  unit-test:
-    requires:
-      - static
-    jobs:
-      - unit-test
+      - unit-test:
+          requires:
+            - lint-php
+            - phpstan
+
