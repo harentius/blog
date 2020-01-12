@@ -17,7 +17,7 @@
 
     <testsuites>
         <testsuite name="unit">
-            <directory>src/BlogBundle/tests/Unit</directory>
+            <directory>tests/Unit</directory>
         </testsuite>
     </testsuites>
 

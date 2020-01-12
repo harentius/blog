@@ -8,3 +8,4 @@
 /public/bundles
 /public/sitemap.*
 /var
+/.phpunit.result.cache
