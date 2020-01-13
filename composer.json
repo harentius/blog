@@ -56,7 +56,8 @@
         "cs-fix": "vendor-bin/php-cs-fixer/vendor/bin/php-cs-fixer fix --diff -v --diff-format=udiff --ansi",
         "phpstan": "vendor/bin/phpstan analyse -c phpstan.neon src --memory-limit=768M --level=2",
         "phpstan-next": "vendor/bin/phpstan analyse -c phpstan.neon src --memory-limit=768M --level=3",
-        "phpunit": "vendor/bin/phpunit"
+        "phpunit": "vendor/bin/phpunit",
+        "local-check": "composer cs-fix && composer phpstan && composer phpunit"
     },
     "config": {
         "bin-dir": "vendor/bin"
