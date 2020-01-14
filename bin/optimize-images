@@ -49,4 +49,3 @@ while IFS= read -r i; do
     mkdir -p "$output_dir"
     jpegoptim "${i}" --dest="$output_dir" --overwrite --strip-all
 done
-
