@@ -1,0 +1,36 @@
+#!/bin/sh
+
+set -e; set -u
+. "$(dirname $0)/.common"
+
+composer install
+
+set +e
+echo "Dropping database"
+exec_console doctrine:database:drop --force --quiet
+set -e
+
+echo "Create database"
+exec_console doctrine:database:create
+
+echo "Updating database schema"
+exec_console doctrine:schema:update --force
+
+echo "Setting all migrations as migrated"
+exec_console doctrine:migrations:version --add --all --no-interaction
+
+echo "Loading fixtures"
+exec_console hautelook:fixtures:load --no-interaction
+
+echo "Installing bundles assets"
+exec_console assets:install --symlink
+
+echo "Installing node modules"
+npm install
+
+echo "Building blog-bundle npm assets"
+npm run build
+
+echo "Building folkprog npm assets"
+npm run build:folkprog
+

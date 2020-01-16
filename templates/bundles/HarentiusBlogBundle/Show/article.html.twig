@@ -1,0 +1,35 @@
+{% extends '@!HarentiusBlog/Show/article.html.twig' %}
+
+{% block after_breadcrumbs_content %}
+    {% include '_translations_list_article.html.twig' %}
+{% endblock %}
+
+{% block post_rating_left %}
+    <div class="sharethis-inline-share-buttons"></div>
+{% endblock %}
+
+{% block after_post_ratings_row %}
+    <div class="comments-wrapper">
+        <div id="disqus_thread"></div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="application/json" id="js-config">
+    {{
+        {
+            "article_id": entity.id,
+            "article_url": publication_path(entity, app.request.locale, constant('Symfony\\Component\\Routing\\Generator\\UrlGeneratorInterface::ABSOLUTE_URL')),
+            "page_identifier": app.request.locale ~ '/' ~ entity.slug,
+            "discuss_user_name": discuss_user_name|default,
+            "article_original_id": entity.attributes.original_id is defined ?: null
+        }|json_encode|raw
+        }}
+    </script>
+
+    <script src="{{ asset('bundles/harentiusblog/article.js', 'harentius_blog') }}"></script>
+    <script src="{{ asset('build/article.js') }}"></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+    <script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property={{ sharethis_property }}&product={{ sharethis_product }}"></script>
+{% endblock javascripts %}

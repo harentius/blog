@@ -1,0 +1,13 @@
+{% extends '@HarentiusBlog/Blog/_common_post_info.html.twig' %}
+
+{% block after_post_info %}
+<span>
+    <i class="fa fa-thumbs-o-up"></i>
+    {{ article.likesCount }}
+</span>
+
+<span>
+    <i class="fa fa-thumbs-o-down"></i>
+    {{ article.disLikesCount }}
+</span>
+{% endblock %}

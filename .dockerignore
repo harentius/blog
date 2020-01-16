@@ -1,0 +1,6 @@
+/node_modules
+/src/BlogBundle/node_modules
+/.idea
+/.git
+/vendor-bin
+/src/BlogBundle/vendor-bin

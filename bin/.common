@@ -1,0 +1,15 @@
+#!/bin/sh
+
+bin_dir=$(cd $(dirname $0) && pwd)
+base_dir=$(cd "$bin_dir/.." && pwd)
+public_dir="$base_dir/public"
+images_dir="$public_dir/assets/images"
+console="bin/console"
+
+cd "$base_dir"
+
+exec_console() {
+    cmd=$1
+    shift
+    $console $cmd "$@"
+}

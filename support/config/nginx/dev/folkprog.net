@@ -1,38 +1,27 @@
 server {
     listen 80;
     server_name folkprog;
-    root /var/www/folkprog;
+    root /home/yaros/projects/folkprog.net/public;
 
     location / {
-        client_max_body_size 80m;
-        # try to serve file directly, fallback to rewrite
-        try_files $uri @rewriteapp;
+        # try to serve file directly, fallback to index.php
+        try_files $uri /index.php$is_args$args;
     }
 
-    location @rewriteapp {
-        # rewrite all to app.php
-        rewrite ^(.*)$ /app_dev.php/$1 last;
-    }
-
-    location ~ ^/app_dev\.php(/|$) {
-        client_max_body_size 80m;
-        fastcgi_pass unix:/var/run/php-fpm/php-fpm.sock;
+    location ~ ^/index.php(/|$) {
+        fastcgi_pass unix:/home/yaros/.phpbrew/php/php-7.3.12/var/run/php-fpm.sock;
         fastcgi_split_path_info ^(.+\.php)(/.*)$;
         include fastcgi_params;
+
         fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
         fastcgi_param DOCUMENT_ROOT $realpath_root;
+        internal;
     }
 
-    location ~ ^/(bundles|css|js|img|assets)/ {
-        access_log off;
-        expires 30d;
-        try_files $uri @rewriteapp;
+    location ~ \.php$ {
+        return 404;
     }
 
-    location ~ /\.ht {
-        deny all;
-    }
-
-    access_log /var/log/nginx/folkprog.net.access.log;
-    error_log  /var/log/nginx/folkprog.net.error.log;
+    error_log /var/log/nginx/folkprog_error.log;
+    access_log /var/log/nginx/folkprog_access.log;
 }

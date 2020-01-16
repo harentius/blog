@@ -1,0 +1,11 @@
+framework:
+    secret: '%env(APP_SECRET)%'
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    default_locale:  '%locale%'
+    session: ~
+    fragments: ~
+    http_method_override: true
+    assets:
+        json_manifest_path: '%kernel.project_dir%/public/build/manifest.json'

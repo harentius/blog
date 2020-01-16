@@ -1,0 +1,9 @@
+eko_feed:
+    feeds:
+        article:
+            title: 'Народное программирование'
+            description: 'Новые публикации'
+            link:
+                route_name: 'harentius_blog_homepage'
+            encoding: 'utf-8'
+            author: 'Harentius'
