@@ -15,7 +15,6 @@ FROM harentius/blog-bundle-base
 
 COPY ./support/prod/folkprog-image/nginx.vh.conf /etc/nginx/conf.d/default.conf
 COPY ./ /app
-COPY ./support/prod/folkprog-image/.env /app
 COPY --from=build /app/public/build /app/public/build
 
 WORKDIR /app
