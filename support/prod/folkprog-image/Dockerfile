@@ -18,6 +18,3 @@ COPY ./ /app
 COPY --from=build /app/public/build /app/public/build
 
 WORKDIR /app
-
-RUN bin/console assets:install --symlink \
-    && bin/console cache:warmup --env=prod
