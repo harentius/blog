@@ -89,6 +89,7 @@ workflows:
       - build-image:
           requires:
             - unit-tests
-          branches:
-            only:
-              - master
+          filters:
+            branches:
+              only:
+                - master
