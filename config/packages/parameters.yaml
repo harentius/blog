@@ -21,3 +21,5 @@ parameters:
     # Secret parameters
     google_analytics.id: '%env(GOOGLE_ANALYTICS_ID)%'
     sharethis_property: '%env(SHARETHIS_PROPERTY)%'
+    facebook_admin_id: '%env(FACEBOOK_ADMIN_ID)%'
+    site_url: '%env(SITE_URL)%'
