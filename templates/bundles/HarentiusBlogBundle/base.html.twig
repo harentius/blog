@@ -3,13 +3,7 @@
 {% block head_extra %}
     {% if app.environment == 'prod' %}
     {{ include('_google_analytics.html.twig') }}
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({
-        google_ad_client: "ca-pub-8463813510139079",
-        enable_page_level_ads: true
-      });
-    </script>
+    <script data-ad-client="ca-pub-8463813510139079" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     {% endif %}
 {% endblock %}
 
@@ -38,9 +32,10 @@
              style="display:block"
              data-ad-client="ca-pub-8463813510139079"
              data-ad-slot="8719005747"
-             data-ad-format="auto"></ins>
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
         <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
+          (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
     {% endif %}
 {% endblock %}
