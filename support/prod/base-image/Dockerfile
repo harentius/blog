@@ -38,7 +38,8 @@ RUN apk update -q && apk upgrade -q \
     && apk add supervisor && mkdir -p /var/log/supervisor
 
 COPY config/nginx.conf /etc/nginx/nginx.conf
-COPY config/php/zz-docker.conf /usr/local/etc/php-fpm.d/zz-docker.conf
+COPY config/php/zz-fpm-docker.conf /usr/local/etc/php-fpm.d/zz-fpm-docker.conf
+COPY config/php/zz-docker.conf /usr/local/etc/php/conf.d/zz-fpm-docker.conf
 COPY config/nginx.vh.conf /etc/nginx/conf.d/default.conf
 COPY config/supervisord.conf /etc/supervisord.conf
 
