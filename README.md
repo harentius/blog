@@ -6,7 +6,6 @@ Installation
 
 1) Build base image:
 ```bash
-cd support/prod/base-image
 docker build -f support/prod/base-image/Dockerfile -t harentius/blog-bundle-base:latest support/prod/base-image
 docker push harentius/blog-bundle-base
 ```

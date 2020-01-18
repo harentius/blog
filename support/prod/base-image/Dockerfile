@@ -1,11 +1,7 @@
 FROM php:7.3-fpm-alpine
 
-# php fpm config
-RUN echo "pm.start_servers = 1" >> /usr/local/etc/php-fpm.d/zz-docker.conf \
-    && echo "pm.max_children = 1" >> /usr/local/etc/php-fpm.d/zz-docker.conf \
-    && echo "pm.max_spare_servers = 1" >> /usr/local/etc/php-fpm.d/zz-docker.conf \
 # php extensions deps
-    && apk update -q && apk upgrade -q \
+RUN apk update -q && apk upgrade -q \
     && apk add \
         gd \
         libpng \
@@ -42,6 +38,7 @@ RUN echo "pm.start_servers = 1" >> /usr/local/etc/php-fpm.d/zz-docker.conf \
     && apk add supervisor && mkdir -p /var/log/supervisor
 
 COPY config/nginx.conf /etc/nginx/nginx.conf
+COPY config/php/zz-docker.conf /usr/local/etc/php-fpm.d/zz-docker.conf
 COPY config/nginx.vh.conf /etc/nginx/conf.d/default.conf
 COPY config/supervisord.conf /etc/supervisord.conf
 
