@@ -43,6 +43,9 @@ COPY config/php/zz-docker.conf /usr/local/etc/php/conf.d/zz-fpm-docker.conf
 COPY config/nginx.vh.conf /etc/nginx/conf.d/default.conf
 COPY config/supervisord.conf /etc/supervisord.conf
 
+# Fix permissions after changing nginx user
+RUN chown -Rf www-data:www-data /var/lib/nginx
+
 STOPSIGNAL SIGTERM
 
 EXPOSE 80
