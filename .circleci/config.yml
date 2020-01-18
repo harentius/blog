@@ -72,9 +72,10 @@ jobs:
           paths:
             - vendor
       - run:
-          - docker login -u "$DOCKER_REGISTRY_USER" -p "$DOCKER_REGISTRY_PASS"
-          - docker build -f support/prod/folkprog-image/Dockerfile -t "$DOCKER_IMAGE_NAME" .
-          - docker push "${DOCKER_IMAGE_NAME}:latest"
+          command: |
+            docker login -u "$DOCKER_REGISTRY_USER" -p "$DOCKER_REGISTRY_PASS"
+            docker build -f support/prod/folkprog-image/Dockerfile -t "$DOCKER_IMAGE_NAME" .
+            docker push "${DOCKER_IMAGE_NAME}:latest"
 
 workflows:
   version: 2
