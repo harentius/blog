@@ -56,6 +56,26 @@ jobs:
           paths:
             - .phpunit.result.cache
 
+  build-image:
+    docker:
+      - image: circleci/php:7.3-cli
+    steps:
+      - checkout
+      - run: sudo composer self-update
+      - restore_cache:
+          keys:
+            - composer-v1-{{ checksum "composer.lock" }}
+            - composer-v1-
+      - run: composer install --no-interaction --ignore-platform-reqs --no-dev
+      - save_cache:
+          key: composer-v1-{{ checksum "composer.lock" }}
+          paths:
+            - vendor
+      - run:
+          - docker login -u "$DOCKER_REGISTRY_USER" -p "$DOCKER_REGISTRY_PASS"
+          - docker build -f support/prod/folkprog-image/Dockerfile -t "$DOCKER_IMAGE_NAME" .
+          - docker push "${DOCKER_IMAGE_NAME}:latest"
+
 workflows:
   version: 2
   default:
@@ -66,3 +86,9 @@ workflows:
           requires:
             - lint-php
             - phpstan
+      - build-image:
+          requires:
+            - unit-tests
+          branches:
+            only:
+              - master
