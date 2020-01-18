@@ -5,6 +5,5 @@ twig:
         statistics: '@App\Statistics'
         google_analytics_id: '%google_analytics.id%'
         google_analytics_hostname: '%google_analytics.hostname%'
-        discuss_user_name: '%discuss_user_name%'
         sharethis_property: '%sharethis_property%'
         sharethis_product: '%sharethis_product%'

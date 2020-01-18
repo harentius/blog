@@ -20,5 +20,4 @@ parameters:
     en_default_locale_since: '2020/01/07'
     # Secret parameters
     google_analytics.id: '%env(GOOGLE_ANALYTICS_ID)%'
-    discuss_user_name: '%env(DISCUSS_USER_NAME)%'
     sharethis_property: '%env(SHARETHIS_PROPERTY)%'
