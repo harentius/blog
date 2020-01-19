@@ -13,6 +13,7 @@ use Harentius\BlogBundle\Router\PublicationUrlGenerator;
 use Presta\SitemapBundle\Event\SitemapPopulateEvent;
 use Presta\SitemapBundle\Sitemap\Url\UrlConcrete;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class PostsSubscriber implements EventSubscriberInterface
 {
@@ -102,7 +103,7 @@ class PostsSubscriber implements EventSubscriberInterface
     {
         $event->getGenerator()->addUrl(
             new UrlConcrete(
-                $this->publicationUrlGenerator->generateUrl($post, $locale),
+                $this->publicationUrlGenerator->generateUrl($post, $locale, UrlGeneratorInterface::ABSOLUTE_URL),
                 $post->getUpdatedAt(),
                 UrlConcrete::CHANGEFREQ_MONTHLY,
                 0.5
