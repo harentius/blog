@@ -14,10 +14,9 @@
 {% endblock %}
 
 {% block javascripts %}
+    {{ parent() }}
+
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/uk_UA/sdk.js#xfbml=1&version=v5.0"></script>
-    <script src="{{ asset('bundles/harentiusblog/article.js', 'harentius_blog') }}"></script>
-    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
     <script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property={{ sharethis_property }}&product={{ sharethis_product }}"></script>
 {% endblock javascripts %}
 
