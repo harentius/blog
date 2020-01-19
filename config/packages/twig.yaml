@@ -7,5 +7,5 @@ twig:
         google_analytics_hostname: '%google_analytics.hostname%'
         sharethis_property: '%sharethis_property%'
         sharethis_product: '%sharethis_product%'
-        facebook_admin_id: '%facebook_admin_id%'
+        facebook_app_id: '%facebook_app_id%'
         site_url: '%site_url%'
