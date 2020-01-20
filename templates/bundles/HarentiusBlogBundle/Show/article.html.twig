@@ -21,5 +21,6 @@
 {% endblock javascripts %}
 
 {% block head_extra %}
+    {{ parent() }}
     <meta property="fb:app_id" content="{{ facebook_app_id }}"/>
 {% endblock %}
