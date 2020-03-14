@@ -1,5 +1,9 @@
 {% extends '@!HarentiusBlog/base.html.twig' %}
 
+{%- block raw_title -%}
+    {% if block('page_title') is not empty %}{% block page_title %}{% endblock %} | {% endif %}{{ 'project.name'|trans }}
+{%- endblock -%}
+
 {% block head_extra %}
     {% if app.environment == 'prod' %}
     {{ include('_google_analytics.html.twig') }}
