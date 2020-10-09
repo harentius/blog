@@ -1,5 +1,5 @@
 parameters:
-    sidebar_cache_lifetime: null
+    sidebar_cache_lifetime: 0
     sidebar_tags_limit: 15
     sidebar_tag_sizes:
         - 65
