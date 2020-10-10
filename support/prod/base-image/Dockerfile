@@ -19,7 +19,7 @@ RUN apk update -q && apk upgrade -q \
     jpeg-dev \
     gd-dev \
     curl-dev \
-    && docker-php-ext-install gd intl pdo_mysql curl \
+    && docker-php-ext-install gd intl pdo_mysql curl opcache \
     && apk del -q build-deps \
 # apcu
     && docker-php-source extract \
