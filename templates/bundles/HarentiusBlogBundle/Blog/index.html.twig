@@ -1,0 +1,14 @@
+{% extends '@!HarentiusBlog/Blog/index.html.twig' %}
+
+{% block content %}
+    {% if page %}
+    <div class="padded-content">
+        <h1>{{ get_field(page, 'title') }}</h1>
+        <div>{{ get_field(page, 'text')|raw }}</div>
+    </div>
+    {% endif %}
+
+    {% include('@HarentiusBlog/Blog/_articles.html.twig') %}
+
+    {{ knp_pagination_render(articles) }}
+{% endblock %}

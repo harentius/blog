@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace App\EventSubscriber;
 
 use App\DefaultLocaleResolver;
+use App\LocalizationHelper;
 use Doctrine\ORM\EntityManagerInterface;
 use Gedmo\Translatable\TranslatableListener;
 use Harentius\BlogBundle\Entity\ArticleRepository;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
@@ -35,22 +37,29 @@ class TranslationLocaleSubscriber implements EventSubscriberInterface
     private $defaultLocaleResolver;
 
     /**
+     * @var LocalizationHelper
+     */
+    private $localizationHelper;
+
+    /**
      * @param TranslatableListener $translatableListener
      * @param ArticleRepository $articleRepository
      * @param EntityManagerInterface $entityManager
      * @param DefaultLocaleResolver $localeResolver
-     * @throws \Exception
+     * @param LocalizationHelper $localizationHelper
      */
     public function __construct(
         TranslatableListener $translatableListener,
         ArticleRepository $articleRepository,
         EntityManagerInterface $entityManager,
-        DefaultLocaleResolver $localeResolver
+        DefaultLocaleResolver $localeResolver,
+        LocalizationHelper $localizationHelper
     ) {
         $this->translatableListener = $translatableListener;
         $this->articleRepository = $articleRepository;
         $this->entityManager = $entityManager;
         $this->defaultLocaleResolver = $localeResolver;
+        $this->localizationHelper = $localizationHelper;
     }
 
     /**
@@ -62,42 +71,28 @@ class TranslationLocaleSubscriber implements EventSubscriberInterface
 
         $route = $request->attributes->get('_route');
         $isArticleShow = \in_array($route, ['harentius_blog_show', 'harentius_blog_show_default'], true);
-        $isArticleCreateOrEdit = \in_array($route, ['admin_harentius_blog_article_create', 'admin_harentius_blog_article_edit'], true);
+        $isArticleOrPageEdit = \in_array($route, ['admin_harentius_blog_article_edit', 'admin_harentius_blog_page_edit'], true);
 
-        if (!$route || (!$isArticleShow && !$isArticleCreateOrEdit)) {
+        if (!$route || (!$isArticleShow && !$isArticleOrPageEdit)) {
             return;
         }
 
-        if ($isArticleShow && $request->attributes->get('slug')) {
-            $article = $this->articleRepository->findOneBy([
-                'slug' => $request->attributes->get('slug'),
-            ]);
+        if ($isArticleShow) {
+            $slug = $request->attributes->get('slug');
 
-            if ($article) {
-                $defaultLocale = $this->defaultLocaleResolver->resolveLocale($article);
-                $requestLocale = $request->attributes->get('_locale');
+            if ($this->localizationHelper->isLegacyArticlesBySlug($slug)) {
+                $this->applyFallbackLocale($request);
 
-                if ($defaultLocale === DefaultLocaleResolver::EN_LOCALE) {
-                    if ($requestLocale) {
-                        $this->entityManager->clear();
-                    }
-
-                    $oldLocale = $this->translatableListener->getDefaultLocale();
-                    $this->translatableListener->setDefaultLocale(DefaultLocaleResolver::EN_LOCALE);
-
-                    if ($request->attributes->get('_locale') !== 'uk') {
-                        // Load entity before change listener. Dirty workaround.
-                        $this->articleRepository->findOneBy(['slug' => $request->attributes->get('slug')]);
-                    }
-
-                    $request->setLocale($defaultLocale);
-                    $this->translatableListener->setDefaultLocale($oldLocale);
-                } else {
-                    $this->entityManager->clear();
-                }
+                return;
             }
-        } else {
-            $this->translatableListener->setDefaultLocale(DefaultLocaleResolver::EN_LOCALE);
+        }
+
+        $id = (int) $request->attributes->get('id');
+
+        if ($isArticleOrPageEdit && $this->localizationHelper->isLegacyArticlesById($id)) {
+            $this->applyFallbackLocale($request);
+
+            return;
         }
     }
 
@@ -111,5 +106,14 @@ class TranslationLocaleSubscriber implements EventSubscriberInterface
                 ['changeTranslationListener', 30],
             ],
         ];
+    }
+
+    /**
+     * @param Request $request
+     */
+    private function applyFallbackLocale(Request $request): void
+    {
+        $request->setLocale(LocalizationHelper::FALLBACK_LOCALE);
+        $this->translatableListener->setDefaultLocale(LocalizationHelper::FALLBACK_LOCALE);
     }
 }

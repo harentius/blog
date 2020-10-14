@@ -8,8 +8,6 @@ use Harentius\BlogBundle\Entity\Article;
 
 class DefaultLocaleResolver
 {
-    public const EN_LOCALE = 'en';
-
     /**
      * @var string
      */
@@ -37,8 +35,8 @@ class DefaultLocaleResolver
      */
     public function resolveLocale(Article $article): string
     {
-        if ($article->getCreatedAt() > $this->enDefaultSince) {
-            return DefaultLocaleResolver::EN_LOCALE;
+        if ($article->getCreatedAt() <= $this->enDefaultSince) {
+            return LocalizationHelper::FALLBACK_LOCALE;
         }
 
         return $this->primaryLocale;

@@ -43,9 +43,17 @@ services:
         tags:
             - { name: twig.extension }
 
+    App\Twig\AbstractPostLocalizationExtension:
+        arguments:
+            $propertyAccessor: '@property_accessor'
+        tags:
+            - { name: twig.extension }
+
     Harentius\BlogBundle\Sitemap\PostsSubscriber:
         class: App\Sitemap\PostsSubscriber
         arguments:
             $primaryLocale: '%harentius_blog.primary_locale%'
         tags:
             - { name: "kernel.event_subscriber", priority: 100 }
+
+    App\LocalizationHelper: ~

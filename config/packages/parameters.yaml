@@ -1,5 +1,5 @@
 parameters:
-    sidebar_cache_lifetime: 0
+    sidebar_cache_lifetime: ~
     sidebar_tags_limit: 15
     sidebar_tag_sizes:
         - 65
@@ -11,7 +11,7 @@ parameters:
     homepage_feed_category: null
     list_posts_per_page: 15
     statistics_cache_lifetime: 3600
-    locale: ru
+    locale: en
     generate_image_previews: true
     image_previews_base_uri: /assets/images/preview/
     apc_global_prefix: folkprog_net
