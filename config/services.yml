@@ -57,3 +57,9 @@ services:
             - { name: "kernel.event_subscriber", priority: 100 }
 
     App\LocalizationHelper: ~
+
+    Harentius\BlogBundle\Controller\SidebarController:
+        class: App\Controller\SidebarController
+        arguments:
+            $translatableListener: '@stof_doctrine_extensions.listener.translatable'
+        public: true
