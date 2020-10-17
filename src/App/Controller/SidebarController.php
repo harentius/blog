@@ -11,7 +11,6 @@ use Harentius\BlogBundle\Entity\CategoryRepository;
 use Harentius\BlogBundle\Sidebar\Archive;
 use Harentius\BlogBundle\Sidebar\Tags;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class SidebarController extends AbstractController
