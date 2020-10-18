@@ -63,3 +63,8 @@ services:
         arguments:
             $translatableListener: '@stof_doctrine_extensions.listener.translatable'
         public: true
+
+    Harentius\BlogBundle\BreadCrumbsManager:
+        class: App\BreadCrumbsManager
+        arguments:
+            $translatableListener: '@stof_doctrine_extensions.listener.translatable'
