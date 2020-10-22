@@ -1,5 +1,9 @@
 {% extends '@!HarentiusBlog/Blog/index.html.twig' %}
 
+{% block page_title %}
+    {%- if page %}{{ get_field(page, 'title') }}{% endif -%}
+{% endblock %}
+
 {% block content %}
     {% if page %}
     <div class="padded-content">
