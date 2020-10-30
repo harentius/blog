@@ -6,7 +6,6 @@ jobs:
       - image: circleci/php:7.3-cli
     steps:
       - checkout
-      - run: sudo composer self-update
       - restore_cache:
           keys:
             - composer-bin-cs-fixer-v2-{{ checksum "vendor-bin/php-cs-fixer/composer.lock" }}
@@ -23,7 +22,6 @@ jobs:
       - image: circleci/php:7.3-cli
     steps:
       - checkout
-      - run: sudo composer self-update
       - restore_cache:
           keys:
             - composer-v1-{{ checksum "composer.lock" }}
@@ -40,7 +38,6 @@ jobs:
       - image: circleci/php:7.3-cli
     steps:
       - checkout
-      - run: sudo composer self-update
       - restore_cache:
           keys:
             - composer-v1-{{ checksum "composer.lock" }}
@@ -62,7 +59,6 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - run: sudo composer self-update
       - restore_cache:
           keys:
             - composer-v1-{{ checksum "composer.lock" }}
