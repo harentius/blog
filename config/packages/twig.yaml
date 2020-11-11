@@ -2,7 +2,6 @@ twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
     globals:
-        statistics: '@App\Statistics'
         google_analytics_id: '%google_analytics.id%'
         google_analytics_hostname: '%google_analytics.hostname%'
         sharethis_property: '%sharethis_property%'

@@ -1,6 +1,3 @@
-imports:
-    - { resource: 'services/*' }
-
 parameters:
 
 services:
@@ -26,11 +23,6 @@ services:
         class: App\Router\PublicationUrlGenerator
         arguments:
             $primaryLocale: '%harentius_blog.primary_locale%'
-
-    Harentius\BlogBundle\Menu\MenuBuilder:
-        class: App\Menu\MenuBuilder
-        arguments:
-            $homepageSlug: '%harentius_blog.homepage.page_slug%'
 
     Harentius\BlogBundle\Twig\TranslationListExtension:
         class: App\Twig\TranslationListExtension
