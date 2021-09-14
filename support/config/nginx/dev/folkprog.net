@@ -1,7 +1,6 @@
 server {
-    listen 80;
-    server_name folkprog;
-    root /home/yaros/projects/folkprog.net/public;
+    listen 80 default_server;
+    root /app/public;
 
     location / {
         # try to serve file directly, fallback to index.php
@@ -9,19 +8,17 @@ server {
     }
 
     location ~ ^/index.php(/|$) {
-        fastcgi_pass unix:/home/yaros/.phpbrew/php/php-7.3.12/var/run/php-fpm.sock;
+        fastcgi_pass php:9000;
         fastcgi_split_path_info ^(.+\.php)(/.*)$;
         include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME /usr/share/nginx/html$fastcgi_script_name;
 
-        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
-        fastcgi_param DOCUMENT_ROOT $realpath_root;
+		fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+		fastcgi_param DOCUMENT_ROOT $realpath_root;
         internal;
     }
 
     location ~ \.php$ {
         return 404;
     }
-
-    error_log /var/log/nginx/folkprog_error.log;
-    access_log /var/log/nginx/folkprog_access.log;
 }
