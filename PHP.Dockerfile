@@ -15,5 +15,3 @@ RUN apt-get update && \
 
 RUN curl https://getcomposer.org/download/2.1.7/composer.phar --output /usr/local/bin/composer \
     && chmod +x /usr/local/bin/composer
-
-WORKDIR /app

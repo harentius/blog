@@ -12,6 +12,7 @@ services:
         build:
             context: .
             dockerfile: PHP.Dockerfile
+        working_dir: /app
         volumes:
             - ./:/app
         environment:
@@ -26,6 +27,16 @@ services:
             MYSQL_DATABASE: 'folkprog'
         volumes:
             - mysqldata:/var/lib/mysql
+
+    node:
+        image: node:14
+        container_name: npm
+        working_dir: /app/src/BlogBundle
+        command: sh -c 'npm install && npm run watch'
+        volumes:
+            - ./:/app
+        environment:
+            OUTPUT_PATH: '../../public/bundles/harentiusblog/build'
 
 volumes:
     mysqldata: {}
