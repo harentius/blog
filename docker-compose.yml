@@ -30,7 +30,6 @@ services:
 
     node:
         image: node:14
-        container_name: npm
         working_dir: /app/src/BlogBundle
         command: sh -c 'npm install && npm run watch'
         volumes:
