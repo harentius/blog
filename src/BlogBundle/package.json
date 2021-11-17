@@ -12,7 +12,7 @@
     "ckeditor-more-plugin": "^1.0.1",
     "ckeditor-wordcount-plugin": "^1.17.2",
     "ckeditor-youtube-plugin": "^2.1.14",
-    "ckeditor4": "^4.13.1",
+    "ckeditor4": "^4.17.0",
     "copy-webpack-plugin": "^5.1.1",
     "font-awesome": "^4.7.0",
     "highlight.js": "^9.16.2",
