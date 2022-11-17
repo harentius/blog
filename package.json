@@ -5,7 +5,7 @@
   "author": "Yaroslav Osypenko <yaroslav.osypenko@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@symfony/webpack-encore": "^0.28.2"
+    "@symfony/webpack-encore": "^4.1.1"
   },
   "devDependencies": {
     "pre-commit": "^1.2.2"
