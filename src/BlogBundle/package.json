@@ -5,7 +5,7 @@
   "author": "Yaroslav Osypenko <yaroslav.osypenko@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@symfony/webpack-encore": "^0.28",
+    "@symfony/webpack-encore": "^4.1",
     "autoprefixer": "^9.7.3",
     "bootstrap": "^4.4.1",
     "ckeditor-audio-plugin": "^1.0.0",
