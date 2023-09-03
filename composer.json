@@ -75,5 +75,11 @@
         "phpstan/phpstan": "^0.12",
         "phpunit/phpunit": "^8.5",
         "phpstan/phpstan-phpunit": "^0.12.6"
-    }
+    },
+    "repositories": [
+      {
+          "type": "vcs",
+          "url": "https://github.com/theofidry/AliceBundle"
+      }
+    ]
 }

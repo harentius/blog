@@ -1734,12 +1734,12 @@
             "version": "v2.5.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/hautelook/AliceBundle.git",
+                "url": "https://github.com/theofidry/AliceBundle.git",
                 "reference": "a4d25ba319b551d14082cd7e9916f5ddcd8bc0f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hautelook/AliceBundle/zipball/a4d25ba319b551d14082cd7e9916f5ddcd8bc0f2",
+                "url": "https://api.github.com/repos/theofidry/AliceBundle/zipball/a4d25ba319b551d14082cd7e9916f5ddcd8bc0f2",
                 "reference": "a4d25ba319b551d14082cd7e9916f5ddcd8bc0f2",
                 "shasum": ""
             },
