@@ -14,5 +14,8 @@ FROM nginx:1.27
 COPY --from=build /app/public/build /app/public/build
 COPY --from=folkprog-php /app/public/bundles /app/public/bundles
 COPY support/docker/folkprog-static/nginx.vh.conf /etc/nginx/conf.d/default.conf
+COPY public/banners /app/public/banners
+COPY public/favicon.ico /app/public/favicon.ico
+COPY public/robots.txt /app/public/robots.txt
 
 WORKDIR /app
