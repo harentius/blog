@@ -7,7 +7,6 @@
 {% block head_extra %}
     {% if app.environment == 'prod' %}
     {{ include('_google_analytics.html.twig') }}
-    <script data-ad-client="ca-pub-8463813510139079" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     {% endif %}
 {% endblock %}
 
@@ -23,24 +22,9 @@
     </div>
     <div class="col-lg-4 col-md-4 col-sm-3 col-xs-3 text-right footer-widgets">
         <a href="http://adment.org.ua" target="_blank">
-            <img width="88" height="31" src="/banners/adment_88_31.png" alt="Админские развлечения - танцы с бубном на досуге" title="Админские развлечения - танцы с бубном на досуге"/>
+            <img width="88" height="31" src="/banners/adment_88_31.png"/>
         </a>
     </div>
 </div>
-{% endblock %}
-
-{% block sidebar_after_content %}
-    {% if app.environment == 'prod' %}
-        <!-- folkprog regular -->
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-8463813510139079"
-             data-ad-slot="8719005747"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    {% endif %}
 {% endblock %}
 

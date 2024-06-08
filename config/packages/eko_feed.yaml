@@ -1,8 +1,8 @@
 eko_feed:
     feeds:
         article:
-            title: 'Народное программирование'
-            description: 'Новые публикации'
+            title: 'Folkprog'
+            description: 'New articles'
             link:
                 route_name: 'harentius_blog_homepage'
             encoding: 'utf-8'

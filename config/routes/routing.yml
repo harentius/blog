@@ -1,14 +1,3 @@
 blog:
     resource: "@HarentiusBlogBundle/Resources/config/routing.yml"
     prefix:   /
-
-# Old site compatibility (slashes at the end)
-harentius_blog_show_default:
-    path: /{slug}/
-    defaults: { _controller: 'Harentius\BlogBundle\Controller\ShowController' }
-
-harentius_blog_show:
-    path: /{_locale}/{slug}/
-    defaults: { _controller: 'Harentius\BlogBundle\Controller\ShowController', _locale: '%kernel.default_locale%' }
-    requirements:
-        _locale: "%harentius_blog.locales_requirement%"

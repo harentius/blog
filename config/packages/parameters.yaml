@@ -17,7 +17,7 @@ parameters:
     apc_global_prefix: folkprog_net
     google_analytics.hostname: auto
     sharethis_product: 'inline-share-buttons'
-    en_default_locale_since: '2020/01/07'
+    en_default_locale_since: '2000/01/07'
     # Secret parameters
     google_analytics.id: '%env(GOOGLE_ANALYTICS_ID)%'
     sharethis_property: '%env(SHARETHIS_PROPERTY)%'
