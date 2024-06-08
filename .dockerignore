@@ -4,3 +4,5 @@
 /.git
 /vendor-bin
 /src/BlogBundle/vendor-bin
+/.circleci
+/var
