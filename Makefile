@@ -27,3 +27,7 @@ build-image-static: ## build php image for folkprog
 
 build-frontend: ## Build Frontend
 	docker run -it --rm -w /app -v $(PWD):/app node:13.6-alpine sh -c "npm install --production && npm run build:folkprog"
+
+# Publish
+publish: ## Publish images to the docker hub
+	docker push harentius/folkprog-php:latest && docker push harentius/folkprog-static:latest
