@@ -31,3 +31,6 @@ build-frontend: ## Build Frontend
 # Publish
 publish: ## Publish images to the docker hub
 	docker push harentius/folkprog-php:latest && docker push harentius/folkprog-static:latest
+
+publish-blog-bundle: ## Publish blog bundle
+	git checkout develop && git subtree push -P src/BlogBundle git@github.com:harentius/blog-bundle.git develop
