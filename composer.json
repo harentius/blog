@@ -18,7 +18,7 @@
         }
     },
     "require": {
-        "php": "^7.0",
+        "php": "^7.3",
         "ext-json": "*",
         "ext-apcu": "*",
         "doctrine/doctrine-migrations-bundle": "^1.0",
@@ -48,7 +48,6 @@
         "liip/imagine-bundle": "^2.2",
         "monolog/monolog": "^1.22",
         "symfony/dotenv": "^5.0",
-        "mhujer/breadcrumbs-bundle": "^1.5",
         "symfony/intl": "^4.4"
     },
     "scripts": {

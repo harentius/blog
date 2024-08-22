@@ -13,7 +13,7 @@ down: ## Down containers
 	docker compose down
 
 ssh: ## ssh to php container
-	docker compose exec folkprog.app /bin/sh
+	docker compose exec php /bin/sh
 
 # Build
 build: ## Build all images
