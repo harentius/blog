@@ -4,6 +4,7 @@ COPY package.json package-lock.json ./
 RUN npm install --production
 COPY ./assets ./assets
 COPY ./src/BlogBundle/src/Resources/js ./src/BlogBundle/src/Resources/js
+COPY ./src/BlogBundle/src/Resources/css ./src/BlogBundle/src/Resources/css
 COPY ./webpack.config.js ./webpack.config.js
 RUN npm run build:folkprog
 

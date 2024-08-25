@@ -11,8 +11,6 @@
     "pre-commit": "^1.2.2"
   },
   "scripts": {
-    "build": "cd src/BlogBundle && OUTPUT_PATH='../../public/bundles/harentiusblog/build' ./node_modules/.bin/encore production",
-    "watch": "cd src/BlogBundle && OUTPUT_PATH='../../public/bundles/harentiusblog/build' ./node_modules/.bin/encore dev --watch",
     "build:folkprog": "encore production",
     "lint": "cd src/BlogBundle && npm run lint",
     "lint-fix": "cd src/BlogBundle && npm run lint-fix",
