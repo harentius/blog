@@ -20,10 +20,10 @@ build: ## Build all images
 	make build-image-php && make build-image-static
 
 build-image-php: ## build php image for folkprog
-	docker build -f support/docker/folkprog-php/Dockerfile . -t harentius/folkprog-php:latest
+	docker build -f support/docker/folkprog-php/Dockerfile . -t harentius/folkprog-php:latest --platform=linux/amd64
 
 build-image-static: ## build php image for folkprog
-	docker build -f support/docker/folkprog-static/Dockerfile . -t harentius/folkprog-static:latest
+	docker build -f support/docker/folkprog-static/Dockerfile . -t harentius/folkprog-static:latest --platform=linux/amd64
 
 build-frontend: ## Build Frontend
 	docker run -it --rm -w /app -v $(PWD):/app node:13.6-alpine sh -c "npm install --production && npm run build:folkprog"

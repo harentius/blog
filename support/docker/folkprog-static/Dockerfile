@@ -17,5 +17,6 @@ COPY support/docker/folkprog-static/nginx.vh.conf /etc/nginx/conf.d/default.conf
 COPY public/banners /app/public/banners
 COPY public/favicon.ico /app/public/favicon.ico
 COPY public/robots.txt /app/public/robots.txt
+COPY public/google2a887e99218c2967.html /app/public/google2a887e99218c2967.html
 
 WORKDIR /app
