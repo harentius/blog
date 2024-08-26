@@ -32,9 +32,6 @@
         "twig/twig": "^2.12|^3.0",
         "symfony/yaml": "4.4.*",
         "stof/doctrine-extensions-bundle": "^1.3",
-        "sonata-project/admin-bundle": "^3.56",
-        "sonata-project/doctrine-orm-admin-bundle": "^3.12",
-        "sonata-project/translation-bundle": "^2.4",
         "doctrine/orm": "^2.7",
         "doctrine/doctrine-bundle": "^1.12 || ^2.0",
         "sensio/framework-extra-bundle": "^5.5",
@@ -45,7 +42,9 @@
         "liip/imagine-bundle": "^2.2",
         "monolog/monolog": "^1.22",
         "symfony/dotenv": "^5.0",
-        "symfony/intl": "^4.4"
+        "symfony/intl": "^4.4",
+        "league/html-to-markdown": "^5.1",
+        "symfony/validator": "^4.4"
     },
     "scripts": {
         "cs-check": "vendor-bin/php-cs-fixer/vendor/bin/php-cs-fixer fix --dry-run --diff -v --diff-format=udiff --ansi",

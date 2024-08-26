@@ -40,3 +40,6 @@ publish: ## Publish folkprog images to the docker hub
 
 publish-blog-bundle: ## Publish blog-bundle to github
 	git checkout develop && git subtree push -P src/BlogBundle git@github.com:harentius/blog-bundle.git develop
+
+# make build-blog-assets && make build && make down && make up
+# also need assets install from php app

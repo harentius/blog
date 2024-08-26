@@ -1,6 +1,6 @@
 framework:
     secret: '%env(APP_SECRET)%'
-    form:            ~
+    form:            false
     csrf_protection: ~
     validation:      { enable_annotations: true }
     default_locale:  '%locale%'

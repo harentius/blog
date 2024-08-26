@@ -9,3 +9,6 @@ services:
         tags:
             - { name: 'doctrine.event_subscriber' }
 
+    App\Command\MarkdownExportCommand:
+        tags:
+            - { name: 'console.command' }

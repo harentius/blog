@@ -14,9 +14,12 @@ services:
     environment:
       - COMPOSER_MEMORY_LIMIT=-1
       - DATABASE_URL=mysql://root:1111@mysql:3306/folkprog?serverVersion=5.7
+      - HISTFILE=/app/var/.bash_history-php
 
   static:
     image: harentius/folkprog-static:latest
+    environment:
+      - HISTFILE=/app/var/.bash_history-static
 
   mysql:
     image: mariadb:10.6.4
