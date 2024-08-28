@@ -29,7 +29,7 @@ RUN apk update -q && apk upgrade -q \
     && apk del .phpize-deps-configure \
     && docker-php-source delete
 
-COPY --from=composer:1.10.26 /usr/bin/composer /usr/local/bin/composer
+COPY --from=composer:2.7.8 /usr/bin/composer /usr/local/bin/composer
 COPY support/docker/folkprog-php/zz-docker.conf /usr/local/etc/php/conf.d/zz-docker.conf
 
 WORKDIR /app
