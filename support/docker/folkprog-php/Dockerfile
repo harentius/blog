@@ -1,4 +1,4 @@
-FROM php:8.1-fpm-alpine
+FROM php:8.3-fpm-alpine
 
 # php extensions deps
 RUN apk update -q && apk upgrade -q \
@@ -19,7 +19,7 @@ RUN apk update -q && apk upgrade -q \
     jpeg-dev \
     gd-dev \
     curl-dev \
-    && docker-php-ext-install gd intl pdo_mysql curl opcache \
+    && docker-php-ext-install gd pdo_mysql curl opcache \
     && apk del -q build-deps
 
 COPY --from=composer:2.7.8 /usr/bin/composer /usr/local/bin/composer
