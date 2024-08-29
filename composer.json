@@ -23,11 +23,9 @@
         "beberlei/doctrineextensions": "^1.5",
         "doctrine/doctrine-bundle": "^2.7",
         "doctrine/doctrine-migrations-bundle": "^3.3",
-        "doctrine/orm": "^2.7",
         "knplabs/knp-paginator-bundle": "^4.1 || ^5.0",
         "league/html-to-markdown": "^5.1",
         "liip/imagine-bundle": "^2.13",
-        "monolog/monolog": "^1.22",
         "presta/sitemap-bundle": "^2.5",
         "sensio/framework-extra-bundle": "^5.5",
         "stof/doctrine-extensions-bundle": "^1.3",
@@ -40,8 +38,7 @@
         "symfony/translation": "^5.4",
         "symfony/twig-bundle": "^5.4",
         "symfony/validator": "^5.4",
-        "symfony/yaml": "5.4",
-        "twig/twig": "^2.12|^3.0"
+        "symfony/yaml": "^5.4"
     },
     "scripts": {
         "cs-check": "vendor-bin/php-cs-fixer/vendor/bin/php-cs-fixer fix --dry-run --diff -v --diff-format=udiff --ansi",
