@@ -25,7 +25,7 @@ build: ## Build all images
 build-image-php: ## build php image for folkprog
 	docker build -f support/docker/folkprog-php/Dockerfile . -t harentius/folkprog-php:latest --platform=linux/amd64
 
-build-image-static: ## build php image for folkprog
+build-image-static: ## build static files image for folkprog
 	docker build -f support/docker/folkprog-static/Dockerfile . -t harentius/folkprog-static:latest --platform=linux/amd64
 
 build-frontend: ## Build Frontend
