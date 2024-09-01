@@ -18,6 +18,9 @@ ssh: ## ssh to php container
 ssh-s: ## ssh to php container
 	docker compose exec static /bin/bash
 
+rector: ## Run rector
+	docker compose exec php /bin/sh -c "composer rector"
+
 # Build
 build: ## Build all images
 	make build-image-php && make build-image-static

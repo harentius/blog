@@ -18,21 +18,15 @@ class Statistics
     protected $cacheLifetime;
 
     /**
-     * @var ArticleRepository
-     */
-    private $articleRepository;
-
-    /**
      * Statistics constructor.
      * @param CacheProvider $cache
      * @param int|null $cacheLifetime
      * @param ArticleRepository $articleRepository
      */
-    public function __construct(CacheProvider $cache, ?int $cacheLifetime, ArticleRepository $articleRepository)
+    public function __construct(CacheProvider $cache, ?int $cacheLifetime, private readonly ArticleRepository $articleRepository)
     {
         $this->cache = $cache;
         $this->cacheLifetime = $cacheLifetime;
-        $this->articleRepository = $articleRepository;
     }
 
     /**
