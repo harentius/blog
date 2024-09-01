@@ -1,16 +1,16 @@
 <?php
 
-$finder = PhpCsFixer\Finder::create()
+$finder = (new PhpCsFixer\Finder())
     ->in(__DIR__ . '/src')
 ;
-return PhpCsFixer\Config::create()
+
+return (new PhpCsFixer\Config())
     ->setRiskyAllowed(true)
     ->setFinder($finder)
     ->setCacheFile(__DIR__ . '/.php_cs.cache')
     ->setRules([
         '@Symfony' => true,
         '@Symfony:risky' => true,
-        '@PHP56Migration' => true,
         'combine_consecutive_unsets' => true,
         'array_syntax' => ['syntax' => 'short'],
         'no_useless_else' => true,
@@ -18,7 +18,7 @@ return PhpCsFixer\Config::create()
         'ordered_class_elements' => true,
         'ordered_imports' => true,
         'concat_space' => ['spacing' => 'one'],
-        'psr4' => true,
+        'psr_autoloading' => true,
         'strict_comparison' => true,
         'strict_param' => true,
         'phpdoc_align' => false,
@@ -32,9 +32,6 @@ return PhpCsFixer\Config::create()
         'php_unit_construct' => true,
         'php_unit_strict' => false,
         'semicolon_after_instruction' => true,
-        'doctrine_annotation_indentation' => true,
-        'doctrine_annotation_spaces' => ['around_array_assignments' => false],
-        'pre_increment' => false,
         'yoda_style' => false,
         'self_accessor' => false,
         'increment_style' => false,

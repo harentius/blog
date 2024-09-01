@@ -31,7 +31,7 @@ class ArticleRepository extends BaseArticleRepository
                     ->orderBy('ap.publishedAt', 'ASC')
                     ->setMaxResults(1)
                     ->getDQL()
-                . ')' . 'AS firstArticlePublicationDate'
+                . ')AS firstArticlePublicationDate'
             )
             ->where('a.published = :isPublished')
             ->setParameter(':isPublished', true)
