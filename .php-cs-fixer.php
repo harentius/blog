@@ -25,7 +25,6 @@ return (new PhpCsFixer\Config())
         'phpdoc_order' => true,
         'phpdoc_separation' => false,
         'phpdoc_to_comment' => false,
-        'no_empty_phpdoc' => false,
         'phpdoc_add_missing_param_annotation' => ['only_untyped' => false],
         'modernize_types_casting' => true,
         'no_php4_constructor' => true,
@@ -38,6 +37,5 @@ return (new PhpCsFixer\Config())
         'fopen_flags' => false,
         'native_function_invocation' => false,
         'phpdoc_types_order' => false,
-        'no_superfluous_phpdoc_tags' => false,
         'single_line_throw' => false,
     ]);

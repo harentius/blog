@@ -13,9 +13,6 @@ use Harentius\BlogBundle\Entity\Article;
 
 class OverrideArticleRepositorySubscriber implements EventSubscriber
 {
-    /**
-     * {@inheritdoc}
-     */
     public function getSubscribedEvents()
     {
         return [
@@ -23,10 +20,7 @@ class OverrideArticleRepositorySubscriber implements EventSubscriber
         ];
     }
 
-    /**
-     * @param LoadClassMetadataEventArgs $eventArgs
-     */
-    public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
+    public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs): void
     {
         /**
          * @var ClassMetadata

@@ -8,30 +8,12 @@ use Doctrine\Common\Cache\CacheProvider;
 class Statistics
 {
     /**
-     * @var CacheProvider
-     */
-    protected $cache;
-
-    /**
-     * @var int
-     */
-    protected $cacheLifetime;
-
-    /**
      * Statistics constructor.
-     * @param CacheProvider $cache
-     * @param int|null $cacheLifetime
-     * @param ArticleRepository $articleRepository
      */
-    public function __construct(CacheProvider $cache, ?int $cacheLifetime, private readonly ArticleRepository $articleRepository)
+    public function __construct(protected CacheProvider $cache, protected ?int $cacheLifetime, private readonly ArticleRepository $articleRepository)
     {
-        $this->cache = $cache;
-        $this->cacheLifetime = $cacheLifetime;
     }
 
-    /**
-     * @return array
-     */
     public function getAll(): array
     {
         $key = 'statistics';

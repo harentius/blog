@@ -9,9 +9,6 @@ use Harentius\BlogBundle\Entity\ArticleRepository as BaseArticleRepository;
 
 class ArticleRepository extends BaseArticleRepository
 {
-    /**
-     * @return array
-     */
     public function findStatistics(): array
     {
         $q = $this->createQueryBuilder('a');
@@ -40,9 +37,6 @@ class ArticleRepository extends BaseArticleRepository
         ;
     }
 
-    /**
-     * @return Article
-     */
     public function findMostPopular(): Article
     {
         return $this->createQueryBuilder('a')
