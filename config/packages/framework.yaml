@@ -2,7 +2,7 @@ framework:
     secret: '%env(APP_SECRET)%'
     form:            false
     csrf_protection: ~
-    validation:      { enable_annotations: true }
+    validation:      { enable_attributes: true }
     default_locale:  '%locale%'
     session: ~
     fragments: ~
