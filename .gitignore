@@ -1,7 +1,6 @@
 /vendor/
 /node_modules/
 /.env
-/vendor-bin/**/vendor
 /.php_cs.cache
 /public/assets
 /public/build
@@ -10,3 +9,4 @@
 /var
 /.phpunit.result.cache
 .idea
+test-results
