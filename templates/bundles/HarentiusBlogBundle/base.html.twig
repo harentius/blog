@@ -1,15 +1,5 @@
 {% extends '@!HarentiusBlog/base.html.twig' %}
 
-{%- block raw_title -%}
-    {% if block('page_title') is not empty %}{% block page_title %}{% endblock %} | {% endif %}{{ 'project.name'|trans }}
-{%- endblock -%}
-
-{% block head_extra %}
-    {% if app.environment == 'prod' %}
-    {{ include('_google_analytics.html.twig') }}
-    {% endif %}
-{% endblock %}
-
 {% block footer_content %}
 <div class="row">
     <div class="col-lg-4 col-md-4 col-sm-3 col-xs-3 text-left footer-widgets">
@@ -27,4 +17,3 @@
     </div>
 </div>
 {% endblock %}
-
