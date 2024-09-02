@@ -34,7 +34,7 @@ build-image-static: ## build static files image for folkprog
 build-frontend: ## Build Frontend
 	docker run -it --rm -w /app -v $(PWD):/app node:13.6-alpine sh -c "npm install --production && npm run build:folkprog"
 
-build-blog-assets: # Build blog assets before commit
+build-blog-assets: ## Build blog assets before commit
 	docker run -it --rm -w /app -v $(PWD)/src/BlogBundle:/app node:13.6-alpine sh -c "npm install --production && ./node_modules/.bin/encore production"
 
 # Publish
