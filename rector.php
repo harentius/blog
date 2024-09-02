@@ -5,6 +5,8 @@ use Rector\Symfony\Set\SymfonySetList;
 use Rector\Doctrine\Set\DoctrineSetList;
 use Rector\Symfony\Set\SensiolabsSetList;
 use Rector\Set\ValueObject\SetList;
+use Rector\TypeDeclaration\Rector\ClassMethod\ReturnTypeFromStrictNativeCallRector;
+use Rector\TypeDeclaration\Rector\Property;
 
 return RectorConfig::configure()
     ->withSymfonyContainerXml(__DIR__ . '/var/cache/dev/App_KernelDevDebugContainer.xml')
@@ -19,4 +21,11 @@ return RectorConfig::configure()
         DoctrineSetList::DOCTRINE_CODE_QUALITY,
         DoctrineSetList::GEDMO_ANNOTATIONS_TO_ATTRIBUTES,
         SetList::TYPE_DECLARATION,
+    ])
+    ->withRules([
+        ReturnTypeFromStrictNativeCallRector::class,
+        Property\AddPropertyTypeDeclarationRector::class,
+        Property\TypedPropertyFromAssignsRector::class,
+        Property\TypedPropertyFromStrictConstructorRector::class,
+        Property\TypedPropertyFromStrictSetUpRector::class,
     ]);
