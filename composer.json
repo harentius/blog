@@ -24,7 +24,6 @@
         "doctrine/doctrine-bundle": "^2.7",
         "doctrine/doctrine-migrations-bundle": "^3.3",
         "knplabs/knp-paginator-bundle": "^4.1 || ^5.0 || ^6.0",
-        "league/html-to-markdown": "^5.1",
         "liip/imagine-bundle": "^2.13",
         "presta/sitemap-bundle": "^4.1",
         "stof/doctrine-extensions-bundle": "^1.3",
@@ -38,6 +37,16 @@
         "symfony/twig-bundle": "^6.4 || ^7.0",
         "symfony/validator": "^6.4 || ^7.0",
         "symfony/yaml": "^6.4 || ^7.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.64",
+        "phpstan/phpstan": "^1.12",
+        "phpstan/phpstan-phpunit": "^1.4",
+        "phpunit/phpunit": "^11.3",
+        "rector/rector": "^1.2",
+        "symfony/debug-bundle": "^6.4 || ^7.1",
+        "symfony/web-profiler-bundle": "^6.4 || ^7.0",
+        "league/html-to-markdown": "^5.1"
     },
     "scripts": {
         "cs-check": "vendor/bin/php-cs-fixer check",
@@ -57,14 +66,5 @@
         "bamarni-bin": {
             "bin-links": false
         }
-    },
-    "require-dev": {
-        "friendsofphp/php-cs-fixer": "^3.64",
-        "phpstan/phpstan": "^1.12",
-        "phpstan/phpstan-phpunit": "^1.4",
-        "phpunit/phpunit": "^11.3",
-        "rector/rector": "^1.2",
-        "symfony/debug-bundle": "^6.4 || ^7.1",
-        "symfony/web-profiler-bundle": "^6.4 || ^7.0"
     }
 }
