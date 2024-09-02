@@ -35,7 +35,30 @@ class MarkdownExportCommand extends Command
 
         foreach ($articles as $article) {
             $html = $article->getText();
-            $markdown = $converter->convert($html);
+            $markdown = '';
+
+            $title = $article->getTitle();
+            if ($title) {
+                $markdown .= '# ' . $title . "\n";
+            }
+
+            $metaDescription = $article->getMetaDescription();
+            if ($metaDescription) {
+                $markdown .= '###### Meta Description: ' . $metaDescription . "\n";
+            }
+
+            $metaKeywords = $article->getMetaKeywords();
+            if ($metaKeywords) {
+                $markdown .= '###### Meta Keywords: ' . $metaKeywords . "\n";
+            }
+
+            $publishedAt = $article->getPublishedAt();
+            if ($publishedAt) {
+                $markdown .= '###### Published At: ' . $publishedAt->format('Y-m-d') . "\n";
+            }
+
+            $markdown = $markdown . "\n" . $converter->convert($html);
+
             $fullPath = $this->getPath($article, $destination);
             $output->writeln('Exporting ' . $fullPath);
             file_put_contents($fullPath, $markdown);
