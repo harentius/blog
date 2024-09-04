@@ -32,7 +32,6 @@
         "symfony/dotenv": "^6.4 || ^7.0",
         "symfony/framework-bundle": "^6.4 || ^7.0",
         "symfony/monolog-bundle": "^3.10",
-        "symfony/security-bundle": "^6.4 || ^7.0",
         "symfony/translation": "^6.4 || ^7.0",
         "symfony/twig-bundle": "^6.4 || ^7.0",
         "symfony/validator": "^6.4 || ^7.0",

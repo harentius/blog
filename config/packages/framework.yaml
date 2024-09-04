@@ -1,7 +1,6 @@
 framework:
     secret: '%env(APP_SECRET)%'
     form:            false
-    csrf_protection: ~
     validation:      { enable_attributes: true }
     default_locale:  '%locale%'
     session: ~

@@ -3,14 +3,13 @@
 namespace App\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Harentius\BlogBundle\Entity\AbstractPost;
 use Harentius\BlogBundle\Entity\Article;
 use League\HTMLToMarkdown\HtmlConverter;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Attribute\AsCommand;
 
 #[AsCommand(name: 'folkprog:markdown:export')]
 class MarkdownExportCommand extends Command
@@ -67,7 +66,7 @@ class MarkdownExportCommand extends Command
         return 0;
     }
 
-    private function getPath(AbstractPost $post, string $destination): string
+    private function getPath(Article $post, string $destination): string
     {
         $category = $post->getCategory();
         $subPath = '';

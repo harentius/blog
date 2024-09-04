@@ -1,3 +1,3 @@
 blog:
-    resource: "@HarentiusBlogBundle/Resources/config/routing.yml"
+    resource: "@HarentiusBlogBundle/Resources/config/routing.yaml"
     prefix:   /
