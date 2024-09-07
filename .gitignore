@@ -10,3 +10,4 @@
 /.phpunit.result.cache
 .idea
 test-results
+.DS_Store
