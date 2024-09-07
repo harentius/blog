@@ -38,7 +38,7 @@ class MarkdownExportCommand extends Command
 
             $title = $article->getTitle();
             if ($title) {
-                $markdown .= '# ' . $title . "\n";
+                $markdown .= '# ' . $title . "\n\n";
             }
 
             $metaDescription = $article->getMetaDescription();
@@ -53,8 +53,10 @@ class MarkdownExportCommand extends Command
 
             $publishedAt = $article->getPublishedAt();
             if ($publishedAt) {
-                $markdown .= '###### Published At: ' . $publishedAt->format('Y-m-d') . "\n";
+                $markdown .= '###### Published at: ' . $publishedAt->format('Y-m-d') . "\n";
             }
+
+            $html = str_replace('<!--more-->', "<br/>{{ Read more }}<br/>", $html);
 
             $markdown = $markdown . "\n" . $converter->convert($html);
 
