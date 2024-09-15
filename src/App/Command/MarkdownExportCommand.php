@@ -56,8 +56,6 @@ class MarkdownExportCommand extends Command
                 $markdown .= '###### Published at: ' . $publishedAt->format('Y-m-d') . "\n";
             }
 
-            $html = str_replace('<!--more-->', "<br/>{{ Read more }}<br/>", $html);
-
             $markdown = $markdown . "\n" . $converter->convert($html);
 
             $fullPath = $this->getPath($article, $destination);
