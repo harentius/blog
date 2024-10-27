@@ -2,7 +2,6 @@ framework:
     secret: '%env(APP_SECRET)%'
     form:            false
     validation:      { enable_attributes: true }
-    default_locale:  '%locale%'
     session: ~
     fragments: ~
     http_method_override: true

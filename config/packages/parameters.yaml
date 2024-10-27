@@ -1,27 +1,6 @@
 parameters:
-    sidebar_cache_lifetime: ~
-    sidebar_tags_limit: 15
-    sidebar_tag_sizes:
-        - 65
-        - 75
-        - 83
-        - 100
-    homepage_page_slug: index
-    homepage_feed_number: 7
-    homepage_feed_category: null
-    list_posts_per_page: 15
-    statistics_cache_lifetime: 3600
-    locale: en
-    generate_image_previews: true
-    image_previews_base_uri: /assets/images/preview/
-    apc_global_prefix: folkprog_net
-    google_analytics.hostname: auto
     sharethis_product: 'inline-share-buttons'
-    en_default_locale_since: '2000/01/07'
-    # Secret parameters
-    google_analytics.id: '%env(GOOGLE_ANALYTICS_ID)%'
     sharethis_property: '%env(SHARETHIS_PROPERTY)%'
     facebook_app_id: '%env(FACEBOOK_APP_ID)%'
-    site_url: '%env(SITE_SCHEME)%://%env(SITE_HOST)%'
     router.request_context.host: '%env(SITE_HOST)%'
     router.request_context.scheme: '%env(SITE_SCHEME)%'
