@@ -23,7 +23,7 @@ RUN apk update -q && apk upgrade -q \
     && apk del -q build-deps
 
 COPY --from=composer:2.7.8 /usr/bin/composer /usr/local/bin/composer
-COPY support/docker/folkprog-php/zz-docker.conf /usr/local/etc/php/conf.d/zz-docker.conf
+COPY support/docker/blog-php/zz-docker.conf /usr/local/etc/php/conf.d/zz-docker.conf
 
 WORKDIR /app
 

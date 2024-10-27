@@ -1,8 +1,8 @@
 {
-    "name": "harentius/folkprog",
+    "name": "harentius/blog",
     "license": "MIT",
     "type": "project",
-    "description": "Folkprog website sources",
+    "description": "Blog sources",
     "minimum-stability": "dev",
     "prefer-stable": true,
     "autoload": {

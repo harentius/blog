@@ -8,16 +8,16 @@ services:
       - ./public:/app/public
 
   php:
-    image: harentius/folkprog-php:latest
+    image: harentius/blog-php:latest
     volumes:
       - ./:/app
     environment:
       - COMPOSER_MEMORY_LIMIT=-1
-      - DATABASE_URL=mysql://root:1111@mysql:3306/folkprog
+      - DATABASE_URL=mysql://root:1111@mysql:3306/blog
       - HISTFILE=/app/var/.bash_history-php
 
   static:
-    image: harentius/folkprog-static:latest
+    image: harentius/blog-static:latest
     environment:
       - HISTFILE=/app/var/.bash_history-static
 
@@ -25,10 +25,10 @@ services:
     image: mariadb:10.6.4
     environment:
       MARIADB_ROOT_PASSWORD: '1111'
-      MARIADB_DATABASE: 'folkprog'
+      MARIADB_DATABASE: 'blog'
     volumes:
       - mysqldata:/var/lib/mysql
-      #- "./var/folkprog.sql:/docker-entrypoint-initdb.d/1.sql"
+      - "./var/blog.sql:/docker-entrypoint-initdb.d/1.sql"
 
   adminer:
     image: adminer

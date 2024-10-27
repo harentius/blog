@@ -11,7 +11,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-#[AsCommand(name: 'folkprog:markdown:export')]
+#[AsCommand(name: 'blog:markdown:export')]
 class MarkdownExportCommand extends Command
 {
     public function __construct(private readonly EntityManagerInterface $entityManager)

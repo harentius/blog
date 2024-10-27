@@ -25,21 +25,21 @@ rector: ## Run rector
 build: ## Build all images
 	make build-image-php && make build-image-static
 
-build-image-php: ## build php image for folkprog
-	docker build -f support/docker/folkprog-php/Dockerfile . -t harentius/folkprog-php:latest --platform=linux/amd64
+build-image-php: ## build php image for blog
+	docker build -f support/docker/blog-php/Dockerfile . -t harentius/blog-php:latest --platform=linux/amd64
 
-build-image-static: ## build static files image for folkprog
-	docker build -f support/docker/folkprog-static/Dockerfile . -t harentius/folkprog-static:latest --platform=linux/amd64
+build-image-static: ## build static files image for blog
+	docker build -f support/docker/blog-static/Dockerfile . -t harentius/blog-static:latest --platform=linux/amd64
 
 build-frontend: ## Build Frontend
-	docker run -it --rm -w /app -v $(PWD):/app node:13.6-alpine sh -c "npm install --production && npm run build:folkprog"
+	docker run -it --rm -w /app -v $(PWD):/app node:13.6-alpine sh -c "npm install --production && npm run build:blog"
 
 build-blog-assets: ## Build blog assets before commit
 	docker run -it --rm -w /app -v $(PWD)/src/BlogBundle:/app node:13.6-alpine sh -c "npm install --production && ./node_modules/.bin/encore production"
 
 # Publish
-publish: ## Publish folkprog images to the docker hub
-	docker push harentius/folkprog-php:latest && docker push harentius/folkprog-static:latest
+publish: ## Publish blog images to the docker hub
+	docker push harentius/blog-php:latest && docker push harentius/blog-static:latest
 
 publish-blog-bundle: ## Publish blog-bundle to github
 	git checkout develop && git subtree push -P src/BlogBundle git@github.com:harentius/blog-bundle.git develop
