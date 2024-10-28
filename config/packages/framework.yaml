@@ -1,9 +1,7 @@
 framework:
-    secret: '%env(APP_SECRET)%'
+    secret: '%env(string:APP_SECRET)%'
     form:            false
     validation:      { enable_attributes: true }
     session: ~
     fragments: ~
     http_method_override: true
-    assets:
-        json_manifest_path: '%kernel.project_dir%/public/build/manifest.json'

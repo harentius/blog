@@ -12,9 +12,11 @@ services:
     volumes:
       - ./:/app
     environment:
+      - APP_SECRET=dev_app
       - COMPOSER_MEMORY_LIMIT=-1
       - DATABASE_URL=mysql://root:1111@mysql:3306/blog
       - HISTFILE=/app/var/.bash_history-php
+      - BLOG_TITLE=Web Developer Blog
 
   static:
     image: harentius/blog-static:latest

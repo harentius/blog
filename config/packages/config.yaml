@@ -1,9 +1,3 @@
 imports:
     - { resource: '@HarentiusBlogBundle/Resources/config/config.yaml' }
 
-services:
-    App\Command\MarkdownExportCommand:
-        public: true
-        autowire: true
-        tags:
-            - { name: 'console.command' }

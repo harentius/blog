@@ -15,24 +15,26 @@ down: ## Down containers
 ssh: ## ssh to php container
 	docker compose exec php /bin/sh
 
-ssh-s: ## ssh to php container
+ssh-s: ## ssh to static container
 	docker compose exec static /bin/bash
 
 rector: ## Run rector
 	docker compose exec php /bin/sh -c "composer rector"
 
+dump-manifest:
+	mkdir -p ./public/bundles/harentiusblog/build && \
+	cp ./src/BlogBundle/src/Resources/public/build/manifest.json ./public/bundles/harentiusblog/build
+
+ff: build-blog-assets build dump-manifest down up ## Build frontend und restart container
+
 # Build
-build: ## Build all images
-	make build-image-php && make build-image-static
+build: build-image-php build-image-static ## Build all images
 
 build-image-php: ## build php image for blog
 	docker build -f support/docker/blog-php/Dockerfile . -t harentius/blog-php:latest --platform=linux/amd64
 
 build-image-static: ## build static files image for blog
 	docker build -f support/docker/blog-static/Dockerfile . -t harentius/blog-static:latest --platform=linux/amd64
-
-build-frontend: ## Build Frontend
-	docker run -it --rm -w /app -v $(PWD):/app node:13.6-alpine sh -c "npm install --production && npm run build:blog"
 
 build-blog-assets: ## Build blog assets before commit
 	docker run -it --rm -w /app -v $(PWD)/src/BlogBundle:/app node:13.6-alpine sh -c "npm install --production && ./node_modules/.bin/encore production"

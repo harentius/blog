@@ -30,7 +30,8 @@ WORKDIR /app
 COPY composer.json composer.lock ./
 RUN composer install --no-interaction
 
-COPY ./ /app
+COPY ./ ./
+COPY src/BlogBundle/src/Resources/public/build/manifest.json ./public/bundles/harentiusblog/build/manifest.json
 
 STOPSIGNAL SIGTERM
 

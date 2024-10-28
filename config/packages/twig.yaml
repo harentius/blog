@@ -1,7 +1,3 @@
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
-    globals:
-        sharethis_property: '%sharethis_property%'
-        sharethis_product: '%sharethis_product%'
-        facebook_app_id: '%facebook_app_id%'

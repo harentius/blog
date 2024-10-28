@@ -1,1 +1,5 @@
-harentius_blog: ~
+parameters:
+    blog_title: '%env(string:BLOG_TITLE)%'
+
+harentius_blog:
+    title: '%blog_title%'
