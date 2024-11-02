@@ -1,5 +1,7 @@
 parameters:
     blog_title: '%env(string:BLOG_TITLE)%'
+    theme: '%env(string:THEME)%'
 
 harentius_blog:
     title: '%blog_title%'
+    theme: '%theme%'

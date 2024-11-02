@@ -17,6 +17,7 @@ services:
       - DATABASE_URL=mysql://root:1111@mysql:3306/blog
       - HISTFILE=/app/var/.bash_history-php
       - BLOG_TITLE=Web Developer Blog
+      - THEME=dark
 
   static:
     image: harentius/blog-static:latest
