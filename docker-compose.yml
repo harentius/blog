@@ -18,6 +18,7 @@ services:
       - HISTFILE=/app/var/.bash_history-php
       - BLOG_TITLE=Web Developer Blog
       - THEME=dark
+      - HIGHLIGHT_CODE=true
 
   static:
     image: harentius/blog-static:latest

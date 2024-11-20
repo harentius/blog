@@ -1,5 +1,7 @@
 import { Marked } from 'marked';
-import { baseUrl } from "marked-base-url";
+import { baseUrl } from 'marked-base-url';
+import { markedHighlight } from "marked-highlight";
+import hljs from 'highlight.js';
 import imageRenderer from './imageRenderer.mjs';
 import youtubeRenderer from './youtubeRenderer.mjs';
 
@@ -30,9 +32,19 @@ class ContentManager {
 
     const contentMarkdown = lines.slice(start).join('\n');
     const marked = new Marked();
-    marked.use(baseUrl("/assets/"));
-    marked.use(imageRenderer())
-    marked.use(youtubeRenderer())
+    marked
+      .use({ gfm: true })
+      .use(baseUrl("/assets/"))
+      .use(imageRenderer())
+      .use(youtubeRenderer())
+      .use(markedHighlight({
+        emptyLangClass: 'hljs',
+        langPrefix: 'hljs language-',
+        highlight(code, lang, info) {
+          const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+          return hljs.highlight(code, { language }).value;
+        }
+      }));
 
     let content = marked.parse(contentMarkdown);
 

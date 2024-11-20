@@ -8,7 +8,7 @@ import ContentManager from './ContentManager.mjs';
 const host = process.env.HOST;
 const apiToken = process.env.API_TOKEN;
 
-const baseUrl = `https://${host}/api/v1`;
+const baseUrl = `${host}/api/v1`;
 const mode = process.argv[2]
 const projectPath = process.argv[3]
 const articlePath = process.argv[4]

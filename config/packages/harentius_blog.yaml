@@ -1,7 +1,9 @@
 parameters:
     blog_title: '%env(string:BLOG_TITLE)%'
     theme: '%env(string:THEME)%'
+    highlight_code: '%env(bool:HIGHLIGHT_CODE)%'
 
 harentius_blog:
     title: '%blog_title%'
     theme: '%theme%'
+    highlight_code: '%highlight_code%'
