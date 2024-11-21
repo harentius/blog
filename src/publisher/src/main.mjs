@@ -29,7 +29,9 @@ const processFile = async (p) => {
   const data = contentManager.extractArticleData(fileContent, p);
   await apiClient.upsertArticle(data);
 
-  const filesDir = p.replace(/\.md$/, '');
+  const filesDir = p
+    .replace(/^\.\//, '')
+    .replace(/\.md$/, '');
   if (fileManager.isDirExists(filesDir)) {
     const filesList = fileManager.getAllFilesList(filesDir);
 
