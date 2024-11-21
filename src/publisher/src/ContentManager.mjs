@@ -60,6 +60,7 @@ class ContentManager {
   }
 
   #extractFileNameAndPath(filePath) {
+    filePath = filePath.replace(/^\.\//, '');
     const fileNameWithExtension = filePath.split('/').pop();
     const fileName = fileNameWithExtension.slice(0, fileNameWithExtension.lastIndexOf('.'));
     const directoryPath = filePath.substring(0, filePath.lastIndexOf('/'));

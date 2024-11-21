@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Check required environment variables
+if [ -z "$FOLKPROG_API_TOKEN" ]; then
+    echo "Error: FOLKPROG_API_TOKEN is not set."
+    exit 1
+fi
+
+# Export environment variables
+export API_TOKEN=$FOLKPROG_API_TOKEN
+export HOST=https://folkprog.net
+
+# Define paths
+BLOG_SRC="/Users/harentius/work/projects/blog"
+BLOG_CONTENT="/Users/harentius/work/projects/blogs-content/folkprog/"
+PUBLISHER_SRC="$BLOG_SRC/src/publisher/src/main.mjs"
+
+PUBLISHER_CMD="$PUBLISHER_SRC"
+
+# Function to process all .md files
+process_all_md_files() {
+    find . -type f -name "*.md" -exec bash -c '
+        "$1" add "$2" "$0"
+    ' {} "$PUBLISHER_CMD" "$BLOG_CONTENT" \;
+}
+
+# Main logic
+if [ "$1" == "all" ]; then
+    process_all_md_files
+else
+    $PUBLISHER_CMD add "$BLOG_CONTENT" "$@"
+fi
