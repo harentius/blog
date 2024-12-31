@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+  php:
+    image: harentius/blog-php:latest
+    volumes:
+      - ./var:/app/var
+      - ./web/assets:/app/public/assets # blog app needs to know is there is a cover image for a blog
+    environment:
+      - DATABASE_URL=mysql://db-username:db-password@host:port/blog-dbname
+      - APP_ENV=prod
+      - APP_SECRET={{ app_secret }}
+      - SITE_HOST=example.net
+      - SITE_SCHEME=https
+      - BLOG_TITLE=Blog title
+      - THEME=dark
+    restart: always
+    ports:
+      - 9110:9000 # php fpm port
+
+  static:
+    image: harentius/blog-static:latest
+    restart: always
+    ports:
+      - 8190:80 # php nginx port for static files
