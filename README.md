@@ -2,22 +2,22 @@
 
 ## Overview
 
-`harentius/blog` is a minimalistic blogging engine.
-It is expected to use markdown files for the content and transform them into blogs.
-Directory structure represents categories tree.
+`harentius/blog` is a minimalistic blogging engine.  
+It is designed to use Markdown files for content and transform them into blogs.  
+The directory structure represents a categories tree.  
 
 It consists of the following parts:
 
-### Symfony application (`src/BlogBundle`)
+**Symfony application (`src/BlogBundle`)**
 
 It is used to store and display blogs.
 Provides a REST API to manage blogs and a UI to display them.
 It is also available as a standalone Symfony bundle [harentius/blog-bundle](https://github.com/harentius/blog-bundle),
 which is a subsplit of this engine.
 
-### Markdown renderer and publisher (`src/publisher`)
+**Markdown renderer and publisher (`src/publisher`)**
 
-Renders markdown and stores it in a blogging application.
+Renders markdown and publish it in a blogging application.
 
 ## Installation
 *Requirements: docker, make, nodejs (for publisher)*
@@ -59,7 +59,23 @@ make api-key
 2. Publish a blog post
 
 ```
-HOST=https://blog.url API_TOKEN=your_api_token src/publisher/src/main.mjs add /path/to/dir/with-blog-files/ Category/Subcategory/file.md
+HOST=https://blog.url API_TOKEN=your_api_token src/publisher/src/main.mjs add /path/to/dir/with-blog-files/ Category/Subcategory/blog-url.md
+```
+
+The markdown file has following structure:
+```
+# Title (is required)
+
+###### Meta Description: Optional Meta Description
+###### Meta Keywords: Optional Meta Keywords
+###### Published at: Optional Published at. Default is "now"
+```
+
+The publisher also supports images and other files, including the cover file.
+They should be stored in the directory with the same name as the blog, but without ".md".
+For example:
+```
+/path/to/dir/with-blog-files/ Category/Subcategory/blog-url/
 ```
 
 ## Development
